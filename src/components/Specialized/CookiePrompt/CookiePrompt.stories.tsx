@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { CookiePopup } from "@/components/Specialized/CookiePopup";
+import { CookiePrompt } from "@/components/Specialized/CookiePrompt";
 // import icons from "../../public/icons.svg";
 
 const meta = {
-  title: "Specialized/CookiePopup",
-  component: CookiePopup,
+  title: "Specialized/CookiePrompt",
+  component: CookiePrompt,
   args: {}
-} satisfies Meta<typeof CookiePopup>;
+} satisfies Meta<typeof CookiePrompt>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

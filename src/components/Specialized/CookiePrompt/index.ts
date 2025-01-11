@@ -1,0 +1,1 @@
+export { CookiePrompt } from "./CookiePrompt";

@@ -1,7 +1,7 @@
 @use "sass:map" as map;
 @use "@/styles/globals.scss";
 
-.cookie-popup {
+.cookies-prompt {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -29,7 +29,7 @@
   }
 }
 
-.cookie-accepted {
+.cookies-accepted {
   opacity: 0.1;
   z-index: 1;
 

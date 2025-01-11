@@ -25,8 +25,8 @@
       1. [ ] ArticlesGlobalSearch
       2. [ ] Article
       3. [ ] ArticleListPreview (list item)
-      4. [x] CookiePopup
-         - длина пока 100% width доступного, в модалке (с ref для самоудаления) должна быть длина до 500px
+      4. [x] CookiePrompt
+         - длина пока 100% width доступного, в модалке (с ref для самоудаления, модалка пока Widgets/CookiePopup не написан) должна быть длина до 500px
       5. [ ] Footer
       6. [ ] Header
       7. [ ] Bottom clever bar
