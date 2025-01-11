@@ -1,0 +1,31 @@
+$font-primary: "JetBrains Mono", Helvetica, Arial, sans-serif;
+$font-header: "Pulsewidth";
+$font-stretch: "STRRETCH SANS";
+$font-code: "JetBrains Mono";
+
+$standard-theme: (
+  background-800: #111111,
+  background-900: #0b0b0b,
+
+  font-default: #5e5e5e,
+  font-hover: #bfbfbf,
+  font-sub: #737373,
+  font-hero: #ffffff,
+
+  icon-default: #838383,
+
+  box-default: #181818,
+  box-hover: #303030,
+  box-border: #303030,
+
+  fade-gradient: linear-gradient(#000000 20%, #000000 100%)
+);
+
+$border-radius: (
+  default: 15px,
+  small: 3px,
+  medium: 10px,
+  large: 30px
+);
+
+$padding-bottom: 14px;

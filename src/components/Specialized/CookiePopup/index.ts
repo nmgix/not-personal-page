@@ -1,0 +1,1 @@
+export { CookiePopup } from "./CookiePopup";

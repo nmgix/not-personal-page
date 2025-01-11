@@ -1,0 +1,27 @@
+@use "sass:map" as map;
+@use "@/styles/globals.scss";
+
+.button {
+  border-radius: map.get(globals.$border-radius, medium);
+  background-color: map.get(globals.$standard-theme, box-default);
+
+  padding: 12px 18px;
+  border: none;
+
+  // transition: all 0.01s ease-in-out;
+  cursor: pointer;
+
+  color: map.get(globals.$standard-theme, font-default);
+  font-weight: 700;
+
+  &:hover {
+    background-color: map.get(globals.$standard-theme, box-hover);
+    color: map.get(globals.$standard-theme, font-hover);
+  }
+
+  &:active {
+    filter: opacity(0.5);
+  }
+
+  // TODO: decide to change box highlisht styles when selected from keyboard
+}

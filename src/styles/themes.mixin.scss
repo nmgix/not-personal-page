@@ -1,0 +1,35 @@
+@use "./globals.scss" as globals;
+@use "sass:map";
+
+$themes: (
+  standard: globals.$standard-theme
+);
+
+// https://dev.to/mikekennedydev/applying-visual-themes-using-scss-30j1
+
+@mixin theme() {
+  $array: $themes;
+
+  @each $theme, $map in $array {
+    html.theme-#{$theme} & {
+      $array-map: () !global;
+
+      @each $key, $submap in $map {
+        $value: map.get(map.get($array, $theme), "#{$key}");
+        $array-map: map.merge(
+          $array-map,
+          (
+            $key: $value
+          )
+        ) !global;
+      }
+
+      @content;
+      $array-map: null !global;
+    }
+  }
+}
+
+@function themeValue($key) {
+  @return map.get($array-map, $key);
+}

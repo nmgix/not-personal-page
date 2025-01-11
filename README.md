@@ -15,8 +15,9 @@
       1. [ ] Same page project article render (nextjs feature)
 2. [ ] Components
    1. [ ] Generic
-      1. [ ] Box
-      2. [ ] Buttons
+      1. [x] Box (class)
+      2. [x] Buttons
+         - проверить TODO в button.scss
       3. [ ] Input
       4. [ ] Popup
       5. [ ] Modal
@@ -24,16 +25,22 @@
       1. [ ] ArticlesGlobalSearch
       2. [ ] Article
       3. [ ] ArticleListPreview (list item)
-      4. [ ] BoxesScrollbar
-      5. [ ] CookiePopup
-      6. [ ] Footer
-      7. [ ] Header
-      8. [ ] Bottom clever bar
-3. [ ] Storybook
+      4. [x] CookiePopup
+         - длина пока 100% width доступного, в модалке (с ref для самоудаления) должна быть длина до 500px
+      5. [ ] Footer
+      6. [ ] Header
+      7. [ ] Bottom clever bar
+      8. [ ] Model viewer (orbit controls na one light source)
+3. [ ] Widgets
+   1. [ ] CookiePrompt
+   2. [ ] BoxesScrollbar
+4. [ ] Storybook
    1. [ ] Generic components
    2. [ ] Specialized components
-4. [ ] Playwright
-   1. [ ] Home page
-   2. [ ] Articles list
-   3. [ ] Blog
-   4. [ ] Articles (blog/tech/projects) pages or same page renders
+   3. [ ] Widgets
+5. [ ] Testing
+   1. [ ] Playwright
+      1. [ ] Home page
+      2. [ ] Articles list
+      3. [ ] Blog
+      4. [ ] Articles (blog/tech/projects) pages or same page renders

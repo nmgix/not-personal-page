@@ -1,0 +1,30 @@
+@use "sass:map" as map;
+@use "@/styles/globals.scss";
+
+.cookie-popup {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  background-color: map.get(globals.$standard-theme, box-hover);
+
+  padding: 10px 16px 10px 26px;
+
+  .content-wrapper {
+    color: map.get(globals.$standard-theme, font-hero);
+
+    .title {
+      font-size: 16px;
+      margin-bottom: 2px;
+    }
+    .threat {
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+
+  .button {
+    background-color: map.get(globals.$standard-theme, font-sub);
+    color: map.get(globals.$standard-theme, font-hero);
+  }
+}
