@@ -1,6 +1,6 @@
 @use "sass:map";
-@use "../../../styles/colors";
-@use "../../../styles/borders";
+@use "../../styles/colors";
+@use "../../styles/borders";
 
 .pageFooter {
   background-color: map.get(colors.$standard-theme, box-hover);
