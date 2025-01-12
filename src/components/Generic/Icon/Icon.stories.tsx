@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { Icon } from "@/components/Generic/Icon";
+import { AvailableIcons } from "./Icon";
+import { getEnumKeys } from "@/helpers/getEnumKeys";
 // import icons from "../../public/icons.svg";
 
 const meta = {
@@ -16,5 +18,15 @@ export const Default: Story = {
   args: {
     icon: "arrow-link",
     color: "red"
+  },
+  argTypes: {
+    icon: {
+      options: getEnumKeys(AvailableIcons),
+      control: "select"
+    },
+    color: {
+      // да он слово color маппит под тип сразу, но лучше перестраховаться
+      control: "color"
+    }
   }
 };

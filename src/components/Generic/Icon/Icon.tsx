@@ -4,7 +4,7 @@ import { memo } from "react";
 import classnames from "classnames";
 import styles from "./icon.module.scss";
 
-enum AvailableIcons {
+export enum AvailableIcons {
   "arrow-link",
   "blog",
   "drag-left",

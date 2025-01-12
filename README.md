@@ -39,6 +39,7 @@
       5. [~] Icon
          1. [x] Storybook
          - ~ потому что там кривая обовка внутри самого svg и на некоторые объекты обводка не ставится. fill вообще не имплементирован
+      6. [ ] Image
    2. [ ] Specialized
       1. [ ] ArticlesGlobalSearch
          1. [ ] Storybook
@@ -58,11 +59,14 @@
          1. [ ] Storybook
       8. [ ] Model viewer (orbit controls na one light source)
          1. [ ] Storybook
+      9. [ ] ImageView
+         1. [ ] Storybook
 3. [ ] Widgets
-   1. [ ] CookiePrompt
+   1. [ ] CookiePopup
       1. [ ] Storybook
    2. [ ] BoxesScrollbar
       1. [ ] Storybook
+   3. [ ] ImageList (articles i.e.)
 4. [ ] Testing
    1. [ ] Playwright
       1. [ ] Home page
