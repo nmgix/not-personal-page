@@ -6,15 +6,17 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "styles": "npx typed-scss-modules src --watch"
   },
   "dependencies": {
+    "classnames": "^2.5.1",
     "next": "15.1.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "sass": "^1.83.1"
+    "sass": "^1.83.1",
+    "typed-scss-modules": "^8.1.1"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.3",

@@ -1,8 +1,8 @@
 @use "sass:map" as map;
-@use "@/styles/globals.scss";
+@use "../../../styles/colors";
 
 .box {
-  background-color: map.get(globals.$standard-theme, box-default);
-  border: 1px solid map.get(globals.$standard-theme, box-border);
-  border-radius: map.get(globals.$border-radius, default);
+  background-color: map.get(colors.$standard-theme, box-default);
+  border: 1px solid map.get(colors.$standard-theme, box-border);
+  border-radius: map.get(colors.$border-radius, default);
 }

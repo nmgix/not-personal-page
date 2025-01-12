@@ -1,3 +1,11 @@
+.env
+
+```
+   NEXT_PUBLIC_NAME=brudiz
+   NEXT_PUBLIC_TIMEZONE="Europe/Moscow"
+   NEXT_PUBLIC_CODING_SINCE=1578825717000 (milliseconds)
+```
+
 1. [ ] Pages
    1. [ ] Home
       1. [ ] Different Hero components
@@ -16,29 +24,45 @@
 2. [ ] Components
    1. [ ] Generic
       1. [x] Box (class)
+         1. [x] Storybook
       2. [x] Buttons
          - проверить TODO в button.scss
+         1. [x] Default button
+            1. [x] Storybook
       3. [ ] Input
-      4. [ ] Popup
-      5. [ ] Modal
+         1. [ ] Storybook
+         <!-- 4. [ ] Popup
+         - под вопросом
+         2. [ ] Storybook -->
+      4. [x] Modal
+         1. [x] Storybook
+      5. [~] Icon
+         1. [x] Storybook
+         - ~ потому что там кривая обовка внутри самого svg и на некоторые объекты обводка не ставится. fill вообще не имплементирован
    2. [ ] Specialized
       1. [ ] ArticlesGlobalSearch
+         1. [ ] Storybook
       2. [ ] Article
+         1. [ ] Storybook
       3. [ ] ArticleListPreview (list item)
+         1. [ ] Storybook
       4. [x] CookiePrompt
          - длина пока 100% width доступного, в модалке (с ref для самоудаления, модалка пока Widgets/CookiePopup не написан) должна быть длина до 500px
+         1. [x] Storybook
       5. [ ] Footer
+         1. [ ] Storybook
       6. [ ] Header
+         1. [ ] Storybook
       7. [ ] Bottom clever bar
+         1. [ ] Storybook
       8. [ ] Model viewer (orbit controls na one light source)
+         1. [ ] Storybook
 3. [ ] Widgets
    1. [ ] CookiePrompt
+      1. [ ] Storybook
    2. [ ] BoxesScrollbar
-4. [ ] Storybook
-   1. [ ] Generic components
-   2. [ ] Specialized components
-   3. [ ] Widgets
-5. [ ] Testing
+      1. [ ] Storybook
+4. [ ] Testing
    1. [ ] Playwright
       1. [ ] Home page
       2. [ ] Articles list

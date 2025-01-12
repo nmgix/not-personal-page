@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { DefaultButton } from "@/components/Generic/Buttons";
+import { Icon } from "@/components/Generic/Icon";
 // import icons from "../../public/icons.svg";
 
 const meta = {
@@ -22,7 +23,7 @@ export const Default: Story = {
 export const IconButton: Story = {
   args: {
     children: (
-      <div>stub for icon</div>
+      <Icon icon='filter' />
       // <svg style={{ color: "gray" }}>
       //   <use xlinkHref={`${icons}#filter`}></use>
       // </svg>

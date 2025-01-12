@@ -1,11 +1,12 @@
+import { useRef, useState } from "react";
 import { DefaultButton } from "@/components/Generic/Buttons";
 import "./cookie-prompt.scss";
-import { useRef, useState } from "react";
 
 const acceptButtonTexts = ["ок", "ладно", "попробуй"];
 
 export const CookiePrompt = () => {
   const promptRef = useRef<HTMLDivElement>(null);
+  const buttonText = useRef(acceptButtonTexts[Math.floor(Math.random() * acceptButtonTexts.length)]);
 
   const [cookieAccepted, setCookieAccepted] = useState(false); // for styles to append
   const onCookieAccept = () => {
@@ -25,7 +26,7 @@ export const CookiePrompt = () => {
         <span className='threat'>мы украдём все ваши куки, съедим и тарелку не вернём</span>
       </div>
       <DefaultButton onClick={onCookieAccept} disabled={cookieAccepted}>
-        <span>{acceptButtonTexts[Math.floor(Math.random() * acceptButtonTexts.length)]}</span>
+        <span>{buttonText.current}</span>
       </DefaultButton>
     </div>
   );

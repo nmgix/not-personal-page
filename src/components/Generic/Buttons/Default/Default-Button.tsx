@@ -1,9 +1,10 @@
+import classnames from "classnames";
+import styles from "./default-button.module.scss";
 import { ButtonProps } from "../types";
-import "./default-button.scss";
 
 export const Button = ({ children, onClick, disabled }: ButtonProps) => {
   return (
-    <button className='button default-button' onClick={onClick} disabled={disabled}>
+    <button className={classnames("button", styles.defaultButton)} onClick={onClick} disabled={disabled}>
       {children}
     </button>
   );

@@ -1,0 +1,31 @@
+@use "../../../styles/breakpoints";
+@use "../../../styles/media";
+@use "../../../styles/paddings";
+
+.modal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
+  max-width: 80vw;
+  padding: paddings.$padding-modal;
+
+  & > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  @media screen and (max-width: breakpoints.$xs) {
+    padding: paddings.$padding-modal-s;
+  }
+
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  //   @include media-maxw(breakpoints.$md) {
+  //     max-width: calc(100vw - 4rem);
+  //     width: calc(100vw - 4rem);
+  //   }
+}
