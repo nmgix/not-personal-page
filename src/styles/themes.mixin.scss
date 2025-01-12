@@ -6,6 +6,7 @@ $themes: (
 );
 
 // https://dev.to/mikekennedydev/applying-visual-themes-using-scss-30j1
+// TODO: разобраться что вообще здесь происходит
 
 @mixin theme() {
   $array: $themes;

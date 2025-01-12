@@ -1,4 +1,3 @@
-export declare const button: string;
 export declare const contentWrapper: string;
 export declare const cookiesAccepted: string;
 export declare const cookiesPrompt: string;

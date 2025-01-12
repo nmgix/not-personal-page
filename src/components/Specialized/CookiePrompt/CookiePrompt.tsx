@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
+import classnames from "classnames";
 import { DefaultButton } from "@/components/Generic/Buttons";
-import "./cookie-prompt.scss";
+import styles from "./cookie-prompt.module.scss";
 
 const acceptButtonTexts = ["ок", "ладно", "попробуй"];
 
@@ -19,11 +20,12 @@ export const CookiePrompt = () => {
     if (button) button.tabIndex = -1;
   };
 
+  // `box cookies-prompt ${cookieAccepted ? "cookies-accepted" : ""}`
   return (
-    <div ref={promptRef} className={`box cookies-prompt ${cookieAccepted ? "cookies-accepted" : ""}`}>
-      <div className='content-wrapper'>
-        <h3 className='title'>про куки</h3>
-        <span className='threat'>мы украдём все ваши куки, съедим и тарелку не вернём</span>
+    <div ref={promptRef} className={classnames("box", styles.cookiesPrompt, cookieAccepted && styles.cookiesAccepted)}>
+      <div className={styles.contentWrapper}>
+        <h3 className={styles.title}>про куки</h3>
+        <span className={styles.threat}>мы украдём все ваши куки, съедим и тарелку не вернём</span>
       </div>
       <DefaultButton onClick={onCookieAccept} disabled={cookieAccepted}>
         <span>{buttonText.current}</span>

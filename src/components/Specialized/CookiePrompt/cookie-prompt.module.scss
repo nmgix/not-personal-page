@@ -1,7 +1,7 @@
 @use "sass:map" as map;
 @use "../../../styles/colors";
 
-.cookies-prompt {
+.cookiesPrompt {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -10,7 +10,7 @@
 
   padding: 10px 16px 10px 26px;
 
-  .content-wrapper {
+  .contentWrapper {
     color: map.get(colors.$standard-theme, font-hero);
 
     .title {
@@ -20,16 +20,19 @@
     .threat {
       font-size: 14px;
       font-weight: 400;
+      font-weight: 100;
+      opacity: 0.8;
     }
   }
 
-  .button {
+  // это впервые сработало, лол
+  *:global(.button) {
     background-color: map.get(colors.$standard-theme, font-sub);
     color: map.get(colors.$standard-theme, font-hero);
   }
 }
 
-.cookies-accepted {
+.cookiesAccepted {
   opacity: 0.1;
   z-index: 1;
 

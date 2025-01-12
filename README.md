@@ -49,10 +49,11 @@
       4. [x] CookiePrompt
          - длина пока 100% width доступного, в модалке (с ref для самоудаления, модалка пока Widgets/CookiePopup не написан) должна быть длина до 500px
          1. [x] Storybook
-      5. [ ] Footer
-         1. [ ] Storybook
-      6. [ ] Header
-         1. [ ] Storybook
+      5. [x] Header
+         1. [x] Storybook
+      6. [x] Footer
+         - проблема в том, что в самом дизайне footer ещё не прототипирован/создан
+         1. [x] Storybook
       7. [ ] Bottom clever bar
          1. [ ] Storybook
       8. [ ] Model viewer (orbit controls na one light source)
