@@ -33,3 +33,4 @@ export const CookiePrompt = () => {
     </div>
   );
 };
+CookiePrompt.displayName = "CookiePrompt";

@@ -16,3 +16,4 @@ export const Header = () => {
     </header>
   );
 };
+Header.displayName = "Header";

@@ -34,3 +34,4 @@ export const Modal: React.FC<IModal> = ({ children, show, closeModal, externalCl
     document.body
   );
 };
+Modal.displayName = "Modal";

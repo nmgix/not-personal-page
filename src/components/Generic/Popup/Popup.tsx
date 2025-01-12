@@ -6,3 +6,4 @@ type PopupProps = {
 export const Popup = ({ children, parentRef, timeout }: PopupProps) => {
   return <div className='box'>{children}</div>;
 };
+Popup.displayName = "Popup";

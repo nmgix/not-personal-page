@@ -1,7 +1,8 @@
 // https://github.com/nmgix/testovoe-gym/blob/main/src/shared/ui/icon/icon.tsx
 
 import { memo } from "react";
-import "./icon.scss";
+import classnames from "classnames";
+import styles from "./icon.module.scss";
 
 enum AvailableIcons {
   "arrow-link",
@@ -15,12 +16,12 @@ enum AvailableIcons {
 interface IIconProps {
   icon: keyof typeof AvailableIcons;
   color?: string;
-  classNames?: string | string[];
+  externalClassnames?: string | string[];
 }
 
-export const Icon: React.FC<IIconProps> = ({ icon, color, classNames }) => {
+export const Icon: React.FC<IIconProps> = ({ icon, color, externalClassnames }) => {
   return (
-    <svg className={`icon ${classNames ?? ""}`} style={{ color }}>
+    <svg className={classnames(styles.icon, externalClassnames)} style={{ color }}>
       {/* <title>??? */}
       <use xlinkHref={`/icons.svg#${icon}`}></use>
     </svg>

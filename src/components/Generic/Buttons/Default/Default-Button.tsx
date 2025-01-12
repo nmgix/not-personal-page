@@ -9,3 +9,4 @@ export const Button = ({ children, onClick, disabled }: ButtonProps) => {
     </button>
   );
 };
+Button.displayName = "Button";
