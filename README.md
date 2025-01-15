@@ -51,9 +51,11 @@
       4. [ ] ImageView
          1. [ ] Storybook
 3. [ ] Widgets
-   1. [ ] CookiePopup
-      1. [ ] Storybook
+   1. [x] CookiePopup
+      - проблема в Popup, его фукнционал пока это просто обёртка в виде div.box, нужно взять popup логику из nmgix-components
+      1. [x] Storybook
    2. [ ] BoxesScrollbar
+      - мб есть смысл просто класс fade добавить, но scroll логика мне тоже нужна, может её тоже потом в generic component выделю для реюзабилити
       1. [ ] Storybook
    3. [ ] ImageList (articles i.e.)
       1. [ ] Storybook

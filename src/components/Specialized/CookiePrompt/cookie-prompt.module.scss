@@ -1,10 +1,13 @@
-@use "sass:map" as map;
 @use "../../../styles/colors";
+@use "../../../styles/margins";
+@use "sass:map" as map;
 
 .cookiesPrompt {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+
+  column-gap: margins.$margin-s;
 
   background-color: map.get(colors.$standard-theme, box-hover);
 

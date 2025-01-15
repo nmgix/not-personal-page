@@ -1,6 +1,5 @@
 @use "../../../styles/breakpoints";
 @use "../../../styles/media";
-@use "../../../styles/paddings";
 
 .modal {
   position: fixed;
@@ -9,7 +8,7 @@
   transform: translate(-50%, -50%);
   border: none;
   max-width: 80vw;
-  padding: paddings.$padding-modal;
+  padding: 24px;
 
   & > * {
     position: relative;
@@ -17,7 +16,7 @@
   }
 
   @media screen and (max-width: breakpoints.$xs) {
-    padding: paddings.$padding-modal-s;
+    padding: 12px;
   }
 
   &::backdrop {

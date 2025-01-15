@@ -1,5 +1,4 @@
 @use "../../styles/margins";
-@use "../../styles/paddings";
 @use "../../styles/fonts";
 @use "../../styles/colors";
 @use "../../styles/z-indexes";
@@ -7,14 +6,14 @@
 
 .bottomCleverBar {
   display: flex;
-  column-gap: margins.$margin-default;
+  column-gap: margins.$margin-s;
   max-width: 50vw;
   position: relative; //https://dev.to/sabbirsobhani/css-child-behind-parent-with-z-index-23j1
 
   z-index: z-indexes.$clever-bar;
 
   :global(.box) {
-    padding: paddings.$paddingCleverBarHeight paddings.$paddingCleverBarLatitude;
+    padding: 20px 7px;
   }
 
   .controls {
