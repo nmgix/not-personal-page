@@ -1,0 +1,21 @@
+@use "../../../styles/borders";
+@use "../../../styles/colors";
+@use "sass:map";
+
+.image {
+  border-radius: borders.$border-default;
+  background-color: map.get(colors.$standard-theme, font-hero);
+
+  &Wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &Alt {
+    padding-top: 2px;
+    font-weight: 800;
+    font-size: 10px;
+    color: map.get(colors.$standard-theme, font-darken);
+  }
+}
