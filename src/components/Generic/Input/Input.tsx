@@ -39,16 +39,14 @@ export const Input = ({
     debouncedValue(e.target.value);
   };
 
-  // не хочет работать
-  //   const listenEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-  //     e.preventDefault();
-  //     // e.stopPropagation()
-  //     if (onEnterPress === undefined) return;
-  //     if (e.key == "Enter") {
-  //       onEnterPress(value);
-  //     }
-  //     return e;
-  //   };
+  const listenEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    console.log(e);
+    if (onEnterPress === undefined) return e;
+    if (e.key == "Enter") {
+      onEnterPress(value);
+    }
+    return e;
+  };
 
   useImperativeHandle(ref, () => ({
     value
@@ -61,6 +59,7 @@ export const Input = ({
           className={classnames(styles.input, externalClassnames)}
           onChange={onValueChange}
           value={value}
+          onKeyDown={listenEnter}
           //   onKeyDown={listenEnter}
           name={name}
           type='text'
