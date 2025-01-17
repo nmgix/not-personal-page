@@ -1,0 +1,47 @@
+@use "../../../styles/margins";
+@use "../../../styles/colors";
+@use "sass:map";
+
+.imageList {
+  display: flex;
+
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow-x: hidden; // мб scroll
+  column-gap: margins.$margin-s;
+
+  mask: linear-gradient(to right, black 30%, transparent);
+  -webkit-mask: linear-gradient(to right, black 30%, transparent);
+
+  &Wrapper {
+    display: flex;
+    float: left;
+    position: relative;
+  }
+}
+
+.imageButton {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+.imagesAmount {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(50%, -50%);
+
+  background-color: transparent;
+
+  &:hover {
+    background-color: transparent;
+    color: map.get(colors.$standard-theme, font-hover);
+    font-weight: 700;
+    font-size: 16px;
+  }
+}

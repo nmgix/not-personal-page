@@ -4,4 +4,5 @@ export type ButtonProps = {
   onHold?: () => any;
   onDrag?: () => any; // под вопросом
   disabled?: boolean;
+  extraClassnames?: string | string[];
 };
