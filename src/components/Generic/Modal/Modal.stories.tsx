@@ -15,8 +15,8 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     children: <div>Пример модалки</div>,
-    closeModal: () => console.log("close modal"),
-    label: "modal label",
+    onClose: () => console.log("close modal"),
+    ariaLabel: "modal label",
     show: true
   }
 };

@@ -15,6 +15,7 @@
     "next": "15.1.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hotkeys-hook": "^4.6.1",
     "sass": "^1.83.1",
     "typed-scss-modules": "^8.1.1"
   },

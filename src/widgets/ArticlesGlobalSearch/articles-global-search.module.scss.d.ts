@@ -1,0 +1,12 @@
+export declare const articlesGlobalSearch: string;
+export declare const categories: string;
+export declare const category: string;
+export declare const categoryIcon: string;
+export declare const modal: string;
+export declare const searchBtn: string;
+export declare const searchResult: string;
+export declare const searchWrapper: string;
+export declare const subtitle: string;
+export declare const title: string;
+export declare const titleWrapper: string;
+export declare const top: string;

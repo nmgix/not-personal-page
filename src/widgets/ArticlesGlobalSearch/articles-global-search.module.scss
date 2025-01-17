@@ -1,0 +1,88 @@
+@use "../../styles/margins";
+@use "../../styles/paddings";
+@use "../../styles/borders";
+@use "../../styles/fonts";
+@use "../../styles/colors";
+@use "sass:map";
+
+.modal {
+  padding: 0;
+  background: transparent;
+}
+
+.articlesGlobalSearch {
+  display: flex;
+  flex-direction: column;
+
+  padding: 20px;
+
+  .top {
+    display: flex;
+    flex-direction: column;
+
+    row-gap: margins.$margin-s;
+
+    .title {
+      font-family: fonts.$font-stretch;
+      font-size: 16px;
+      color: map.get(colors.$standard-theme, font-hero);
+
+      &Wrapper {
+        display: block;
+      }
+    }
+
+    .subtitle {
+      margin-top: 2px;
+
+      font-size: 12px;
+      color: map.get(colors.$standard-theme, font-sub);
+      font-weight: 100;
+    }
+
+    .categories {
+      border: none;
+
+      :global(.box) {
+        padding: 0;
+      }
+
+      .category {
+        display: flex;
+        align-items: center;
+        column-gap: margins.$margin-xs;
+
+        padding: paddings.$padding-xs;
+
+        font-size: 10px;
+
+        border-radius: borders.$border-xs;
+
+        &Icon {
+          width: 14px;
+          height: 14px;
+        }
+      }
+    }
+
+    .searchWrapper {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+
+      column-gap: margins.$margin-s;
+
+      .searchBtn {
+        padding: 0;
+        aspect-ratio: 1/1;
+        height: 100%;
+      }
+    }
+  }
+
+  .searchResult {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+}

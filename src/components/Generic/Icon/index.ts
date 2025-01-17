@@ -1,1 +1,1 @@
-export { IconMemo as Icon } from "./Icon";
+export { IconMemo as Icon, type AvailableIcons } from "./Icon";

@@ -1,0 +1,1 @@
+export { ArticlesGlobalSearch } from "./ArticlesGlobalSearch";

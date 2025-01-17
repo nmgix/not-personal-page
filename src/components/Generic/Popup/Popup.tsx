@@ -3,7 +3,7 @@ import classnames from "classnames";
 type PopupProps = {
   // parentRef: React.Ref<HTMLElement>;
   // parentNode: Node
-  children: React.ReactElement;
+  children: React.ReactElement | React.ReactNode[];
   timeout?: number;
   externalClassNames?: string | string[];
 };

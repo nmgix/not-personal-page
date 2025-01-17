@@ -3,19 +3,8 @@ import styles from "./articles-list-element.module.scss";
 import classnames from "classnames";
 import { BoxesScrollbar } from "../BoxesScrollbar";
 import { useRef } from "react";
-import { Image } from "@/components/Generic/Image";
 import { ImageElement, ImageList } from "@/components/Specialized/ImageList";
-
-type ArticleListElementProps = {
-  title: string;
-  tags: string[];
-  TTRmins: number; // time-to-read-mins
-  src: string; // article src
-  id: string;
-  previewImages?: boolean;
-  imagesSrc?: string[]; // images (if exist) src links, amount of items in array is used to calculate "N+" amount of images in element
-  textPreview?: string;
-};
+import { ArticleListElementProps } from "@/types/articles";
 
 export const ArticleListElement = ({ TTRmins, id, imagesSrc, previewImages, src, tags, textPreview, title }: ArticleListElementProps) => {
   const tagsRef = useRef(tags.map(tag => <div className='articleTag'>#{tag}</div>));

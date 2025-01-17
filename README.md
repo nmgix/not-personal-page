@@ -40,14 +40,16 @@
          - длина пока 100% width доступного, в модалке (с ref для самоудаления, модалка пока Widgets/CookiePopup не написан) должна быть длина до 500px
       3. [ ] Model viewer (orbit controls with one light source)
       4. [ ] ImageView
-      5. [ ] ArticlesPreview
-      6. [x] BoxesScrollbar
-      - мб есть смысл просто класс fade добавить, но scroll логика мне тоже нужна, может её тоже потом в generic component выделю для реюзабилити
-      - fade дёрагнный (js'ом имплементирован)
-      - не убран скроллбар на пк, на мобилки он должен оставаться
-      - не в виджетах потому что реюз в других Specialized
-      7. [x] ImageList (articles i.e.)
-      - не в виджетах потому что реюз в других Specialized
+      <!-- 5. [ ] ArticlesPreview, что за компонент?? -->
+      5. [x] BoxesScrollbar
+         - мб есть смысл просто класс fade добавить, но scroll логика мне тоже нужна, может её тоже потом в generic component выделю для реюзабилити
+         - fade дёрагнный (js'ом имплементирован)
+         - не убран скроллбар на пк, на мобилки он должен оставаться
+         - не в виджетах потому что реюз в других Specialized
+      6. [ ] ImageList (articles i.e.)
+         - не в виджетах потому что реюз в других Specialized
+      7. [ ] мб обернуть в Suspense, вроде там перед загрузкой белый фон просто
+      8. [ ] нет обработки если ошибка загрузки изображения
 3. [ ] Widgets
    1. [x] CookiePopup
       - проблема в Popup, его фукнционал пока это просто обёртка в виде div.box, нужно взять popup логику из nmgix-components
@@ -58,6 +60,7 @@
       - проблема в том, что в самом дизайне footer ещё не прототипирован/создан
    5. [ ] ArticlesGlobalSearch
    6. [ ] ArticleList
+      - обернуть в Suspense
       - юзать ArticleListElement из Specialized
    7. [ ] Article (как same page render поверх предыдущего роута без перехода)
 4. [ ] Storybook
