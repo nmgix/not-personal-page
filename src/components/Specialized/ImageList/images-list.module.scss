@@ -38,7 +38,7 @@
 
   background-color: transparent;
 
-  &:hover {
+  &[type="button"]:hover {
     background-color: transparent;
     color: map.get(colors.$standard-theme, font-hover);
     font-weight: 700;

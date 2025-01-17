@@ -5,8 +5,10 @@ import classnames from "classnames";
 
 import styles from "./images-list.module.scss";
 
+export type ImageElement = { src: string; alt: string };
+
 type ImageListProps = {
-  images: { src: string; alt: string }[];
+  images: ImageElement[];
   size: { width: number; height: number };
   galleryButton: boolean;
   imageThreshold?: number;

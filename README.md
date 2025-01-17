@@ -35,7 +35,7 @@
       <!-- 7. [ ] Popup
       - под вопросом -->
    2. [ ] Specialized
-      1. [ ] ArticleListElement (list item)
+      1. [x] ArticleListElement (list item)
       2. [x] CookiePrompt
          - длина пока 100% width доступного, в модалке (с ref для самоудаления, модалка пока Widgets/CookiePopup не написан) должна быть длина до 500px
       3. [ ] Model viewer (orbit controls with one light source)
@@ -46,7 +46,7 @@
       - fade дёрагнный (js'ом имплементирован)
       - не убран скроллбар на пк, на мобилки он должен оставаться
       - не в виджетах потому что реюз в других Specialized
-      7. [ ] ImageList (articles i.e.)
+      7. [x] ImageList (articles i.e.)
       - не в виджетах потому что реюз в других Specialized
 3. [ ] Widgets
    1. [x] CookiePopup

@@ -1,1 +1,1 @@
-export { ImageList } from "./ImagesList";
+export { ImageList, type ImageElement } from "./ImagesList";
