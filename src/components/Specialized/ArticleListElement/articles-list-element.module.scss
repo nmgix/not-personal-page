@@ -1,0 +1,79 @@
+@use "../../../styles/colors";
+@use "../../../styles/margins";
+@use "sass:map";
+@use "sass:color";
+
+.articlesListElement {
+  display: flex;
+  flex-direction: column;
+
+  color: map.get(colors.$standard-theme, font-default);
+  padding: 14px 15px;
+
+  &:hover {
+    // https://stackoverflow.com/a/70990728/14889638
+    // color: color.change($color: currentColor, $lightness: 20%);
+
+    $currColor: color.change(
+      $color: map.get(colors.$standard-theme, font-default),
+      $lightness: 70%
+    );
+
+    color: $currColor;
+    border-color: $currColor;
+  }
+
+  .title {
+    font-weight: 800;
+    font-size: 30px;
+
+    color: inherit;
+    border-bottom: 1px solid map.get(colors.$standard-theme, font-default);
+
+    margin-bottom: 4px;
+  }
+
+  .info {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    // мб потом на всей странице делать один запрос чтобы узнавать топ по тегам между всеми стаатьями
+    // чобы потом давать highlight(в завимоисти от положения в топе) более популярным тегам
+
+    // хз как сделать propogation чтобы теги вместо всего link  при ховер срабатывали
+
+    .TTR {
+      font-size: 16px;
+      color: map.get(colors.$standard-theme, font-sub);
+    }
+  }
+
+  .textWrapper {
+    display: flex;
+    justify-content: space-between;
+    column-gap: margins.$margin-default;
+
+    height: 70px;
+  }
+
+  .textPreview {
+    max-height: 50px;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+
+    mask: linear-gradient(to top, transparent, black);
+    -webkit-mask: linear-gradient(to top, transparent, black);
+  }
+
+  .textWrapper:has(:global(.imageList)) {
+    .textPreview {
+      max-height: none;
+      flex: 1;
+    }
+  }
+}
+
+// .boxesScrollbar {
+//   composes: boxesScrollbar from "../../Specialized/BoxesScrollbar/boxes-scrollbar.module.scss";
+//   font-size: 20px;
+// }

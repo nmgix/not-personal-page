@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { BoxesScrollbar } from "@/widgets/BoxesScrollbar";
+import { BoxesScrollbar } from "@/components/Specialized/BoxesScrollbar";
 import { Icon } from "@/components/Generic/Icon";
 
 const meta = {
-  title: "Widgets/BoxesScrollbar",
+  title: "Specialized/BoxesScrollbar",
   component: BoxesScrollbar,
   args: {}
 } satisfies Meta<typeof BoxesScrollbar>;

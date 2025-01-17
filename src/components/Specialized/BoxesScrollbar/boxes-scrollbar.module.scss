@@ -1,8 +1,8 @@
-@use "../../styles/margins";
-@use "../../styles/paddings";
-@use "../../styles/borders";
-@use "../../styles/media";
-@use "../../styles/breakpoints";
+@use "../../../styles/margins";
+@use "../../../styles/paddings";
+@use "../../../styles/borders";
+@use "../../../styles/media";
+@use "../../../styles/breakpoints";
 
 $fadeWidth: 50px;
 
@@ -34,6 +34,9 @@ $fadeWidth: 50px;
 
   overflow-x: scroll;
   //   убрать сам скролл визуально
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   column-gap: margins.$margin-s;
   transition: all 0.1s ease-in-out;
