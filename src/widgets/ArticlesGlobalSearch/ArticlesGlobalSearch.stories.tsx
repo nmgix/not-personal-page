@@ -1,6 +1,7 @@
 import type { Args, Meta, StoryObj } from "@storybook/react";
 
-import { ArticlesGlobalSearch } from "@/widgets/ArticlesGlobalSearch";
+import { ArticlesGlobalSearch, SearchRef } from "@/widgets/ArticlesGlobalSearch";
+import { useRef } from "react";
 
 const meta = {
   title: "Widgets/ArticlesGlobalSearch",
@@ -12,12 +13,15 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const TutorialWrapper = () => {
+  const ref = useRef<SearchRef>(null);
+
   return (
     <>
       <span style={{ color: "white" }}>
         press <kbd>ctrl + k</kbd>
       </span>
-      <ArticlesGlobalSearch />
+      <button onClick={() => ref.current?.setModalState(true)}>or open</button>
+      <ArticlesGlobalSearch ref={ref} />
     </>
   );
 };

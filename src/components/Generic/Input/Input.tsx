@@ -12,6 +12,7 @@ type InputProps = {
   onEnterPress?: (entered: string) => void;
   onTextInputDebounce?: (entered: string) => void;
   externalClassnames?: string | string[];
+  focus?: true;
 };
 
 export type InputRef = {
@@ -27,7 +28,8 @@ export const Input = ({
   placeholder,
   label,
   name,
-  externalClassnames
+  externalClassnames,
+  focus
 }: InputProps & { ref: React.Ref<InputRef> }) => {
   const _placeholder = useRef(Array.isArray(placeholder) ? placeholder[Math.floor(Math.random() * placeholder.length)] : placeholder);
   const [_value, setValue] = useState(value ?? "");
@@ -58,10 +60,10 @@ export const Input = ({
   }));
 
   return (
-    <div className={styles.inputWrapper}>
+    <div className={classnames(styles.inputWrapper, externalClassnames)}>
       <div className={classnames("box", styles.inputBox)}>
         <input
-          className={classnames(styles.input, externalClassnames)}
+          className={styles.input}
           onChange={onValueChange}
           value={value}
           onKeyDown={listenEnter}
@@ -69,6 +71,7 @@ export const Input = ({
           name={name}
           type='text'
           placeholder={_placeholder.current}
+          autoFocus={focus}
         />
       </div>
       {label !== undefined && (

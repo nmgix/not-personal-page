@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useImperativeHandle, useMemo, useRef, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import classnames from "classnames";
 import { Modal } from "@/components/Generic/Modal";
@@ -7,6 +7,7 @@ import { BoxesScrollbar } from "@/components/Specialized/BoxesScrollbar";
 import { AvailableIcons, Icon } from "@/components/Generic/Icon";
 import { Button } from "@/components/Generic/Buttons/Default/Default-Button";
 import { Input, InputRef } from "@/components/Generic/Input";
+import { Image } from "@/components/Generic/Image";
 
 const _articlesAmount = 163;
 const _categories: { type: string; title: string; icon: keyof typeof AvailableIcons }[] = [
@@ -16,13 +17,22 @@ const _categories: { type: string; title: string; icon: keyof typeof AvailableIc
 ];
 const _inputPlacholderWords = ["мультисемплинг", "геймдев", "разработка"];
 
-export const ArticlesGlobalSearch = () => {
+export type SearchRef = {
+  setModalState: (open: boolean) => void;
+};
+
+export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<SearchRef> }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const onClose = () => {
     console.log("modal closed, this widget");
     setModalOpen(false);
   };
   useHotkeys("ctrl+k", () => setModalOpen(true), { enabled: true, preventDefault: true }, []);
+
+  // на случай неободимости открыть окно, например, в туториале
+  useImperativeHandle(ref, () => ({
+    setModalState: setModalOpen
+  }));
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   // for fun
@@ -34,7 +44,7 @@ export const ArticlesGlobalSearch = () => {
   // не useRef мне нужен, что-то типо memo, если хочу ререндер при select категории (аппенд класса .active .box'у)
   const categoriesRef = useRef(
     _categories.map(c => (
-      <Button onClick={categoriesFuncsMemo[c.title]} extraClassnames={styles.category}>
+      <Button onClick={categoriesFuncsMemo[c.title]} externalClassnames={styles.category}>
         <Icon icon={c.icon} externalClassnames={styles.categoryIcon} />
         <span>{c.title}</span>
       </Button>
@@ -67,7 +77,7 @@ export const ArticlesGlobalSearch = () => {
             <h4 className={styles.title}>articles search</h4>
             <span className={styles.subtitle}>{_articlesAmount} articles currently</span>
           </div>
-          <BoxesScrollbar list={categoriesRef.current} extraClassnames={styles.categories} />
+          <BoxesScrollbar list={categoriesRef.current} externalClassnames={styles.categories} />
           <div className={styles.searchWrapper}>
             <Input
               name='art_search'
@@ -76,13 +86,27 @@ export const ArticlesGlobalSearch = () => {
               placeholder={placeholders.current}
               onLetterEntered={onInput}
               onTextInputDebounce={onInputEnd}
+              externalClassnames={styles.searchInput}
+              focus
             />
-            <Button onClick={onSearch} extraClassnames={styles.searchBtn}>
+            <Button onClick={onSearch} externalClassnames={styles.searchBtn}>
               <Icon icon='filter' />
             </Button>
           </div>
         </div>
-        <div className={styles.searchResult}>{nothingSelected && <span>тут картинка девченки</span>}</div>
+        <div className={styles.searchResult}>
+          {nothingSelected && (
+            <div className={styles.girlBored}>
+              <Image
+                src='/assets/girl.png'
+                externalClassnames={styles.girlImage}
+                showAlt={false}
+                size={{ width: 93, height: 140 }}
+                alt='girl bored'
+              />
+            </div>
+          )}
+        </div>
       </div>
     </Modal>
   );

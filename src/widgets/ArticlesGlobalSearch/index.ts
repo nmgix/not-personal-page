@@ -1,1 +1,1 @@
-export { ArticlesGlobalSearch } from "./ArticlesGlobalSearch";
+export { ArticlesGlobalSearch, type SearchRef } from "./ArticlesGlobalSearch";

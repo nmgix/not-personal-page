@@ -8,6 +8,9 @@
 .modal {
   padding: 0;
   background: transparent;
+
+  width: 50vw;
+  height: 70vh;
 }
 
 .articlesGlobalSearch {
@@ -15,10 +18,13 @@
   flex-direction: column;
 
   padding: 20px;
+  height: 100%;
+  box-sizing: border-box;
 
   .top {
     display: flex;
     flex-direction: column;
+    flex: 0;
 
     row-gap: margins.$margin-s;
 
@@ -54,13 +60,14 @@
 
         padding: paddings.$padding-xs;
 
-        font-size: 10px;
+        font-size: 12px;
+        font-weight: 400;
 
         border-radius: borders.$border-xs;
 
         &Icon {
-          width: 14px;
-          height: 14px;
+          width: 1.4em;
+          height: 1.4em;
         }
       }
     }
@@ -72,10 +79,16 @@
 
       column-gap: margins.$margin-s;
 
+      .searchInput > div {
+        border-radius: borders.$border-xs;
+      }
+
       .searchBtn {
         padding: 0;
         aspect-ratio: 1/1;
         height: 100%;
+
+        padding-top: 5px;
       }
     }
   }
@@ -84,5 +97,21 @@
     display: flex;
     flex-direction: column;
     position: relative;
+
+    flex: 1;
+
+    .girlBored {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      .girlImage {
+        opacity: 0.6;
+        img {
+          background-color: transparent;
+        }
+      }
+    }
   }
 }

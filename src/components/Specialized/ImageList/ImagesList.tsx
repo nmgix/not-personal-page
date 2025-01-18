@@ -12,15 +12,15 @@ type ImageListProps = {
   size: { width: number; height: number };
   galleryButton: boolean;
   imageThreshold?: number;
-  extraClassnames?: string | string[];
+  externalClassnames?: string | string[];
 };
 
-export const ImageList = ({ images, size, galleryButton = false, imageThreshold = 3, extraClassnames }: ImageListProps) => {
+export const ImageList = ({ images, size, galleryButton = false, imageThreshold = 3, externalClassnames }: ImageListProps) => {
   const _temporaryImagesList = useRef(
     images !== undefined && images.length > 0
       ? images.slice(0, imageThreshold).map((img, idx) =>
           galleryButton === true ? (
-            <Button onClick={() => console.log("open gallery, somehow, img idx: " + idx)} extraClassnames={styles.imageButton}>
+            <Button onClick={() => console.log("open gallery, somehow, img idx: " + idx)} externalClassnames={styles.imageButton}>
               <Image src={img.src} size={size} showAlt={false} alt={img.alt} />
             </Button>
           ) : (
@@ -32,13 +32,13 @@ export const ImageList = ({ images, size, galleryButton = false, imageThreshold 
   const imagesLeft = useRef(images.length > imageThreshold ? images.length - imageThreshold : undefined);
 
   return (
-    <div className={classnames(styles.imageListWrapper, extraClassnames)}>
+    <div className={classnames(styles.imageListWrapper, externalClassnames)}>
       <div className={styles.imageList}>{_temporaryImagesList.current}</div>
       {imagesLeft.current &&
         (galleryButton === false ? (
           <span className={styles.imagesAmount}>+{imagesLeft.current}</span>
         ) : (
-          <Button onClick={() => console.log("open gallery, somehow, open at " + imageThreshold)} extraClassnames={styles.imagesAmount}>
+          <Button onClick={() => console.log("open gallery, somehow, open at " + imageThreshold)} externalClassnames={styles.imagesAmount}>
             <>+{imagesLeft.current}</>
           </Button>
         ))}

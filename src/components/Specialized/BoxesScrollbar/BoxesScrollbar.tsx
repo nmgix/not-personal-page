@@ -4,12 +4,12 @@ import { useRef, useState } from "react";
 
 type BoxesScrollbarProps = {
   list: React.ReactElement[];
-  extraClassnames?: string | string[];
+  externalClassnames?: string | string[];
 };
 
 const fadeThresholdPX = 10;
 
-export const BoxesScrollbar = ({ list, extraClassnames }: BoxesScrollbarProps) => {
+export const BoxesScrollbar = ({ list, externalClassnames }: BoxesScrollbarProps) => {
   const boxRef = useRef<HTMLDivElement>(null);
 
   const [fadeState, setFadeState] = useState({ left: false, right: false });
@@ -43,7 +43,7 @@ export const BoxesScrollbar = ({ list, extraClassnames }: BoxesScrollbarProps) =
       className={classnames(
         styles.boxesScrollbar,
         fadeBoth ? styles.fadeBoth : fadeState.left ? styles.fadeLeft : fadeState.right ? styles.fadeRight : null,
-        extraClassnames
+        externalClassnames
       )}>
       {list.map((listElement, idx) => (
         <div key={idx} className={classnames("box")}>

@@ -28,7 +28,7 @@ export const ArticleListElement = ({ TTRmins, id, imagesSrc, previewImages, src,
         <h3 className={styles.title}>{title}</h3>
         <div className={styles.info}>
           {/* хз как сделать propogation чтобы теги вместо всего link  при ховер срабатывали */}
-          <BoxesScrollbar list={tagsRef.current} extraClassnames={styles.tags} />
+          <BoxesScrollbar list={tagsRef.current} externalClassnames={styles.tags} />
           <span className='TTR'>{formatedTTR.current}min</span>
         </div>
         <div className={styles.textWrapper}>
@@ -38,7 +38,7 @@ export const ArticleListElement = ({ TTRmins, id, imagesSrc, previewImages, src,
               size={{ width: 70, height: 70 }}
               images={imagesList.current}
               imageThreshold={3}
-              extraClassnames={styles.imagesList}
+              externalClassnames={styles.imagesList}
             />
           )}
           {textPreview && <p className={styles.textPreview}>{textPreview}</p>}
