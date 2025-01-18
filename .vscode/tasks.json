@@ -1,0 +1,54 @@
+{
+  "version": "2.0.0",
+  // чтобы убрать spinner анимацию у таски: "terminal.integrated.tabs.enableAnimation": false,
+  //  чтобы не было кружка у терминала "terminal.integrated.shellIntegration.decorationsEnabled": "never"
+  "tasks": [
+    {
+      "label": "Development group",
+      "type": "shell",
+      "problemMatcher": [],
+      "dependsOn": ["Storybook", "Styles", "Git"],
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "presentation": {
+        // "group": "build"
+        "echo": false
+      }
+    },
+    {
+      "type": "npm",
+      "script": "storybook",
+      "problemMatcher": [],
+      "label": "Storybook",
+      "presentation": {
+        // "group": "build"
+        "echo": false
+      }
+    },
+    {
+      "type": "npm",
+      "script": "styles",
+      "problemMatcher": [],
+      "label": "Styles",
+      "presentation": {
+        // "group": "build"
+        "echo": false
+      }
+    },
+    {
+      "type": "process",
+      "label": "Git",
+      "command": "C:\\Program Files\\Git\\bin\\bash.exe",
+      "args": [
+        "-l" // login shell for bash
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        // "group": "build"
+        "echo": false, // silence "Executing task ...",
+        "focus": true
+      }
+    }
+  ]
+}
