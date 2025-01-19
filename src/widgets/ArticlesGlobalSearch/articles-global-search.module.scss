@@ -62,6 +62,10 @@
     .categories {
       border: none;
 
+      & > div > label {
+        padding: 0;
+      }
+
       :global(.box) {
         padding: 0;
       }

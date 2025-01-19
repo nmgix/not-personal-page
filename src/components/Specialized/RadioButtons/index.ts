@@ -1,2 +1,2 @@
 export { RadioButton } from "./Button/RadioButton";
-export { RadioButtonsGroup } from "./ButtonsGroup/RadioButtonsGroup";
+export { RadioButtonsGroup, type RadioButtonsGroupProps } from "./ButtonsGroup/RadioButtonsGroup";

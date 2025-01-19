@@ -8,6 +8,7 @@ import { AvailableIcons, Icon } from "@/components/Generic/Icon";
 import { Button } from "@/components/Generic/Buttons/Default/Default-Button";
 import { Input, InputRef } from "@/components/Generic/Input";
 import { Image } from "@/components/Generic/Image";
+import { RadioButtonsGroup, RadioButtonsGroupProps } from "@/components/Specialized/RadioButtons";
 
 const _articlesAmount = 163;
 const _categories: { type: string; title: string; icon: keyof typeof AvailableIcons }[] = [
@@ -35,22 +36,20 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<SearchRef> }) =>
   }));
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  // for fun
-  const categoriesFuncsMemo = useMemo(() => {
-    const funcs: { [title: string]: () => void } = {};
-    _categories.forEach(c => (funcs[c.title] = () => setSelectedCategory(c.type)));
-    return funcs;
-  }, [_categories.length]);
+
   // не useRef мне нужен, что-то типо memo, если хочу ререндер при select категории (аппенд класса .active .box'у)
-  const categoriesRef = useRef(
-    _categories.map(c => (
-      <Button onClick={categoriesFuncsMemo[c.title]} externalClassnames={styles.category}>
-        <Icon icon={c.icon} externalClassnames={styles.categoryIcon} />
-        <span>{c.title}</span>
-      </Button>
-    ))
+  const categoriesRef = useRef<RadioButtonsGroupProps["options"]>(
+    _categories.map(c => ({
+      // react component в obj сомнительно но окэй
+      component: (
+        <div className={styles.category}>
+          <Icon icon={c.icon} externalClassnames={styles.categoryIcon} />
+          <span>{c.title}</span>
+        </div>
+      ),
+      value: c.title
+    }))
   );
-  // for fun
 
   const inputRef = useRef<InputRef>(null);
   const placeholders = useRef(_inputPlacholderWords.map(w => `например, ${w}`));
@@ -85,7 +84,12 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<SearchRef> }) =>
             <h4 className={styles.title}>articles search</h4>
             <span className={styles.subtitle}>{_articlesAmount} articles currently</span>
           </div>
-          <BoxesScrollbar list={categoriesRef.current} externalClassnames={styles.categories} />
+          <RadioButtonsGroup
+            onSelect={setSelectedCategory}
+            name='article-type'
+            options={categoriesRef.current}
+            externalClassnames={styles.categories}
+          />
           <div className={styles.searchWrapper}>
             <Input
               name='articles_search'
