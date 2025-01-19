@@ -1,7 +1,7 @@
 import classnames from "classnames";
 import { BoxesScrollbar } from "@/components/Specialized/BoxesScrollbar";
 import styles from "../radio-buttons.module.scss";
-import { useRef } from "react";
+import { useImperativeHandle, useState } from "react";
 import { RadioButton } from "../Button/RadioButton";
 
 export type RadioButtonsGroupProps = {
@@ -12,7 +12,7 @@ export type RadioButtonsGroupProps = {
   name: string;
   externalClassnames?: string | string[];
   onSelect: (id: string) => void;
-};
+} & { ref?: React.Ref<{ selectedOption: string }> };
 
 /**
  * Radio buttons X boxes scrollbar wrapper. Buttons are inputs[type="radio"], but borrows button styles
@@ -26,19 +26,29 @@ export type RadioButtonsGroupProps = {
  *
  * @returns {React.JSX} React element
  */
-export const RadioButtonsGroup = ({ options, name, externalClassnames, onSelect }: RadioButtonsGroupProps) => {
-  const optionsRender = useRef(
-    options !== undefined
-      ? options.map(option => (
-          <RadioButton value={option.value} name={name} onSelect={onSelect}>
-            {option.component}
-          </RadioButton>
-        ))
-      : []
-  );
+export const RadioButtonsGroup = ({ options, name, externalClassnames, onSelect, ref }: RadioButtonsGroupProps) => {
+  const [selectedOption, setSelectedOption] = useState("");
+  const _onSelect = (id: string) => {
+    if (id === selectedOption) return setSelectedOption("");
+    setSelectedOption(id);
+    onSelect(id);
+  };
+
+  useImperativeHandle(ref, () => ({
+    selectedOption
+  }));
 
   // TODO на сегодня: уйти от boxes scrollbar, выделить fade как кормпонент или scrollable, ибо обёртка детей в .box мешает
-  // потом radiobuttongroup засунуть в articlesglobalsearch вместо boxesscrollbar
-  // а ещё после применения .button у меня перестал кликаться весь компонент  как инпут (видимо его лейбл не покрывает всю кнопку)
-  return <BoxesScrollbar noWrapper list={optionsRender.current} externalClassnames={classnames(styles.group, externalClassnames)} />;
+  return (
+    <BoxesScrollbar
+      noWrapper
+      list={options.map(option => (
+        <RadioButton checked={option.value === selectedOption} value={option.value} name={name} onSelect={_onSelect}>
+          {option.component}
+        </RadioButton>
+      ))}
+      externalClassnames={classnames(styles.group, externalClassnames)}
+    />
+  );
 };
+RadioButtonsGroup.displayName = "RadioButtonsGroup";

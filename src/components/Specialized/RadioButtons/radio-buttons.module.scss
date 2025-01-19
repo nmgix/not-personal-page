@@ -6,9 +6,14 @@
   font-size: 14px;
   cursor: pointer;
 
-  // & input[type="radio"] {
-  //   display: none;
-  // }
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+
+  & input[type="radio"] {
+    display: none;
+  }
 
   & input[type="radio"]:checked + &Label {
     background-color: map.get(colors.$standard-theme, font-default);
@@ -19,7 +24,7 @@
     composes: defaultButton from "../../Generic/Buttons/Default/default-button.module.scss";
 
     padding: 0px 18px; // хз почему verical paddings are collapsing
-    line-height: 36px;
+    line-height: 2.5em;
     display: inline-block; // в таком случае занимает всю высоту родителя
     // &::before {
     //   content: "";

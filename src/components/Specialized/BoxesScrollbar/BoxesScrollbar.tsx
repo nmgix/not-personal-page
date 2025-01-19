@@ -1,6 +1,6 @@
 import classnames from "classnames";
 import styles from "./boxes-scrollbar.module.scss";
-import { useRef, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 
 type BoxesScrollbarProps = {
   list: React.ReactElement[];
@@ -52,9 +52,10 @@ export const BoxesScrollbar = ({ list, externalClassnames, noWrapper }: BoxesScr
             {listElement}
           </div>
         ) : (
-          listElement
+          <Fragment key={idx}>{listElement}</Fragment>
         )
       )}
     </div>
   );
 };
+BoxesScrollbar.displayName = "BoxesScrollbar";

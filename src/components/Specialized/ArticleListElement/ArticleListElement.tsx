@@ -47,3 +47,4 @@ export const ArticleListElement = ({ TTRmins, id, imagesSrc, previewImages, src,
     </Link>
   );
 };
+ArticleListElement.displayName = "ArticleListElement";

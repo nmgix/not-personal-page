@@ -1,7 +1,6 @@
 export declare const articlesGlobalSearch: string;
 export declare const categories: string;
 export declare const category: string;
-export declare const categoryIcon: string;
 export declare const girlBored: string;
 export declare const girlImage: string;
 export declare const modal: string;

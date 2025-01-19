@@ -45,3 +45,4 @@ export const ImageList = ({ images, size, galleryButton = false, imageThreshold 
     </div>
   );
 };
+ImageList.displayName = "ImageList";

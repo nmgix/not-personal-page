@@ -16,42 +16,74 @@ export const Default: Story = {
   args: {
     name: "Icons",
     options: [
-      <>
-        <Icon icon='arrow-link' />
-        <span>Button example</span>
-      </>,
-      <>
-        <Icon icon='blog' />
-        <span>Button example</span>
-      </>,
-      <>
-        <Icon icon='drag-left' />
-        <span>Button example</span>
-      </>
-    ]
+      {
+        component: (
+          <>
+            <Icon icon='arrow-link' />
+            <span>Button example</span>
+          </>
+        ),
+        value: "arrow"
+      },
+      {
+        component: (
+          <>
+            <Icon icon='blog' />
+            <span>Button example</span>
+          </>
+        ),
+        value: "blog"
+      },
+      {
+        component: (
+          <>
+            <Icon icon='drag-left' />
+            <span>Button example</span>
+          </>
+        ),
+        value: "drag left"
+      }
+    ],
+    onSelect: id => console.log(id)
   }
 };
 
 export const EmptyOptions: Story = {
-  args: { options: [], name: "Example-name" }
+  args: { options: [], name: "Example-name", onSelect: id => console.log(id) }
 };
 
 export const EmptyName: Story = {
   args: {
     name: "",
     options: [
-      <>
-        <Icon icon='arrow-link' />
-        <span>Button example</span>
-      </>,
-      <>
-        <Icon icon='blog' />
-        <span>Button example</span>
-      </>,
-      <>
-        <Icon icon='drag-left' />
-        <span>Button example</span>
-      </>
-    ]
+      {
+        component: (
+          <>
+            <Icon icon='arrow-link' />
+            <span>Button example</span>
+          </>
+        ),
+        value: "arrow"
+      },
+      {
+        component: (
+          <>
+            <Icon icon='blog' />
+            <span>Button example</span>
+          </>
+        ),
+        value: "blog"
+      },
+      {
+        component: (
+          <>
+            <Icon icon='drag-left' />
+            <span>Button example</span>
+          </>
+        ),
+        value: "drag left"
+      }
+    ],
+    onSelect: id => console.log(id)
   }
 };

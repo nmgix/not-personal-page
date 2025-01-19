@@ -3,7 +3,6 @@ import { useHotkeys } from "react-hotkeys-hook";
 import classnames from "classnames";
 import { Modal } from "@/components/Generic/Modal";
 import styles from "./articles-global-search.module.scss";
-import { BoxesScrollbar } from "@/components/Specialized/BoxesScrollbar";
 import { AvailableIcons, Icon } from "@/components/Generic/Icon";
 import { Button } from "@/components/Generic/Buttons/Default/Default-Button";
 import { Input, InputRef } from "@/components/Generic/Input";
@@ -38,12 +37,13 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<SearchRef> }) =>
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   // не useRef мне нужен, что-то типо memo, если хочу ререндер при select категории (аппенд класса .active .box'у)
+  // а мб useRef достаточно, я же не буду в memo оборачивать вот эти компоненты, и так пойдёт, наверное
   const categoriesRef = useRef<RadioButtonsGroupProps["options"]>(
     _categories.map(c => ({
       // react component в obj сомнительно но окэй
       component: (
         <div className={styles.category}>
-          <Icon icon={c.icon} externalClassnames={styles.categoryIcon} />
+          <Icon icon={c.icon} />
           <span>{c.title}</span>
         </div>
       ),

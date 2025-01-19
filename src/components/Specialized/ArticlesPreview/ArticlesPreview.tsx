@@ -5,3 +5,4 @@ type ArticlesPreview = ArticleProps;
 export const ArticlesPreview = ({}: ArticlesPreview) => {
   return <article></article>;
 };
+ArticlesPreview.displayName = "ArticlesPreview";

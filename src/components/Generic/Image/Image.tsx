@@ -17,3 +17,4 @@ export const Image = ({ src, alt, size, showAlt, externalClassnames }: ImageProp
     </div>
   );
 };
+Image.displayName = "Image";
