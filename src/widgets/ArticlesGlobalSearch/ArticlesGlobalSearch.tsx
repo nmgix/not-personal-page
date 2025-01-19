@@ -63,8 +63,16 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<SearchRef> }) =>
   };
 
   const onSearch = () => {
-    console.log("search: " + inputRef.current?.value);
-    console.log("category: " + selectedCategory);
+    // console.log("search: " + inputRef.current?.value);
+    // console.log("category: " + selectedCategory);
+  };
+
+  const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const formData = new FormData(e.currentTarget);
+    e.preventDefault();
+    for (let [key, value] of formData.entries()) {
+      console.log(key, value);
+    }
   };
 
   const nothingSelected = input.length == 0 && selectedCategory == null;
@@ -72,7 +80,7 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<SearchRef> }) =>
   return (
     <Modal ariaLabel='articles global search' onClose={onClose} show={modalOpen} externalClassnames={styles.modal} hideCloseBtn>
       <div className={classnames("box", styles.articlesGlobalSearch)}>
-        <div className={styles.top}>
+        <form className={styles.top} onSubmit={onFormSubmit}>
           <div className={styles.titleWrapper}>
             <h4 className={styles.title}>articles search</h4>
             <span className={styles.subtitle}>{_articlesAmount} articles currently</span>
@@ -80,7 +88,7 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<SearchRef> }) =>
           <BoxesScrollbar list={categoriesRef.current} externalClassnames={styles.categories} />
           <div className={styles.searchWrapper}>
             <Input
-              name='art_search'
+              name='articles_search'
               value={input}
               ref={inputRef}
               placeholder={placeholders.current}
@@ -89,11 +97,11 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<SearchRef> }) =>
               externalClassnames={styles.searchInput}
               focus
             />
-            <Button onClick={onSearch} externalClassnames={styles.searchBtn}>
+            <Button type={"submit"} onClick={onSearch} externalClassnames={styles.searchBtn}>
               <Icon icon='filter' />
             </Button>
           </div>
-        </div>
+        </form>
         <div className={styles.searchResult}>
           {nothingSelected && (
             <div className={styles.girlBored}>

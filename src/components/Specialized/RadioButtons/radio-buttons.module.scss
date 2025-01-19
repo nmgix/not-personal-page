@@ -1,0 +1,39 @@
+@use "../../../styles/colors";
+@use "sass:map";
+
+.button {
+  display: inline-block;
+  font-size: 14px;
+  cursor: pointer;
+
+  & input[type="radio"] {
+    display: none;
+  }
+
+  & input[type="radio"]:checked + &Label {
+    background-color: map.get(colors.$standard-theme, font-default);
+  }
+
+  &Label {
+    position: relative;
+    composes: defaultButton from "../../Generic/Buttons/Default/default-button.module.scss";
+
+    padding: 0px 18px; // хз почему verical paddings are collapsing
+    line-height: 36px;
+    display: inline-block; // в таком случае занимает всю высоту родителя
+    // &::before {
+    //   content: "";
+    //   background: transparent;
+
+    //   position: absolute;
+    //   left: 0;
+    //   top: 0;
+    //   width: 100%;
+    //   height: 100%;
+    // }
+  }
+}
+
+.group {
+  opacity: 1; // class filler
+}

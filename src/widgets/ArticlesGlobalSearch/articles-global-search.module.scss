@@ -11,15 +11,29 @@
 
   width: 50vw;
   height: 70vh;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    backdrop-filter: blur(7px);
+    z-index: 0;
+  }
 }
 
 .articlesGlobalSearch {
   display: flex;
   flex-direction: column;
+  position: relative;
 
   padding: 20px;
   height: 100%;
   box-sizing: border-box;
+
+  background-color: rgba(map.get(colors.$standard-theme, box-default), 0.6);
 
   .top {
     display: flex;
@@ -32,6 +46,7 @@
       font-family: fonts.$font-stretch;
       font-size: 16px;
       color: map.get(colors.$standard-theme, font-hero);
+      font-weight: 400;
 
       &Wrapper {
         display: block;
@@ -39,8 +54,6 @@
     }
 
     .subtitle {
-      margin-top: 2px;
-
       font-size: 12px;
       color: map.get(colors.$standard-theme, font-sub);
       font-weight: 100;

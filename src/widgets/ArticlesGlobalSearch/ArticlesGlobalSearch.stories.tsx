@@ -21,6 +21,19 @@ const TutorialWrapper = () => {
         press <kbd>ctrl + k</kbd>
       </span>
       <button onClick={() => ref.current?.setModalState(true)}>or open</button>
+      <div
+        style={{
+          position: "absolute",
+          width: 200,
+          height: 200,
+          backgroundColor: "coral",
+          left: "50vw",
+          top: "50vh",
+          transform: "transalte(-50%, -50%)",
+          opacity: 0.3
+        }}>
+        some div for modal trasparency example
+      </div>
       <ArticlesGlobalSearch ref={ref} />
     </>
   );

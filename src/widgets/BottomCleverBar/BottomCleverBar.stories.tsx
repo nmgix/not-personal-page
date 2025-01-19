@@ -10,7 +10,7 @@ const meta = {
 
 const CleverBarInterscetionExamle = (args: Args) => (
   <>
-    <div style={{ backgroundColor: "red", width: 50, height: 40, position: "absolute", left: 332, top: 5 }} />
+    <div style={{ backgroundColor: "red", width: 200, height: 40, position: "absolute", left: "40vw", top: 5 }} />
     <BottomCleverBar {...args} />
   </>
 );

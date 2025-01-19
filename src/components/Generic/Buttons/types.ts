@@ -1,3 +1,5 @@
+import { ButtonHTMLAttributes } from "react";
+
 export type ButtonProps = {
   children: React.ReactElement | React.ReactElement[];
   onClick: () => any;
@@ -6,4 +8,5 @@ export type ButtonProps = {
   disabled?: boolean;
   externalClassnames?: string | string[];
   focus?: true;
+  type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
 };

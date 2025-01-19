@@ -6,6 +6,12 @@
   border-radius: borders.$border-default;
   background-color: map.get(colors.$standard-theme, font-hero);
 
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+
   &Wrapper {
     display: flex;
     flex-direction: column;
