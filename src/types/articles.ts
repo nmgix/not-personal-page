@@ -1,9 +1,13 @@
+import { AvailableIcons } from "@/components/Generic/Icon";
+import { type PickKey } from "@/helpers/typescript";
+
 export type ArticleListElementProps = {
   id: string;
   title: string;
   tags: string[];
   TTRmins: number; // time-to-read-mins
-  src: string; // article src
+  href: string; // article src
+  category: PickKey<typeof AvailableIcons, "blog" | "tech-article" | "video">;
   previewImages?: boolean;
   imagesSrc?: string[]; // images (if exist) src links, amount of items in array is used to calculate "N+" amount of images in element
   textPreview?: string;

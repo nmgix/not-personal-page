@@ -1,0 +1,10 @@
+export declare const blocksGrid: string;
+export declare const button: string;
+export declare const element: string;
+export declare const elementWrapper: string;
+export declare const list: string;
+export declare const resultListRenderer: string;
+export declare const rowsGrid: string;
+export declare const text: string;
+export declare const title: string;
+export declare const top: string;

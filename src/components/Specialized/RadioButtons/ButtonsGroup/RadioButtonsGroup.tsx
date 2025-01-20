@@ -11,7 +11,7 @@ export type RadioButtonsGroupProps = {
   }[];
   name: string;
   externalClassnames?: string | string[];
-  onSelect: (id: string) => void;
+  onSelect: (id: string | null) => void;
 } & { ref?: React.Ref<{ selectedOption: string }> };
 
 /**
@@ -29,9 +29,14 @@ export type RadioButtonsGroupProps = {
 export const RadioButtonsGroup = ({ options, name, externalClassnames, onSelect, ref }: RadioButtonsGroupProps) => {
   const [selectedOption, setSelectedOption] = useState("");
   const _onSelect = (id: string) => {
-    if (id === selectedOption) return setSelectedOption("");
-    setSelectedOption(id);
-    onSelect(id);
+    if (id === selectedOption) {
+      setSelectedOption("");
+      onSelect(null);
+      return;
+    } else {
+      setSelectedOption(id);
+      onSelect(id);
+    }
   };
 
   useImperativeHandle(ref, () => ({

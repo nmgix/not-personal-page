@@ -1,0 +1,81 @@
+@use "../../../styles/margins";
+@use "../../../styles/paddings";
+@use "../../../styles/colors";
+@use "sass:map";
+
+.resultListRenderer {
+  flex: 1;
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+
+    .button {
+      background-color: transparent;
+      font-size: 22px;
+      padding: 0;
+      // .icon {
+
+      // }
+    }
+  }
+
+  .rowsGrid {
+    grid-template-columns: 1fr;
+  }
+  .blocksGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .list {
+    display: grid;
+    grid-auto-rows: 1fr;
+    gap: margins.$margin-default margins.$margin-default;
+    padding: 0;
+    margin: 0;
+
+    .element {
+      // TODO: нормальные html теги выделить по семантике
+      color: map.get(colors.$standard-theme, icon-default);
+
+      &Wrapper {
+        border-radius: 10px;
+        // composes: defaultButton from "../../../components/Generic/Buttons/Default/default-button.module.scss";
+        background-color: map.get(colors.$standard-theme, box-default);
+        padding: paddings.$padding-s;
+
+        &:hover {
+          background-color: map.get(colors.$standard-theme, box-hover);
+        }
+      }
+      &:hover {
+        color: map.get(colors.$standard-theme, font-hover);
+      }
+
+      .title {
+        display: flex;
+        column-gap: margins.$margin-xs;
+        font-size: 16px;
+        font-weight: 800;
+
+        p {
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+      }
+      .text {
+        margin-top: margins.$margin-xs;
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+        font-weight: 100;
+        font-size: 12px; //must be scaled depending on .element width (because of block render)
+
+        mark {
+          font-weight: 800;
+          color: map.get(colors.$standard-theme, font-hero);
+        }
+      }
+    }
+  }
+}

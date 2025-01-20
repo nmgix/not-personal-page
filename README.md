@@ -46,13 +46,14 @@
          - fade дёрагнный (js'ом имплементирован)
          - не убран скроллбар на пк, на мобилки он должен оставаться
          - не в виджетах потому что реюз в других Specialized
+         - нужно разделить на scrollable компонент и fade хук внутри
       6. [~] ImageList (articles i.e.)
          - не в виджетах потому что реюз в других Specialized
          1. [ ] мб обернуть в Suspense, вроде там перед загрузкой белый фон просто
          2. [ ] нет обработки если ошибка загрузки изображения
-      7. [ ] RadioButtons
-         1. [ ] Button
-         2. [ ] ButtonsGroup
+      7. [x] RadioButtons
+         1. [x] Button
+         2. [x] ButtonsGroup
 3. [ ] Widgets
    1. [x] CookiePopup
       - проблема в Popup, его фукнционал пока это просто обёртка в виде div.box, нужно взять popup логику из nmgix-components
@@ -63,6 +64,7 @@
       - проблема в том, что в самом дизайне footer ещё не прототипирован/создан
    5. [ ] ArticlesGlobalSearch
       - переписать на form чтобы не держать инфу в стейте, boxscroll обернуть в компонент со своим стейтом а внутернние его box переделать в инпуты радиогруппы? чтобы форма могла получать данные выбранного элемента
+      1. [ ] ResultListRenderer
    6. [ ] ArticleList
       - обернуть в Suspense
       - юзать ArticleListElement из Specialized

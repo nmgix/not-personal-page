@@ -92,8 +92,11 @@
 
       column-gap: margins.$margin-s;
 
-      .searchInput > div {
-        border-radius: borders.$border-xs;
+      // .searchInput > div {
+      // border-radius: borders.$border-xs;
+      // }
+      .searchInput > div > input::placeholder {
+        font-size: 12px;
       }
 
       .searchBtn {

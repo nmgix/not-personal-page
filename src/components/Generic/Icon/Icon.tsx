@@ -6,11 +6,13 @@ import styles from "./icon.module.scss";
 
 export enum AvailableIcons {
   "arrow-link",
-  "blog",
+  "tech-article",
   "drag-left",
   "filter",
-  "thought",
-  "video"
+  "blog",
+  "video",
+  "grid-blocks",
+  "grid-rows"
 }
 
 interface IIconProps {

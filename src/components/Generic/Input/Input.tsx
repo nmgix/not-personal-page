@@ -19,64 +19,51 @@ export type InputRef = {
   value: string;
 } | null;
 
-export const Input = ({
-  onEnterPress,
-  onLetterEntered,
-  onTextInputDebounce,
-  value,
-  ref,
-  placeholder,
-  label,
-  name,
-  externalClassnames,
-  focus
-}: InputProps & { ref: React.Ref<InputRef> }) => {
-  const _placeholder = useRef(Array.isArray(placeholder) ? placeholder[Math.floor(Math.random() * placeholder.length)] : placeholder);
-  const [_value, setValue] = useState(value ?? "");
+export const Input = (props: InputProps & { ref: React.Ref<InputRef> }) => {
+  const _placeholder = useRef(
+    Array.isArray(props.placeholder) ? props.placeholder[Math.floor(Math.random() * props.placeholder.length)] : props.placeholder
+  );
+  const [_value, setValue] = useState(props.value ?? "");
   useEffect(() => {
-    setValue(value ?? "");
-  }, [value]);
-  const debouncedValue = useDebounced(onTextInputDebounce, 300, true);
+    setValue(props.value ?? "");
+  }, [props.value]);
+  const debouncedValue = useDebounced(props.onTextInputDebounce, 300, true);
 
   const onValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
     e.preventDefault();
     setValue(e.target.value);
-    if (onLetterEntered !== undefined) onLetterEntered(e.target.value);
+    if (props.onLetterEntered !== undefined) props.onLetterEntered(e.target.value);
     debouncedValue(e.target.value);
   };
 
   const listenEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    console.log(e);
-    if (onEnterPress === undefined) return e;
     if (e.key == "Enter") {
-      onEnterPress(_value);
+      props.onEnterPress!(_value);
     }
     return e;
   };
 
-  useImperativeHandle(ref, () => ({
+  useImperativeHandle(props.ref, () => ({
     value: _value
   }));
 
   return (
-    <div className={classnames(styles.inputWrapper, externalClassnames)}>
+    <div className={classnames(styles.inputWrapper, props.externalClassnames)}>
       <div className={classnames("box", styles.inputBox)}>
         <input
           className={styles.input}
           onChange={onValueChange}
-          value={value}
-          onKeyDown={listenEnter}
-          //   onKeyDown={listenEnter}
-          name={name}
+          value={props.value}
+          onKeyDown={props.onEnterPress ? listenEnter : undefined}
+          name={props.name}
           type='text'
           placeholder={_placeholder.current}
-          autoFocus={focus}
+          autoFocus={props.focus}
         />
       </div>
-      {label !== undefined && (
-        <label htmlFor={name} className={styles.inputLabel}>
-          {label}
+      {props.label !== undefined && (
+        <label htmlFor={props.name} className={styles.inputLabel}>
+          {props.label}
         </label>
       )}
     </div>

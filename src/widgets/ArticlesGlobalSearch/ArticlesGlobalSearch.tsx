@@ -8,6 +8,7 @@ import { Button } from "@/components/Generic/Buttons/Default/Default-Button";
 import { Input, InputRef } from "@/components/Generic/Input";
 import { Image } from "@/components/Generic/Image";
 import { RadioButtonsGroup, RadioButtonsGroupProps } from "@/components/Specialized/RadioButtons";
+import { ResultListRenderer } from "./components/ResultListRenderer";
 
 const _articlesAmount = 163;
 const _categories: { type: string; title: string; icon: keyof typeof AvailableIcons }[] = [
@@ -17,11 +18,12 @@ const _categories: { type: string; title: string; icon: keyof typeof AvailableIc
 ];
 const _inputPlacholderWords = ["мультисемплинг", "геймдев", "разработка"];
 
-export type SearchRef = {
+export type ArticlesGlobalSearchRef = {
   setModalState: (open: boolean) => void;
 };
 
-export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<SearchRef> }) => {
+export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSearchRef> }) => {
+  // MODAL CONTROLS & STATE START
   const [modalOpen, setModalOpen] = useState(false);
   const onClose = () => {
     console.log("modal closed, this widget");
@@ -33,6 +35,9 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<SearchRef> }) =>
   useImperativeHandle(ref, () => ({
     setModalState: setModalOpen
   }));
+  // MODAL CONTROLS & STATE END
+
+  // CATEGORIES CONTROLS & STATE START
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
@@ -51,6 +56,10 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<SearchRef> }) =>
     }))
   );
 
+  // CATEGORIES CONTROLS & STATE END
+
+  // SEARCH INPUT CONTROL START
+
   const inputRef = useRef<InputRef>(null);
   const placeholders = useRef(_inputPlacholderWords.map(w => `например, ${w}`));
   const [input, setInput] = useState("");
@@ -61,20 +70,37 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<SearchRef> }) =>
     setInput(searchWord);
   };
 
-  const onSearch = () => {
-    // console.log("search: " + inputRef.current?.value);
-    // console.log("category: " + selectedCategory);
+  // SEARCH INPUT CONTROL END
+
+  // ARTICLES LIST START START
+
+  const [foundArticles, setFoundArticles] = useState<any[] | null>(null);
+  // empty array = nothing is found, null = not searched yet
+  const noArticlesFound = foundArticles?.length == 0 && (input.length > 0 || (selectedCategory != null && (selectedCategory as string).length > 0));
+
+  // ARTICLES LIST START END
+
+  // MAKING SEARCH START
+
+  const searchArticles = (formData: FormData) => {
+    const _found: any[] = [];
+    // for (let [key, value] of formData.entries()) {
+    //   console.log(key, value);
+    // }
+    return _found;
   };
 
   const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    const formData = new FormData(e.currentTarget);
     e.preventDefault();
-    for (let [key, value] of formData.entries()) {
-      console.log(key, value);
-    }
+    const foundArticles = searchArticles(new FormData(e.currentTarget));
+    return setFoundArticles(foundArticles);
   };
 
-  const nothingSelected = input.length == 0 && selectedCategory == null;
+  // MAKING SEARCH END
+
+  // misc
+  const nothingSelected = input.length == 0 && (selectedCategory == null || selectedCategory == "");
+  // misc
 
   return (
     <Modal ariaLabel='articles global search' onClose={onClose} show={modalOpen} externalClassnames={styles.modal} hideCloseBtn>
@@ -101,7 +127,7 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<SearchRef> }) =>
               externalClassnames={styles.searchInput}
               focus
             />
-            <Button type={"submit"} onClick={onSearch} externalClassnames={styles.searchBtn}>
+            <Button type='submit' externalClassnames={styles.searchBtn}>
               <Icon icon='filter' />
             </Button>
           </div>
@@ -118,6 +144,8 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<SearchRef> }) =>
               />
             </div>
           )}
+          {noArticlesFound && <span>nothing found :c</span>}
+          {foundArticles !== null && foundArticles.length > 0 && <ResultListRenderer list={[]} />}
         </div>
       </div>
     </Modal>

@@ -1,16 +1,16 @@
 import classnames from "classnames";
 import styles from "./default-button.module.scss";
-import { ButtonProps } from "../types";
+import { ButtonPropsVariants } from "../types";
 
-export const Button = ({ children, onClick, disabled, externalClassnames, focus, type }: ButtonProps) => {
+export const Button = (props: ButtonPropsVariants) => {
   return (
     <button
-      type={type}
-      autoFocus={focus}
-      className={classnames("button", styles.defaultButton, externalClassnames)}
-      onClick={onClick}
-      disabled={disabled}>
-      {children}
+      type={props.type}
+      autoFocus={props.focus}
+      className={classnames("button", styles.defaultButton, props.externalClassnames)}
+      onClick={props.type !== "submit" ? props.onClick : undefined}
+      disabled={props.disabled}>
+      {props.children}
     </button>
   );
 };
