@@ -16,7 +16,7 @@ export const Default: Story = {
   args: {
     list: [
       <>
-        <Icon icon='thought' />
+        <Icon icon='blog' />
         <span>приключение</span>
       </>,
       <>
@@ -24,12 +24,12 @@ export const Default: Story = {
         <span>jump demo</span>
       </>,
       <>
-        <Icon icon='blog' />
+        <Icon icon='tech-article' />
         <span>libuv в node.js</span>
       </>,
 
       <>
-        <Icon icon='thought' />
+        <Icon icon='blog' />
         <span>приключение</span>
       </>,
       <>
@@ -37,11 +37,11 @@ export const Default: Story = {
         <span>jump demo</span>
       </>,
       <>
-        <Icon icon='blog' />
+        <Icon icon='tech-article' />
         <span>libuv в node.js</span>
       </>,
       <>
-        <Icon icon='thought' />
+        <Icon icon='blog' />
         <span>приключение</span>
       </>,
       <>
@@ -49,7 +49,7 @@ export const Default: Story = {
         <span>jump demo</span>
       </>,
       <>
-        <Icon icon='blog' />
+        <Icon icon='tech-article' />
         <span>libuv в node.js</span>
       </>
     ]

@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Box } from "./Box";
+const Box = (args?: { styles: React.CSSProperties }) => {
+  return <div className='box' style={args ? args.styles : { width: "100px", height: "50px" }} />;
+};
 
 const meta = {
   title: "Generic/Box",

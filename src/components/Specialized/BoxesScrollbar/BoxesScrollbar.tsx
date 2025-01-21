@@ -1,6 +1,8 @@
 import classnames from "classnames";
 import styles from "./boxes-scrollbar.module.scss";
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useRef } from "react";
+import { useFade } from "@/hooks/useFade";
+import { useScrollable } from "@/hooks/useScrollable";
 
 type BoxesScrollbarProps = {
   list: React.ReactElement[];
@@ -12,35 +14,14 @@ const fadeThresholdPX = 10;
 
 export const BoxesScrollbar = ({ list, externalClassnames, noWrapper }: BoxesScrollbarProps) => {
   const boxRef = useRef<HTMLDivElement>(null);
-
-  const [fadeState, setFadeState] = useState({ left: false, right: false });
-  const fadeBoth = fadeState.left && fadeState.right;
-
-  const updateScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
-    const element = e.target as HTMLDivElement;
-
-    let left = false,
-      right = false;
-    if (element.scrollWidth > element.clientWidth) {
-      if (element.scrollLeft > fadeThresholdPX) left = true;
-      if (element.scrollWidth - element.scrollLeft - element.clientWidth > fadeThresholdPX) right = true;
-    } else {
-      left = false;
-      right = false;
-    }
-    setFadeState({ left, right });
-  };
-
-  // const scrollWithoutShift = (e: React.WheelEvent<HTMLDivElement>) => {
-  //   e.preventDefault();
-  //   if (!boxRef.current) return;
-  //   boxRef.current.scrollLeft = e.deltaY;
-  // };
+  const { fadeBoth, fadeState, updateScroll } = useFade(boxRef as React.RefObject<HTMLElement>, fadeThresholdPX);
+  const _updateScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => updateScroll(e.target as HTMLElement);
+  useScrollable(boxRef as React.RefObject<HTMLElement>);
 
   return (
     <div
       ref={boxRef}
-      onScroll={updateScroll}
+      onScroll={_updateScroll}
       className={classnames(
         styles.boxesScrollbar,
         fadeBoth ? styles.fadeBoth : fadeState.left ? styles.fadeLeft : fadeState.right ? styles.fadeRight : null,

@@ -62,20 +62,28 @@
    3. [x] Header
    4. [x] Footer
       - проблема в том, что в самом дизайне footer ещё не прототипирован/создан
-   5. [ ] ArticlesGlobalSearch
-      - переписать на form чтобы не держать инфу в стейте, boxscroll обернуть в компонент со своим стейтом а внутернние его box переделать в инпуты радиогруппы? чтобы форма могла получать данные выбранного элемента
-      1. [ ] ResultListRenderer
-      - добавить fade vertical при scroll > 2%
+   5. [~] ArticlesGlobalSearch
+      1. [x] переписать на form чтобы не держать инфу в стейте, boxscroll обернуть в компонент со своим стейтом а внутернние его box переделать в инпуты радиогруппы? чтобы форма могла получать данные выбранного элемента
+      2. [ ] Подключить к реальным заметкам .md формата, скорее всего запрос на апи (не забыть rate limit на тот эндпоинт и какой-то варнинг в видео попапа при привышении лимита)
+      3. [~] Components
+         1. [~] ResultListRenderer
+            1. [ ] добавить fade vertical при scroll > 2%
    6. [ ] ArticleList
       - обернуть в Suspense
       - юзать ArticleListElement из Specialized
    7. [ ] Article (как same page render поверх предыдущего роута без перехода)
-4. [ ] Storybook
+4. [ ] Hooks
+   1. [x] useFade
+      1. [ ] сделать и для вертикали, пока хук только для горизонтали
+   2. [x] useDebounce
+   3. [~] useScrollable (чтобы без шифта скроллить при overflow-x:scroll)
+      1. [ ] добавить не то чтобы throttle, но чтобы он собирал все wheel ивенты и batch'ил их в один smooth scroll, что-то на увовне debounce, но с batch
+5. [ ] Storybook
    1. [ ] Components
       1. [x] Generic
       2. [ ] Specialized
    2. [ ]Widgets
-5. [ ] Testing
+6. [ ] Testing
    1. [ ] Playwright
       1. [ ] Home page
       2. [ ] Articles list
