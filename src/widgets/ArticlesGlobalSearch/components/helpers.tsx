@@ -22,15 +22,21 @@ function findSubstringPosition(text: string, substring: string, regexOptions: { 
 }
 
 export const selectTextExample = (symbolsLimit: number, text?: string, phrase?: string) => {
-  if (!text?.trim() || !phrase?.trim()) return text;
+  if (!text?.trim() || !phrase?.trim()) return "";
   const regexOptions: Parameters<typeof findSubstringPosition>[2] = { replace: "\\$&", regex: /[.*+?^${}()|[\]\\]/g };
   const regexMatch = findSubstringPosition(text, phrase, regexOptions); // первый раз regex'ом
-  if (!regexMatch) return text;
 
-  const startIndex = Math.max(0, regexMatch.match.index - symbolsLimit);
-  const endIndex = Math.min(text.length, regexMatch.match.index + regexMatch.match[0].length + symbolsLimit);
+  let startIndex = Math.max(0, text.length / 2 - symbolsLimit);
+  let endIndex = Math.min(text.length, text.length / 2 + phrase.length + symbolsLimit);
 
-  text = text.substring(startIndex, endIndex);
+  if (!regexMatch) {
+    return text.substring(startIndex, endIndex);
+  } else {
+    startIndex = Math.max(0, regexMatch.match.index - symbolsLimit);
+    endIndex = Math.min(text.length, regexMatch.match.index + regexMatch.match[0].length + symbolsLimit);
+    text = text.substring(startIndex, endIndex);
+  }
+
   const parts = splitKeepDelimiter(text, regexMatch.regex); //второй раз regex'ом проходимся, не оч
   return parts.map(p => (regexMatch.regex.test(p.toLowerCase()) ? <mark>{p}</mark> : <span>{p}</span>)); // много раз regex'ом
 };

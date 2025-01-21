@@ -65,6 +65,7 @@
    5. [ ] ArticlesGlobalSearch
       - переписать на form чтобы не держать инфу в стейте, boxscroll обернуть в компонент со своим стейтом а внутернние его box переделать в инпуты радиогруппы? чтобы форма могла получать данные выбранного элемента
       1. [ ] ResultListRenderer
+      - добавить fade vertical при scroll > 2%
    6. [ ] ArticleList
       - обернуть в Suspense
       - юзать ArticleListElement из Specialized

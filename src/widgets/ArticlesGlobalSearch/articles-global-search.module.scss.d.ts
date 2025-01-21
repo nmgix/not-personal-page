@@ -4,6 +4,7 @@ export declare const category: string;
 export declare const girlBored: string;
 export declare const girlImage: string;
 export declare const modal: string;
+export declare const nothingFound: string;
 export declare const searchBtn: string;
 export declare const searchInput: string;
 export declare const searchResult: string;

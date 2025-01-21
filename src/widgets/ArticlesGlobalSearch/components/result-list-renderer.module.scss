@@ -6,10 +6,19 @@
 .resultListRenderer {
   flex: 1;
 
+  height: 100%;
+  display: flex; // чтобы overflow-scroll нормально работал
+  flex-direction: column; // чтобы overflow-scroll нормально работал
+
   .top {
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap;
+    align-items: center;
+
+    .title {
+      color: map.get(colors.$standard-theme, font-default);
+    }
 
     .button {
       background-color: transparent;
@@ -33,6 +42,8 @@
     gap: margins.$margin-default margins.$margin-default;
     padding: 0;
     margin: 0;
+
+    overflow-y: scroll;
 
     .element {
       // TODO: нормальные html теги выделить по семантике

@@ -10,12 +10,13 @@ import { Image } from "@/components/Generic/Image";
 import { RadioButtonsGroup, RadioButtonsGroupProps } from "@/components/Specialized/RadioButtons";
 import { ResultListRenderer } from "./components/ResultListRenderer";
 import { ArticleListElementProps } from "@/types/articles";
+import { mockArticlesFound } from "./shared";
 
 const _articlesAmount = 163;
 const _categories: { type: string; title: string; icon: keyof typeof AvailableIcons }[] = [
-  { type: "article", title: "статьи", icon: "blog" },
+  { type: "article", title: "статьи", icon: "tech-article" },
   { type: "projects", title: "проекты", icon: "video" },
-  { type: "blog", title: "блог", icon: "thought" }
+  { type: "blog", title: "блог", icon: "blog" }
 ];
 const _inputPlacholderWords = ["мультисемплинг", "геймдев", "разработка"];
 
@@ -59,6 +60,13 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
 
   // CATEGORIES CONTROLS & STATE END
 
+  // ARTICLES LIST START START
+
+  const [foundArticles, setFoundArticles] = useState<ArticleListElementProps[] | null>(null);
+  // empty array = nothing is found, null = not searched yet
+
+  // ARTICLES LIST START END
+
   // SEARCH INPUT CONTROL START
 
   const inputRef = useRef<InputRef>(null);
@@ -68,26 +76,20 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
     console.log(searchWord);
   };
   const onInput = (searchWord: string) => {
+    setFoundArticles(null);
     setInput(searchWord);
   };
 
   // SEARCH INPUT CONTROL END
 
-  // ARTICLES LIST START START
-
-  const [foundArticles, setFoundArticles] = useState<ArticleListElementProps[] | null>(null);
-  // empty array = nothing is found, null = not searched yet
-  const noArticlesFound = foundArticles?.length == 0 && (input.length > 0 || (selectedCategory != null && (selectedCategory as string).length > 0));
-
-  // ARTICLES LIST START END
-
   // MAKING SEARCH START
 
   const searchArticles = (formData: FormData) => {
-    const _found: any[] = [];
+    let _found: ArticleListElementProps[] = [];
     // for (let [key, value] of formData.entries()) {
     //   console.log(key, value);
     // }
+    _found = mockArticlesFound;
     return _found;
   };
 
@@ -102,6 +104,10 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
   // misc
   const nothingSelected = input.length == 0 && (selectedCategory == null || selectedCategory == "");
   const articlesFound = foundArticles !== null && foundArticles.length > 0 && input.length > 0;
+  const noArticlesFound =
+    foundArticles !== null &&
+    foundArticles?.length == 0 &&
+    (input.length > 0 || (selectedCategory != null && (selectedCategory as string).length > 0));
   // misc
 
   return (
@@ -146,7 +152,12 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
               />
             </div>
           )}
-          {noArticlesFound && <span>nothing found :c</span>}
+          {noArticlesFound && (
+            <div className={styles.nothingFound}>
+              <h4 className={styles.title}>nothing found</h4>
+              <span className={styles.subtitle}>u dont know where to search c;</span>
+            </div>
+          )}
           {articlesFound && <ResultListRenderer list={foundArticles} searchedPhrase={input} />}
         </div>
       </div>
