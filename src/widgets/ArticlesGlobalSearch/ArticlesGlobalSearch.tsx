@@ -9,6 +9,7 @@ import { Input, InputRef } from "@/components/Generic/Input";
 import { Image } from "@/components/Generic/Image";
 import { RadioButtonsGroup, RadioButtonsGroupProps } from "@/components/Specialized/RadioButtons";
 import { ResultListRenderer } from "./components/ResultListRenderer";
+import { ArticleListElementProps } from "@/types/articles";
 
 const _articlesAmount = 163;
 const _categories: { type: string; title: string; icon: keyof typeof AvailableIcons }[] = [
@@ -74,7 +75,7 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
 
   // ARTICLES LIST START START
 
-  const [foundArticles, setFoundArticles] = useState<any[] | null>(null);
+  const [foundArticles, setFoundArticles] = useState<ArticleListElementProps[] | null>(null);
   // empty array = nothing is found, null = not searched yet
   const noArticlesFound = foundArticles?.length == 0 && (input.length > 0 || (selectedCategory != null && (selectedCategory as string).length > 0));
 
@@ -100,6 +101,7 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
 
   // misc
   const nothingSelected = input.length == 0 && (selectedCategory == null || selectedCategory == "");
+  const articlesFound = foundArticles !== null && foundArticles.length > 0 && input.length > 0;
   // misc
 
   return (
@@ -127,7 +129,7 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
               externalClassnames={styles.searchInput}
               focus
             />
-            <Button type='submit' externalClassnames={styles.searchBtn}>
+            <Button title='search for articles' type='submit' externalClassnames={styles.searchBtn}>
               <Icon icon='filter' />
             </Button>
           </div>
@@ -145,7 +147,7 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
             </div>
           )}
           {noArticlesFound && <span>nothing found :c</span>}
-          {foundArticles !== null && foundArticles.length > 0 && <ResultListRenderer list={[]} />}
+          {articlesFound && <ResultListRenderer list={foundArticles} searchedPhrase={input} />}
         </div>
       </div>
     </Modal>

@@ -29,7 +29,7 @@
   }
   .list {
     display: grid;
-    grid-auto-rows: 1fr;
+    grid-auto-rows: min-content;
     gap: margins.$margin-default margins.$margin-default;
     padding: 0;
     margin: 0;
@@ -74,6 +74,7 @@
         mark {
           font-weight: 800;
           color: map.get(colors.$standard-theme, font-hero);
+          background: transparent;
         }
       }
     }

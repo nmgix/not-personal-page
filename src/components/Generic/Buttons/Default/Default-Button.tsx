@@ -5,6 +5,7 @@ import { ButtonPropsVariants } from "../types";
 export const Button = (props: ButtonPropsVariants) => {
   return (
     <button
+      title={props.title}
       type={props.type}
       autoFocus={props.focus}
       className={classnames("button", styles.defaultButton, props.externalClassnames)}

@@ -20,7 +20,7 @@ export const ImageList = ({ images, size, galleryButton = false, imageThreshold 
     images !== undefined && images.length > 0
       ? images.slice(0, imageThreshold).map((img, idx) =>
           galleryButton === true ? (
-            <Button onClick={() => console.log("open gallery, somehow, img idx: " + idx)} externalClassnames={styles.imageButton}>
+            <Button title='open image' onClick={() => console.log("open gallery, somehow, img idx: " + idx)} externalClassnames={styles.imageButton}>
               <Image src={img.src} size={size} showAlt={false} alt={img.alt} />
             </Button>
           ) : (
@@ -38,7 +38,10 @@ export const ImageList = ({ images, size, galleryButton = false, imageThreshold 
         (galleryButton === false ? (
           <span className={styles.imagesAmount}>+{imagesLeft.current}</span>
         ) : (
-          <Button onClick={() => console.log("open gallery, somehow, open at " + imageThreshold)} externalClassnames={styles.imagesAmount}>
+          <Button
+            title='open gallery'
+            onClick={() => console.log("open gallery, somehow, open at " + imageThreshold)}
+            externalClassnames={styles.imagesAmount}>
             <>+{imagesLeft.current}</>
           </Button>
         ))}
