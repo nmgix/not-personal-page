@@ -2,11 +2,12 @@ import classnames from "classnames";
 import { ArticleListElementProps } from "@/types/articles";
 import styles from "./result-list-renderer.module.scss";
 import classNames from "classnames";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Button } from "@/components/Generic/Buttons/Default/Default-Button";
 import { Icon } from "@/components/Generic/Icon";
 import Link from "next/link";
 import { selectTextExample } from "./helpers";
+import { useFade } from "@/hooks/useFade";
 
 const ListElement = ({ article, searchedPhrase }: { article: ArticleListElementProps; searchedPhrase: string }) => {
   const text = useMemo(() => selectTextExample(100, article.textPreview, searchedPhrase), [article.textPreview, searchedPhrase]);
@@ -37,6 +38,12 @@ export const ResultListRenderer = ({ list, searchedPhrase, extraClassnames }: Re
   const cycleVariant = () => {
     setRenderVariant(currIdx => (currIdx + 1) % _renderListVariant.length);
   };
+  const listRef = useRef<HTMLUListElement>(null);
+  const { updateScrollFn } = useFade(listRef as React.RefObject<HTMLElement>, false, {
+    sideOne: "fadeTop",
+    sideTwo: "fadeBottom",
+    bothSides: "fadeTopBottom"
+  });
 
   return (
     <div className={classnames(styles.resultListRenderer, extraClassnames)}>
@@ -46,7 +53,7 @@ export const ResultListRenderer = ({ list, searchedPhrase, extraClassnames }: Re
           <Icon icon={`grid-${_renderListVariant[renderListVariant]}`} />
         </Button>
       </div>
-      <ul className={classNames(styles.list, styles[`${_renderListVariant[renderListVariant]}Grid`])}>
+      <ul onScroll={updateScrollFn} className={classNames(styles.list, styles[`${_renderListVariant[renderListVariant]}Grid`])}>
         {list.map(article => (
           <ListElement key={article.id} article={article} searchedPhrase={searchedPhrase} />
         ))}

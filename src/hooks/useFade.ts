@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
-// import _ from "lodash";
 
+// подумал что не смогу переписать всю функцию на leftSide/rightSide или topSide/bottomSide, так что ограничусь jsDoc
+
+/**
+ * @example horizontal == true =>  sides = left/right
+ * @example horizontal == false => sides = top/bottom
+ */
 export const useFade = (
   nodeRef: React.RefObject<HTMLElement>,
-  fadeThresholdPX: number,
   horizontal: boolean,
-  sidesStyles: { sideOne: string; sideTwo: string; bothSides: string }
+  sidesStyles: { sideOne: string; sideTwo: string; bothSides: string },
+  fadeThresholdPX: number = 10
 ) => {
   const [fadeState, setFadeState] = useState({ sideOne: false, sideTwo: false });
   const fadeBoth = fadeState.sideOne && fadeState.sideTwo; // хз будет пересчитываться или нет
 
-  const updateScroll = (element: HTMLElement) => {
+  const _updateScroll = (element: HTMLElement) => {
     let sideOne = false,
       sideTwo = false;
     if (horizontal) {
@@ -37,7 +42,6 @@ export const useFade = (
         break;
       }
     }
-    console.log(appendedSyles);
     // хз будто так себе код ^
     element.classList.remove(...[sidesStyles.sideOne, sidesStyles.sideTwo, sidesStyles.bothSides]);
     if (appendedSyles !== null) element.classList.add(...appendedSyles);
@@ -45,16 +49,14 @@ export const useFade = (
 
   useEffect(() => {
     if (nodeRef?.current !== null) {
-      updateScroll(nodeRef.current); // called only once
+      _updateScroll(nodeRef.current); // called only once on init
     }
+    console.log("lel not once");
   }, [nodeRef]);
-
-  // const _updateScroll = useThrottleFn(() => console.log(), 0.1, [])
-  //   const _updateScroll = _.throttle(updateScroll, 2);
 
   // whole hook is called multiple times
 
-  // хз как nodeRef'у применять стили fadaBoth/fadeLeft/fadeRight из BoxesScrollbar
+  const updateScrollFn = (e: React.UIEvent<HTMLElement, UIEvent>) => _updateScroll(e.target as HTMLElement);
 
-  return { fadeState, setFadeState, updateScroll, fadeBoth };
+  return { fadeState, setFadeState, updateScrollFn, fadeBoth };
 };

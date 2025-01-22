@@ -9,13 +9,6 @@ import { ArticleListElementProps } from "@/types/articles";
 export const ArticleListElement = ({ TTRmins, id, imagesSrc, previewImages, src, tags, textPreview, title }: ArticleListElementProps) => {
   const tagsRef = useRef(tags.map(tag => <div className='articleTag'>#{tag}</div>));
   const formatedTTR = useRef(Math.floor(TTRmins > 60 ? TTRmins / 60 : TTRmins));
-  // const _temporaryImagesList = useRef(
-  //   imagesSrc !== undefined && imagesSrc.length > 0
-  //     ? imagesSrc
-  //         .slice(0, 3)
-  //         .map((imgSrc, idx) => <Image src={imgSrc} size={{ width: 70, height: 70 }} showAlt={false} alt={`${title} img preview. img.${idx + 1}`} />)
-  //     : []
-  // );
   const imagesList = useRef<ImageElement[]>(
     imagesSrc !== undefined && imagesSrc.length > 0
       ? imagesSrc.map((i, idx) => ({ src: i, alt: `${title} article img preview. img ${Number(idx + 1)}` }))

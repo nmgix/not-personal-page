@@ -65,19 +65,20 @@
    5. [~] ArticlesGlobalSearch
       1. [x] переписать на form чтобы не держать инфу в стейте, boxscroll обернуть в компонент со своим стейтом а внутернние его box переделать в инпуты радиогруппы? чтобы форма могла получать данные выбранного элемента
       2. [ ] Подключить к реальным заметкам .md формата, скорее всего запрос на апи (не забыть rate limit на тот эндпоинт и какой-то варнинг в видео попапа при привышении лимита)
-      3. [~] Components
-         1. [~] ResultListRenderer
-            1. [ ] добавить fade vertical при scroll > 2%
+      3. [x] Components
+         1. [x] ResultListRenderer
+            1. [x] добавить fade vertical при scroll
    6. [ ] ArticleList
-      - обернуть в Suspense
-      - юзать ArticleListElement из Specialized
+      1. [ ] обернуть в Suspense
+      2. [ ] юзать ArticleListElement из Specialized
    7. [ ] Article (как same page render поверх предыдущего роута без перехода)
-4. [ ] Hooks
+4. [x] Hooks
    1. [x] useFade
-      1. [ ] сделать и для вертикали, пока хук только для горизонтали
+      1. [x] сделать и для вертикали, пока хук только для горизонтали
+      2. [-] добавить throttle
    2. [x] useDebounce
-   3. [~] useScrollable (чтобы без шифта скроллить при overflow-x:scroll)
-      1. [ ] добавить не то чтобы throttle, но чтобы он собирал все wheel ивенты и batch'ил их в один smooth scroll, что-то на увовне debounce, но с batch
+   3. [x] useScrollable (чтобы без шифта скроллить при overflow-x:scroll)
+      1. [-] добавить не то чтобы throttle, но чтобы он собирал все wheel ивенты и batch'ил их в один smooth scroll, что-то на увовне debounce, но с batch
 5. [ ] Storybook
    1. [ ] Components
       1. [x] Generic

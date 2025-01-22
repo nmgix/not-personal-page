@@ -10,22 +10,20 @@ type BoxesScrollbarProps = {
   noWrapper?: true;
 };
 
-const fadeThresholdPX = 10;
-
 export const BoxesScrollbar = ({ list, externalClassnames, noWrapper }: BoxesScrollbarProps) => {
   const boxRef = useRef<HTMLDivElement>(null);
-  const { updateScroll } = useFade(boxRef as React.RefObject<HTMLElement>, fadeThresholdPX, true, {
+  const { updateScrollFn } = useFade(boxRef as React.RefObject<HTMLElement>, true, {
     sideOne: "fadeLeft",
     sideTwo: "fadeRight",
     bothSides: "fadeLeftRight"
   });
-  const _updateScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => updateScroll(e.target as HTMLElement);
+
   useScrollable(boxRef as React.RefObject<HTMLElement>);
 
   return (
     <div
       ref={boxRef}
-      onScroll={_updateScroll}
+      onScroll={updateScrollFn}
       className={classnames(
         styles.boxesScrollbar,
         // fadeBoth ? styles.fadeBoth : fadeState.sideOne ? styles.fadeLeft : fadeState.sideTwo ? styles.fadeRight : null,
