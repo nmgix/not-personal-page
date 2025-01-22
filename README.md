@@ -54,6 +54,7 @@
       7. [x] RadioButtons
          1. [x] Button
          2. [x] ButtonsGroup
+      8. [x] ErrorBoundary
 3. [ ] Widgets
    1. [x] CookiePopup
       - проблема в Popup, его фукнционал пока это просто обёртка в виде div.box, нужно взять popup логику из nmgix-components

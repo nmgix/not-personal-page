@@ -6,6 +6,8 @@ import { Suspense, useLayoutEffect, useRef } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, Stage, useGLTF } from "@react-three/drei";
 import { Icon } from "@/components/Generic/Icon";
+import { ErrorBoundary } from "@/components/Specialized/ErrorBoundary";
+// import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 // import { ErrorBoundary } from "@react-three/fiber/dist/declarations/src/core/utils";
 
 const AvailableModels = {
@@ -39,15 +41,17 @@ export const ModelViewer = ({ renderModelTitle }: ModelViewerProps) => {
       </div>
       <div className={styles.viewRenderer}>
         {/* <ErrorBoundary set={idk}> */}
-        <Canvas>
-          <ambientLight intensity={0.25} />
-          <Suspense fallback={<span>scene is loading :3</span>}>
-            <Stage>
-              <primitive object={scene} />
-            </Stage>
-            <OrbitControls makeDefault />
-          </Suspense>
-        </Canvas>
+        <ErrorBoundary fallbackComponent={<span>error rendering model viewer UwU</span>}>
+          <Canvas>
+            <ambientLight intensity={0.25} />
+            <Suspense fallback={<span>scene is loading :3</span>}>
+              <Stage>
+                <primitive object={scene} />
+              </Stage>
+              <OrbitControls makeDefault />
+            </Suspense>
+          </Canvas>
+        </ErrorBoundary>
         {/* </ErrorBoundary> */}
       </div>
       <Icon icon='drag-left' externalClassnames={styles.grabIcon} />
