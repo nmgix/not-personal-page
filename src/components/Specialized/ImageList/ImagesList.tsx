@@ -5,7 +5,7 @@ import classnames from "classnames";
 
 import styles from "./images-list.module.scss";
 
-export type ImageElement = { src: string; alt: string };
+export type ImageElement = { id: string; src: string; alt: string };
 
 type ImageListProps = {
   images: ImageElement[];
@@ -33,7 +33,9 @@ export const ImageList = ({ images, size, galleryButton = false, imageThreshold 
 
   return (
     <div className={classnames(styles.imageListWrapper, externalClassnames)}>
-      <div className={styles.imageList}>{_temporaryImagesList.current}</div>
+      <div className={styles.imageList}>
+        {React.Children.map(_temporaryImagesList.current, (child, idx) => React.cloneElement(child, { key: idx }))}
+      </div>
       {imagesLeft.current &&
         (galleryButton === false ? (
           <span className={styles.imagesAmount}>+{imagesLeft.current}</span>

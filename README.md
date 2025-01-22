@@ -39,22 +39,25 @@
       2. [x] CookiePrompt
          - длина пока 100% width доступного, в модалке (с ref для самоудаления, модалка пока Widgets/CookiePopup не написан) должна быть длина до 500px
       3. [x] Model viewer (orbit controls with one light source)
-      4. [ ] ImageView
-      <!-- 5. [ ] ArticlesPreview, что за компонент?? -->
-      5. [x] BoxesScrollbar
+         1. [ ] Пофиксить блок event loop'а загрузкой объекта, мб через воркера или ещё как, саспенс не помогает
+         1. [ ] Поставить камеру чуть ближе, свет сделать более мягким и заставить крутиться объект (чек первый коммит связанный с modelviewer.ts)
+         1. [ ] Цвет иконки (справа снизу) не хочет меняться ни через родительский color, ни через установку цвета через outline/stroke/color напрямую
+         <!-- 5. [ ] ArticlesPreview, что за компонент?? -->
+      4. [x] BoxesScrollbar
          - мб есть смысл просто класс fade добавить, но scroll логика мне тоже нужна, может её тоже потом в generic component выделю для реюзабилити
          - fade дёрагнный (js'ом имплементирован)
          - не убран скроллбар на пк, на мобилки он должен оставаться
          - не в виджетах потому что реюз в других Specialized
          - нужно разделить на scrollable компонент и fade хук внутри
-      6. [~] ImageList (articles i.e.)
+      5. [~] ImageList (articles i.e.)
          - не в виджетах потому что реюз в других Specialized
          1. [ ] мб обернуть в Suspense, вроде там перед загрузкой белый фон просто
          2. [ ] нет обработки если ошибка загрузки изображения
-      7. [x] RadioButtons
+         3. [ ] \_temporaryImagesList? Ничего нет более постоянного, чем временное
+      6. [x] RadioButtons
          1. [x] Button
          2. [x] ButtonsGroup
-      8. [x] ErrorBoundary
+      7. [x] ErrorBoundary
 3. [ ] Widgets
    1. [x] CookiePopup
       - проблема в Popup, его фукнционал пока это просто обёртка в виде div.box, нужно взять popup логику из nmgix-components
@@ -73,6 +76,8 @@
       1. [ ] обернуть в Suspense + bonus: добавить skeleton анимацию
       2. [ ] юзать ArticleListElement из Specialized
    7. [ ] Article (как same page render поверх предыдущего роута без перехода)
+   8. [ ] ImageGallery (prev ImageView)
+      - возможность открыть на определённом индексе/id (при нажатии на изображение в середине статьи должна открыться галлерея на id этого изображения)
 4. [x] Hooks
    1. [~] useFade
       1. [x] сделать и для вертикали, пока хук только для горизонтали

@@ -14,10 +14,10 @@ type Story = StoryObj<typeof meta>;
 export const FourImagesDefaultLimit: Story = {
   args: {
     images: [
-      { src: "https://cdn.memes.com/up/71558571535638926/i/1736290969647.jpg", alt: "meme 1" },
-      { src: "https://cdn.memes.com/up/71558571535638926/i/1736290846680.jpeg", alt: "meme 2" },
-      { src: "https://cdn.memes.com/up/71558571535638926/i/1736290857145.png", alt: "meme 3" },
-      { src: "https://cdn.memes.com/up/71558571535638926/i/1736290938328.jpg", alt: "meme 4" }
+      { src: "https://cdn.memes.com/up/71558571535638926/i/1736290969647.jpg", alt: "meme 1", id: "1520f129-c938-48ef-bff2-84a27e03c797" },
+      { src: "https://cdn.memes.com/up/71558571535638926/i/1736290846680.jpeg", alt: "meme 2", id: "8317845a-feeb-415e-bb08-1648da2f5391" },
+      { src: "https://cdn.memes.com/up/71558571535638926/i/1736290857145.png", alt: "meme 3", id: "02e010f0-3bc5-4bab-94d2-71055aaffb76" },
+      { src: "https://cdn.memes.com/up/71558571535638926/i/1736290938328.jpg", alt: "meme 4", id: "1aa65a6b-5d7e-43c4-bd0d-78cb7b214b89" }
     ],
     size: { width: 70, height: 70 },
     galleryButton: false
@@ -26,7 +26,7 @@ export const FourImagesDefaultLimit: Story = {
 
 export const OneImage: Story = {
   args: {
-    images: [{ src: "https://cdn.memes.com/up/71558571535638926/i/1736290969647.jpg", alt: "meme 1" }],
+    images: [{ src: "https://cdn.memes.com/up/71558571535638926/i/1736290969647.jpg", alt: "meme 1", id: "f59db00e-41f9-45d6-b70a-09b9550cd291" }],
     size: { width: 70, height: 70 },
     galleryButton: false
   }
@@ -43,11 +43,11 @@ export const NoImages: Story = {
 export const FiveImagesIncreasedLimit: Story = {
   args: {
     images: [
-      { src: "https://cdn.memes.com/up/71558571535638926/i/1736290969647.jpg", alt: "meme 1" },
-      { src: "https://cdn.memes.com/up/71558571535638926/i/1736290846680.jpeg", alt: "meme 2" },
-      { src: "https://cdn.memes.com/up/71558571535638926/i/1736290857145.png", alt: "meme 3" },
-      { src: "https://cdn.memes.com/up/71558571535638926/i/1736290938328.jpg", alt: "meme 4" },
-      { src: "https://cdn.memes.com/up/71558571535638926/i/1736237784651.jpg", alt: "meme 5" }
+      { src: "https://cdn.memes.com/up/71558571535638926/i/1736290969647.jpg", alt: "meme 1", id: "46f7ae1c-5bd3-4d24-ac8c-14881dd19aa3" },
+      { src: "https://cdn.memes.com/up/71558571535638926/i/1736290846680.jpeg", alt: "meme 2", id: "7d3e7e13-31d2-4246-b6fc-b459b30b59ad" },
+      { src: "https://cdn.memes.com/up/71558571535638926/i/1736290857145.png", alt: "meme 3", id: "7834b6ad-45be-4fa4-99eb-490230a76df1" },
+      { src: "https://cdn.memes.com/up/71558571535638926/i/1736290938328.jpg", alt: "meme 4", id: "cac8d055-2528-4442-949a-703fdb237426" },
+      { src: "https://cdn.memes.com/up/71558571535638926/i/1736237784651.jpg", alt: "meme 5", id: "8317845a-feeb-415e-bb08-1648da2f5391" }
     ],
     size: { width: 70, height: 70 },
     imageThreshold: 5,
@@ -58,88 +58,12 @@ export const FiveImagesIncreasedLimit: Story = {
 export const FourImagesGalleryDefaultLimit: Story = {
   args: {
     images: [
-      { src: "https://cdn.memes.com/up/71558571535638926/i/1736290969647.jpg", alt: "meme 1" },
-      { src: "https://cdn.memes.com/up/71558571535638926/i/1736290846680.jpeg", alt: "meme 2" },
-      { src: "https://cdn.memes.com/up/71558571535638926/i/1736290857145.png", alt: "meme 3" },
-      { src: "https://cdn.memes.com/up/71558571535638926/i/1736290938328.jpg", alt: "meme 4" }
+      { src: "https://cdn.memes.com/up/71558571535638926/i/1736290969647.jpg", alt: "meme 1", id: "1aa65a6b-5d7e-43c4-bd0d-78cb7b214b89" },
+      { src: "https://cdn.memes.com/up/71558571535638926/i/1736290846680.jpeg", alt: "meme 2", id: "46f7ae1c-5bd3-4d24-ac8c-14881dd19aa3" },
+      { src: "https://cdn.memes.com/up/71558571535638926/i/1736290857145.png", alt: "meme 3", id: "f59db00e-41f9-45d6-b70a-09b9550cd291" },
+      { src: "https://cdn.memes.com/up/71558571535638926/i/1736290938328.jpg", alt: "meme 4", id: "7834b6ad-45be-4fa4-99eb-490230a76df1" }
     ],
     size: { width: 70, height: 70 },
     galleryButton: true
   }
 };
-
-// export const MemesNoPreview: Story = {
-//   args: {
-//     id: "a7c30da6-c452-480a-9ae1-038ee5b564e5",
-//     imagesSrc: [
-//       "https://cdn.memes.com/up/71558571535638926/i/1736290969647.jpg",
-// "https://cdn.memes.com/up/71558571535638926/i/1736290846680.jpeg",
-// "https://cdn.memes.com/up/71558571535638926/i/1736290857145.png",
-// "https://cdn.memes.com/up/71558571535638926/i/1736290938328.jpg",
-// "https://cdn.memes.com/up/71558571535638926/i/1736237784651.jpg"
-//     ],
-//     previewImages: false,
-//     src: "/blog/memes_daily_121",
-//     tags: ["memes", "daily"],
-//     textPreview:
-//       "Duis eget condimentum neque. In at mi faucibus, interdum ipsum sit amet, cursus quam. Cras purus lacus, vulputate ac tempor sed, imperdiet quis risus. Maecenas posuere dapibus egestas. In vel tincidunt libero. Etiam non scelerisque est, et tempor purus. Vivamus porttitor, ex eget luctus posuere, elit neque placerat ante, eu sagittis arcu velit ut neque",
-//     title: "Daily memes 121",
-//     TTRmins: 3
-//   }
-// };
-// export const MemesPreview: Story = {
-//   args: {
-//     id: "10ac14f9-5457-4330-b2a0-87080de3bab7",
-//     imagesSrc: [
-//       "https://cdn.memes.com/up/71558571535638926/i/1736290969647.jpg",
-//       "https://cdn.memes.com/up/71558571535638926/i/1736290846680.jpeg",
-//       "https://cdn.memes.com/up/71558571535638926/i/1736290857145.png",
-//       "https://cdn.memes.com/up/71558571535638926/i/1736290938328.jpg",
-//       "https://cdn.memes.com/up/71558571535638926/i/1736237784651.jpg"
-//     ],
-//     previewImages: true,
-//     src: "/blog/memes_daily_122",
-//     tags: ["memes", "daily"],
-//     textPreview:
-//       "Duis eget condimentum neque. In at mi faucibus, interdum ipsum sit amet, cursus quam. Cras purus lacus, vulputate ac tempor sed, imperdiet quis risus. Maecenas posuere dapibus egestas. In vel tincidunt libero. Etiam non scelerisque est, et tempor purus. Vivamus porttitor, ex eget luctus posuere, elit neque placerat ante, eu sagittis arcu velit ut neque",
-//     title: "Daily memes 122",
-//     TTRmins: 0.5
-//   }
-// };
-// export const MemesNoDescription: Story = {
-//   args: {
-//     id: "f9301849-bdd2-49b7-b8d4-52a5327540f4",
-//     imagesSrc: [
-//       "https://cdn.memes.com/up/71558571535638926/i/1736290969647.jpg",
-//       "https://cdn.memes.com/up/71558571535638926/i/1736290846680.jpeg",
-//       "https://cdn.memes.com/up/71558571535638926/i/1736290857145.png",
-//       "https://cdn.memes.com/up/71558571535638926/i/1736290938328.jpg",
-//       "https://cdn.memes.com/up/71558571535638926/i/1736237784651.jpg"
-//     ],
-//     previewImages: true,
-//     src: "/blog/memes_daily_123",
-//     tags: ["memes", "daily"],
-//     title: "Daily memes 123",
-//     TTRmins: 1
-//   }
-// };
-// export const MemesNoImages: Story = {
-//   args: {
-//     id: "79ed9bfd-a32f-4b63-beab-eda0c5aef0cb",
-//     src: "/blog/memes_daily_124",
-//     tags: ["memes", "daily"],
-//     textPreview:
-//       "Duis eget condimentum neque. In at mi faucibus, interdum ipsum sit amet, cursus quam. Cras purus lacus, vulputate ac tempor sed, imperdiet quis risus. Maecenas posuere dapibus egestas. In vel tincidunt libero. Etiam non scelerisque est, et tempor purus. Vivamus porttitor, ex eget luctus posuere, elit neque placerat ante, eu sagittis arcu velit ut neque",
-//     title: "Daily memes 124",
-//     TTRmins: 14
-//   }
-// };
-// export const MemesNoInfo: Story = {
-//   args: {
-//     id: "a42c8be6-4a7d-4cda-9faf-cb33cd39741d",
-//     src: "/blog/memes_daily_125",
-//     tags: [],
-//     title: "Daily memes 125",
-//     TTRmins: 105
-//   }
-// };

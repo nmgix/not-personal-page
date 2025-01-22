@@ -1,0 +1,64 @@
+@use "../../styles/margins";
+@use "../../styles/paddings";
+@use "../../styles/borders";
+@use "../../styles/fonts";
+@use "../../styles/colors";
+@use "sass:map";
+
+.modal {
+  padding: 0;
+  background: transparent;
+
+  width: 70vw;
+  height: 50vh;
+
+  position: relative;
+
+  overflow-y: hidden;
+
+  button {
+    z-index: 2;
+    position: absolute;
+    top: calc(paddings.$padding-xl / 2);
+    right: calc(paddings.$padding-xl / 2);
+
+    background: none;
+    border: none;
+    color: map.get(colors.$standard-theme, font-hero);
+
+    cursor: pointer;
+    font-family: fonts.$font-stretch;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    backdrop-filter: blur(7px);
+    z-index: 0;
+  }
+
+  .imageGallery {
+    position: relative;
+    padding: paddings.$padding-xl;
+    height: 100%;
+
+    overflow-y: hidden;
+    z-index: 1;
+    background-color: rgba(map.get(colors.$standard-theme, box-default), 0.6);
+
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+
+    gap: margins.$margin-default;
+
+    .imageInstance {
+      flex: 0;
+      overflow: unset;
+    }
+  }
+}

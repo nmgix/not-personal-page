@@ -27,10 +27,7 @@ export type ArticlesGlobalSearchRef = {
 export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSearchRef> }) => {
   // MODAL CONTROLS & STATE START
   const [modalOpen, setModalOpen] = useState(false);
-  const onClose = () => {
-    console.log("modal closed, this widget");
-    setModalOpen(false);
-  };
+  const onClose = () => setModalOpen(false);
   useHotkeys("ctrl+k", () => setModalOpen(true), { enabled: true, preventDefault: true }, []);
 
   // на случай неободимости открыть окно, например, в туториале
