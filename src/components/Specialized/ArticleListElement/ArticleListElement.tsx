@@ -6,7 +6,7 @@ import { useRef } from "react";
 import { ImageElement, ImageList } from "@/components/Specialized/ImageList";
 import { ArticleListElementProps } from "@/types/articles";
 
-export const ArticleListElement = ({ TTRmins, id, imagesSrc, previewImages, src, tags, textPreview, title }: ArticleListElementProps) => {
+export const ArticleListElement = ({ TTRmins, id, imagesSrc, previewImages, href, tags, textPreview, title }: ArticleListElementProps) => {
   const tagsRef = useRef(tags.map(tag => <div className='articleTag'>#{tag}</div>));
   const formatedTTR = useRef(Math.floor(TTRmins > 60 ? TTRmins / 60 : TTRmins));
   const imagesList = useRef<ImageElement[]>(
@@ -16,7 +16,7 @@ export const ArticleListElement = ({ TTRmins, id, imagesSrc, previewImages, src,
   );
 
   return (
-    <Link href={src}>
+    <Link href={href}>
       <article className={classnames("box", styles.articlesListElement)}>
         <h3 className={styles.title}>{title}</h3>
         <div className={styles.info}>

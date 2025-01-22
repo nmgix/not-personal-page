@@ -16,6 +16,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hotkeys-hook": "^4.6.1",
+    "react-loading-skeleton": "^3.5.0",
     "react-use": "^17.6.0",
     "sass": "^1.83.1",
     "typed-scss-modules": "^8.1.1"

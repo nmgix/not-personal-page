@@ -10,7 +10,7 @@ import { Image } from "@/components/Generic/Image";
 import { RadioButtonsGroup, RadioButtonsGroupProps } from "@/components/Specialized/RadioButtons";
 import { ResultListRenderer } from "./components/ResultListRenderer";
 import { ArticleListElementProps } from "@/types/articles";
-import { mockArticlesFound } from "./shared";
+import { mockArticlesFound } from "@/types/mocks";
 
 const _articlesAmount = 163;
 const _categories: { type: string; title: string; icon: keyof typeof AvailableIcons }[] = [

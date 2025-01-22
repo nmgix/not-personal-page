@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { ResultListRenderer } from "./ResultListRenderer";
-import { mockArticlesFound } from "../shared";
+import { mockArticlesFound } from "@/types/mocks";
 
 const meta = {
   title: "Widgets/ArticlesGlobalSearch/ResultListRenderer",

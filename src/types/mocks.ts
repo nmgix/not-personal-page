@@ -1,4 +1,4 @@
-import { ArticleListElementProps } from "@/types/articles";
+import { ArticleListElementProps } from "./articles";
 
 export const mockArticlesFound: ArticleListElementProps[] = [
   {

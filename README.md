@@ -68,14 +68,15 @@
       3. [x] Components
          1. [x] ResultListRenderer
             1. [x] добавить fade vertical при scroll
-   6. [ ] ArticleList
-      1. [ ] обернуть в Suspense
+   6. [~] ArticleList
+      1. [ ] обернуть в Suspense + bonus: добавить skeleton анимацию
       2. [ ] юзать ArticleListElement из Specialized
    7. [ ] Article (как same page render поверх предыдущего роута без перехода)
 4. [x] Hooks
-   1. [x] useFade
+   1. [~] useFade
       1. [x] сделать и для вертикали, пока хук только для горизонтали
       2. [-] добавить throttle
+      3. [ ] иногда в ResultListRenderer блюрится контент при наложении маски
    2. [x] useDebounce
    3. [x] useScrollable (чтобы без шифта скроллить при overflow-x:scroll)
       1. [-] добавить не то чтобы throttle, но чтобы он собирал все wheel ивенты и batch'ил их в один smooth scroll, что-то на увовне debounce, но с batch
