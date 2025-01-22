@@ -38,7 +38,7 @@
       1. [x] ArticleListElement (list item)
       2. [x] CookiePrompt
          - длина пока 100% width доступного, в модалке (с ref для самоудаления, модалка пока Widgets/CookiePopup не написан) должна быть длина до 500px
-      3. [ ] Model viewer (orbit controls with one light source)
+      3. [x] Model viewer (orbit controls with one light source)
       4. [ ] ImageView
       <!-- 5. [ ] ArticlesPreview, что за компонент?? -->
       5. [x] BoxesScrollbar
@@ -84,7 +84,7 @@
    1. [ ] Components
       1. [x] Generic
       2. [ ] Specialized
-   2. [ ]Widgets
+   2. [ ] Widgets
 6. [ ] Testing
    1. [ ] Playwright
       1. [ ] Home page

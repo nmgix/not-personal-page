@@ -11,14 +11,21 @@
     "styles": "npx typed-scss-modules src --watch"
   },
   "dependencies": {
+    "@react-three/drei": "^9.121.3",
+    "@react-three/fiber": "^9.0.0-alpha.8",
+    "@types/three": "^0.172.0",
     "classnames": "^2.5.1",
+    "file-loader": "^6.2.0",
+    "i": "^0.3.7",
     "next": "15.1.4",
+    "npm": "^11.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hotkeys-hook": "^4.6.1",
     "react-loading-skeleton": "^3.5.0",
     "react-use": "^17.6.0",
     "sass": "^1.83.1",
+    "three": "^0.172.0",
     "typed-scss-modules": "^8.1.1"
   },
   "devDependencies": {

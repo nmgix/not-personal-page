@@ -1,0 +1,55 @@
+@use "../../../styles/margins";
+@use "../../../styles/colors";
+@use "sass:map";
+
+.modelViewer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  .infoBar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: margins.$margin-s;
+
+    flex: 0;
+
+    font-size: 12px;
+
+    .title {
+      font-weight: 100;
+      color: map.get(colors.$standard-theme, font-darken);
+    }
+
+    .workName {
+      font-weight: 800;
+      color: map.get(colors.$standard-theme, icon-default);
+      text-decoration: underline;
+
+      cursor: no-drop; // хз зачем, пока ссылка не планируется, ну или можно прикольнуть если зажмёшь этот текст то чё-то случится
+    }
+  }
+
+  .viewRenderer {
+    flex: 1;
+
+    & > div > div > canvas {
+      cursor: grab;
+
+      &:active {
+        cursor: grabbing;
+      }
+    }
+  }
+
+  .grabIcon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    color: map.get(colors.$standard-theme, font-darken);
+  }
+}
