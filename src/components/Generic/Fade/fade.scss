@@ -1,0 +1,40 @@
+$fadeWidth: 50px;
+
+.fadeLeft {
+  mask: linear-gradient(to right, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 1) $fadeWidth);
+  -webkit-mask: linear-gradient(to right, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 1) $fadeWidth);
+}
+.fadeRight {
+  mask: linear-gradient(to right, rgba(0, 0, 0, 1) calc(100% - $fadeWidth), rgba(0, 0, 0, 0));
+  -webkit-mask: linear-gradient(to right, rgba(0, 0, 0, 1) calc(100% - $fadeWidth), rgba(0, 0, 0, 0));
+}
+
+.fadeLeftRight {
+  mask: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) $fadeWidth, rgba(0, 0, 0, 1) calc(100% - $fadeWidth), rgba(0, 0, 0, 0));
+  -webkit-mask: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) $fadeWidth,
+    rgba(0, 0, 0, 1) calc(100% - $fadeWidth),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+.fadeTop {
+  mask: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 1) $fadeWidth);
+  -webkit-mask: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 1) $fadeWidth);
+}
+.fadeBottom {
+  mask: linear-gradient(to bottom, rgba(0, 0, 0, 1) calc(100% - $fadeWidth), rgba(0, 0, 0, 0));
+  -webkit-mask: linear-gradient(to bottom, rgba(0, 0, 0, 1) calc(100% - $fadeWidth), rgba(0, 0, 0, 0));
+}
+.fadeTopBottom {
+  mask: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) $fadeWidth, rgba(0, 0, 0, 1) calc(100% - $fadeWidth), rgba(0, 0, 0, 0));
+  -webkit-mask: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) $fadeWidth,
+    rgba(0, 0, 0, 1) calc(100% - $fadeWidth),
+    rgba(0, 0, 0, 0)
+  );
+}

@@ -8,7 +8,7 @@ export const useScrollable = (nodeRef: React.RefObject<HTMLElement>) => {
       left: nodeRef.current.scrollLeft + e.deltaY,
       behavior: "smooth"
     });
-    console.log(e);
+    // console.log(e);
   };
 
   useEffect(() => {

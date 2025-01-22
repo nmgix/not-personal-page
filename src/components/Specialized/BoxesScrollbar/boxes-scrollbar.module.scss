@@ -4,27 +4,6 @@
 @use "../../../styles/media";
 @use "../../../styles/breakpoints";
 
-$fadeWidth: 50px;
-
-.fadeRight {
-  mask: linear-gradient(to right, rgba(0, 0, 0, 1) calc(100% - $fadeWidth), rgba(0, 0, 0, 0));
-  -webkit-mask: linear-gradient(to right, rgba(0, 0, 0, 1) calc(100% - $fadeWidth), rgba(0, 0, 0, 0));
-}
-.fadeLeft {
-  mask: linear-gradient(to right, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 1) $fadeWidth);
-  -webkit-mask: linear-gradient(to right, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 1) $fadeWidth);
-}
-.fadeBoth {
-  mask: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) $fadeWidth, rgba(0, 0, 0, 1) calc(100% - $fadeWidth), rgba(0, 0, 0, 0));
-  -webkit-mask: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 1) $fadeWidth,
-    rgba(0, 0, 0, 1) calc(100% - $fadeWidth),
-    rgba(0, 0, 0, 0)
-  );
-}
-
 .boxesScrollbar {
   display: flex;
   flex-direction: row;
