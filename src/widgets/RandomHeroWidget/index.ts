@@ -1,0 +1,1 @@
+export { RandomHeroWidget } from "./RandomHeroWidget";

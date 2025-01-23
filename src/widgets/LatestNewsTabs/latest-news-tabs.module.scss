@@ -1,0 +1,20 @@
+@use "../../styles/paddings";
+@use "../../styles/margins";
+
+.latestNewsTabs {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: margins.$margin-default;
+
+  :global(.box) {
+    padding: paddings.$padding-xl;
+  }
+
+  .firstRowItem {
+    grid-column: span 3;
+  }
+
+  .secondRowItem {
+    grid-column: span 2;
+  }
+}

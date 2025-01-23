@@ -51,5 +51,6 @@
     right: 0;
 
     color: map.get(colors.$standard-theme, font-darken);
+    z-index: -1;
   }
 }

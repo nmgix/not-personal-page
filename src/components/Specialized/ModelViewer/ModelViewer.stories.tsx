@@ -1,11 +1,18 @@
 import type { Args, Meta, StoryObj } from "@storybook/react";
-
 import { ModelViewer } from "@/components/Specialized/ModelViewer";
 
 const meta = {
   title: "Specialized/ModelViewer",
   component: ModelViewer,
   args: {}
+  // decorators: [
+  //   Story => (
+  //     <Html>
+  //       {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
+  //       <Story />
+  //     </Html>
+  //   )
+  // ]
 } satisfies Meta<typeof ModelViewer>;
 
 export default meta;

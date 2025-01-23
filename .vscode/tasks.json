@@ -49,6 +49,16 @@
         "echo": false, // silence "Executing task ...",
         "focus": true
       }
+    },
+    {
+      "type": "npm",
+      "script": "dev",
+      "problemMatcher": [],
+      "label": "next dev",
+      "presentation": {
+        // "group": "build"
+        "echo": false
+      }
     }
   ]
 }

@@ -10,7 +10,7 @@ import { ErrorBoundary } from "@/components/Specialized/ErrorBoundary";
 // import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 // import { ErrorBoundary } from "@react-three/fiber/dist/declarations/src/core/utils";
 
-const AvailableModels = {
+export const AvailableModels = {
   dragons_liberation: "gltf/dragons_liberation.glb",
   corkboard: "gltf/corkboard.glb"
 } as const;
@@ -44,7 +44,7 @@ export const ModelViewer = ({ renderModelTitle }: ModelViewerProps) => {
         <ErrorBoundary fallbackComponent={<span>error rendering model viewer UwU</span>}>
           <Canvas>
             <ambientLight intensity={0.25} />
-            <Suspense fallback={<span>scene is loading :3</span>}>
+            <Suspense fallback={null}>
               <Stage>
                 <primitive object={scene} />
               </Stage>

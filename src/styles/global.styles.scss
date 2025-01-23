@@ -16,6 +16,22 @@ body {
   color: map.get(colors.$standard-theme, font-default);
 }
 
+body {
+  background-color: map.get(colors.$standard-theme, background-800);
+  padding: 35px 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .page {
+    max-width: 500px;
+  }
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 a {
   text-decoration: none; // add link icon later in :after
   color: map.get(colors.$standard-theme, font-hero);
