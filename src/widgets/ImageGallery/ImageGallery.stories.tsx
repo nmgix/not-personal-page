@@ -9,6 +9,7 @@ const StoryWrapper = (args: Omit<React.ComponentProps<typeof ImageGallery>, "ref
   return (
     <div>
       <button onClick={() => galleryRef.current?.setModalOpen(true)}>open gallery</button>
+      <button onClick={() => galleryRef.current?.openIndex(1)}>open at 2nd</button>
       <ImageGallery ref={galleryRef} {...args} />
     </div>
   );

@@ -1,0 +1,29 @@
+@use "../../../styles/margins";
+@use "../../../styles/colors";
+@use "sass:map";
+
+// .tree {
+
+// }
+.treeNode {
+  .label {
+    margin-bottom: margins.$margin-s;
+    color: map.get(colors.$standard-theme, font-hero);
+
+    a {
+      text-decoration: underline;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+
+    span {
+      opacity: 0.5;
+    }
+  }
+
+  .children {
+    padding-left: 10px;
+    border-left: 1px solid map.get(colors.$standard-theme, font-hero);
+  }
+}

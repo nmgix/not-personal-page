@@ -26,6 +26,7 @@
     "react-use": "^17.6.0",
     "sass": "^1.83.1",
     "three": "^0.172.0",
+    "ts-key-enum": "^3.0.13",
     "typed-scss-modules": "^8.1.1"
   },
   "devDependencies": {
