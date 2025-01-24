@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+// import { useScroll } from "react-use";
 
 export const useScrollable = (nodeRef: React.RefObject<HTMLElement>) => {
   const scrollWithoutShift = (e: WheelEvent) => {
@@ -20,4 +21,12 @@ export const useScrollable = (nodeRef: React.RefObject<HTMLElement>) => {
       nodeRef?.current?.removeEventListener("wheel", scrollWithoutShift, true);
     };
   }, [nodeRef]);
+
+  // мб /\ заменю на \/
+
+  // const { x, y } = useScroll(nodeRef);
+  // nodeRef.current.scrollTo({
+  //   left: nodeRef.current.scrollLeft + y,
+  //   behavior: "smooth"
+  // });
 };

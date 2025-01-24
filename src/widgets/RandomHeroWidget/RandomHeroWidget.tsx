@@ -13,7 +13,7 @@ const ModelViewer = dynamic(() => import("../../components/Specialized/ModelView
   ssr: false
 });
 export const variants = {
-  tabs: <LatestNewsTabs />,
+  // tabs: <LatestNewsTabs />,
   viewer: (
     <ModelViewer
       renderModelTitle={Object.keys(AvailableModels)[Math.floor(Math.random() * Object.keys(AvailableModels).length)] as keyof typeof AvailableModels}
