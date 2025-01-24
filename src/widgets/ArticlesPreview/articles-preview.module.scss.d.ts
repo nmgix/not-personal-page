@@ -1,0 +1,9 @@
+export declare const articleHeader: string;
+export declare const articlesPreview: string;
+export declare const articlesPreviewInsideWrapper: string;
+export declare const element: string;
+export declare const header: string;
+export declare const list: string;
+export declare const textPreview: string;
+export declare const title: string;
+export declare const ttr: string;

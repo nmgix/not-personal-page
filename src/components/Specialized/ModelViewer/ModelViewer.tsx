@@ -17,11 +17,12 @@ export const AvailableModels = {
 
 type ModelViewerProps = {
   renderModelTitle: keyof typeof AvailableModels;
+  externalClassnames?: string | string[];
 };
 
 const publicModelPath = "models";
 
-export const ModelViewer = ({ renderModelTitle }: ModelViewerProps) => {
+export const ModelViewer = ({ renderModelTitle, externalClassnames }: ModelViewerProps) => {
   const modelPath = `${publicModelPath}/${AvailableModels[renderModelTitle]}`;
 
   //   const modelRef=  useRef(null) <JSX.IntrinsicElements>
@@ -34,7 +35,7 @@ export const ModelViewer = ({ renderModelTitle }: ModelViewerProps) => {
   //   const idk = (err: any) => console.log(err);
 
   return (
-    <div className={classnames(styles.modelViewer)}>
+    <div className={classnames(styles.modelViewer, externalClassnames)}>
       <div className={styles.infoBar}>
         <span className={styles.title}>&#91;work example&#93;</span>
         <span className={styles.workName}>{renderModelTitle}</span>

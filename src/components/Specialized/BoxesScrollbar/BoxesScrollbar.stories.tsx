@@ -12,46 +12,48 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+export const mockList = [
+  <>
+    <Icon icon='blog' />
+    <span>приключение</span>
+  </>,
+  <>
+    <Icon icon='video' />
+    <span>jump demo</span>
+  </>,
+  <>
+    <Icon icon='tech-article' />
+    <span>libuv в node.js</span>
+  </>,
+
+  <>
+    <Icon icon='blog' />
+    <span>приключение</span>
+  </>,
+  <>
+    <Icon icon='video' />
+    <span>jump demo</span>
+  </>,
+  <>
+    <Icon icon='tech-article' />
+    <span>libuv в node.js</span>
+  </>,
+  <>
+    <Icon icon='blog' />
+    <span>приключение</span>
+  </>,
+  <>
+    <Icon icon='video' />
+    <span>jump demo</span>
+  </>,
+  <>
+    <Icon icon='tech-article' />
+    <span>libuv в node.js</span>
+  </>
+];
+
 export const Default: Story = {
   args: {
-    list: [
-      <>
-        <Icon icon='blog' />
-        <span>приключение</span>
-      </>,
-      <>
-        <Icon icon='video' />
-        <span>jump demo</span>
-      </>,
-      <>
-        <Icon icon='tech-article' />
-        <span>libuv в node.js</span>
-      </>,
-
-      <>
-        <Icon icon='blog' />
-        <span>приключение</span>
-      </>,
-      <>
-        <Icon icon='video' />
-        <span>jump demo</span>
-      </>,
-      <>
-        <Icon icon='tech-article' />
-        <span>libuv в node.js</span>
-      </>,
-      <>
-        <Icon icon='blog' />
-        <span>приключение</span>
-      </>,
-      <>
-        <Icon icon='video' />
-        <span>jump demo</span>
-      </>,
-      <>
-        <Icon icon='tech-article' />
-        <span>libuv в node.js</span>
-      </>
-    ]
+    list: mockList
   }
 };

@@ -11,19 +11,21 @@ type BoxesScrollbarProps = {
 };
 
 export const BoxesScrollbar = ({ list, externalClassnames, noWrapper }: BoxesScrollbarProps) => {
-  const boxRef = useRef<HTMLDivElement>(null);
-  const { updateScrollFn } = useFade(boxRef as React.RefObject<HTMLElement>, true, {
-    sideOne: "fadeLeft",
-    sideTwo: "fadeRight",
-    bothSides: "fadeLeftRight"
-  });
+  // const boxRef = useRef<HTMLDivElement>(null);
+  // const { updateScrollFn } = useFade(boxRef as React.RefObject<HTMLElement>, true, {
+  //   sideOne: "fadeLeft",
+  //   sideTwo: "fadeRight",
+  //   bothSides: "fadeLeftRight"
+  // });
 
-  useScrollable(boxRef as React.RefObject<HTMLElement>);
+  // useScrollable(boxRef as React.RefObject<HTMLElement>);
+
+  // пока убираю все связанные хуки ибо nextjs не даёт рендерить в ssr режиме
 
   return (
     <div
-      ref={boxRef}
-      onScroll={updateScrollFn}
+      // ref={boxRef}
+      // onScroll={updateScrollFn}
       className={classnames(
         styles.boxesScrollbar,
         // fadeBoth ? styles.fadeBoth : fadeState.sideOne ? styles.fadeLeft : fadeState.sideTwo ? styles.fadeRight : null,

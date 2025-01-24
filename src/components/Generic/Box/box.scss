@@ -1,8 +1,9 @@
 @use "sass:map" as map;
 @use "../../../styles/colors";
+@use "../../../styles/borders";
 
 .box {
   background-color: map.get(colors.$standard-theme, box-default);
   border: 1px solid map.get(colors.$standard-theme, box-border);
-  border-radius: map.get(colors.$border-radius, default);
+  border-radius: borders.$border-default;
 }

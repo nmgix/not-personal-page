@@ -1,3 +1,4 @@
+import { UnexpectedErrorBoundary } from "@/components/Specialized/ErrorBoundary/ErrorBoundary";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -11,10 +12,8 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <div className='not-so-secret-window'>
-        <button />
-      </div>
-      <div className='page'>{children}</div>
+      <UnexpectedErrorBoundary />
+      {children}
     </>
   );
 }

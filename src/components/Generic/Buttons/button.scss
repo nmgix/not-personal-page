@@ -1,8 +1,9 @@
 @use "sass:map" as map;
 @use "../../../styles/colors";
+@use "../../../styles/borders";
 
 .button {
-  border-radius: map.get(colors.$border-radius, medium);
+  border-radius: borders.$border-s;
   background-color: map.get(colors.$standard-theme, box-default);
 
   padding: 12px 18px;
@@ -24,4 +25,20 @@
   }
 
   // TODO: decide to change box highlisht styles when selected from keyboard
+}
+
+.not-so-secret-btn {
+  background-color: #0f0f0f;
+  border-radius: 0 0 3px 3px;
+  position: fixed;
+  top: 0;
+  left: 80%;
+  border: none;
+  width: 24px;
+  height: 13px;
+
+  cursor: grab;
+  &:active {
+    cursor: grabbing;
+  }
 }

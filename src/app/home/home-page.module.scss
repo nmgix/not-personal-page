@@ -1,0 +1,51 @@
+@use "../../styles/margins";
+
+.home {
+  margin-top: margins.$margin-default;
+  display: flex;
+  flex-direction: column;
+  row-gap: margins.$margin-default;
+  height: 100%;
+
+  .randomWidget {
+    flex: 1;
+    // скорее всего уберу
+    // margin-top: 14px;
+    .viewer {
+      aspect-ratio: 4/3;
+    }
+  }
+
+  .mainTabs {
+    flex: 0;
+
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: 170px; // temporary instead of 1fr
+    gap: margins.$margin-default;
+
+    .articlesPreview {
+      grid-column: span 3;
+    }
+
+    .guyStanding {
+      grid-column: span 1;
+
+      img {
+        background: transparent;
+      }
+    }
+
+    .box1 {
+      grid-column: span 1;
+    }
+
+    .box2 {
+      grid-column: span 2;
+    }
+
+    .box3 {
+      grid-column: span 3;
+    }
+  }
+}

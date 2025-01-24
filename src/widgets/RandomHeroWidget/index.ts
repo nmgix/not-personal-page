@@ -1,1 +1,1 @@
-export { RandomHeroWidget } from "./RandomHeroWidget";
+export { RandomHeroWidget, variants } from "./RandomHeroWidget";

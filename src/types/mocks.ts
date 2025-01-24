@@ -46,5 +46,15 @@ export const mockArticlesFound: ArticleListElementProps[] = [
     title: "Daily memes 124",
     TTRmins: 14,
     category: "video"
+  },
+  {
+    id: "6dca1e1a-a6fb-4281-9d4b-648eeec9f876",
+    href: "/blog/memes_daily_125",
+    tags: ["memes", "daily"],
+    textPreview:
+      "Interdum ipsum sit amet, cursus quam. Interdum ipsum cras purus lacus, vulputate ac tempor sed, imperdiet quis risus. Maecenas posuere dapibus egestas. In vel tincidunt libero. Etiam non scelerisque est, et tempor purus. Vivamus porttitor, ex eget luctus posuere, elit neque placerat ante, eu sagittis arcu velit ut neque",
+    title: "Daily memes 125",
+    TTRmins: 10,
+    category: "video"
   }
 ];

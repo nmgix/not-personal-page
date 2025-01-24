@@ -5,7 +5,7 @@ import styles from "./article-list.module.scss";
 
 type ArticleListProps = {
   list: ArticleListElementProps[];
-  externalClassnames: string | string[];
+  externalClassnames?: string | string[];
 };
 
 export const ArticleList = ({ list, externalClassnames }: ArticleListProps) => {
