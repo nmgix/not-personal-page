@@ -20,6 +20,7 @@ export default function Home() {
           externalClassnames={styles.guyStanding}
           showAlt={false}
           size={{ width: 80, height: 170 }}
+          priority={false}
         />
         <div className={classnames("box", styles.box1)} />
         <div className={classnames("box", styles.box2)} />

@@ -1,10 +1,28 @@
-.env
+# not personal page
+
+Изначально проект планировался как сайт для друга который увлекается геймдевом. Я всё-же немного из другой сферы, так что ничего умнее, как погонять джейсоны и джипеги в красивом ui/ux, я не придумал.
+
+   <img width="850" alt="app preview" src="./.git.content/preview.png">
+
+## Дизайн в фигме
+
+<p float="middle">
+  <img align="top" src="./.git.content/figma_preview1.png" width="38%" />
+  <img align="top" src="./.git.content/figma_preview2.png" width="38%" /> 
+  <img align="top" src="./.git.content/figma_preview3.png" width="20%" />
+</p>
+
+## Сетап
+
+> [!IMPORTANT] Не забудь .env
 
 ```
-   NEXT_PUBLIC_NAME=brudiz
+   NEXT_PUBLIC_NAME="hehe-coolname"
    NEXT_PUBLIC_TIMEZONE="Europe/Moscow"
    NEXT_PUBLIC_CODING_SINCE=1578825717000 (milliseconds)
 ```
+
+## Компоненты, короче TODO
 
 1. [ ] Pages
    1. [ ] Home
@@ -110,3 +128,5 @@
       2. [ ] Articles list
       3. [ ] Blog
       4. [ ] Articles (blog/tech/projects) pages or same page renders
+7. [ ] Misc
+   1. [ ] Перенести glb в git-lfs (опционально, без lfs пометки лимит до 100мб/файл)

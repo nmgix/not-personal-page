@@ -1,6 +1,7 @@
 "use client";
 
-import { Component, ErrorInfo, ReactNode, useRef, useState } from "react";
+import { Component, ErrorInfo, ReactNode, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { useScratch } from "react-use";
 
 interface Props {

@@ -5,19 +5,25 @@ import styles from "./image.module.scss";
 type ImageProps = {
   src: string;
   alt: string;
-  size: { width: number; height: number } | false;
+  size: { width: number; height: number };
+  priority?: boolean;
   showAlt?: boolean;
   externalClassnames?: string | string[];
 };
-export const Image = ({ src, alt, size, showAlt, externalClassnames }: ImageProps) => {
+
+type UnionImageProps = (Omit<ImageProps, "size"> & { fill: true }) | ImageProps;
+
+export const Image = ({ externalClassnames, showAlt, ...props }: UnionImageProps) => {
   return (
     <div className={classnames(styles.imageWrapper, externalClassnames)}>
-      {size === false ? (
-        <ImageNext className={styles.image} src={src} alt={alt} fill draggable={false} />
-      ) : (
-        <ImageNext className={styles.image} src={src} alt={alt} width={size.width} height={size.height} draggable={false} />
-      )}
-      {showAlt === true && <span className={styles.imageAlt}>{alt}</span>}
+      <ImageNext
+        className={styles.image}
+        draggable={false}
+        {...props}
+        width={(props as ImageProps)?.size.width ?? undefined}
+        height={(props as ImageProps)?.size.height ?? undefined}
+      />
+      {showAlt === true && <span className={styles.imageAlt}>{props.alt}</span>}
     </div>
   );
 };
