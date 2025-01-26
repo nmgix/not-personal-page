@@ -14,7 +14,8 @@
 
 ## Сетап
 
-> [!IMPORTANT] Не забудь .env
+> [!IMPORTANT]
+> Не забудь .env
 
 ```
    NEXT_PUBLIC_NAME="hehe-coolname"

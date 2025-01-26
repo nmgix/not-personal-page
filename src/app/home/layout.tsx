@@ -1,4 +1,4 @@
-import { UnexpectedErrorBoundary } from "@/components/Specialized/ErrorBoundary/ErrorBoundary";
+import { UnexpectedErrorBoundary } from "@/components/Specialized/ErrorBoundary/TestComponents";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
