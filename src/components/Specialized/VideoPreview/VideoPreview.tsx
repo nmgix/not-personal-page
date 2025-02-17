@@ -4,9 +4,10 @@ import { Image } from "@/components/Generic/Image";
 import Link from "next/link";
 import { AvailableIcons, Icon } from "@/components/Generic/Icon";
 import { useEffect, useRef } from "react";
-import { useHover, useHoverDirty, useVideo } from "react-use";
+import { useHoverDirty /*, useVideo*/ } from "react-use";
+import { ExternalClassnames } from "@/types/components";
 
-type VideoPreviewProps = {
+export type VideoPreviewProps = {
   shortenedVideoSrc: string;
   videoLength: number;
   title: string;
@@ -14,7 +15,7 @@ type VideoPreviewProps = {
   thumbnailSrc: string;
   href: string;
   relatedTags?: (keyof typeof AvailableIcons)[];
-};
+} & ExternalClassnames;
 
 const descriptionLimit = 51;
 
@@ -28,7 +29,16 @@ function formatTime(seconds: number) {
   return `${minutes}:${formattedSeconds}`;
 }
 
-export const VideoPreview = ({ shortenedDescription, shortenedVideoSrc, title, videoLength, relatedTags, thumbnailSrc, href }: VideoPreviewProps) => {
+export const VideoPreview = ({
+  shortenedDescription,
+  shortenedVideoSrc,
+  title,
+  videoLength,
+  relatedTags,
+  thumbnailSrc,
+  href,
+  externalClassnames
+}: VideoPreviewProps) => {
   // useHover будет не чтобы класс вешать когда навелась мышка, а чтобы активировать видос по-новой
 
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -43,18 +53,19 @@ export const VideoPreview = ({ shortenedDescription, shortenedVideoSrc, title, v
     } else {
       if (videoRef.current !== null) {
         videoRef.current.pause();
+        videoRef.current.currentTime = 0;
         videoRef.current.style.display = "none";
       }
     }
   }, [hovered]);
 
   return (
-    <Link ref={elRef} href={href} className={classnames("box", styles.videoPreview)}>
+    <Link ref={elRef} href={href} className={classnames("box", styles.videoPreview, externalClassnames)}>
       <Image src={thumbnailSrc} alt={`thumbnail of "${title}"`} fill externalClassnames={styles.thumbnail} />
       <div className={styles.previewDescription}>
         {typeof shortenedVideoSrc === "string" && shortenedVideoSrc.length > 0 && (
           // https://stackoverflow.com/a/42414858/14889638
-          <video ref={videoRef} className={styles.video} src={shortenedVideoSrc} muted preload='metadata' />
+          <video ref={videoRef} className={styles.video} src={shortenedVideoSrc} loop muted preload='metadata' />
         )}
         <div className={styles.top}>
           <h4 className={styles.title}>{title}</h4>

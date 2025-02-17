@@ -1,18 +1,18 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import "./modal.scss";
+import { ExternalClassnames } from "@/types/components";
 
-interface IModal {
+type ModalProps = {
   children: React.ReactNode | React.ReactNode[];
   show: boolean;
   onClose: () => void;
   ariaLabel: string;
-  externalClassnames?: string | string[];
   hideCloseBtn?: true;
   outsideToClose?: true;
-}
+} & ExternalClassnames;
 
-export const Modal: React.FC<IModal> = ({ children, show, onClose, externalClassnames, ariaLabel, hideCloseBtn, outsideToClose }) => {
+export const Modal: React.FC<ModalProps> = ({ children, show, onClose, externalClassnames, ariaLabel, hideCloseBtn, outsideToClose }) => {
   const modalRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {

@@ -1,0 +1,17 @@
+// @use "../../styles/colors";
+// @use "../../styles/borders";
+@use "../../styles/paddings";
+@use "../../styles/margins";
+// @use "sass:map";
+// @use "sass:color";
+
+.videosPreview {
+  display: block;
+
+  .grid {
+    display: grid;
+    grid-template-columns: 0fr 0fr 0fr;
+    grid-auto-rows: 0fr;
+    gap: margins.$margin-s;
+  }
+}

@@ -1,6 +1,5 @@
-@use "sass:map";
 @use "../../styles/fonts";
-@use "../../styles/colors";
+@use "../../styles/themes";
 
 .header {
   display: flex;
@@ -11,13 +10,13 @@
   .devTitle {
     font-family: fonts.$font-header;
     font-size: 16px;
-    color: map.get(colors.$standard-theme, font-hero);
+    color: themes.theme-standard(font-hero);
     opacity: 0.6;
   }
 
   .timeInfo {
     font-weight: 100;
     font-size: 12px;
-    color: map.get(colors.$standard-theme, font-sub);
+    color: themes.theme-standard(font-sub);
   }
 }

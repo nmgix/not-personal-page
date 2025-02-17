@@ -1,3 +1,4 @@
+import { ExternalClassnames } from "@/types/components";
 import classnames from "classnames";
 
 type PopupProps = {
@@ -5,9 +6,8 @@ type PopupProps = {
   // parentNode: Node
   children: React.ReactElement | React.ReactNode[];
   timeout?: number;
-  externalClassNames?: string | string[];
-};
-export const Popup = ({ children, externalClassNames, timeout }: PopupProps) => {
-  return <div className={classnames("box", externalClassNames)}>{children}</div>;
+} & ExternalClassnames;
+export const Popup = ({ children, externalClassnames, timeout }: PopupProps) => {
+  return <div className={classnames("box", externalClassnames)}>{children}</div>;
 };
 Popup.displayName = "Popup";

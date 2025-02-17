@@ -1,6 +1,5 @@
-@use "../../../styles/colors";
 @use "../../../styles/margins";
-@use "sass:map" as map;
+@use "../../../styles/themes";
 
 .cookiesPrompt {
   display: flex;
@@ -9,12 +8,12 @@
 
   column-gap: margins.$margin-s;
 
-  background-color: map.get(colors.$standard-theme, box-hover);
+  background-color: themes.theme-standard(box-hover);
 
   padding: 10px 16px 10px 26px;
 
   .contentWrapper {
-    color: map.get(colors.$standard-theme, font-hero);
+    color: themes.theme-standard(font-hero);
 
     .title {
       font-size: 16px;
@@ -30,8 +29,8 @@
 
   // это впервые сработало, лол
   *:global(.button) {
-    background-color: map.get(colors.$standard-theme, font-sub);
-    color: map.get(colors.$standard-theme, font-hero);
+    background-color: themes.theme-standard(font-sub);
+    color: themes.theme-standard(font-hero);
   }
 }
 

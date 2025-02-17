@@ -2,8 +2,7 @@
 @use "../../styles/paddings";
 @use "../../styles/borders";
 @use "../../styles/fonts";
-@use "../../styles/colors";
-@use "sass:map";
+@use "../../styles/themes";
 
 .modal {
   padding: 0;
@@ -37,11 +36,11 @@
 
   overflow-y: hidden;
 
-  background-color: rgba(map.get(colors.$standard-theme, box-default), 0.6);
+  background-color: rgba(themes.theme-standard(box-default), 0.6);
 
   .title {
     font-family: fonts.$font-stretch;
     font-size: 16px;
-    color: map.get(colors.$standard-theme, font-hero);
+    color: themes.theme-standard(font-hero);
   }
 }

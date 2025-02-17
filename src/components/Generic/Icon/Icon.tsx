@@ -3,6 +3,7 @@
 import { memo } from "react";
 import classnames from "classnames";
 import styles from "./icon.module.scss";
+import { ExternalClassnames } from "@/types/components";
 
 export enum AvailableIcons {
   "arrow-link",
@@ -16,13 +17,12 @@ export enum AvailableIcons {
   "code"
 }
 
-interface IIconProps {
+type IconProps = {
   icon: keyof typeof AvailableIcons;
   color?: string;
-  externalClassnames?: string | string[];
-}
+} & ExternalClassnames;
 
-export const Icon: React.FC<IIconProps> = ({ icon, color, externalClassnames }) => {
+export const Icon: React.FC<IconProps> = ({ icon, color, externalClassnames }) => {
   return (
     <svg id={icon} className={classnames(styles.icon, externalClassnames)} style={{ color }}>
       {/* <title>??? */}

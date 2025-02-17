@@ -1,5 +1,6 @@
 "use client"; // думал без директивы обойдётся, но const не создаются и ssr: false нельзя использовать
 import { AvailableModels } from "@/components/Specialized/ModelViewer";
+import { ExternalClassnames } from "@/types/components";
 import classnames from "classnames";
 import dynamic from "next/dynamic";
 import { cloneElement } from "react";
@@ -24,9 +25,8 @@ const selectedComponentName = Object.keys(variants)[Math.floor(Math.random() * O
 const component = variants[selectedComponentName];
 
 type RandomHeroWidgetProps = {
-  externalClassnames?: string | string[];
   externalWidgetClassnames?: { [id in keyof typeof variants]?: string };
-};
+} & ExternalClassnames;
 
 export const RandomHeroWidget = ({ externalClassnames, externalWidgetClassnames }: RandomHeroWidgetProps) => {
   return (

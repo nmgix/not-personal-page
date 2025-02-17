@@ -4,6 +4,7 @@ import { Children, cloneElement, useRef } from "react";
 import classnames from "classnames";
 
 import styles from "./images-list.module.scss";
+import { ExternalClassnames } from "@/types/components";
 
 export type ImageElement = { id: string; src: string; alt: string };
 
@@ -12,8 +13,7 @@ type ImageListProps = {
   size: { width: number; height: number };
   galleryButton: boolean;
   imageThreshold?: number;
-  externalClassnames?: string | string[];
-};
+} & ExternalClassnames;
 
 export const ImageList = ({ images, size, galleryButton = false, imageThreshold = 3, externalClassnames }: ImageListProps) => {
   const _temporaryImagesList = useRef(

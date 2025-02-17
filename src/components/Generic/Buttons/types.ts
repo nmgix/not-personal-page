@@ -1,3 +1,4 @@
+import { ExternalClassnames } from "@/types/components";
 import { ButtonHTMLAttributes } from "react";
 
 export type ButtonProps = {
@@ -7,10 +8,9 @@ export type ButtonProps = {
   onHold?: () => any;
   onDrag?: () => any; // под вопросом
   disabled?: boolean;
-  externalClassnames?: string | string[];
   focus?: true;
   type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
-};
+} & ExternalClassnames;
 
 export type ButtonPropsVariants =
   | (Omit<ButtonProps, "onClick"> & { type: "submit" })

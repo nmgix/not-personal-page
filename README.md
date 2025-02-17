@@ -48,7 +48,8 @@
          - проверить TODO в button.scss
          1. [x] Default button
       3. [x] Input
-      4. [x] Modal
+      4. [~] Modal
+         - outsideToClose что за переменная?
       5. [~] Icon
          - ~ потому что там кривая обовка внутри самого svg и на некоторые объекты обводка не ставится. fill вообще не имплементирован
       6. [x] Image
@@ -80,8 +81,8 @@
          1. [x] Button
          2. [x] ButtonsGroup
       7. [x] ErrorBoundary
-      8. [~] VideoPreview
-         1. [ ] Storybook если видео/изображение недоступно/ошибка при загрузке
+      8. [x] VideoPreview
+         1. [x] Storybook если видео/изображение недоступно/ошибка при загрузке
 3. [ ] Widgets
    1. [x] CookiePopup
       - проблема в Popup, его фукнционал пока это просто обёртка в виде div.box, нужно взять popup логику из nmgix-components
@@ -117,7 +118,8 @@
    12. [x] ArticlesPreview
        - Я понял что это был за компонент в specialized
        1. [ ] Из-за link сейчас стили поломаны
-   13. [ ] VideoPreviewGrid
+   13. [~] VideosPreview
+       1. [ ] Unload img/video if out of view boundaries
 4. [x] Hooks
    1. [~] useFade
       1. [x] сделать и для вертикали, пока хук только для горизонтали

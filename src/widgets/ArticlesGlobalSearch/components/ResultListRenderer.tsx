@@ -8,6 +8,7 @@ import { Icon } from "@/components/Generic/Icon";
 import Link from "next/link";
 import { selectTextExample } from "./helpers";
 import { useFade } from "@/hooks/useFade";
+import { ExternalClassnames } from "@/types/components";
 
 const ListElement = ({ article, searchedPhrase }: { article: ArticleListElementProps; searchedPhrase: string }) => {
   const text = useMemo(() => selectTextExample(100, article.textPreview, searchedPhrase), [article.textPreview, searchedPhrase]);
@@ -28,12 +29,11 @@ const ListElement = ({ article, searchedPhrase }: { article: ArticleListElementP
 type ResultListRenderProps = {
   list: ArticleListElementProps[];
   searchedPhrase: string;
-  extraClassnames?: string | string[];
-};
+} & ExternalClassnames;
 
 const _renderListVariant = ["blocks", "rows"] as const;
 
-export const ResultListRenderer = ({ list, searchedPhrase, extraClassnames }: ResultListRenderProps) => {
+export const ResultListRenderer = ({ list, searchedPhrase, externalClassnames }: ResultListRenderProps) => {
   const [renderListVariant, setRenderVariant] = useState<number>(0);
   const cycleVariant = () => {
     setRenderVariant(currIdx => (currIdx + 1) % _renderListVariant.length);
@@ -46,7 +46,7 @@ export const ResultListRenderer = ({ list, searchedPhrase, extraClassnames }: Re
   });
 
   return (
-    <div className={classnames(styles.resultListRenderer, extraClassnames)}>
+    <div className={classnames(styles.resultListRenderer, externalClassnames)}>
       <div className={classnames(styles.top)}>
         <span className={styles.title}>&#91;results&#93;&nbsp;{list.length}&nbsp;found</span>
         <Button title={`grid: mode: ${_renderListVariant[renderListVariant]}`} onClick={cycleVariant} externalClassnames={styles.button}>

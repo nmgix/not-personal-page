@@ -3,12 +3,12 @@ import styles from "./boxes-scrollbar.module.scss";
 import { Fragment, useRef } from "react";
 import { useFade } from "@/hooks/useFade";
 import { useScrollable } from "@/hooks/useScrollable";
+import { ExternalClassnames } from "@/types/components";
 
 type BoxesScrollbarProps = {
   list: React.ReactElement[];
-  externalClassnames?: string | string[];
   noWrapper?: true;
-};
+} & ExternalClassnames;
 
 export const BoxesScrollbar = ({ list, externalClassnames, noWrapper }: BoxesScrollbarProps) => {
   // const boxRef = useRef<HTMLDivElement>(null);

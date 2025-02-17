@@ -1,9 +1,8 @@
 @use "../../../styles/borders";
-@use "../../../styles/colors";
-@use "sass:map";
+@use "../../../styles/themes";
 
 .input {
-  color: map.get(colors.$standard-theme, font-hover);
+  color: themes.theme-standard(font-hover);
   font-size: 12px;
 
   border: none;
@@ -12,7 +11,7 @@
   padding: 12px 3px 12px 12px;
 
   &::placeholder {
-    color: map.get(colors.$standard-theme, font-darken);
+    color: themes.theme-standard(font-darken);
     font-size: 10px;
     font-weight: 500;
     // fade effect
@@ -31,6 +30,6 @@
   &Label {
     padding-top: 2px;
     font-size: 14px;
-    color: map.get(colors.$standard-theme, font-hover);
+    color: themes.theme-standard(font-hover);
   }
 }

@@ -1,5 +1,4 @@
-@use "../../../styles/colors";
-@use "sass:map";
+@use "../../../styles/themes";
 
 .button {
   display: inline-block;
@@ -16,7 +15,7 @@
   }
 
   & input[type="radio"]:checked + &Label {
-    background-color: map.get(colors.$standard-theme, font-default);
+    background-color: themes.theme-standard(font-default);
   }
 
   &Label {

@@ -1,6 +1,5 @@
 @use "fonts";
-@use "colors";
-@use "sass:map";
+@use "themes";
 
 @use "../components/Generic/components.scss";
 // @use "../styles/themes.mixin.scss"
@@ -19,11 +18,11 @@ body {
 
   height: 100%;
 
-  color: map.get(colors.$standard-theme, font-default);
+  color: themes.theme-standard(font-default);
 }
 
 html {
-  background-color: map.get(colors.$standard-theme, background-800);
+  background-color: themes.theme-standard(background-800);
 }
 
 body {
@@ -36,7 +35,7 @@ body {
     height: 100%;
     left: 0;
     top: 0;
-    background-color: map.get(colors.$standard-theme, background-800);
+    background-color: themes.theme-standard(background-800);
     z-index: -1;
   }
   padding: 35px 0;
@@ -58,7 +57,7 @@ body {
 
 a {
   text-decoration: none; // add link icon later in :after
-  color: map.get(colors.$standard-theme, font-hero);
+  color: themes.theme-standard(font-hero);
 }
 
 h1,

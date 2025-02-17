@@ -1,15 +1,15 @@
 import classnames from "classnames";
 import styles from "../radio-buttons.module.scss";
 import { memo, useCallback, useId } from "react";
+import { ExternalClassnames } from "@/types/components";
 
 type RadioButtonProps = {
   children: React.ReactElement | React.ReactElement[];
   name: string;
-  externalClassnames?: string | string[];
   onSelect: (id: string) => void;
   value: string;
   checked: boolean;
-};
+} & ExternalClassnames;
 
 export const RadioButton = memo(
   ({ children, name, checked, externalClassnames, value, onSelect }: RadioButtonProps) => {

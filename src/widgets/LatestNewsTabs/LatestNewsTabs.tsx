@@ -3,10 +3,9 @@
 
 import classnames from "classnames";
 import styles from "./latest-news-tabs.module.scss";
+import { ExternalClassnames } from "@/types/components";
 
-type LastetNewsTabsProps = {
-  externalClassnames?: string | string[];
-};
+type LastetNewsTabsProps = {} & ExternalClassnames;
 
 export const LatestNewsTabs = ({ externalClassnames }: LastetNewsTabsProps) => {
   return (

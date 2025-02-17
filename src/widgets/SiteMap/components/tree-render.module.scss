@@ -1,6 +1,5 @@
 @use "../../../styles/margins";
-@use "../../../styles/colors";
-@use "sass:map";
+@use "../../../styles/themes";
 
 // .tree {
 
@@ -8,7 +7,7 @@
 .treeNode {
   .label {
     margin-bottom: margins.$margin-s;
-    color: map.get(colors.$standard-theme, font-hero);
+    color: themes.theme-standard(font-hero);
 
     a {
       text-decoration: underline;
@@ -24,6 +23,6 @@
 
   .children {
     padding-left: 10px;
-    border-left: 1px solid map.get(colors.$standard-theme, font-hero);
+    border-left: 1px solid themes.theme-standard(font-hero);
   }
 }

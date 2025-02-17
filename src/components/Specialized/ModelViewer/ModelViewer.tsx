@@ -11,6 +11,7 @@ import { ErrorBoundary } from "@/components/Specialized/ErrorBoundary";
 // import { ErrorBoundary } from "@react-three/fiber/dist/declarations/src/core/utils";
 import { useHold } from "@technarts/react-use-hold";
 import useDebounced from "@/hooks/useDebounce";
+import { ExternalClassnames } from "@/types/components";
 
 export const AvailableModels = {
   dragons_liberation: "gltf/dragons_liberation.glb",
@@ -19,8 +20,7 @@ export const AvailableModels = {
 
 type ModelViewerProps = {
   renderModelTitle: keyof typeof AvailableModels;
-  externalClassnames?: string | string[];
-};
+} & ExternalClassnames;
 
 const publicModelPath = "models";
 

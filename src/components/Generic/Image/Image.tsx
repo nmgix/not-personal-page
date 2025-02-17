@@ -2,6 +2,7 @@ import ImageNext, { StaticImageData } from "next/image";
 import classnames from "classnames";
 import styles from "./image.module.scss";
 import { memo, useState } from "react";
+import { ExternalClassnames } from "@/types/components";
 
 type ImageProps = {
   src: string | StaticImageData;
@@ -9,10 +10,9 @@ type ImageProps = {
   size: { width: number; height: number };
   priority?: boolean;
   showAlt?: boolean;
-  externalClassnames?: string | string[];
   omImgLoadCB?: () => void;
   onImgErrorLoadCB?: () => {};
-};
+} & ExternalClassnames;
 
 type UnionImageProps = (Omit<ImageProps, "size"> & { fill: true }) | ImageProps;
 

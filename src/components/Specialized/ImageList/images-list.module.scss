@@ -1,6 +1,5 @@
 @use "../../../styles/margins";
-@use "../../../styles/colors";
-@use "sass:map";
+@use "../../../styles/themes";
 
 .imageList {
   display: flex;
@@ -40,7 +39,7 @@
 
   &[type="button"]:hover {
     background-color: transparent;
-    color: map.get(colors.$standard-theme, font-hover);
+    color: themes.theme-standard(font-hover);
     font-weight: 700;
     font-size: 16px;
   }

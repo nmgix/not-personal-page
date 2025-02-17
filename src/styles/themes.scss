@@ -1,9 +1,9 @@
-@use "colors";
+@use "./colors";
 @use "sass:map";
 
-$themes: (
-  standard: colors.$standard-theme
-);
+// $themes: (
+//   standard: colors.$standard-theme
+// );
 
 // https://dev.to/mikekennedydev/applying-visual-themes-using-scss-30j1
 // TODO: разобраться что вообще здесь происходит
@@ -33,4 +33,8 @@ $themes: (
 
 @function themeValue($key) {
   @return map.get($array-map, $key);
+}
+
+@function theme-standard($key) {
+  @return map.get(colors.$standard-theme, $key);
 }

@@ -2,6 +2,7 @@ import { useEffect, useImperativeHandle, useRef, useState } from "react";
 import useDebounced from "@/hooks/useDebounce";
 import styles from "./input.module.scss";
 import classnames from "classnames";
+import { ExternalClassnames } from "@/types/components";
 
 type InputProps = {
   name: string;
@@ -11,9 +12,8 @@ type InputProps = {
   onLetterEntered?: (entered: string) => void;
   onEnterPress?: (entered: string) => void;
   onTextInputDebounce?: (entered: string) => void;
-  externalClassnames?: string | string[];
   focus?: true;
-};
+} & ExternalClassnames;
 
 export type InputRef = {
   value: string;

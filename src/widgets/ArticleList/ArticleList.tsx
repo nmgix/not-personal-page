@@ -2,11 +2,11 @@ import classnames from "classnames";
 import { ArticleListElement } from "@/components/Specialized/ArticleListElement";
 import { ArticleListElementProps } from "@/types/articles";
 import styles from "./article-list.module.scss";
+import { ExternalClassnames } from "@/types/components";
 
 type ArticleListProps = {
   list: ArticleListElementProps[];
-  externalClassnames?: string | string[];
-};
+} & ExternalClassnames;
 
 export const ArticleList = ({ list, externalClassnames }: ArticleListProps) => {
   return (

@@ -1,7 +1,6 @@
 @use "../../../styles/margins";
 @use "../../../styles/paddings";
-@use "../../../styles/colors";
-@use "sass:map";
+@use "../../../styles/themes";
 
 .resultListRenderer {
   flex: 1;
@@ -17,7 +16,7 @@
     align-items: center;
 
     .title {
-      color: map.get(colors.$standard-theme, font-default);
+      color: themes.theme-standard(font-default);
     }
 
     .button {
@@ -47,20 +46,20 @@
 
     .element {
       // TODO: нормальные html теги выделить по семантике
-      color: map.get(colors.$standard-theme, icon-default);
+      color: themes.theme-standard(icon-default);
 
       &Wrapper {
         border-radius: 10px;
         // composes: defaultButton from "../../../components/Generic/Buttons/Default/default-button.module.scss";
-        background-color: map.get(colors.$standard-theme, box-default);
+        background-color: themes.theme-standard(box-default);
         padding: paddings.$padding-s;
 
         &:hover {
-          background-color: map.get(colors.$standard-theme, box-hover);
+          background-color: themes.theme-standard(box-hover);
         }
       }
       &:hover {
-        color: map.get(colors.$standard-theme, font-hover);
+        color: themes.theme-standard(font-hover);
       }
 
       .title {
@@ -84,7 +83,7 @@
 
         mark {
           font-weight: 800;
-          color: map.get(colors.$standard-theme, font-hero);
+          color: themes.theme-standard(font-hero);
           background: transparent;
         }
       }

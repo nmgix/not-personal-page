@@ -1,6 +1,5 @@
-@use "../../../styles/colors";
 @use "../../../styles/paddings";
-@use "sass:map";
+@use "../../../styles/themes";
 
 .videoPreview {
   position: relative;
@@ -75,13 +74,13 @@
       justify-content: space-between;
 
       .videoLength {
-        color: map.get(colors.$standard-theme, icon-default);
+        color: themes.theme-standard(icon-default);
       }
 
       .tags {
         display: flex;
         column-gap: 5px;
-        color: map.get(colors.$standard-theme, icon-default);
+        color: themes.theme-standard(icon-default);
         font-size: 13px;
 
         :global(svg#code) {

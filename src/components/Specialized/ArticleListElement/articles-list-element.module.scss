@@ -1,14 +1,13 @@
-@use "../../../styles/colors";
 @use "../../../styles/margins";
 @use "../../../styles/paddings";
-@use "sass:map";
 @use "sass:color";
+@use "../../../styles/themes";
 
 .articlesListElement {
   display: flex;
   flex-direction: column;
 
-  color: map.get(colors.$standard-theme, font-default);
+  color: themes.theme-standard(font-default);
   padding: 14px 15px;
 
   &:hover {
@@ -16,7 +15,7 @@
     // color: color.change($color: currentColor, $lightness: 20%);
 
     $currColor: color.change(
-      $color: map.get(colors.$standard-theme, font-default),
+      $color: themes.theme-standard(font-default),
       $lightness: 70%
     );
 
@@ -29,7 +28,7 @@
     font-size: 24px;
 
     color: inherit;
-    border-bottom: 1px solid map.get(colors.$standard-theme, font-default);
+    border-bottom: 1px solid themes.theme-standard(font-default);
 
     margin-bottom: 4px;
   }
@@ -45,7 +44,7 @@
 
     .TTR {
       font-size: 16px;
-      color: map.get(colors.$standard-theme, font-sub);
+      color: themes.theme-standard(font-sub);
     }
 
     .tags {

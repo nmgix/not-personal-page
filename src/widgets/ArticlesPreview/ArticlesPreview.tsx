@@ -2,13 +2,13 @@ import { ArticleListElementProps } from "@/types/articles";
 import classnames from "classnames";
 import styles from "./articles-preview.module.scss";
 import Link from "next/link";
+import { ExternalClassnames } from "@/types/components";
 
 type ArticlesPreviewProps = {
   list: ArticleListElementProps[];
   articlesHref: string;
   articlesRenderLimit?: number;
-  externalClassnames?: string | string[];
-};
+} & ExternalClassnames;
 
 export const ArticlesPreview = ({ list, externalClassnames, articlesRenderLimit, articlesHref }: ArticlesPreviewProps) => {
   return (

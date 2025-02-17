@@ -3,6 +3,7 @@ import { BoxesScrollbar } from "@/components/Specialized/BoxesScrollbar";
 import styles from "../radio-buttons.module.scss";
 import { useImperativeHandle, useState } from "react";
 import { RadioButton } from "../Button/RadioButton";
+import { ExternalClassnames } from "@/types/components";
 
 export type RadioButtonsGroupProps = {
   options: {
@@ -10,9 +11,8 @@ export type RadioButtonsGroupProps = {
     value: string;
   }[];
   name: string;
-  externalClassnames?: string | string[];
   onSelect: (id: string | null) => void;
-} & { ref?: React.Ref<{ selectedOption: string }> };
+} & { ref?: React.Ref<{ selectedOption: string }> } & ExternalClassnames;
 
 /**
  * Radio buttons X boxes scrollbar wrapper. Buttons are inputs[type="radio"], but borrows button styles

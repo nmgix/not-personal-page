@@ -1,9 +1,8 @@
-@use "../../styles/colors";
 @use "../../styles/borders";
 @use "../../styles/paddings";
 @use "../../styles/margins";
-@use "sass:map";
 @use "sass:color";
+@use "../../styles/themes";
 
 .articlesPreview {
   padding: paddings.$padding-s;
@@ -15,12 +14,12 @@
 
   .header {
     font-size: 24px;
-    color: map.get(colors.$standard-theme, font-hover);
+    color: themes.theme-standard(font-hover);
 
     margin-bottom: margins.$margin-s;
 
     mark {
-      color: map.get(colors.$standard-theme, font-darken);
+      color: themes.theme-standard(font-darken);
     }
   }
 
@@ -32,7 +31,7 @@
     .element {
       display: block;
 
-      $white-color: map.get(colors.$standard-theme, box-border);
+      $white-color: themes.theme-standard(box-border);
 
       &:hover {
         .articleHeader {

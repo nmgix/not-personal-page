@@ -1,10 +1,9 @@
-@use "sass:map" as map;
-@use "../../../styles/colors";
 @use "../../../styles/borders";
+@use "../../../styles/themes";
 
 .button {
   border-radius: borders.$border-s;
-  background-color: map.get(colors.$standard-theme, box-default);
+  background-color: themes.theme-standard(box-default);
 
   padding: 12px 18px;
   border: none;
@@ -12,12 +11,12 @@
   // transition: all 0.01s ease-in-out;
   cursor: pointer;
 
-  color: map.get(colors.$standard-theme, font-default);
+  color: themes.theme-standard(font-default);
   font-weight: 700;
 
   &:hover {
-    background-color: map.get(colors.$standard-theme, box-hover);
-    color: map.get(colors.$standard-theme, font-hover);
+    background-color: themes.theme-standard(box-hover);
+    color: themes.theme-standard(font-hover);
   }
 
   &:active {

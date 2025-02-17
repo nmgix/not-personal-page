@@ -1,12 +1,11 @@
-@use "sass:map" as map;
-@use "../../../../styles/colors";
+@use "../../../../styles/themes";
 
 .defaultButton {
-  background-color: map.get(colors.$standard-theme, box-hover);
-  color: map.get(colors.$standard-theme, font-hover);
+  background-color: themes.theme-standard(box-hover);
+  color: themes.theme-standard(font-hover);
 
   &:hover {
-    background-color: map.get(colors.$standard-theme, box-default);
-    color: map.get(colors.$standard-theme, font-default);
+    background-color: themes.theme-standard(box-default);
+    color: themes.theme-standard(font-default);
   }
 }

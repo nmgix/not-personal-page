@@ -1,9 +1,8 @@
-@use "sass:map";
-@use "../../styles/colors";
+@use "../../styles/themes";
 @use "../../styles/borders";
 
 .pageFooter {
-  background-color: map.get(colors.$standard-theme, box-hover);
+  background-color: themes.theme-standard(box-hover);
   border-radius: borders.$border-s borders.$border-s 0 0;
 
   width: 80vw;

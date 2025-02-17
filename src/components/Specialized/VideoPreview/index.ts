@@ -1,1 +1,1 @@
-export { VideoPreview } from "./VideoPreview";
+export { VideoPreview, type VideoPreviewProps } from "./VideoPreview";
