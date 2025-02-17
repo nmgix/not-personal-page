@@ -13,7 +13,7 @@ export const VideosPreview = ({ videos, externalClassnames }: VideosPreviewProps
       {/* что-то намутить чтобы не рендерились компоненты вне viewport, в articlelist то-же самое сделать */}
       <div className={styles.grid}>
         {videos.map(v => (
-          <VideoPreview {...v} />
+          <VideoPreview key={v.id} {...v} />
         ))}
       </div>
     </div>

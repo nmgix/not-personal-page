@@ -1,5 +1,6 @@
 @use "fonts";
 @use "themes";
+@use "margins";
 
 @use "../components/Generic/components.scss";
 // @use "../styles/themes.mixin.scss"
@@ -28,15 +29,17 @@ html {
 body {
   position: relative;
   z-index: 1;
+  overflow-y: scroll;
+
   &::before {
     content: "";
-    position: absolute;
+    position: absolute; // иначе не будет двигаться с body.styles.top
     width: 100%;
     height: 100%;
     left: 0;
     top: 0;
     background-color: themes.theme-standard(background-800);
-    z-index: -1;
+    z-index: -3;
   }
   padding: 35px 0;
   margin: 0;
@@ -48,7 +51,7 @@ body {
   .page {
     width: 100%;
     height: 100%;
-    max-width: 600px;
+    max-width: 55vw;
   }
 
   -webkit-font-smoothing: antialiased;

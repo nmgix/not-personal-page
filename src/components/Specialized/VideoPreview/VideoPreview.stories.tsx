@@ -13,6 +13,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
+    id: "25d95bd9-2ff0-4ad7-a169-af853df4686d",
     title: "some project demo long title",
     shortenedDescription:
       "just some really long description not to fit in shortened, consider api output limits from cache (so cache these descriptions)",
@@ -27,6 +28,7 @@ export const Default: Story = {
 
 export const VideoError: Story = {
   args: {
+    id: "a6344e96-77dd-4ac1-83e4-21d964588a68",
     title: "some project demo long title",
     shortenedDescription:
       "just some really long description not to fit in shortened, consider api output limits from cache (so cache these descriptions)",
@@ -41,6 +43,7 @@ export const VideoError: Story = {
 
 export const ImageAndVideoErrors: Story = {
   args: {
+    id: "bb91d6b3-930d-4feb-9051-a67f5bc14558",
     title: "some project demo long title",
     shortenedDescription:
       "just some really long description not to fit in shortened, consider api output limits from cache (so cache these descriptions)",

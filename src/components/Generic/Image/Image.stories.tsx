@@ -23,3 +23,15 @@ export const Default: Story = {
     showAlt: true
   }
 };
+
+export const NotFound: Story = {
+  args: {
+    src: "https://i.pinimg.com/originals/9aebe71bac07b841fff8f02bc2.jpg",
+    alt: "city image",
+    size: {
+      width: 300,
+      height: 150
+    },
+    showAlt: true
+  }
+};

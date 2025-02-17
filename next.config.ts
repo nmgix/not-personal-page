@@ -16,7 +16,15 @@ const nextConfig: NextConfig = {
   // typescript: {
   //     ignoreBuildErrors: true
   // }
-  transpilePackages: ["three"]
+  transpilePackages: ["three"],
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "*"
+      }
+    ]
+  }
 };
 
 export default nextConfig;

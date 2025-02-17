@@ -1,11 +1,14 @@
 @use "../../styles/margins";
+@use "../../styles/fonts";
+@use "../../styles/themes";
 
 .home {
   margin-top: margins.$margin-default;
   display: flex;
   flex-direction: column;
   row-gap: margins.$margin-default;
-  height: 100%;
+  // height: 100%;
+  height: auto !important;
 
   .randomWidget {
     flex: 1;
@@ -47,5 +50,40 @@
     .box3 {
       grid-column: span 3;
     }
+  }
+
+  .projects {
+    margin-top: calc(margins.$margin-default * 2);
+    // display: flex;
+    // flex-direction: column;
+    // gap: 25px;
+    display: block;
+
+    &Title {
+      font-family: fonts.$font-stretch;
+      font-size: 16px;
+      color: themes.theme-standard("font-hero");
+      font-weight: 400;
+
+      display: inline-block;
+      position: relative;
+      margin-bottom: 25px;
+
+      mark {
+        color: themes.theme-standard("font-sub");
+        background-color: transparent;
+        font-size: 0.8em;
+        font-family: fonts.$font-header;
+
+        position: absolute;
+        right: 0px;
+        top: -25%;
+        transform: translate(110%, 0%);
+      }
+    }
+
+    // .projects-list {
+
+    // }
   }
 }

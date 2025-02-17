@@ -3,11 +3,10 @@ import styles from "./video-preview.module.scss";
 import { Image } from "@/components/Generic/Image";
 import Link from "next/link";
 import { AvailableIcons, Icon } from "@/components/Generic/Icon";
-import { useEffect, useRef } from "react";
-import { useHoverDirty /*, useVideo*/ } from "react-use";
 import { ExternalClassnames } from "@/types/components";
 
 export type VideoPreviewProps = {
+  id: string;
   shortenedVideoSrc: string;
   videoLength: number;
   title: string;
@@ -39,33 +38,12 @@ export const VideoPreview = ({
   href,
   externalClassnames
 }: VideoPreviewProps) => {
-  // useHover будет не чтобы класс вешать когда навелась мышка, а чтобы активировать видос по-новой
-
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const elRef = useRef<HTMLAnchorElement>(null);
-  const hovered = useHoverDirty(elRef as unknown as React.RefObject<Element>);
-  useEffect(() => {
-    if (hovered) {
-      if (videoRef.current !== null) {
-        videoRef.current.play();
-        videoRef.current.style.display = "block";
-      }
-    } else {
-      if (videoRef.current !== null) {
-        videoRef.current.pause();
-        videoRef.current.currentTime = 0;
-        videoRef.current.style.display = "none";
-      }
-    }
-  }, [hovered]);
-
   return (
-    <Link ref={elRef} href={href} className={classnames("box", styles.videoPreview, externalClassnames)}>
+    <Link href={href} className={classnames("box", styles.videoPreview, externalClassnames)}>
       <Image src={thumbnailSrc} alt={`thumbnail of "${title}"`} fill externalClassnames={styles.thumbnail} />
       <div className={styles.previewDescription}>
         {typeof shortenedVideoSrc === "string" && shortenedVideoSrc.length > 0 && (
-          // https://stackoverflow.com/a/42414858/14889638
-          <video ref={videoRef} className={styles.video} src={shortenedVideoSrc} loop muted preload='metadata' />
+          <video className={styles.video} src={shortenedVideoSrc} autoPlay loop muted preload='metadata' />
         )}
         <div className={styles.top}>
           <h4 className={styles.title}>{title}</h4>

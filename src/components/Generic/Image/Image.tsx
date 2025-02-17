@@ -1,7 +1,6 @@
 import ImageNext, { StaticImageData } from "next/image";
 import classnames from "classnames";
 import styles from "./image.module.scss";
-import { memo, useState } from "react";
 import { ExternalClassnames } from "@/types/components";
 
 type ImageProps = {
@@ -18,7 +17,7 @@ type UnionImageProps = (Omit<ImageProps, "size"> & { fill: true }) | ImageProps;
 
 export const Image = ({ externalClassnames, showAlt, omImgLoadCB, onImgErrorLoadCB, ...props }: UnionImageProps) => {
   // memo(
-  const [error, setError] = useState(false);
+  // const [error, setError] = useState(false);
   return (
     <div className={classnames(styles.imageWrapper, externalClassnames)}>
       <ImageNext
@@ -27,13 +26,11 @@ export const Image = ({ externalClassnames, showAlt, omImgLoadCB, onImgErrorLoad
         {...props}
         width={(props as ImageProps)?.size?.width ?? undefined}
         height={(props as ImageProps)?.size?.height ?? undefined}
-        onError={() => {
-          setError(true);
-          if (onImgErrorLoadCB) onImgErrorLoadCB();
-        }}
+        onError={onImgErrorLoadCB}
         onLoad={omImgLoadCB}
       />
-      {(showAlt || error) === true && <span className={styles.imageAlt}>{props.alt}</span>}
+      {/* {(showAlt || error) === true && <span className={styles.imageAlt}>{props.alt}</span>} */}
+      <span className={classnames(styles.imageAlt, showAlt && "img-show")}>{props.alt}</span>
     </div>
   );
 };

@@ -12,3 +12,12 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
+
+const OverflowBoundary = () => (
+  <div style={{ height: "110vh" }}>
+    <UnexpectedErrorBoundary />
+  </div>
+);
+export const OverflowWindow: Story = {
+  render: OverflowBoundary
+};

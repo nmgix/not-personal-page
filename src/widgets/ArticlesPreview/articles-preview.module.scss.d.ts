@@ -1,6 +1,7 @@
 export declare const articleHeader: string;
 export declare const articlesPreview: string;
 export declare const articlesPreviewInsideWrapper: string;
+export declare const articlesPreviewLink: string;
 export declare const element: string;
 export declare const header: string;
 export declare const list: string;

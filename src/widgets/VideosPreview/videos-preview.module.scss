@@ -10,8 +10,8 @@
 
   .grid {
     display: grid;
-    grid-template-columns: 0fr 0fr 0fr;
-    grid-auto-rows: 0fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-rows: 1fr;
     gap: margins.$margin-s;
   }
 }

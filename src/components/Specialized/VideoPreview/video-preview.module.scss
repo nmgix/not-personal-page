@@ -5,8 +5,11 @@
   position: relative;
   border-radius: 15px;
 
-  width: 300px;
-  height: 180px;
+  // width: 300px;
+  // height: 180px;
+  min-width: 100px;
+  width: 100%;
+  aspect-ratio: 5/3;
   display: block;
   overflow: hidden; // чтобы границы video обрезались
 
@@ -34,6 +37,10 @@
     opacity: 1;
     transition: opacity 0.05s ease-in-out;
     display: block;
+
+    img {
+      color: themes.theme-standard("font-default");
+    }
   }
 
   .previewDescription {

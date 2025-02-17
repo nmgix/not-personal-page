@@ -12,15 +12,16 @@ type ArticlesPreviewProps = {
 
 export const ArticlesPreview = ({ list, externalClassnames, articlesRenderLimit, articlesHref }: ArticlesPreviewProps) => {
   return (
-    <Link href={articlesHref} className={classnames("box", styles.articlesPreview, externalClassnames)}>
+    <div className={classnames("box", styles.articlesPreview, externalClassnames)}>
       <div className={classnames("fadeBottom", styles.articlesPreviewInsideWrapper)}>
+        <Link href={articlesHref} className={styles.articlesPreviewLink} />
         <h3 className={styles.header}>
           статьи<mark>&#40;{list.length}&#41;</mark>
         </h3>
         <div className={classnames(styles.list)}>
           {list &&
             list.slice(0, articlesRenderLimit ?? 3).map(article => (
-              <Link href={article.href} className={classnames("fadeBottom", styles.element)} onClick={e => e.stopPropagation()}>
+              <Link href={article.href} className={classnames("fadeBottom", styles.element)}>
                 <div className={styles.articleHeader}>
                   <h4 className={styles.title}>{article.title}</h4>
                   <span className={styles.ttr}>{article.TTRmins}min</span>
@@ -32,6 +33,6 @@ export const ArticlesPreview = ({ list, externalClassnames, articlesRenderLimit,
             ))}
         </div>
       </div>
-    </Link>
+    </div>
   );
 };

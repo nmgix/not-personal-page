@@ -37,6 +37,7 @@ export const UnexpectedErrorBoundary = () => {
     } else {
       if (activeBoundary) {
         document.body.classList.add("hideFromTop");
+        document.body.style.top = `0px`; // на всякий ибо если зажать кнопку при триггере, то top остается тот что был при drag
       } else {
         document.body.classList.remove("hideFromTop");
       }
@@ -73,6 +74,7 @@ export const UnexpectedErrorBoundary = () => {
   const onButtonTouchMove = (e: React.TouchEvent<HTMLButtonElement>) => buttonDragHandler(e.touches[0].clientY);
 
   const onButtonDragEnd = () => {
+    console.log("btn drag end");
     setMouseDown(false);
     // setFoundOut(false); выкл потому что если  НЕ fail drag'а фулл  до пасхалки,  то при  отпускании пасхалка уберётся
     if (btnRef.current) {
@@ -127,9 +129,12 @@ export const UnexpectedErrorBoundary = () => {
         createPortal(<BoundaryRender since={state.since} setFoundOut={setFoundOut} active={activeBoundary} />, document.querySelector("html")!)}
       {!activeBoundary && (
         <button
-          onMouseEnter={() => (htmlRef.current!.style.overflow = "hidden")}
+          // onMouseEnter={() => (htmlRef.current!.style.overflow = "hidden")}
           onMouseLeave={() => (htmlRef.current!.style.overflow = "auto")}
-          onMouseDown={onButtonDragStart as unknown as React.MouseEventHandler<HTMLButtonElement>} // в react типе нет clientY, а в mouseEvent есть (отрабатывает mouseEvent)
+          onMouseDown={e => {
+            onButtonDragStart(e as unknown as MouseEvent);
+            htmlRef.current!.style.overflow = "hidden";
+          }} // в react типе нет clientY, а в mouseEvent есть (отрабатывает mouseEvent)
           onMouseUp={onButtonDragEnd}
           onTouchStart={onButtonTouchStart}
           onTouchMove={onButtonTouchMove}
