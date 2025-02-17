@@ -80,7 +80,8 @@
          1. [x] Button
          2. [x] ButtonsGroup
       7. [x] ErrorBoundary
-      8. [ ] VideoPreview
+      8. [~] VideoPreview
+         1. [ ] Storybook если видео/изображение недоступно/ошибка при загрузке
 3. [ ] Widgets
    1. [x] CookiePopup
       - проблема в Popup, его фукнционал пока это просто обёртка в виде div.box, нужно взять popup логику из nmgix-components

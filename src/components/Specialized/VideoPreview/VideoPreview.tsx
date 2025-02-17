@@ -3,6 +3,8 @@ import styles from "./video-preview.module.scss";
 import { Image } from "@/components/Generic/Image";
 import Link from "next/link";
 import { AvailableIcons, Icon } from "@/components/Generic/Icon";
+import { useEffect, useRef } from "react";
+import { useHover, useHoverDirty, useVideo } from "react-use";
 
 type VideoPreviewProps = {
   shortenedVideoSrc: string;
@@ -28,13 +30,31 @@ function formatTime(seconds: number) {
 
 export const VideoPreview = ({ shortenedDescription, shortenedVideoSrc, title, videoLength, relatedTags, thumbnailSrc, href }: VideoPreviewProps) => {
   // useHover будет не чтобы класс вешать когда навелась мышка, а чтобы активировать видос по-новой
+
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const elRef = useRef<HTMLAnchorElement>(null);
+  const hovered = useHoverDirty(elRef as unknown as React.RefObject<Element>);
+  useEffect(() => {
+    if (hovered) {
+      if (videoRef.current !== null) {
+        videoRef.current.play();
+        videoRef.current.style.display = "block";
+      }
+    } else {
+      if (videoRef.current !== null) {
+        videoRef.current.pause();
+        videoRef.current.style.display = "none";
+      }
+    }
+  }, [hovered]);
+
   return (
-    <Link href={href} className={classnames("box", styles.videoPreview)}>
+    <Link ref={elRef} href={href} className={classnames("box", styles.videoPreview)}>
       <Image src={thumbnailSrc} alt={`thumbnail of "${title}"`} fill externalClassnames={styles.thumbnail} />
       <div className={styles.previewDescription}>
         {typeof shortenedVideoSrc === "string" && shortenedVideoSrc.length > 0 && (
           // https://stackoverflow.com/a/42414858/14889638
-          <video className={styles.video} src={shortenedVideoSrc} autoPlay muted preload='metadata' />
+          <video ref={videoRef} className={styles.video} src={shortenedVideoSrc} muted preload='metadata' />
         )}
         <div className={styles.top}>
           <h4 className={styles.title}>{title}</h4>
