@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes } from "react";
 
 export type ButtonProps = {
-  children: React.ReactElement | React.ReactElement[];
+  children: React.ReactElement | React.ReactElement[] | string;
   onClick: () => any; // optional потому что при type submit onClick не нужен
   title: string;
   onHold?: () => any;

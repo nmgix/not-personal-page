@@ -3,17 +3,12 @@ import styles from "./articles-list-element.module.scss";
 import classnames from "classnames";
 import { BoxesScrollbar } from "../BoxesScrollbar";
 import { useRef } from "react";
-import { ImageElement, ImageList } from "@/components/Specialized/ImageList";
+import { ImageList } from "@/components/Specialized/ImageList";
 import { ArticleListElementProps } from "@/types/articles";
 
 export const ArticleListElement = ({ TTRmins, id, imagesSrc, previewImages, href, tags, textPreview, title }: ArticleListElementProps) => {
   const tagsRef = useRef(tags.map(tag => <div className='articleTag'>#{tag}</div>));
   const formatedTTR = useRef(Math.floor(TTRmins > 60 ? TTRmins / 60 : TTRmins));
-  const imagesList = useRef<ImageElement[]>(
-    imagesSrc !== undefined && imagesSrc.length > 0
-      ? imagesSrc.map((i, idx) => ({ src: i, alt: `${title} article img preview. img ${Number(idx + 1)}` }))
-      : []
-  );
 
   return (
     <Link href={href}>
@@ -29,7 +24,7 @@ export const ArticleListElement = ({ TTRmins, id, imagesSrc, previewImages, href
             <ImageList
               galleryButton={false}
               size={{ width: 70, height: 70 }}
-              images={imagesList.current}
+              images={imagesSrc ?? []}
               imageThreshold={3}
               externalClassnames={styles.imagesList}
             />

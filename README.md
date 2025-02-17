@@ -32,14 +32,15 @@
          2. [ ] Recent articles or sorted by popularity? (idk which content to load to them)
          3. [ ] Articles list preview
          4. [ ] Projects grid
-   2. [ ] Tech articles
-      1. [ ] Selected article page
-         1. [ ] Same page article render (nextjs feature) (article widget)
-   3. [ ] Blog
-      1. [ ] Selected blog article page
-         1. [ ] Same blog article render (nextjs feature) (article widget)
-   4. [ ] Projects
-      1. [ ] Same page project article render (nextjs feature) (article widget)
+   2. [ ] Articles
+      1. [ ] Tech articles
+         1. [ ] Selected article page
+         2. [ ] Same page article render (nextjs feature) (article widget)
+      2. [ ] Blog
+         1. [ ] Selected blog article page
+         2. [ ] Same blog article render (nextjs feature) (article widget)
+      3. [ ] Projects
+         1. [ ] Same page project article render (nextjs feature) (article widget)
 2. [ ] Components
    1. [x] Generic
       1. [x] Box (class)
@@ -58,9 +59,12 @@
       2. [x] CookiePrompt
          - длина пока 100% width доступного, в модалке (с ref для самоудаления, модалка пока Widgets/CookiePopup не написан) должна быть длина до 500px
       3. [x] Model viewer (orbit controls with one light source)
-         1. [ ] Пофиксить блок event loop'а загрузкой объекта, мб через воркера или ещё как, саспенс не помогает
-         2. [ ] Поставить камеру чуть ближе, свет сделать более мягким и заставить крутиться объект (чек первый коммит связанный с modelviewer.ts)
-         3. [ ] Цвет иконки (справа снизу) не хочет меняться ни через родительский color, ни через установку цвета через outline/stroke/color напрямую
+         1. [~] Пофиксить блок event loop'а загрузкой объекта, мб через воркера или ещё как, саспенс не помогает
+         - вроде бы только в сторис зависает, на странице норм
+         2. [~] Поставить камеру чуть ближе, свет сделать более мягким и заставить крутиться объект (чек первый коммит связанный с modelviewer.ts)
+         - заставил крутиться
+         3. [x] Цвет иконки (справа снизу) не хочет меняться ни через родительский color, ни через установку цвета через outline/stroke/color напрямую
+         4. [ ] до сих пор баг с неработающим debounce (модель начинает крутится несмотря на то что ты ещё держишь её)
       4. [x] BoxesScrollbar
          - мб есть смысл просто класс fade добавить, но scroll логика мне тоже нужна, может её тоже потом в generic component выделю для реюзабилити
          - fade дёрагнный (js'ом имплементирован)
@@ -76,6 +80,7 @@
          1. [x] Button
          2. [x] ButtonsGroup
       7. [x] ErrorBoundary
+      8. [ ] VideoPreview
 3. [ ] Widgets
    1. [x] CookiePopup
       - проблема в Popup, его фукнционал пока это просто обёртка в виде div.box, нужно взять popup логику из nmgix-components
@@ -93,6 +98,7 @@
       4. [x] Components
          1. [x] ResultListRenderer
             1. [x] добавить fade vertical при scroll
+      5. [ ] проблема блюра при нелевом scroll (фильтр блюрит весь внутернний контент), при скролле остаётся только маска, блюра всего элемента нет
    6. [~] ArticleList
       1. [ ] обернуть в Suspense + bonus: добавить skeleton анимацию
       2. [ ] юзать ArticleListElement из Specialized
@@ -109,6 +115,8 @@
    11. [x] RandomHeroWidget
    12. [x] ArticlesPreview
        - Я понял что это был за компонент в specialized
+       1. [ ] Из-за link сейчас стили поломаны
+   13. [ ] VideoPreviewGrid
 4. [x] Hooks
    1. [~] useFade
       1. [x] сделать и для вертикали, пока хук только для горизонтали
@@ -131,3 +139,4 @@
       4. [ ] Articles (blog/tech/projects) pages or same page renders
 7. [ ] Misc
    1. [ ] Перенести glb в git-lfs (опционально, без lfs пометки лимит до 100мб/файл)
+   2. [ ] Подход - desktop-first, так что дизайн не особо будет адаптироваться

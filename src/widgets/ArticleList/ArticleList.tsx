@@ -10,12 +10,12 @@ type ArticleListProps = {
 
 export const ArticleList = ({ list, externalClassnames }: ArticleListProps) => {
   return (
-    <ul className={classnames(styles.articleList, externalClassnames)}>
+    <div className={classnames(styles.articleList, externalClassnames)}>
       {list.map(article => (
-        <li>
-          <ArticleListElement {...article} />
-        </li>
+        <ArticleListElement key={article.id} {...article} />
       ))}
-    </ul>
+    </div>
   );
 };
+
+ArticleList.displayName = "ArticleList";

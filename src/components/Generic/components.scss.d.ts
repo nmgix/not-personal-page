@@ -6,4 +6,5 @@ export declare const fadeLeftRight: string;
 export declare const fadeRight: string;
 export declare const fadeTop: string;
 export declare const fadeTopBottom: string;
+export declare const hideFromTop: string;
 export declare const notSoSecretBtn: string;

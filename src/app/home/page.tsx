@@ -1,11 +1,13 @@
 import { RandomHeroWidget } from "@/widgets/RandomHeroWidget";
 import styles from "./home-page.module.scss";
 import classnames from "classnames";
-import { mockList } from "@/components/Specialized/BoxesScrollbar/BoxesScrollbar.stories";
+import { mockList } from "@/components/Specialized/BoxesScrollbar/types";
 import { BoxesScrollbar } from "@/components/Specialized/BoxesScrollbar";
 import { ArticlesPreview } from "@/widgets/ArticlesPreview";
 import { mockArticlesFound } from "@/types/mocks";
 import { Image } from "@/components/Generic/Image";
+
+const globalArticlesHref = "/articles/";
 
 export default function Home() {
   return (
@@ -13,7 +15,12 @@ export default function Home() {
       <RandomHeroWidget externalClassnames={styles.randomWidget} externalWidgetClassnames={{ viewer: styles.viewer }} />
       <BoxesScrollbar list={mockList} />
       <div className={styles.mainTabs}>
-        <ArticlesPreview list={mockArticlesFound} externalClassnames={styles.articlesPreview} articlesRenderLimit={2} />
+        <ArticlesPreview
+          articlesHref={globalArticlesHref}
+          list={mockArticlesFound}
+          externalClassnames={styles.articlesPreview}
+          articlesRenderLimit={2}
+        />
         <Image
           src='/assets/person.png'
           alt='guy standing'
@@ -26,6 +33,7 @@ export default function Home() {
         <div className={classnames("box", styles.box2)} />
         <div className={classnames("box", styles.box3)} />
       </div>
+      {/* projects lower */}
     </div>
   );
 }

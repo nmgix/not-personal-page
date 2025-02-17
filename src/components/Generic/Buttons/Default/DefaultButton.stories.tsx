@@ -16,7 +16,8 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     children: <span>Ok</span>,
-    onClick: () => console.log("ok")
+    onClick: () => console.log("ok"),
+    title: "ok"
   }
 };
 
@@ -28,6 +29,8 @@ export const IconButton: Story = {
       //   <use xlinkHref={`${icons}#filter`}></use>
       // </svg>
     ),
-    onClick: () => console.log("create filter popup")
+    onClick: () => console.log("create filter popup"),
+    title: "filter btn",
+    disabled: true
   }
 };

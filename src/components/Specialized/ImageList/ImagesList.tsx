@@ -1,6 +1,6 @@
 import { Button } from "@/components/Generic/Buttons/Default/Default-Button";
 import { Image } from "@/components/Generic/Image";
-import { useRef } from "react";
+import { Children, cloneElement, useRef } from "react";
 import classnames from "classnames";
 
 import styles from "./images-list.module.scss";
@@ -20,11 +20,15 @@ export const ImageList = ({ images, size, galleryButton = false, imageThreshold 
     images !== undefined && images.length > 0
       ? images.slice(0, imageThreshold).map((img, idx) =>
           galleryButton === true ? (
-            <Button title='open image' onClick={() => console.log("open gallery, somehow, img idx: " + idx)} externalClassnames={styles.imageButton}>
+            <Button
+              key={img.id}
+              title='open image'
+              onClick={() => console.log("open gallery, somehow, img idx: " + idx)}
+              externalClassnames={styles.imageButton}>
               <Image src={img.src} size={size} showAlt={false} alt={img.alt} />
             </Button>
           ) : (
-            <Image src={img.src} size={size} showAlt={false} alt={img.alt} />
+            <Image key={img.id} src={img.src} size={size} showAlt={false} alt={img.alt} />
           )
         )
       : []
@@ -33,9 +37,7 @@ export const ImageList = ({ images, size, galleryButton = false, imageThreshold 
 
   return (
     <div className={classnames(styles.imageListWrapper, externalClassnames)}>
-      <div className={styles.imageList}>
-        {React.Children.map(_temporaryImagesList.current, (child, idx) => React.cloneElement(child, { key: idx }))}
-      </div>
+      <div className={styles.imageList}>{Children.map(_temporaryImagesList.current, (child, idx) => cloneElement(child, { key: idx }))}</div>
       {imagesLeft.current &&
         (galleryButton === false ? (
           <span className={styles.imagesAmount}>+{imagesLeft.current}</span>

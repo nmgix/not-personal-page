@@ -1,3 +1,8 @@
 @use "./Buttons/button.scss";
 @use "./Fade/fade.scss";
 @use "./Box/box.scss";
+
+.hideFromTop {
+  top: 100vh !important;
+  transition: top 0.8s ease-out !important;
+}

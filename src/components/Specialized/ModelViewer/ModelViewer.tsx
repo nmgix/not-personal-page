@@ -51,7 +51,7 @@ export const ModelViewer = ({ renderModelTitle, externalClassnames }: ModelViewe
     ms: 100,
     onHold: () => setPressed(true),
     onRelease: removePressed
-  });
+  }); // до сих пор баг с неработающим debounce
 
   return (
     <div className={classnames(styles.modelViewer, externalClassnames)}>

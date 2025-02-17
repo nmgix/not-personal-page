@@ -14,7 +14,7 @@ type Story = StoryObj<typeof meta>;
 export const MemesNoPreview: Story = {
   args: {
     id: "a7c30da6-c452-480a-9ae1-038ee5b564e5",
-    imageshref: [
+    imagesSrc: [
       "https://cdn.memes.com/up/71558571535638926/i/1736290969647.jpg",
       "https://cdn.memes.com/up/71558571535638926/i/1736290846680.jpeg",
       "https://cdn.memes.com/up/71558571535638926/i/1736290857145.png",
@@ -34,7 +34,7 @@ export const MemesNoPreview: Story = {
 export const MemesPreview: Story = {
   args: {
     id: "10ac14f9-5457-4330-b2a0-87080de3bab7",
-    imageshref: [
+    imagesSrc: [
       "https://cdn.memes.com/up/71558571535638926/i/1736290969647.jpg",
       "https://cdn.memes.com/up/71558571535638926/i/1736290846680.jpeg",
       "https://cdn.memes.com/up/71558571535638926/i/1736290857145.png",

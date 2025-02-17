@@ -1,0 +1,93 @@
+@use "../../../styles/margins";
+@use "../../../styles/paddings";
+
+.boundary {
+  background: white;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 0;
+  left: 0;
+  top: 0;
+
+  .wrapper {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+
+    &Active {
+      opacity: 0;
+    }
+  }
+
+  .scene {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    .controls {
+      position: absolute;
+
+      width: 50%;
+
+      left: 50%;
+      top: 40%;
+      transform: translate(-50%, -50%);
+
+      .dialogWindow {
+        min-width: 200px;
+        max-width: 50vw;
+        position: relative;
+        border-radius: 15px;
+
+        padding: paddings.$padding-xl;
+        &::before {
+          content: "";
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          left: 0;
+          top: 0;
+          border-radius: 15px;
+          background-color: rgba(255, 255, 255, 0.5);
+          backdrop-filter: blur(3px);
+          z-index: -1;
+        }
+
+        .phraseAuthor {
+          font-weight: 700;
+        }
+
+        .phrase {
+          font-weight: 300;
+        }
+
+        .dialogControls {
+          // position: absolute;
+          // left: 0;
+          // top: calc(100% + margins.$margin_default);
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+
+          margin-top: margins.$margin_default;
+
+          column-gap: margins.$margin-default;
+
+          .reply {
+            padding: paddings.$padding-s;
+          }
+        }
+      }
+    }
+  }
+
+  .dudeChilling {
+    position: absolute;
+    left: 60%;
+    top: 60%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+}

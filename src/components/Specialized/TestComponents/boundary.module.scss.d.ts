@@ -1,0 +1,11 @@
+export declare const boundary: string;
+export declare const controls: string;
+export declare const dialogControls: string;
+export declare const dialogWindow: string;
+export declare const dudeChilling: string;
+export declare const phrase: string;
+export declare const phraseAuthor: string;
+export declare const reply: string;
+export declare const scene: string;
+export declare const wrapper: string;
+export declare const wrapperActive: string;

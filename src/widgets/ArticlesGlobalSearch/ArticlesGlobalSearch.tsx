@@ -161,3 +161,4 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
     </Modal>
   );
 };
+ArticlesGlobalSearch.displayName = "ArticlesGlobalSearch";

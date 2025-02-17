@@ -12,7 +12,8 @@ export enum AvailableIcons {
   "blog",
   "video",
   "grid-blocks",
-  "grid-rows"
+  "grid-rows",
+  "code"
 }
 
 interface IIconProps {
@@ -23,7 +24,7 @@ interface IIconProps {
 
 export const Icon: React.FC<IIconProps> = ({ icon, color, externalClassnames }) => {
   return (
-    <svg className={classnames(styles.icon, externalClassnames)} style={{ color }}>
+    <svg id={icon} className={classnames(styles.icon, externalClassnames)} style={{ color }}>
       {/* <title>??? */}
       <use xlinkHref={`/icons.svg#${icon}`}></use>
     </svg>

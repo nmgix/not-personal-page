@@ -1,0 +1,104 @@
+@use "../../../styles/colors";
+@use "../../../styles/paddings";
+@use "sass:map";
+
+.videoPreview {
+  position: relative;
+  border-radius: 15px;
+
+  width: 300px;
+  height: 180px;
+  display: block;
+  overflow: hidden; // чтобы границы video обрезались
+
+  &:hover {
+    .thumbnail {
+      opacity: 0;
+    }
+    .previewDescription {
+      opacity: 1;
+
+      .video {
+        display: block;
+        z-index: auto;
+        opacity: 0.3;
+      }
+    }
+  }
+
+  .thumbnail {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    opacity: 1;
+    transition: opacity 0.05s ease-in-out;
+    display: block;
+  }
+
+  .previewDescription {
+    position: relative;
+    display: flex;
+    transition: display 0.05s ease-in-out;
+    opacity: 0;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    padding: paddings.$padding-s paddings.$padding-xl;
+
+    box-sizing: border-box;
+    overflow: hidden;
+
+    .top {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      .title {
+        font-weight: 800;
+        font-size: 16px;
+      }
+      .shortDescription {
+        font-weight: 100;
+        opacity: 0.8;
+        font-size: 10px;
+
+        text-overflow: ellipsis;
+        line-height: 1.5em;
+        height: 3em;
+        overflow: hidden;
+      }
+    }
+    .bottom {
+      display: flex;
+      justify-content: space-between;
+
+      .videoLength {
+        color: map.get(colors.$standard-theme, icon-default);
+      }
+
+      .tags {
+        display: flex;
+        column-gap: 5px;
+        color: map.get(colors.$standard-theme, icon-default);
+        font-size: 13px;
+
+        :global(svg#code) {
+          width: 3em;
+        }
+      }
+    }
+    .video {
+      display: none;
+      position: absolute;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      object-fit: cover;
+    }
+  }
+}
