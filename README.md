@@ -26,20 +26,28 @@
 ## Компоненты, короче TODO
 
 1. [ ] Pages
-   1. [ ] Home
-      1. [ ] Different Hero components
-         1. [ ] 3D render
-         2. [ ] Recent articles or sorted by popularity? (idk which content to load to them)
-         3. [ ] Articles list preview
-         4. [ ] Projects grid
+   1. [x/~] Home
+      1. [~] Different Hero components
+         1. [x] 3D render
+            - компоненты для рендера просто в файле random-hero-widget, возможно для ssr/static не подходит?
+         2. [~] Latest News Tabs
+            - без данных вовсе, подгрузка с api должна быть
+      2. [~] Recent articles or sorted by popularity? (idk which content to load to them)
+         - моковые данные, нет подгрузки с api
+      3. [~] Articles list preview
+         - моковые данные, нет подгрузки с api
+      4. [~] Projects grid
+         - моковые данные, нет подгрузки с api
    2. [ ] Articles
-      1. [ ] Tech articles
+      1. [ ] '/' (/articles aka домашняя)
+         1. [ ] Поиск через ctrl+f (уже есть в компоненте articles-search)
+      2. [ ] Tech articles
          1. [ ] Selected article page
          2. [ ] Same page article render (nextjs feature) (article widget)
-      2. [ ] Blog
+      3. [ ] Blog
          1. [ ] Selected blog article page
          2. [ ] Same blog article render (nextjs feature) (article widget)
-      3. [ ] Projects
+      4. [ ] Projects
          1. [ ] Same page project article render (nextjs feature) (article widget)
 2. [ ] Components
    1. [x] Generic

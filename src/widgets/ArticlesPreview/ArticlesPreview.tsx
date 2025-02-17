@@ -20,8 +20,8 @@ export const ArticlesPreview = ({ list, externalClassnames, articlesRenderLimit,
         </h3>
         <div className={classnames(styles.list)}>
           {list &&
-            list.slice(0, articlesRenderLimit ?? 3).map(article => (
-              <Link href={article.href} className={classnames("fadeBottom", styles.element)}>
+            list.slice(0, articlesRenderLimit ?? 3).map((article, i) => (
+              <Link href={article.href} className={classnames("fadeBottom", styles.element)} tabIndex={i < 1 ? i : -1}>
                 <div className={styles.articleHeader}>
                   <h4 className={styles.title}>{article.title}</h4>
                   <span className={styles.ttr}>{article.TTRmins}min</span>

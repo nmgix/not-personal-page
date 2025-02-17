@@ -1,3 +1,6 @@
+"use client";
+// наверное client, пока хз, модалка ведь. можно и немодальную версию страницы сделать
+
 import { useImperativeHandle, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import classnames from "classnames";

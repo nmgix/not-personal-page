@@ -1,4 +1,6 @@
-import { useImperativeHandle, useMemo, useRef, useState } from "react";
+"use client";
+
+import { useImperativeHandle, useRef, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import classnames from "classnames";
 import { Modal } from "@/components/Generic/Modal";

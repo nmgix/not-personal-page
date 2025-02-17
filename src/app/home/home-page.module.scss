@@ -24,7 +24,7 @@
 
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-auto-rows: 170px; // temporary instead of 1fr
+    grid-auto-rows: 170px; // temporary instead of 1fr, also in home-page .latestPosts
     gap: margins.$margin-default;
 
     .articlesPreview {

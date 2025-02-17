@@ -1,3 +1,5 @@
+"use client";
+
 import { Modal } from "@/components/Generic/Modal";
 import { ImageElement } from "@/components/Specialized/ImageList";
 import { useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";

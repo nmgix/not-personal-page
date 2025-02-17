@@ -74,7 +74,6 @@ export const UnexpectedErrorBoundary = () => {
   const onButtonTouchMove = (e: React.TouchEvent<HTMLButtonElement>) => buttonDragHandler(e.touches[0].clientY);
 
   const onButtonDragEnd = () => {
-    console.log("btn drag end");
     setMouseDown(false);
     // setFoundOut(false); выкл потому что если  НЕ fail drag'а фулл  до пасхалки,  то при  отпускании пасхалка уберётся
     if (btnRef.current) {

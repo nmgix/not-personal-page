@@ -1,0 +1,69 @@
+@use "../../styles/margins";
+@use "../../styles/fonts";
+@use "../../styles/themes";
+@use "../../styles/borders";
+
+.articles {
+  margin-top: calc(margins.$margin-default * 2);
+  display: flex;
+  flex-direction: column;
+  row-gap: margins.$margin-default;
+  // height: 100%;
+  height: auto !important;
+  width: 100%;
+
+  .header {
+    color: themes.theme-standard("font-hero");
+    font-size: 24px;
+    font-weight: 400;
+    mark {
+      font-size: 16px;
+      font-weight: 100;
+      color: themes.theme-standard("box-border");
+    }
+  }
+
+  .latestPosts {
+    flex: 0;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 170px; // temporary instead of 1fr, also in home-page .mainTabs
+    gap: margins.$margin-default;
+
+    .box1 {
+      grid-column: span 2;
+    }
+
+    .box2 {
+      grid-column: span 1;
+    }
+  }
+
+  .controls {
+    display: flex;
+    flex-direction: row;
+    gap: margins.$margin-s;
+
+    &Tags {
+      // тут opacity, но мб в boxes scroll будет
+      border-radius: borders.$border-s;
+      flex: 1;
+
+      :global(.box) {
+        background-color: themes.theme-standard("font-sub");
+        color: themes.theme-standard("font-color");
+      }
+    }
+    &Input {
+      div {
+        height: 100%;
+        width: 100%;
+      }
+      flex: 0.7;
+    }
+    &Filter {
+      flex: 0;
+    }
+  }
+}

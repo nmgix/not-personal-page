@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useImperativeHandle, useRef, useState } from "react";
 import useDebounced from "@/hooks/useDebounce";
 import styles from "./input.module.scss";

@@ -1,0 +1,9 @@
+export declare const articles: string;
+export declare const box1: string;
+export declare const box2: string;
+export declare const controls: string;
+export declare const controlsFilter: string;
+export declare const controlsInput: string;
+export declare const controlsTags: string;
+export declare const header: string;
+export declare const latestPosts: string;
