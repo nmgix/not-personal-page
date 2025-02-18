@@ -3,10 +3,8 @@
 .button {
   font-size: 14px;
   padding: 0px 18px; // хз почему verical paddings are collapsing
-  line-height: 2.5em;
   cursor: pointer;
   position: relative;
-  display: inline-block; // в таком случае занимает всю высоту родителя
   composes: defaultButton from "../../Generic/Buttons/Default/default-button.module.scss";
 
   user-select: none;

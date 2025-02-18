@@ -40,34 +40,40 @@
     }
   }
 
-  .controls {
+  .handle {
     display: flex;
-    flex-direction: row;
-    gap: margins.$margin-s;
+    flex-direction: column;
+    gap: margins.$margin-default;
 
-    &Tags {
-      // тут opacity, но мб в boxes scroll будет
-      border-radius: borders.$border-s;
-      flex: 1;
+    .controls {
+      display: flex;
+      flex-direction: row;
+      gap: margins.$margin-s;
 
-      :global(.box) {
-        background-color: themes.theme-standard("box-hover");
-        color: themes.theme-standard("font-hover");
+      &Tags {
+        // тут opacity, но мб в boxes scroll будет
+        border-radius: borders.$border-s;
+        flex: 1;
+
+        :global(.box) {
+          background-color: themes.theme-standard("box-hover");
+          color: themes.theme-standard("font-hover");
+        }
+      }
+      &Input {
+        div {
+          height: 100%;
+          width: 100%;
+        }
+        flex: 0.7;
+      }
+      &Filter {
+        flex: 0;
       }
     }
-    &Input {
-      div {
-        height: 100%;
-        width: 100%;
-      }
-      flex: 0.7;
-    }
-    &Filter {
-      flex: 0;
-    }
-  }
 
-  .articlesFound {
-    display: flex; // placeholder
+    .articlesFound {
+      display: flex; // placeholder
+    }
   }
 }

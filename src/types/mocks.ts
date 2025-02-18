@@ -2,6 +2,13 @@ import { ImageElement } from "@/components/Specialized/ImageList";
 import { ArticleListElementProps } from "./articles";
 import { VideoPreviewProps } from "@/components/Specialized/VideoPreview";
 
+export const mockTags: { type: string; title: string }[] = [
+  { type: "gamedev", title: "#gamedev" },
+  { type: "thoughts", title: "#thoughts" },
+  { type: "c++", title: "#c++" }
+];
+export const mockArticlesAmount = 163;
+
 export const mockImages: ImageElement[] = [
   { src: "https://cdn.memes.com/up/71558571535638926/i/1736290969647.jpg", alt: "meme 1", id: "46f7ae1c-5bd3-4d24-ac8c-14881dd19aa3" },
   { src: "https://cdn.memes.com/up/71558571535638926/i/1736290846680.jpeg", alt: "meme 2", id: "7d3e7e13-31d2-4246-b6fc-b459b30b59ad" },

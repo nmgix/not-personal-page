@@ -5,13 +5,13 @@ import styles from "./article-list.module.scss";
 import { ExternalClassnames } from "@/types/components";
 
 type ArticleListProps = {
-  list: ArticleListElementProps[];
+  list: ArticleListElementProps[] | null;
 } & ExternalClassnames;
 
 export const ArticleList = ({ list, externalClassnames }: ArticleListProps) => {
   return (
     <div className={classnames(styles.articleList, externalClassnames)}>
-      {list.map(article => (
+      {(list ?? []).map(article => (
         <ArticleListElement key={article.id} {...article} />
       ))}
     </div>

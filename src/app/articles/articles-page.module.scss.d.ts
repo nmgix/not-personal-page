@@ -6,5 +6,6 @@ export declare const controls: string;
 export declare const controlsFilter: string;
 export declare const controlsInput: string;
 export declare const controlsTags: string;
+export declare const handle: string;
 export declare const header: string;
 export declare const latestPosts: string;

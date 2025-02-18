@@ -1,6 +1,5 @@
 "use client";
 
-import { Modal } from "@/components/Generic/Modal";
 import { ImageElement } from "@/components/Specialized/ImageList";
 import { useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
@@ -8,7 +7,9 @@ import classnames from "classnames";
 import styles from "./image-gallery.module.scss";
 import { Image } from "@/components/Generic/Image";
 import { useScrollable } from "@/hooks/useScrollable";
+import dynamic from "next/dynamic";
 // import { Key } from "ts-key-enum";
+const Modal = dynamic(() => import("../../components/Generic/Modal").then(m => m.Modal), { ssr: false });
 
 type ImageGalleryProps = {
   images: ImageElement[];
@@ -54,10 +55,10 @@ export const ImageGallery = ({ images, ref, size }: ImageGalleryProps) => {
 
   // controls for images gallery START
   useHotkeys(["a", "left"], () => {
-    if (modalOpen === true) setCurrentImage(curr => (curr - 1) % images.length);
+    if (modalOpen === true) setCurrentImageIdx(curr => (curr - 1) % images.length);
   });
   useHotkeys(["d", "right", "tab"], () => {
-    if (modalOpen === true) setCurrentImage(curr => (curr + 1) % images.length);
+    if (modalOpen === true) setCurrentImageIdx(curr => (curr + 1) % images.length);
   });
 
   // controls for images gallery END

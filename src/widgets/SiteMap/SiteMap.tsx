@@ -4,10 +4,11 @@
 import { useImperativeHandle, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import classnames from "classnames";
-import { Modal } from "@/components/Generic/Modal";
 import styles from "./site-map.module.scss";
 import { PageTree } from "./types";
 import { Tree } from "./components/TreeRender";
+import dynamic from "next/dynamic";
+const Modal = dynamic(() => import("../../components/Generic/Modal").then(m => m.Modal), { ssr: false });
 
 const pages: PageTree[] = [
   {
