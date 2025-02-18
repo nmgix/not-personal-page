@@ -4,6 +4,10 @@
   background-color: themes.theme-standard(box-hover);
   color: themes.theme-standard(font-hover);
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   &:hover {
     background-color: themes.theme-standard(box-default);
     color: themes.theme-standard(font-default);

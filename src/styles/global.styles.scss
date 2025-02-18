@@ -1,6 +1,8 @@
 @use "fonts";
 @use "themes";
 @use "margins";
+@use "media";
+@use "breakpoints";
 
 @use "../components/Generic/components.scss";
 // @use "../styles/themes.mixin.scss"
@@ -26,21 +28,38 @@ html {
   background-color: themes.theme-standard(background-800);
 }
 
-body {
-  position: relative;
-  z-index: 1;
-  overflow-y: scroll;
-
-  &::before {
+html:has(div[class*="boundary"]) {
+  body::before {
     content: "";
     position: absolute; // иначе не будет двигаться с body.styles.top
     width: 100%;
     height: 100%;
     left: 0;
     top: 0;
-    background-color: themes.theme-standard(background-800);
+    background-color: themes.theme-standard("background-800");
     z-index: -3;
   }
+}
+
+body {
+  position: relative;
+  z-index: 1;
+  // overflow-y: scroll;
+  box-sizing: content-box;
+
+  &:has(.not-so-secret-btn) {
+    &::before {
+      content: "";
+      position: absolute; // иначе не будет двигаться с body.styles.top
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      background-color: themes.theme-standard("background-800");
+      z-index: -3;
+    }
+  }
+
   padding: 35px 0;
   margin: 0;
 
@@ -48,14 +67,24 @@ body {
   flex-direction: column;
   align-items: center;
 
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
   .page {
     width: 100%;
     height: 100%;
-    max-width: 50vw;
-  }
+    max-width: 35vw;
 
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    @include media.media-maxw(breakpoints.$lg) {
+      max-width: 50vw;
+    }
+    @include media.media-maxw(breakpoints.$md) {
+      max-width: 65vw;
+    }
+    @include media.media-maxw(breakpoints.$sm) {
+      max-width: 80vw;
+    }
+  }
 }
 
 a {
@@ -79,4 +108,14 @@ ul {
 
 mark {
   background: transparent;
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }

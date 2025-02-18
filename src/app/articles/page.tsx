@@ -4,10 +4,12 @@ import { BoxesScrollbar } from "@/components/Specialized/BoxesScrollbar";
 import { Input } from "@/components/Generic/Input";
 import { DefaultButton } from "@/components/Generic/Buttons";
 import { Icon } from "@/components/Generic/Icon";
+import { ArticleList } from "@/widgets/ArticleList";
+import { mockArticlesFound } from "@/types/mocks";
 
 const mockArticlesAmount = 103;
 
-export default function Artciles() {
+export default function Articles() {
   return (
     <div className={classnames("page", styles.articles)}>
       <h3 className={styles.header}>
@@ -29,6 +31,7 @@ export default function Artciles() {
           <Icon icon='filter' />
         </DefaultButton>
       </div>
+      <ArticleList list={mockArticlesFound} externalClassnames={styles.articlesFound} />
     </div>
   );
 }

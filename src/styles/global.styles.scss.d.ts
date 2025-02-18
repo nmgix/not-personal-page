@@ -9,3 +9,4 @@ export declare const fadeTopBottom: string;
 export declare const hideFromTop: string;
 export declare const notSoSecretBtn: string;
 export declare const page: string;
+export declare const visuallyHidden: string;

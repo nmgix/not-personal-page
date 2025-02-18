@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/Generic/Buttons/Default/Default-Button";
 import { Image } from "@/components/Generic/Image";
 import { Children, cloneElement, useRef } from "react";

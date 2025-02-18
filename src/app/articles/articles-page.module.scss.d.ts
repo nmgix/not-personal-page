@@ -1,4 +1,5 @@
 export declare const articles: string;
+export declare const articlesFound: string;
 export declare const box1: string;
 export declare const box2: string;
 export declare const controls: string;

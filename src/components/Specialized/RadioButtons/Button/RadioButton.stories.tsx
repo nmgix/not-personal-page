@@ -14,6 +14,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
+    idx: 0,
+    checked: false,
+    onSelect: id => console.log(id),
+    value: "idk",
     children: (
       <>
         <Icon icon='arrow-link' />

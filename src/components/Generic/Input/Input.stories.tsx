@@ -1,19 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { Input } from "@/components/Generic/Input";
-import { useRef } from "react";
-
-const InputRefWrapper = (args: Omit<React.ComponentProps<typeof Input>, "ref">) => {
-  const ref = useRef(null);
-
-  return <Input ref={ref} {...args} />;
-};
 
 const meta = {
   title: "Generic/Input",
-  component: InputRefWrapper,
+  component: Input,
   args: {}
-} satisfies Meta<typeof InputRefWrapper>;
+} satisfies Meta<typeof Input>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

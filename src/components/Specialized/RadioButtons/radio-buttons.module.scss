@@ -1,9 +1,13 @@
 @use "../../../styles/themes";
 
 .button {
-  display: inline-block;
   font-size: 14px;
+  padding: 0px 18px; // хз почему verical paddings are collapsing
+  line-height: 2.5em;
   cursor: pointer;
+  position: relative;
+  display: inline-block; // в таком случае занимает всю высоту родителя
+  composes: defaultButton from "../../Generic/Buttons/Default/default-button.module.scss";
 
   user-select: none;
   -moz-user-select: none;
@@ -14,27 +18,9 @@
     display: none;
   }
 
-  & input[type="radio"]:checked + &Label {
+  &:has(input[type="radio"]:checked) {
     background-color: themes.theme-standard(font-default);
-  }
-
-  &Label {
-    position: relative;
-    composes: defaultButton from "../../Generic/Buttons/Default/default-button.module.scss";
-
-    padding: 0px 18px; // хз почему verical paddings are collapsing
-    line-height: 2.5em;
-    display: inline-block; // в таком случае занимает всю высоту родителя
-    // &::before {
-    //   content: "";
-    //   background: transparent;
-
-    //   position: absolute;
-    //   left: 0;
-    //   top: 0;
-    //   width: 100%;
-    //   height: 100%;
-    // }
+    color: themes.theme-standard(box-default);
   }
 }
 

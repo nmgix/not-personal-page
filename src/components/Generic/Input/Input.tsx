@@ -21,10 +21,12 @@ export type InputRef = {
   value: string;
 } | null;
 
-export const Input = (props: InputProps & { ref: React.Ref<InputRef> }) => {
-  const _placeholder = useRef(
-    Array.isArray(props.placeholder) ? props.placeholder[Math.floor(Math.random() * props.placeholder.length)] : props.placeholder
-  );
+export const Input = (props: InputProps & { ref?: React.Ref<InputRef> }) => {
+  // const _placeholder = useRef(
+  //   Array.isArray(props.placeholder) ? props.placeholder[Math.floor(Math.random() * props.placeholder.length)] : props.placeholder
+  // );
+  const _placeholder = Array.isArray(props.placeholder) ? props.placeholder[Math.floor(Math.random() * props.placeholder.length)] : props.placeholder;
+
   const [_value, setValue] = useState(props.value ?? "");
   useEffect(() => {
     setValue(props.value ?? "");
@@ -59,7 +61,7 @@ export const Input = (props: InputProps & { ref: React.Ref<InputRef> }) => {
           onKeyDown={props.onEnterPress ? listenEnter : undefined}
           name={props.name}
           type='text'
-          placeholder={_placeholder.current}
+          placeholder={_placeholder}
           autoFocus={props.focus}
         />
       </div>

@@ -7,12 +7,13 @@
 
   border: none;
   background: transparent;
+  border-radius: inherit;
 
   padding: 12px 3px 12px 12px;
 
   &::placeholder {
     color: themes.theme-standard(font-darken);
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 500;
     // fade effect
   }

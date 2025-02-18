@@ -1,13 +1,17 @@
 @use "../../../styles/paddings";
 @use "../../../styles/themes";
 
+@use "../../../styles/breakpoints";
+@use "../../../styles/media";
+
 .videoPreview {
   position: relative;
-  border-radius: 15px;
+  border-radius: 0.95em;
+  font-size: 1em;
 
   // width: 300px;
   // height: 180px;
-  min-width: 100px;
+  min-width: 7.5em;
   width: 100%;
   aspect-ratio: 5/3;
   display: block;
@@ -53,6 +57,9 @@
     height: 100%;
     width: 100%;
     padding: paddings.$padding-s paddings.$padding-xl;
+    @include media.media-maxw(breakpoints.$md) {
+      padding: paddings.$padding-xs paddings.$padding-s;
+    }
 
     box-sizing: border-box;
     overflow: hidden;
@@ -61,14 +68,16 @@
       display: flex;
       flex-direction: column;
       align-items: flex-end;
+      overflow: hidden; // чтобы кнопки снизу не уезжали за экран
+
       .title {
         font-weight: 800;
-        font-size: 16px;
+        font-size: 1.1em;
       }
       .shortDescription {
         font-weight: 100;
         opacity: 0.8;
-        font-size: 10px;
+        font-size: 0.85em;
 
         text-overflow: ellipsis;
         line-height: 1.5em;
@@ -77,6 +86,7 @@
       }
     }
     .bottom {
+      padding-top: 3px; // чтобы контент не сливался (текст и кнопки не накладывались)
       display: flex;
       justify-content: space-between;
 
@@ -86,12 +96,16 @@
 
       .tags {
         display: flex;
-        column-gap: 5px;
+        column-gap: 0.3em;
         color: themes.theme-standard(icon-default);
-        font-size: 13px;
+        font-size: 0.7em;
 
+        :global(svg) {
+          width: 2em;
+          height: 1.6em;
+        }
         :global(svg#code) {
-          width: 3em;
+          width: 3.5em;
         }
       }
     }

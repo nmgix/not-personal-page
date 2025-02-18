@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang='ru'>
       <body>
-        <Header />
+        <Header homeHref='/home' />
         {children}
       </body>
     </html>

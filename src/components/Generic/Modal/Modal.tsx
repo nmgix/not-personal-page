@@ -32,7 +32,7 @@ export const Modal: React.FC<ModalProps> = ({ children, show, onClose, externalC
       )}
       {children}
     </dialog>,
-    document.body
+    document?.body
   );
 };
 Modal.displayName = "Modal";

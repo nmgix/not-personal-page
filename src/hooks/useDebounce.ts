@@ -2,7 +2,7 @@
 
 import { useRef, useEffect } from "react";
 
-export default function useDebounced(func: any, delay: number, cleanUp = false) {
+export default function useDebounced(func: any | undefined, delay: number, cleanUp = false) {
   const timeoutRef = useRef<NodeJS.Timeout>(undefined);
 
   // Очистка таймера
@@ -19,6 +19,8 @@ export default function useDebounced(func: any, delay: number, cleanUp = false) 
 
   return (...args: any[]) => {
     clearTimer();
-    timeoutRef.current = setTimeout(() => func(...args), delay);
+    timeoutRef.current = setTimeout(() => {
+      if (func) func(...args);
+    }, delay);
   };
 }

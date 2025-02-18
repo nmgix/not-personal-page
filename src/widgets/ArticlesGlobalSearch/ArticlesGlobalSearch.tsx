@@ -13,6 +13,7 @@ import { RadioButtonsGroup, RadioButtonsGroupProps } from "@/components/Speciali
 import { ResultListRenderer } from "./components/ResultListRenderer";
 import { ArticleListElementProps } from "@/types/articles";
 import { mockArticlesFound } from "@/types/mocks";
+import { useArticlesSearch } from "@/hooks/useArticlesSearch";
 
 const _articlesAmount = 163;
 const _categories: { type: string; title: string; icon: keyof typeof AvailableIcons }[] = [
@@ -31,17 +32,37 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
   const [modalOpen, setModalOpen] = useState(false);
   const onClose = () => setModalOpen(false);
   useHotkeys("ctrl+k", () => setModalOpen(true), { enabled: true, preventDefault: true }, []);
-
   // на случай неободимости открыть окно, например, в туториале
   useImperativeHandle(ref, () => ({
     setModalState: setModalOpen
   }));
   // MODAL CONTROLS & STATE END
 
+  // ARTICLES LIST START START
+  const { articlesData, setArticlesData, setFormData, fetchArticles } = useArticlesSearch();
+  // ARTICLES LIST START END
+
+  // SEARCH INPUT CONTROL START
+
+  const placeholders = useRef(_inputPlacholderWords.map(w => `например, ${w}`));
+  const [input, setInput] = useState("");
+  const onInput = (searchWord: string) => {
+    setArticlesData({ articles: null, totalPages: 0 });
+    setInput(searchWord);
+  };
+  // const onInputEnd = (searchWord: string) => {
+  //   console.log(searchWord);
+  // };
+
+  // SEARCH INPUT CONTROL END
+
   // CATEGORIES CONTROLS & STATE START
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-
+  const _onSelectCategory = (val: string | null) => {
+    setArticlesData({ articles: null, totalPages: 0 });
+    setSelectedCategory(val);
+  };
   // не useRef мне нужен, что-то типо memo, если хочу ререндер при select категории (аппенд класса .active .box'у)
   // а мб useRef достаточно, я же не буду в memo оборачивать вот эти компоненты, и так пойдёт, наверное
   const categoriesRef = useRef<RadioButtonsGroupProps["options"]>(
@@ -53,61 +74,31 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
           <span>{c.title}</span>
         </div>
       ),
-      value: c.title
+      value: c.type
     }))
   );
 
   // CATEGORIES CONTROLS & STATE END
 
-  // ARTICLES LIST START START
-
-  const [foundArticles, setFoundArticles] = useState<ArticleListElementProps[] | null>(null);
-  // empty array = nothing is found, null = not searched yet
-
-  // ARTICLES LIST START END
-
-  // SEARCH INPUT CONTROL START
-
-  const inputRef = useRef<InputRef>(null);
-  const placeholders = useRef(_inputPlacholderWords.map(w => `например, ${w}`));
-  const [input, setInput] = useState("");
-  const onInputEnd = (searchWord: string) => {
-    console.log(searchWord);
-  };
-  const onInput = (searchWord: string) => {
-    setFoundArticles(null);
-    setInput(searchWord);
-  };
-
-  // SEARCH INPUT CONTROL END
-
   // MAKING SEARCH START
 
-  const searchArticles = (formData: FormData) => {
-    let _found: ArticleListElementProps[] = [];
-    // for (let [key, value] of formData.entries()) {
-    //   console.log(key, value);
-    // }
-    _found = mockArticlesFound;
-    return _found;
-  };
-
   const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    console.log("form submit?");
     e.preventDefault();
-    const foundArticles = searchArticles(new FormData(e.currentTarget));
-    return setFoundArticles(foundArticles);
+    setFormData(new FormData(e.currentTarget));
+    fetchArticles();
   };
 
   // MAKING SEARCH END
 
-  // misc
+  // render//misc
   const nothingSelected = input.length == 0 && (selectedCategory == null || selectedCategory == "");
-  const articlesFound = foundArticles !== null && foundArticles.length > 0 && input.length > 0;
+  const articlesFound = articlesData.articles !== null && articlesData.articles.length > 0 && input.length > 0;
   const noArticlesFound =
-    foundArticles !== null &&
-    foundArticles?.length == 0 &&
+    articlesData.articles !== null &&
+    articlesData.articles?.length == 0 &&
     (input.length > 0 || (selectedCategory != null && (selectedCategory as string).length > 0));
-  // misc
+  // render//misc
 
   return (
     <Modal ariaLabel='articles global search' onClose={onClose} show={modalOpen} externalClassnames={styles.modal} hideCloseBtn>
@@ -118,8 +109,8 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
             <span className={styles.subtitle}>{_articlesAmount} articles currently</span>
           </div>
           <RadioButtonsGroup
-            onSelect={setSelectedCategory}
-            name='article-type'
+            onSelect={_onSelectCategory}
+            name='article_type'
             options={categoriesRef.current}
             externalClassnames={styles.categories}
           />
@@ -127,10 +118,9 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
             <Input
               name='articles_search'
               value={input}
-              ref={inputRef}
               placeholder={placeholders.current}
               onLetterEntered={onInput}
-              onTextInputDebounce={onInputEnd}
+              // onTextInputDebounce={onInputEnd}
               externalClassnames={styles.searchInput}
               focus
             />
@@ -157,7 +147,7 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
               <span className={styles.subtitle}>u dont know where to search c;</span>
             </div>
           )}
-          {articlesFound && <ResultListRenderer list={foundArticles} searchedPhrase={input} />}
+          {articlesFound && <ResultListRenderer list={articlesData.articles ?? []} searchedPhrase={input} />}
         </div>
       </div>
     </Modal>

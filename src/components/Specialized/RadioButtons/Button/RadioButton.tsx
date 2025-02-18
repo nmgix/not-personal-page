@@ -9,21 +9,28 @@ type RadioButtonProps = {
   onSelect: (id: string) => void;
   value: string;
   checked: boolean;
+  idx: number;
 } & ExternalClassnames;
 
 export const RadioButton = memo(
-  ({ children, name, checked, externalClassnames, value, onSelect }: RadioButtonProps) => {
+  ({ children, name, checked, externalClassnames, value, onSelect, idx }: RadioButtonProps) => {
     const componentId = useId();
     const _onSelect = useCallback(() => onSelect(value), [value, checked]);
 
     return (
-      <div className={classnames(styles.button, externalClassnames)}>
-        <input name={name} type='radio' id={componentId} value={value} onClick={_onSelect} readOnly checked={checked} />
-        {/* // а ещё после применения .button у меня перестал кликаться весь компонент  как инпут (видимо его лейбл не покрывает всю кнопку) */}
-        <label className={classnames("button", styles.buttonLabel)} htmlFor={componentId}>
-          {children}
-        </label>
-      </div>
+      <label tabIndex={idx} className={classnames("button", styles.buttonLabel, styles.button, externalClassnames)} htmlFor={componentId}>
+        <input
+          className={classnames("visually-hidden")}
+          name={name}
+          type='radio'
+          id={componentId}
+          value={value}
+          onClick={_onSelect}
+          readOnly
+          checked={checked}
+        />
+        {children}
+      </label>
     );
   },
   (prev, next) => prev.checked === next.checked

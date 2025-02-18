@@ -1,9 +1,7 @@
-// @use "../../styles/colors";
-// @use "../../styles/borders";
 @use "../../styles/paddings";
 @use "../../styles/margins";
-// @use "sass:map";
-// @use "sass:color";
+@use "../../styles/breakpoints";
+@use "../../styles/media";
 
 .videosPreview {
   display: block;
@@ -13,5 +11,14 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-auto-rows: 1fr;
     gap: margins.$margin-s;
+
+    font-size: 14px;
+
+    @include media.media-maxw(breakpoints.$lg) {
+      font-size: 12px;
+    }
+    @include media.media-maxw(breakpoints.$md) {
+      font-size: 10px;
+    }
   }
 }

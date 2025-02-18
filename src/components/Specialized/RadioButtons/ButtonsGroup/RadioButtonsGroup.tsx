@@ -47,8 +47,8 @@ export const RadioButtonsGroup = ({ options, name, externalClassnames, onSelect,
   return (
     <BoxesScrollbar
       noWrapper
-      list={options.map(option => (
-        <RadioButton checked={option.value === selectedOption} value={option.value} name={name} onSelect={_onSelect}>
+      list={options.map((option, i) => (
+        <RadioButton idx={i} checked={option.value === selectedOption} value={option.value} name={name} onSelect={_onSelect}>
           {option.component}
         </RadioButton>
       ))}
