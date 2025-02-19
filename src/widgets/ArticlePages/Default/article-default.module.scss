@@ -1,0 +1,89 @@
+@use "../../../styles/margins";
+@use "../../../styles/paddings";
+@use "../../../styles/themes";
+
+.backBtn {
+  background-color: transparent !important;
+  &:hover {
+    background-color: transparent !important;
+  }
+  padding: 0;
+  font-size: 20px;
+}
+
+.articleDefault {
+  display: block;
+
+  .rightPanel {
+    float: right;
+    width: 25%;
+
+    display: flex;
+    flex-direction: column;
+    gap: margins.$margin-default;
+    padding: paddings.$padding-xs;
+
+    .articleDate {
+      color: themes.theme-standard(icon-default);
+    }
+
+    .tags {
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: margins.$margin-s;
+    }
+
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: margins.$margin-default;
+      align-items: flex-end;
+      & > * {
+        text-align: end;
+      }
+    }
+  }
+
+  .articleContent {
+    // display: flex; // нельзя ибо тогда рушится идея обтекаемого текста
+    // flex-direction: column;
+    // gap: margins.$margin-default;
+
+    .title {
+      font-size: 30px;
+      font-weight: 700;
+      color: themes.theme-standard(font-hero);
+      margin: 0;
+
+      position: relative;
+
+      &::after {
+        content: attr(data-id);
+        position: absolute;
+        z-index: 2;
+        bottom: 0%;
+        left: 0%;
+        transform: translateY(110%);
+        background: black;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s;
+      }
+
+      &:hover::after {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    & > *:not(:last-child) {
+      margin-bottom: margins.$margin-default;
+    }
+  }
+}

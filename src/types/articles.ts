@@ -14,6 +14,19 @@ export type ArticleListElementProps = {
   textPreview?: string;
 };
 
+export type TArticleDefault = {
+  id: string;
+  title: string;
+  tags: string[];
+  date: number;
+  TTRmins: number;
+  href: string;
+  category: PickKey<typeof AvailableIcons, "blog" | "tech-article" | "video">;
+  text: string | string[]; //хз как частями загружать
+  textPreview?: string;
+  imagesSrc?: ImageElement[];
+};
+
 export type ArticleProps = {
   id: string;
   title: string;

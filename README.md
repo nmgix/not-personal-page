@@ -128,6 +128,9 @@
        1. [ ] Из-за link сейчас стили поломаны
    13. [~] VideosPreview
        1. [ ] Unload img/video if out of view boundaries
+   14. [ ] ArticlePages
+       - в Widgets потому что будет в blog/,article/,projects/
+       1. [ ] Default
 4. [x] Hooks
    1. [~] useFade
       1. [x] сделать и для вертикали, пока хук только для горизонтали
