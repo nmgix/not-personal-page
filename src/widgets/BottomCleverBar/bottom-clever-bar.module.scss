@@ -11,16 +11,25 @@
 
   z-index: z-indexes.$clever-bar;
 
+  position: fixed;
+  left: 50%;
+  bottom: 0%;
+  transform: translate(-50%, -50%);
+
+  transition: bottom 0.1s ease-in-out;
+
+  white-space: nowrap;
+
   :global(.box) {
     padding: 20px 7px;
   }
 
-  .controls {
+  .barOne {
     flex: 1;
     background-color: themes.theme-standard(box-hover);
   }
 
-  .devName {
+  .barTwo {
     flex: 0;
     background-color: rgb(themes.theme-standard(box-hover), 0.5);
 
@@ -29,4 +38,7 @@
 
     backdrop-filter: blur(7px);
   }
+}
+.hideBar {
+  bottom: -20%;
 }

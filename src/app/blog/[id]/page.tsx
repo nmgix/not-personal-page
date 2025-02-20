@@ -7,7 +7,7 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { NextRequest } from "next/server";
 
 const mockServerArticleFetch = async (id: string) => {
-  console.log(id);
+  // console.log(id);
   const apiArticle: TArticleDefault = {
     id: "ec957c53-8081-440b-b441-461357222144",
     href: "/blog/some-ideas",
@@ -19,7 +19,9 @@ const mockServerArticleFetch = async (id: string) => {
       "тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз, как разделять на отдельные части, как",
       "изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз",
       "как разделять на отдельные части, как изображения вставлять, md parcer в помощь.",
-      "Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст."
+      "Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст.",
+      "изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз",
+      "как разделять на отдельные части, как изображения вставлять, md parcer в помощь."
     ],
     title: id ?? "Некоторые идеи",
     TTRmins: 5,
@@ -47,19 +49,21 @@ export async function generateMetadata({ params /*, searchParams*/ }: TNextProps
     description: article.textPreview ?? "Статья в блоге",
     authors: [{ name: process.env.NEXT_PUBLIC_NAME }],
     keywords: article.tags,
-    openGraph: {
-      title: `${process.env.NEXT_PUBLIC_NAME}'s blog article, ${id}`,
-      type: "website",
-      locale: "ru-RU",
-      images: [],
-      //     images: ['/some-specific-page-image.jpg', ...previousImages],
-      url:
-        request.headers.get("referer") ??
-        //   вот мне делать нечего
-        `${request.headers.get("x-forwarded-proto")}://${request.headers.get("host")}${
-          (request.url as unknown as { pathname: string; search: string }).pathname
-        }`
-    }
+    openGraph: !request
+      ? undefined
+      : {
+          title: `${process.env.NEXT_PUBLIC_NAME}'s blog article, ${id}`,
+          type: "website",
+          locale: "ru-RU",
+          images: [],
+          //     images: ['/some-specific-page-image.jpg', ...previousImages],
+          url:
+            request.headers.get("referer") ??
+            //   вот мне делать нечего
+            `${request.headers.get("x-forwarded-proto")}://${request.headers.get("host")}${
+              (request.url as unknown as { pathname: string; search: string }).pathname
+            }`
+        }
   };
 }
 

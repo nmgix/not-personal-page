@@ -57,12 +57,12 @@
     height: 100%;
     width: 100%;
     padding: paddings.$padding-s paddings.$padding-xl;
+    box-sizing: border-box;
+    overflow: hidden;
+
     @include media.media-maxw(breakpoints.$md) {
       padding: paddings.$padding-xs paddings.$padding-s;
     }
-
-    box-sizing: border-box;
-    overflow: hidden;
 
     .top {
       display: flex;

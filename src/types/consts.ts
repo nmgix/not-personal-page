@@ -10,3 +10,4 @@ export enum ArticleFields {
   type = "article_type",
   text = "article-text"
 }
+export const bottomCleverBarShowThreshold = 70; //px

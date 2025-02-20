@@ -3,7 +3,7 @@ import { ArticleListElementProps } from "@/types/articles";
 import styles from "./result-list-renderer.module.scss";
 import classNames from "classnames";
 import { useMemo, useRef, useState } from "react";
-import { Button } from "@/components/Generic/Buttons/Default/Default-Button";
+import { Button } from "@/components/Generic/Buttons/Default/DefaultButton";
 import { Icon } from "@/components/Generic/Icon";
 import Link from "next/link";
 import { selectTextExample } from "./helpers";

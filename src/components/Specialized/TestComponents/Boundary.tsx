@@ -4,7 +4,7 @@ import { Image } from "@/components/Generic/Image";
 // import imgdata from "./dudeimg.txt";
 // `data:image/webp;base64,${atob(imgdata)}`
 import img from "./g2325dfwe3.webp";
-import { Button } from "@/components/Generic/Buttons/Default/Default-Button";
+import { Button } from "@/components/Generic/Buttons/Default/DefaultButton";
 import classnames from "classnames";
 
 const textAnimationInterval = 50;

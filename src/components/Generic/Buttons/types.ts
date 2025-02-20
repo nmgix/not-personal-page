@@ -10,6 +10,7 @@ export type ButtonProps = {
   disabled?: boolean;
   focus?: true;
   type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
+  tab?: number;
 } & ExternalClassnames;
 
 export type ButtonPropsVariants =

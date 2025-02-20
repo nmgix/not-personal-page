@@ -5,7 +5,7 @@ import { useHotkeys } from "react-hotkeys-hook";
 import classnames from "classnames";
 import styles from "./articles-global-search.module.scss";
 import { AvailableIcons, Icon } from "@/components/Generic/Icon";
-import { Button } from "@/components/Generic/Buttons/Default/Default-Button";
+import { Button } from "@/components/Generic/Buttons/Default/DefaultButton";
 import { Input, InputRef } from "@/components/Generic/Input";
 import { Image } from "@/components/Generic/Image";
 import { RadioButtonsGroup, RadioButtonsGroupProps } from "@/components/Specialized/RadioButtons";

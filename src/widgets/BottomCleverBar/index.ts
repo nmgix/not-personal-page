@@ -1,1 +1,1 @@
-export { BottomCleverBar } from "./BottomCleverBar";
+export { BottomCleverBar, type BarTypeKeys } from "./BottomCleverBar";

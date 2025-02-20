@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/Generic/Buttons/Default/Default-Button";
+import { Button } from "@/components/Generic/Buttons/Default/DefaultButton";
 import { Image } from "@/components/Generic/Image";
 import { Children, cloneElement, useRef } from "react";
 import classnames from "classnames";
@@ -26,6 +26,7 @@ export const ImageList = ({ images, size, galleryButton = false, imageThreshold 
               key={img.id}
               title='open image'
               onClick={() => console.log("open gallery, somehow, img idx: " + idx)}
+              tab={-1}
               externalClassnames={styles.imageButton}>
               <Image src={img.src} size={size} showAlt={false} alt={img.alt} />
             </Button>

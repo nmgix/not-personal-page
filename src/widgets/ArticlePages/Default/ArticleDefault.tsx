@@ -2,16 +2,27 @@ import classnames from "classnames";
 import { TArticleDefault } from "@/types/articles";
 import { ExternalClassnames } from "@/types/components";
 import styles from "./article-default.module.scss";
-import { Back } from "./components/Back";
 import { dateTimeAgo } from "@/helpers/dateTimeAgo";
 import Link from "next/link";
+import { ImageList } from "@/components/Specialized/ImageList";
+import { BackButton } from "@/components/Generic/Buttons";
 
 export type ArticleDefaultProps = { mappedTextLinks?: { href: string; title?: string }[]; mappedTags?: { popularity: number; tag: string }[] } & Omit<
   TArticleDefault,
   "tags"
 > &
   ExternalClassnames;
-export const ArticleDefault = ({ title, id, mappedTags, text, mappedTextLinks, TTRmins, externalClassnames, date }: ArticleDefaultProps) => {
+export const ArticleDefault = ({
+  title,
+  id,
+  mappedTags,
+  text,
+  mappedTextLinks,
+  TTRmins,
+  imagesSrc,
+  externalClassnames,
+  date
+}: ArticleDefaultProps) => {
   const timeAgo = dateTimeAgo(date);
   const localDate = new Date(date)
     .toLocaleTimeString("ru-RU", {
@@ -26,8 +37,8 @@ export const ArticleDefault = ({ title, id, mappedTags, text, mappedTextLinks, T
     .replace("-", "/");
 
   return (
-    <div className={classnames(styles.articleDefault, externalClassnames)}>
-      <Back />
+    <div className={classnames("page", styles.articleDefault, externalClassnames)}>
+      <BackButton />
       <div>
         <div className={styles.rightPanel}>
           <span className={styles.articleDate}>
@@ -50,6 +61,9 @@ export const ArticleDefault = ({ title, id, mappedTags, text, mappedTextLinks, T
                 </a>
               ))}
             </div>
+          )}
+          {imagesSrc !== undefined && imagesSrc.length > 0 && (
+            <ImageList galleryButton images={imagesSrc} size={{ width: 50, height: 50 }} externalClassnames={styles.images} imageThreshold={3} />
           )}
         </div>
         <div className={styles.articleContent}>

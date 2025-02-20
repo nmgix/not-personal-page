@@ -10,7 +10,8 @@ export const Button = (props: ButtonPropsVariants) => {
       autoFocus={props.focus}
       className={classnames("button", styles.defaultButton, props.externalClassnames)}
       onClick={props.type !== "submit" ? props.onClick : undefined}
-      disabled={props.disabled}>
+      disabled={props.disabled}
+      tabIndex={props.tab}>
       {props.children}
     </button>
   );

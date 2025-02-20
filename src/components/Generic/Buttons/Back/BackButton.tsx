@@ -1,11 +1,11 @@
 "use client";
 
-import { Button } from "@/components/Generic/Buttons/Default/Default-Button";
+import { Button } from "@/components/Generic/Buttons/Default/DefaultButton";
 import { useRouter } from "next/navigation";
 
-import styles from "../article-default.module.scss";
+import styles from "./back-btn.module.scss";
 
-export const Back = () => {
+export const BackButton = () => {
   const router = useRouter();
   return (
     <Button title='назад' onClick={router.back} externalClassnames={styles.backBtn}>

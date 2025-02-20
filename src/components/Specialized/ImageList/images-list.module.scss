@@ -34,11 +34,13 @@
   right: 0;
   top: 50%;
   transform: translate(50%, -50%);
+  padding: 0;
 
-  background-color: transparent;
+  background-color: transparent !important;
 
-  &[type="button"]:hover {
-    background-color: transparent;
+  // &[type="button"] был
+  &:hover {
+    background-color: transparent !important;
     color: themes.theme-standard(font-hover);
     font-weight: 700;
     font-size: 16px;
