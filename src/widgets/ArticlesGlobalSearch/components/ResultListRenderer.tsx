@@ -17,7 +17,7 @@ const ListElement = ({ article, searchedPhrase }: { article: ArticleListElementP
     <li className={styles.elementWrapper}>
       <Link href={article.href} className={styles.element}>
         <div className={styles.title}>
-          {article.category && <Icon icon={article.category} />}
+          {article.categoryImg && <Icon icon={article.categoryImg} />}
           &#91;<p>{article.title}</p>&#93;
         </div>
         <p className={styles.text}>...{text}...</p>

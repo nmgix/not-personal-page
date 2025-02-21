@@ -1,17 +1,23 @@
-import { TArticleDefault } from "@/types/articles";
+import { getDocBySlug } from "@/app/api/getDoc";
+import { tagPopularityBaseDecrementLevel, TArticleDefault } from "@/types/articles";
+import { articleCategories } from "@/types/consts";
 import { mockImages } from "@/types/mocks";
 import { TNextProps } from "@/types/next";
-import { ArticleDefault } from "@/widgets/ArticlePages";
+import { ArticleDefault, ArticleDefaultProps } from "@/widgets/ArticlePages";
+import { redirect } from "next/navigation";
 
 import type { Metadata, ResolvingMetadata } from "next";
 import { NextRequest } from "next/server";
+import { getDocImages, getDocLinks } from "@/app/api/getDocLinks";
+import { ImageElement } from "@/components/Specialized/ImageList";
+import { calculateAllTagsPopularity } from "@/app/api/tags";
 
 const mockServerArticleFetch = async (id: string) => {
   // console.log(id);
   const apiArticle: TArticleDefault = {
     id: "ec957c53-8081-440b-b441-461357222144",
     href: "/blog/some-ideas",
-    category: "blog",
+    categoryImg: "blog",
     tags: ["ideas", "news", "new", "gamedev"],
     date: 1677678611000,
     // text: "тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст.",
@@ -67,19 +73,70 @@ export async function generateMetadata({ params /*, searchParams*/ }: TNextProps
   };
 }
 
-export default async function BlogArticle(props: { params: Promise<{ id: string }> }) {
+export default async function BlogArticle(props: any) {
   //   console.log(props);
   const { id } = await props.params;
-  const article = await mockServerArticleFetch(id);
 
+  const symbols = Object.getOwnPropertySymbols(props.params);
+  const needed = symbols[2] as keyof ResolvingMetadata;
+  // console.log(props.params);
+  const request = props.params[needed] as unknown as { route: string };
+  console.log(request.route);
+
+  function checkPath(path: string, words: string[]) {
+    const wordsSet = new Set(words);
+    const match = path.match(/^\/([^\/]+)/); // Находим первое слово после "/"
+    if (match && wordsSet.has(match[1])) {
+      return match[1]; // Если слово есть в Set — возвращаем его
+    }
+    return null;
+  }
+
+  const type = checkPath(
+    request.route,
+    articleCategories.map(c => c.type)
+  );
+  if (!type) {
+    console.log("article type (blog, article or project) is not found, nextjs wtf???");
+    console.log("error fetching type, kinda impossible error if article exists lol");
+    return redirect("/home");
+  }
+  const article = getDocBySlug(type as (typeof getDocBySlug)["arguments"][0], id);
+  if (!article) {
+    console.log("this page does not exist");
+    return redirect("/home");
+  }
+  // const article = await mockServerArticleFetch(id);
+  const mappedLinks = getDocLinks(article.fullPath);
+  const mappedImages: ImageElement[] = getDocImages(article.fullPath).map(i => ({ alt: i.text, src: i.href }));
+  // const mappedTags: ArticleDefaultProps['mappedTags'] = article.meta.tags.map(t => ({ tag: t, popularity: 50 }))
   // через server функцию мапатьвесть текст и вытаскивать ссылки
-  const mappedLinks = [
-    { title: "game", href: "https://google.com/search" },
-    { href: "some-other-page.coolnick.com" },
-    { href: "and-other-page.coolnick.com" }
-  ];
+  // const mappedLinks = [
+  //   { title: "game", href: "https://google.com/search" },
+  //   { href: "some-other-page.coolnick.com" },
+  //   { href: "and-other-page.coolnick.com" }
+  // ];
+  const globalTags = calculateAllTagsPopularity();
+  const mappedTags = article.meta.tags.map(articleTag => {
+    const foundTag = globalTags.find(globalTag => globalTag.tag === articleTag);
+    return foundTag ?? { popularity: tagPopularityBaseDecrementLevel, tag: articleTag };
+  });
 
-  const mappedTags = article.tags.map(t => ({ popularity: Math.round(Math.random() * 50), tag: t }));
-
-  return <ArticleDefault {...article} mappedTextLinks={mappedLinks} mappedTags={mappedTags} />;
+  // const mappedTags = article.tags.map(t => ({ popularity: Math.round(Math.random() * 50), tag: t }));
+  // imagesSrc={mappedImages}
+  return (
+    <ArticleDefault
+      mappedTextLinks={mappedLinks}
+      mappedTags={mappedTags}
+      imagesSrc={mappedImages}
+      TTRmins={article.meta.TTRmins}
+      categoryImg={type as (typeof ArticleDefault)["arguments"]["categoryImg"]}
+      date={article.meta.date}
+      href={"todo"}
+      id='-1'
+      text={article.text}
+      title={article.meta.title}
+      textPreview={article.meta.textPreview}
+    />
+  );
 }

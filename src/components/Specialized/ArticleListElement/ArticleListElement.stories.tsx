@@ -48,7 +48,7 @@ export const MemesNoPreview: Story = {
       "Duis eget condimentum neque. In at mi faucibus, interdum ipsum sit amet, cursus quam. Cras purus lacus, vulputate ac tempor sed, imperdiet quis risus. Maecenas posuere dapibus egestas. In vel tincidunt libero. Etiam non scelerisque est, et tempor purus. Vivamus porttitor, ex eget luctus posuere, elit neque placerat ante, eu sagittis arcu velit ut neque",
     title: "Daily memes 121",
     TTRmins: 3,
-    category: "blog"
+    categoryImg: "blog"
   }
 };
 export const MemesPreview: Story = {
@@ -88,7 +88,7 @@ export const MemesPreview: Story = {
       "Duis eget condimentum neque. In at mi faucibus, interdum ipsum sit amet, cursus quam. Cras purus lacus, vulputate ac tempor sed, imperdiet quis risus. Maecenas posuere dapibus egestas. In vel tincidunt libero. Etiam non scelerisque est, et tempor purus. Vivamus porttitor, ex eget luctus posuere, elit neque placerat ante, eu sagittis arcu velit ut neque",
     title: "Daily memes 122",
     TTRmins: 0.5,
-    category: "blog"
+    categoryImg: "blog"
   }
 };
 export const MemesNoDescription: Story = {
@@ -126,7 +126,7 @@ export const MemesNoDescription: Story = {
     tags: ["memes", "daily"],
     title: "Daily memes 123",
     TTRmins: 1,
-    category: "blog"
+    categoryImg: "blog"
   }
 };
 export const MemesNoImages: Story = {
@@ -138,7 +138,7 @@ export const MemesNoImages: Story = {
       "Duis eget condimentum neque. In at mi faucibus, interdum ipsum sit amet, cursus quam. Cras purus lacus, vulputate ac tempor sed, imperdiet quis risus. Maecenas posuere dapibus egestas. In vel tincidunt libero. Etiam non scelerisque est, et tempor purus. Vivamus porttitor, ex eget luctus posuere, elit neque placerat ante, eu sagittis arcu velit ut neque",
     title: "Daily memes 124",
     TTRmins: 14,
-    category: "blog"
+    categoryImg: "blog"
   }
 };
 export const TechArticleNoInfo: Story = {
@@ -148,6 +148,6 @@ export const TechArticleNoInfo: Story = {
     tags: [],
     title: "C++ example",
     TTRmins: 60,
-    category: "tech-article"
+    categoryImg: "tech-article"
   }
 };

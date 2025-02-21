@@ -8,7 +8,7 @@ import classnames from "classnames";
 import styles from "./images-list.module.scss";
 import { ExternalClassnames } from "@/types/components";
 
-export type ImageElement = { id: string; src: string; alt: string };
+export type ImageElement = { src: string; alt: string };
 
 type ImageListProps = {
   images: ImageElement[];
@@ -23,7 +23,7 @@ export const ImageList = ({ images, size, galleryButton = false, imageThreshold 
       ? images.slice(0, imageThreshold).map((img, idx) =>
           galleryButton === true ? (
             <Button
-              key={img.id}
+              key={idx}
               title='open image'
               onClick={() => console.log("open gallery, somehow, img idx: " + idx)}
               tab={-1}
@@ -31,7 +31,7 @@ export const ImageList = ({ images, size, galleryButton = false, imageThreshold 
               <Image src={img.src} size={size} showAlt={false} alt={img.alt} />
             </Button>
           ) : (
-            <Image key={img.id} src={img.src} size={size} showAlt={false} alt={img.alt} />
+            <Image key={idx} src={img.src} size={size} showAlt={false} alt={img.alt} />
           )
         )
       : []

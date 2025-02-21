@@ -1,5 +1,5 @@
 import classnames from "classnames";
-import { TArticleDefault } from "@/types/articles";
+import { ArticleTag, TArticleDefault } from "@/types/articles";
 import { ExternalClassnames } from "@/types/components";
 import styles from "./article-default.module.scss";
 import { dateTimeAgo } from "@/helpers/dateTimeAgo";
@@ -7,7 +7,7 @@ import Link from "next/link";
 import { ImageList } from "@/components/Specialized/ImageList";
 import { BackButton } from "@/components/Generic/Buttons";
 
-export type ArticleDefaultProps = { mappedTextLinks?: { href: string; title?: string }[]; mappedTags?: { popularity: number; tag: string }[] } & Omit<
+export type ArticleDefaultProps = { mappedTextLinks?: { href: string; title?: string }[]; mappedTags?: ArticleTag[] } & Omit<
   TArticleDefault,
   "tags"
 > &
