@@ -1,4 +1,4 @@
-export function dateTimeAgo(date: number, english?: boolean) {
+export function dateTimeAgo(date: Date, english?: boolean) {
   const now = new Date();
   const past = new Date(date);
   const diff = Math.floor((Number(now) - Number(past)) / 1000);

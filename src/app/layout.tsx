@@ -1,6 +1,7 @@
 import { Header } from "@/widgets/Header";
 import type { Metadata } from "next";
 import "../styles/global.styles.scss";
+import { GlobalRoutes } from "@/types/articles";
 
 export const metadata: Metadata = {
   title: process.env.NEXT_PUBLIC_NAME,
@@ -15,7 +16,7 @@ export default async function RootLayout({
   return (
     <html lang='ru'>
       <body>
-        <Header homeHref='/home' />
+        <Header homeHref={GlobalRoutes.home} />
         {children}
       </body>
     </html>

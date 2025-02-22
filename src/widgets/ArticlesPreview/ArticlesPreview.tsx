@@ -1,4 +1,4 @@
-import { ArticleListElementProps } from "@/types/articles";
+import { ArticleListElementProps, GlobalRoutes } from "@/types/articles";
 import classnames from "classnames";
 import styles from "./articles-preview.module.scss";
 import Link from "next/link";
@@ -21,7 +21,7 @@ export const ArticlesPreview = ({ list, externalClassnames, articlesRenderLimit,
         <div className={classnames(styles.list)}>
           {list &&
             list.slice(0, articlesRenderLimit ?? 3).map((article, i) => (
-              <Link href={article.href} className={classnames("fadeBottom", styles.element)} tabIndex={i < 1 ? i : -1}>
+              <Link href={`${GlobalRoutes.root}${article.slug}`} className={classnames("fadeBottom", styles.element)} tabIndex={i < 1 ? i : -1}>
                 <div className={styles.articleHeader}>
                   <h4 className={styles.title}>{article.title}</h4>
                   <span className={styles.ttr}>{article.TTRmins}min</span>

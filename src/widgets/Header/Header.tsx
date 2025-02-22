@@ -1,6 +1,8 @@
 import Link from "next/link";
-import { ClientDate } from "./components/ClientDate";
 import styles from "./header.module.scss";
+import dynamic from "next/dynamic";
+// import { ClientDate } from "./components/ClientDate";
+const ClientDate = dynamic(() => import("./components/ClientDate").then(c => c.ClientDate));
 
 export const Header = ({ homeHref = "/" }: { homeHref: string }) => {
   return (

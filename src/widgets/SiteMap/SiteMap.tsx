@@ -8,42 +8,58 @@ import styles from "./site-map.module.scss";
 import { PageTree } from "./types";
 import { Tree } from "./components/TreeRender";
 import dynamic from "next/dynamic";
+import { GlobalRoutes } from "@/types/articles";
 const Modal = dynamic(() => import("../../components/Generic/Modal").then(m => m.Modal), { ssr: false });
 
 const pages: PageTree[] = [
   {
-    href: "/home",
+    href: GlobalRoutes.home,
     label: "/home"
   },
+  // {
+  //   href: "/tech-articles",
+  //   label: "/tech-articles",
+  //   children: [
+  //     {
+  //       href: "/article/*",
+  //       label: "/article/*",
+  //       noLink: true
+  //     }
+  //   ]
+  // },
   {
-    href: "/tech-articles",
-    label: "/tech-articles",
+    href: GlobalRoutes.articles,
+    label: "/articles/"
+  },
+  {
+    href: GlobalRoutes.article,
+    label: "/article/",
     children: [
       {
-        href: "/article/*",
-        label: "/article/*",
+        href: "[id]/",
+        label: "[id]/",
         noLink: true
       }
     ]
   },
   {
-    href: "/blog",
-    label: "/blog",
+    href: GlobalRoutes.blog,
+    label: "/blog/",
     children: [
       {
-        href: "/article/*",
-        label: "/article/*",
+        href: "[id]/",
+        label: "[id]/",
         noLink: true
       }
     ]
   },
   {
-    href: "/projects",
-    label: "/projects",
+    href: GlobalRoutes.project,
+    label: "/proejct/",
     children: [
       {
-        href: "/article/*",
-        label: "/article/*",
+        href: "[id]/",
+        label: "[id]/",
         noLink: true
       }
     ]

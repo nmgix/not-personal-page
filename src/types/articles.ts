@@ -2,12 +2,17 @@ import { AvailableIcons } from "@/components/Generic/Icon";
 import { ImageElement } from "@/components/Specialized/ImageList";
 import { type PickKey } from "@/helpers/typescript";
 
-export type ArticleListElementProps = Omit<TArticleDefault, "date" | "text"> & {
-  previewImages?: boolean;
-};
-
 export const tagPopularityBaseDecrementLevel = 50;
 export const articleFileName = "text.md";
+
+export enum GlobalRoutes {
+  root = "/",
+  home = "/home",
+  articles = "/articles/",
+  article = "/article/",
+  blog = "/blog/",
+  project = "/project/"
+}
 
 export type ArticleTag = {
   popularity: number;
@@ -15,16 +20,24 @@ export type ArticleTag = {
 };
 
 export type TArticleDefault = {
-  id: string;
   title: string;
   tags: string[];
-  date: number;
+  date: string;
   TTRmins: number;
-  href: string;
   categoryImg: PickKey<typeof AvailableIcons, "blog" | "tech-article" | "video">;
-  text: string | string[]; //хз как частями загружать
+  text: string; //хз как частями загружать
   textPreview?: string;
   imagesSrc?: ImageElement[];
+};
+export type ArticleListElementProps = Omit<TArticleDefault, "date" | "text"> & {
+  slug: string;
+  previewImages?: boolean;
+};
+export type ArticleData = {
+  meta: Omit<TArticleDefault, "imagesSrc" | "href">;
+  text: string;
+  slug: string;
+  // fullPath: string;
 };
 
 export type ArticleProps = {
@@ -34,10 +47,3 @@ export type ArticleProps = {
 };
 
 export const articleTypes = ["article", "blog", "project"] as const;
-
-export type ArticleData = {
-  meta: Omit<TArticleDefault, "imagesSrc" | "href">;
-  text: string;
-  slug: string;
-  fullPath: string;
-};

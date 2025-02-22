@@ -55,7 +55,7 @@ export const ResultListRenderer = ({ list, searchedPhrase, externalClassnames }:
       </div>
       <ul onScroll={updateScrollFn} className={classNames(styles.list, styles[`${_renderListVariant[renderListVariant]}Grid`])}>
         {list.map(article => (
-          <ListElement key={article.id} article={article} searchedPhrase={searchedPhrase} />
+          <ListElement key={article.slug} article={article} searchedPhrase={searchedPhrase} />
         ))}
       </ul>
     </div>

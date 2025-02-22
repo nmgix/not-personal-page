@@ -19,7 +19,7 @@ export const mockImages: ImageElement[] = [
 
 export const mockArticlesFound: ArticleListElementProps[] = [
   {
-    id: "10ac14f9-5457-4330-b2a0-87080de3bab7",
+    // id: "10ac14f9-5457-4330-b2a0-87080de3bab7",
     imagesSrc: [
       { src: "https://cdn.memes.com/up/71558571535638926/i/1736290969647.jpg", alt: "meme 1" },
       { src: "https://cdn.memes.com/up/71558571535638926/i/1736290846680.jpeg", alt: "meme 2" },
@@ -28,7 +28,8 @@ export const mockArticlesFound: ArticleListElementProps[] = [
       { src: "https://cdn.memes.com/up/71558571535638926/i/1736237784651.jpg", alt: "meme 5" }
     ],
     previewImages: true,
-    href: "/blog/memes_daily_122",
+    // href: "/blog/memes_daily_122",
+    slug: "blog/memes_daily_122",
     tags: ["memes", "daily"],
     textPreview:
       "Duis eget condimentum neque. In at mi faucibus, interdum ipsum sit amet, cursus quam. Cras purus lacus, vulputate ac tempor sed, imperdiet quis risus. Maecenas posuere dapibus egestas. In vel tincidunt libero. Etiam non scelerisque est, et tempor purus. Vivamus porttitor, ex eget luctus posuere, elit neque placerat ante, eu sagittis arcu velit ut neque",
@@ -37,14 +38,15 @@ export const mockArticlesFound: ArticleListElementProps[] = [
     categoryImg: "blog"
   },
   {
-    id: "f9301849-bdd2-49b7-b8d4-52a5327540f4",
+    // id: "f9301849-bdd2-49b7-b8d4-52a5327540f4",
     imagesSrc: [
       { src: "https://cdn.memes.com/up/71558571535638926/i/1736290969647.jpg", alt: "meme 1" },
       { src: "https://cdn.memes.com/up/71558571535638926/i/1736290846680.jpeg", alt: "meme 2" },
       { src: "https://cdn.memes.com/up/71558571535638926/i/1736290857145.png", alt: "meme 3" }
     ],
     previewImages: true,
-    href: "/blog/memes_daily_123",
+    // href: "/blog/memes_daily_123",
+    slug: "blog/memes_daily_123",
     tags: ["memes", "daily"],
     textPreview:
       "In at mi faucibus, interdum ipsum sit amet, cursus quam. Cras purus lacus, vulputate ac tempor sed, imperdiet quis risus. Maecenas posuere dapibus egestas. In vel tincidunt libero. Etiam non scelerisque est, et tempor purus. Vivamus porttitor, ex eget luctus posuere, elit neque placerat ante, eu sagittis arcu velit ut neque",
@@ -53,8 +55,9 @@ export const mockArticlesFound: ArticleListElementProps[] = [
     categoryImg: "tech-article"
   },
   {
-    id: "79ed9bfd-a32f-4b63-beab-eda0c5aef0cb",
-    href: "/blog/memes_daily_124",
+    // id: "79ed9bfd-a32f-4b63-beab-eda0c5aef0cb",
+    // href: "/blog/memes_daily_124",
+    slug: "/blog/memes_daily_124",
     tags: ["memes", "daily"],
     textPreview:
       "Interdum ipsum sit amet, cursus quam. Interdum ipsum cras purus lacus, vulputate ac tempor sed, imperdiet quis risus. Maecenas posuere dapibus egestas. In vel tincidunt libero. Etiam non scelerisque est, et tempor purus. Vivamus porttitor, ex eget luctus posuere, elit neque placerat ante, eu sagittis arcu velit ut neque",
@@ -63,8 +66,9 @@ export const mockArticlesFound: ArticleListElementProps[] = [
     categoryImg: "video"
   },
   {
-    id: "6dca1e1a-a6fb-4281-9d4b-648eeec9f876",
-    href: "/blog/memes_daily_125",
+    // id: "6dca1e1a-a6fb-4281-9d4b-648eeec9f876",
+    // href: "/blog/memes_daily_125",
+    slug: "blog/memes_daily_125",
     tags: ["memes", "daily"],
     textPreview:
       "Interdum ipsum sit amet, cursus quam. Interdum ipsum cras purus lacus, vulputate ac tempor sed, imperdiet quis risus. Maecenas posuere dapibus egestas. In vel tincidunt libero. Etiam non scelerisque est, et tempor purus. Vivamus porttitor, ex eget luctus posuere, elit neque placerat ante, eu sagittis arcu velit ut neque",

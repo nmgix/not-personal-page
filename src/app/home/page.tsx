@@ -9,34 +9,37 @@ import { Image } from "@/components/Generic/Image";
 import { /*mockArticlesFound,*/ mockProjectsShortened } from "@/types/mocks";
 import { VideosPreview } from "@/widgets/VideosPreview";
 import { getDocBySlugShorten, getLatestDocs } from "../api/getDoc";
-import { ArticleListElementProps, articleTypes } from "@/types/articles";
-
-const globalArticlesHref = "/articles/";
+import { ArticleListElementProps, articleTypes, GlobalRoutes } from "@/types/articles";
 
 export default function Home() {
-  const latestArticlesShorten = getLatestDocs(2).map(d =>
-    getDocBySlugShorten(d.file.split("/")[0] as (typeof articleTypes)[number], d.file.split("/")[1])
-  );
-  console.log(latestArticlesShorten);
+  const latestArticlesShorten = getLatestDocs(2).map(d => {
+    console.log({ d });
+    return getDocBySlugShorten(d.file.split("/")[0] as (typeof articleTypes)[number], d.file.split("/")[1]);
+  });
+  console.log({ latestArticlesShorten });
+
+  // надо проверку zod делать всех полей, надоело ?. юзать
   const articlePreviewList: ArticleListElementProps[] = latestArticlesShorten.map(la => ({
+    title: la?.meta.title ?? la?.slug ?? "somehow title didnt load UwU",
     categoryImg: la?.meta.categoryImg ?? "tech-article",
-    href: "todo",
+    // href: "todo",
     id: "todo to remove id",
     tags: [],
-    title: la?.meta.title ?? "somehow title didnt load UwU",
     imagesSrc: [],
     previewImages: false,
     textPreview: la?.meta.textPreview,
-    TTRmins: la?.meta.TTRmins ?? -1
+    TTRmins: la?.meta.TTRmins ?? -1,
+    slug: la?.slug ?? ""
   }));
   //  categoryImg: lA?.category, href: 'todo', id: '', title:
   return (
     <div className={classnames("page", styles.home)}>
+      {/* @ts-ignore */}
       <RandomHeroWidget externalClassnames={styles.randomWidget} externalWidgetClassnames={{ viewer: styles.viewer }} />
       <BoxesScrollbar list={mockList} />
       <div className={styles.mainTabs}>
         <ArticlesPreview
-          articlesHref={globalArticlesHref}
+          articlesHref={GlobalRoutes.articles}
           list={articlePreviewList}
           externalClassnames={styles.articlesPreview}
           articlesRenderLimit={2}

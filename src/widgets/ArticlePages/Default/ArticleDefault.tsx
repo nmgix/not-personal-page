@@ -6,25 +6,27 @@ import { dateTimeAgo } from "@/helpers/dateTimeAgo";
 import Link from "next/link";
 import { ImageList } from "@/components/Specialized/ImageList";
 import { BackButton } from "@/components/Generic/Buttons";
+import Markdown from "markdown-to-jsx";
 
-export type ArticleDefaultProps = { mappedTextLinks?: { href: string; title?: string }[]; mappedTags?: ArticleTag[] } & Omit<
+export type ArticleDefaultProps = { mappedTextLinks?: { href: string; title?: string }[]; mappedTags?: ArticleTag[]; slug: string } & Omit<
   TArticleDefault,
   "tags"
 > &
   ExternalClassnames;
 export const ArticleDefault = ({
   title,
-  id,
   mappedTags,
   text,
   mappedTextLinks,
-  TTRmins,
+  // TTRmins,
   imagesSrc,
   externalClassnames,
-  date
+  date,
+  slug
 }: ArticleDefaultProps) => {
-  const timeAgo = dateTimeAgo(date);
-  const localDate = new Date(date)
+  const d = new Date(date);
+  const timeAgo = dateTimeAgo(d);
+  const localDate = d
     .toLocaleTimeString("ru-RU", {
       // hour: "2-digit",
       // minute: "2-digit",
@@ -68,10 +70,11 @@ export const ArticleDefault = ({
         </div>
         <div className={styles.articleContent}>
           {/* <a href='/' title={id} */}
-          <h2 className={styles.title} data-id={id}>
+          <h2 className={styles.title} data-id={slug}>
             {title}
           </h2>
-          {Array.isArray(text) ? (text as string[]).map(t => <span>{t}</span>) : text}
+          <Markdown>{text}</Markdown>
+          {/* {Array.isArray(text) ? (text as string[]).map(t => <span>{t}</span>) : text} */}
         </div>
       </div>
     </div>

@@ -12,7 +12,7 @@ export const ArticleList = ({ list, externalClassnames }: ArticleListProps) => {
   return (
     <div className={classnames(styles.articleList, externalClassnames)}>
       {(list ?? []).map(article => (
-        <ArticleListElement key={article.id} {...article} />
+        <ArticleListElement key={article.slug} {...article} />
       ))}
     </div>
   );

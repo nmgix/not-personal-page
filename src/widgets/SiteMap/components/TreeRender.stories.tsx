@@ -11,6 +11,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+// это пример для сториса
 export const Default: Story = {
   args: {
     treeData: [

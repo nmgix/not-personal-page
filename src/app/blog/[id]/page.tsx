@@ -1,5 +1,5 @@
 import { getDocBySlug } from "@/app/api/getDoc";
-import { tagPopularityBaseDecrementLevel, TArticleDefault } from "@/types/articles";
+import { GlobalRoutes, tagPopularityBaseDecrementLevel, TArticleDefault } from "@/types/articles";
 import { articleCategories } from "@/types/consts";
 import { mockImages } from "@/types/mocks";
 import { TNextProps } from "@/types/next";
@@ -14,12 +14,12 @@ import { calculateAllTagsPopularity } from "@/app/api/tags";
 
 const mockServerArticleFetch = async (id: string) => {
   // console.log(id);
-  const apiArticle: TArticleDefault = {
-    id: "ec957c53-8081-440b-b441-461357222144",
-    href: "/blog/some-ideas",
+  const apiArticle: TArticleDefault & { slug: string } = {
+    // id: "ec957c53-8081-440b-b441-461357222144",
+    // href: "/blog/some-ideas",
     categoryImg: "blog",
     tags: ["ideas", "news", "new", "gamedev"],
-    date: 1677678611000,
+    date: "2023-03-01 16:50:01",
     // text: "тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст.",
     text: [
       "тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз, как разделять на отдельные части, как",
@@ -32,7 +32,8 @@ const mockServerArticleFetch = async (id: string) => {
     title: id ?? "Некоторые идеи",
     TTRmins: 5,
     textPreview: "just some really long description not to fit in shortened, consider api output limits from cache (so cache these descriptions)",
-    imagesSrc: mockImages
+    imagesSrc: mockImages,
+    slug: "blog/some-news-123"
   };
   return apiArticle;
 };
@@ -81,7 +82,7 @@ export default async function BlogArticle(props: any) {
   const needed = symbols[2] as keyof ResolvingMetadata;
   // console.log(props.params);
   const request = props.params[needed] as unknown as { route: string };
-  console.log(request.route);
+  // console.log(request.route);
 
   function checkPath(path: string, words: string[]) {
     const wordsSet = new Set(words);
@@ -99,16 +100,16 @@ export default async function BlogArticle(props: any) {
   if (!type) {
     console.log("article type (blog, article or project) is not found, nextjs wtf???");
     console.log("error fetching type, kinda impossible error if article exists lol");
-    return redirect("/home");
+    return redirect(GlobalRoutes.home);
   }
   const article = getDocBySlug(type as (typeof getDocBySlug)["arguments"][0], id);
   if (!article) {
     console.log("this page does not exist");
-    return redirect("/home");
+    return redirect(GlobalRoutes.home);
   }
   // const article = await mockServerArticleFetch(id);
-  const mappedLinks = getDocLinks(article.fullPath);
-  const mappedImages: ImageElement[] = getDocImages(article.fullPath).map(i => ({ alt: i.text, src: i.href }));
+  const mappedLinks = getDocLinks(article.slug);
+  const mappedImages: ImageElement[] = getDocImages(article.slug).map(i => ({ alt: i.text, src: i.href }));
   // const mappedTags: ArticleDefaultProps['mappedTags'] = article.meta.tags.map(t => ({ tag: t, popularity: 50 }))
   // через server функцию мапатьвесть текст и вытаскивать ссылки
   // const mappedLinks = [
@@ -124,6 +125,7 @@ export default async function BlogArticle(props: any) {
 
   // const mappedTags = article.tags.map(t => ({ popularity: Math.round(Math.random() * 50), tag: t }));
   // imagesSrc={mappedImages}
+
   return (
     <ArticleDefault
       mappedTextLinks={mappedLinks}
@@ -132,11 +134,10 @@ export default async function BlogArticle(props: any) {
       TTRmins={article.meta.TTRmins}
       categoryImg={type as (typeof ArticleDefault)["arguments"]["categoryImg"]}
       date={article.meta.date}
-      href={"todo"}
-      id='-1'
       text={article.text}
       title={article.meta.title}
       textPreview={article.meta.textPreview}
+      slug={article.slug}
     />
   );
 }

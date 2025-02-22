@@ -12,6 +12,9 @@
   &InsideWrapper {
     position: relative;
     height: 100%;
+
+    display: flex;
+    flex-direction: column;
   }
 
   &Link {
@@ -37,6 +40,9 @@
     display: flex;
     flex-direction: column;
     row-gap: margins.$margin-xs;
+
+    justify-content: space-between;
+    flex: 1;
 
     .element {
       display: block;

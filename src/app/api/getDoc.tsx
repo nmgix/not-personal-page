@@ -14,7 +14,7 @@ export function getDocBySlug(category: (typeof articleTypes)[number], slug: stri
     const fullPath = join(doscDirectory, category, realSlug, articleFileName);
     const fileContents = fs.readFileSync(fullPath, "utf8");
     const { data, content } = matter(fileContents);
-    return { slug: realSlug, meta: data as ArticleData["meta"], text: content, fullPath };
+    return { slug: `${category}/${realSlug}`, meta: data as ArticleData["meta"], text: content };
   } catch (error) {
     return undefined;
   }
@@ -30,7 +30,7 @@ export function getDocBySlugShorten(
     const fullPath = join(doscDirectory, category, realSlug, articleFileName);
     const fileContents = fs.readFileSync(fullPath, "utf8");
     const { data } = matter(fileContents);
-    return { slug: realSlug, meta: data as ArticleData["meta"], fullPath };
+    return { slug: `${category}/${realSlug}`, meta: data as ArticleData["meta"] };
   } catch (error) {
     return undefined;
   }
@@ -70,6 +70,6 @@ function sortDocsDesc() {
 
 export function getLatestDocs(limit: number = 3) {
   const files = sortDocsDesc();
-  console.log(files);
+  console.log({ files });
   return files.sort((fA, fB) => fB.date - fA.date).slice(0, limit);
 }
