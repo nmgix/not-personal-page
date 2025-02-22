@@ -28,7 +28,7 @@ const mockServerArticleFetch = async (id: string) => {
       "Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст.",
       "изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз",
       "как разделять на отдельные части, как изображения вставлять, md parcer в помощь."
-    ],
+    ].join(" "),
     title: id ?? "Некоторые идеи",
     TTRmins: 5,
     textPreview: "just some really long description not to fit in shortened, consider api output limits from cache (so cache these descriptions)",
