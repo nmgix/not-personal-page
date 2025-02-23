@@ -9,7 +9,8 @@ import { Image } from "@/components/Generic/Image";
 import { /*mockArticlesFound,*/ mockProjectsShortened } from "@/types/mocks";
 import { VideosPreview } from "@/widgets/VideosPreview";
 import { getDocBySlugShorten, getLatestDocs } from "../api/getDoc";
-import { ArticleListElementProps, articleTypes, GlobalRoutes } from "@/types/articles";
+import { ArticleListElementProps } from "@/types/articles";
+import { articleTypes } from "@/types/consts";
 
 export default function Home() {
   const latestArticlesShorten = getLatestDocs(2).map(d => {
@@ -19,17 +20,15 @@ export default function Home() {
   console.log({ latestArticlesShorten });
 
   // надо проверку zod делать всех полей, надоело ?. юзать
-  const articlePreviewList: ArticleListElementProps[] = latestArticlesShorten.map(la => ({
-    title: la?.meta.title ?? la?.slug ?? "somehow title didnt load UwU",
-    categoryImg: la?.meta.categoryImg ?? "tech-article",
-    // href: "todo",
-    id: "todo to remove id",
+  const articlePreviewList: ArticleListElementProps[] = latestArticlesShorten.map(latestArticle => ({
+    title: latestArticle?.meta.title ?? latestArticle?.slug ?? "somehow title didnt load UwU",
+    categoryImg: latestArticle?.meta.categoryImg ?? "tech-article",
     tags: [],
     imagesSrc: [],
     previewImages: false,
-    textPreview: la?.meta.textPreview,
-    TTRmins: la?.meta.TTRmins ?? -1,
-    slug: la?.slug ?? ""
+    textPreview: latestArticle?.meta.textPreview,
+    TTRmins: latestArticle?.meta.TTRmins ?? -1,
+    slug: latestArticle?.slug ?? ""
   }));
   //  categoryImg: lA?.category, href: 'todo', id: '', title:
   return (
@@ -38,12 +37,7 @@ export default function Home() {
       <RandomHeroWidget externalClassnames={styles.randomWidget} externalWidgetClassnames={{ viewer: styles.viewer }} />
       <BoxesScrollbar list={mockList} />
       <div className={styles.mainTabs}>
-        <ArticlesPreview
-          articlesHref={GlobalRoutes.articles}
-          list={articlePreviewList}
-          externalClassnames={styles.articlesPreview}
-          articlesRenderLimit={2}
-        />
+        <ArticlesPreview list={articlePreviewList} externalClassnames={styles.articlesPreview} articlesRenderLimit={2} />
         <Image
           src='/assets/person.png'
           alt='guy standing'

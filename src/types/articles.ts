@@ -9,9 +9,9 @@ export enum GlobalRoutes {
   root = "/",
   home = "/home",
   articles = "/articles/",
-  article = "/article/",
-  blog = "/blog/",
-  project = "/project/"
+  article = "/article/"
+  // blog = "/blog/",
+  // project = "/project/"
 }
 
 export type ArticleTag = {
@@ -45,5 +45,3 @@ export type ArticleProps = {
   title: string;
   tags: string[];
 };
-
-export const articleTypes = ["article", "blog", "project"] as const;

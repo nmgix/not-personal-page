@@ -1,5 +1,5 @@
 import { ImageElement } from "@/components/Specialized/ImageList";
-import { ArticleListElementProps } from "./articles";
+import { ArticleListElementProps, TArticleDefault } from "./articles";
 import { VideoPreviewProps } from "@/components/Specialized/VideoPreview";
 
 export const mockTags: { type: string; title: string }[] = [
@@ -88,7 +88,7 @@ export const mockProjectsShortened: VideoPreviewProps[] = [
 
     videoLength: 15,
     thumbnailSrc: "https://avatars.mds.yandex.net/i?id=38626a0a842450fb09a1de88d86f2bfc_l-5334983-images-thumbs&n=13",
-    href: "/blog/memes-21",
+    href: "project/memes-21",
     relatedTags: ["code", "video", "blog"]
   },
   {
@@ -100,7 +100,7 @@ export const mockProjectsShortened: VideoPreviewProps[] = [
 
     videoLength: 15,
     thumbnailSrc: "https://avatars.mds.yandex.net/i?id=38626a0a842450fb09a1de88d86f2bfc_l-5334983-images-thumbs&n=13",
-    href: "/blog/memes-21",
+    href: "project/memes-21",
     relatedTags: ["code", "video", "blog"]
   },
   {
@@ -112,7 +112,7 @@ export const mockProjectsShortened: VideoPreviewProps[] = [
 
     videoLength: 15,
     thumbnailSrc: "https://avatars.mds.yandex.net/i?id=38626a0a842450fb09a1de88d86f2bfc_l-5334983-images-thumbs&n=13",
-    href: "/blog/memes-21",
+    href: "project/memes-21",
     relatedTags: ["code", "video", "blog"]
   },
   {
@@ -124,7 +124,7 @@ export const mockProjectsShortened: VideoPreviewProps[] = [
 
     videoLength: 15,
     thumbnailSrc: "https://avatars.mds.yandex.net/i?id=38626a0a842450fb09a1de88d86f2bfc_l-5334983-images-thumbs&n=13",
-    href: "/blog/memes-21",
+    href: "project/memes-21",
     relatedTags: ["code", "video", "blog"]
   },
   {
@@ -136,7 +136,7 @@ export const mockProjectsShortened: VideoPreviewProps[] = [
 
     videoLength: 15,
     thumbnailSrc: "https://avatars.mds.yandex.net/i?id=38626a0a842450fb09a1de88d86f2bfc_l-5334983-images-thumbs&n=13",
-    href: "/blog/memes-21",
+    href: "project/memes-21",
     relatedTags: ["code", "video", "blog"]
   },
   {
@@ -148,7 +148,33 @@ export const mockProjectsShortened: VideoPreviewProps[] = [
 
     videoLength: 15,
     thumbnailSrc: "https://avatars.mds.yandex.net/i?id=38626a0a842450fb09a1de88d86f2bfc_l-5334983-images-thumbs&n=13",
-    href: "/blog/memes-21",
+    href: "project/memes-21",
     relatedTags: ["code", "video", "blog"]
   }
 ];
+
+export const mockServerArticleFetch = async (id: string) => {
+  // console.log(id);
+  const apiArticle: TArticleDefault & { slug: string } = {
+    // id: "ec957c53-8081-440b-b441-461357222144",
+    // href: "/blog/some-ideas",
+    categoryImg: "blog",
+    tags: ["ideas", "news", "new", "gamedev"],
+    date: "2023-03-01 16:50:01",
+    // text: "тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст.",
+    text: [
+      "тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз, как разделять на отдельные части, как",
+      "изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз",
+      "как разделять на отдельные части, как изображения вставлять, md parcer в помощь.",
+      "Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст.",
+      "изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз, как разделять на отдельные части, как изображения вставлять, md parcer в помощь. Пока тестовый текст. тут хз",
+      "как разделять на отдельные части, как изображения вставлять, md parcer в помощь."
+    ].join(" "),
+    title: id ?? "Некоторые идеи",
+    TTRmins: 5,
+    textPreview: "just some really long description not to fit in shortened, consider api output limits from cache (so cache these descriptions)",
+    imagesSrc: mockImages,
+    slug: "blog/some-news-123"
+  };
+  return apiArticle;
+};

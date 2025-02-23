@@ -36,34 +36,41 @@ const pages: PageTree[] = [
     label: "/article/",
     children: [
       {
-        href: "[id]/",
-        label: "[id]/",
-        noLink: true
-      }
-    ]
-  },
-  {
-    href: GlobalRoutes.blog,
-    label: "/blog/",
-    children: [
-      {
-        href: "[id]/",
-        label: "[id]/",
-        noLink: true
-      }
-    ]
-  },
-  {
-    href: GlobalRoutes.project,
-    label: "/proejct/",
-    children: [
-      {
-        href: "[id]/",
-        label: "[id]/",
-        noLink: true
+        href: "[category]/",
+        label: "[category(blog/project/note)]/",
+        noLink: true,
+        children: [
+          {
+            href: "[name]",
+            label: "[name]",
+            noLink: true
+          }
+        ]
       }
     ]
   }
+  // {
+  //   href: GlobalRoutes.blog,
+  //   label: "/blog/",
+  //   children: [
+  //     {
+  //       href: "[id]/",
+  //       label: "[id]/",
+  //       noLink: true
+  //     }
+  //   ]
+  // },
+  // {
+  //   href: GlobalRoutes.project,
+  //   label: "/proejct/",
+  //   children: [
+  //     {
+  //       href: "[id]/",
+  //       label: "[id]/",
+  //       noLink: true
+  //     }
+  //   ]
+  // }
 ];
 
 export type SiteMapRef = {

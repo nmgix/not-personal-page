@@ -6,22 +6,21 @@ import { ExternalClassnames } from "@/types/components";
 
 type ArticlesPreviewProps = {
   list: ArticleListElementProps[];
-  articlesHref: string;
   articlesRenderLimit?: number;
 } & ExternalClassnames;
 
-export const ArticlesPreview = ({ list, externalClassnames, articlesRenderLimit, articlesHref }: ArticlesPreviewProps) => {
+export const ArticlesPreview = ({ list, externalClassnames, articlesRenderLimit }: ArticlesPreviewProps) => {
   return (
     <div className={classnames("box", styles.articlesPreview, externalClassnames)}>
       <div className={classnames("fadeBottom", styles.articlesPreviewInsideWrapper)}>
-        <Link href={articlesHref} className={styles.articlesPreviewLink} />
+        <Link href={GlobalRoutes.articles} className={styles.articlesPreviewLink} />
         <h3 className={styles.header}>
           статьи<mark>&#40;{list.length}&#41;</mark>
         </h3>
         <div className={classnames(styles.list)}>
           {list &&
             list.slice(0, articlesRenderLimit ?? 3).map((article, i) => (
-              <Link href={`${GlobalRoutes.root}${article.slug}`} className={classnames("fadeBottom", styles.element)} tabIndex={i < 1 ? i : -1}>
+              <Link href={`${GlobalRoutes.article}${article.slug}`} className={classnames("fadeBottom", styles.element)} tabIndex={i < 1 ? i : -1}>
                 <div className={styles.articleHeader}>
                   <h4 className={styles.title}>{article.title}</h4>
                   <span className={styles.ttr}>{article.TTRmins}min</span>

@@ -1,7 +1,8 @@
 import path, { join } from "path";
 import fs from "fs";
 import matter from "gray-matter";
-import { ArticleData, articleFileName, articleTypes } from "@/types/articles";
+import { ArticleData, articleFileName } from "@/types/articles";
+import { articleTypes } from "@/types/consts";
 
 const doscDirectory = join(process.cwd(), "articles");
 

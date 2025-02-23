@@ -4,6 +4,7 @@ import { Image } from "@/components/Generic/Image";
 import Link from "next/link";
 import { AvailableIcons, Icon } from "@/components/Generic/Icon";
 import { ExternalClassnames } from "@/types/components";
+import { GlobalRoutes } from "@/types/articles";
 
 export type VideoPreviewProps = {
   id: string;
@@ -39,7 +40,7 @@ export const VideoPreview = ({
   externalClassnames
 }: VideoPreviewProps) => {
   return (
-    <Link href={href} className={classnames("box", styles.videoPreview, externalClassnames)}>
+    <Link href={`${GlobalRoutes.article}${href}`} className={classnames("box", styles.videoPreview, externalClassnames)}>
       <Image src={thumbnailSrc} alt={`thumbnail of "${title}"`} fill externalClassnames={styles.thumbnail} />
       <div className={styles.previewDescription}>
         {typeof shortenedVideoSrc === "string" && shortenedVideoSrc.length > 0 && (
