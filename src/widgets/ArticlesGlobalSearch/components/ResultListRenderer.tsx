@@ -1,5 +1,5 @@
 import classnames from "classnames";
-import { ArticleListElementProps } from "@/types/articles";
+import { ArticleListElementProps, GlobalRoutes } from "@/types/articles";
 import styles from "./result-list-renderer.module.scss";
 import classNames from "classnames";
 import { useMemo, useRef, useState } from "react";
@@ -15,7 +15,7 @@ const ListElement = ({ article, searchedPhrase }: { article: ArticleListElementP
 
   return (
     <li className={styles.elementWrapper}>
-      <Link href={article.href} className={styles.element}>
+      <Link href={`${GlobalRoutes.article}${article.slug}`} className={styles.element}>
         <div className={styles.title}>
           {article.categoryImg && <Icon icon={article.categoryImg} />}
           &#91;<p>{article.title}</p>&#93;

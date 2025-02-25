@@ -7,7 +7,7 @@ export const articleCategories: { type: string; title: string; icon: keyof typeo
 ];
 export const inputPlacholderWords = ["мультисемплинг", "геймдев", "разработка"];
 export enum ArticleFields {
-  type = "article_type",
+  tag = "article_tag",
   text = "article-text"
 }
 export const bottomCleverBarShowThreshold = 70; //px

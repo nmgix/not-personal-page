@@ -6,7 +6,7 @@ import { getPopularTags } from "../serverfunctions/tags";
 
 export default function Articles() {
   const fetchedTags = getPopularTags(8);
-  console.log(fetchedTags);
+  // console.log(fetchedTags);
   return (
     <div className={classnames("page", styles.articles)}>
       <h3 className={styles.header}>

@@ -39,7 +39,7 @@ const ArticlesSearch = ({ tags, setArticlesData, setFormData, fetchArticles }: A
     <form className={styles.controls} onSubmit={onFormSubmit}>
       <RadioButtonsGroup
         onSelect={() => setArticlesData({ articles: null, totalPages: 0 })}
-        name={ArticleFields.type}
+        name={ArticleFields.tag}
         options={categoriesTagsRef.current}
         externalClassnames={styles.controlsTags}
       />

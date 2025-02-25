@@ -7,7 +7,7 @@ import { articleTypes } from "@/types/consts";
 export const doscDirectory = join(process.cwd(), "articles");
 
 // https://github.com/nmgix/portfolio/blob/main/helpers/getDocBySlug.ts
-export function getDocBySlug(category: (typeof articleTypes)[number], slug: string /*, locale: string*/): ArticleData | undefined {
+export function getDocBySlug(category: string, slug: string /*, locale: string*/): ArticleData | undefined {
   try {
     if (!articleTypes.some(t => t === category)) throw Error("category not found");
     const regex = new RegExp(`^\/?(${articleTypes.join("|")})(\/|$)`, "i");
@@ -29,6 +29,25 @@ export function getDocBySlugShorten(category: string, slug: string /*, locale: s
     const fileContents = fs.readFileSync(fullPath, "utf8");
     const { data } = matter(fileContents);
     return { slug: `${category}/${realSlug}`, meta: data as ArticleData["meta"] };
+  } catch (error) {
+    return undefined;
+  }
+}
+export function findInDoc(category: string, slug: string, words: string[], includeText: boolean) {
+  try {
+    if (!articleTypes.some(t => t === category)) throw Error("category not found");
+    const regex = new RegExp(`^\/?(${articleTypes.join("|")})(\/|$)`, "i");
+    const realSlug = slug.replace(regex, "");
+    const fullPath = join(doscDirectory, category, realSlug, articleFileName);
+    const fileContents = fs.readFileSync(fullPath, "utf8");
+    const { data, content } = matter(fileContents);
+    const wordsMatch = new RegExp(words.join("|"), "gi").test(content);
+    if (wordsMatch) {
+      if (includeText) return { slug: `${category}/${realSlug}`, meta: data as ArticleData["meta"], text: content } as ArticleData;
+      else return { slug: `${category}/${realSlug}`, meta: data as ArticleData["meta"] } as Omit<ArticleData, "text">; // хотя мб text:undefined тоже подошёл бы
+    } else {
+      return null;
+    }
   } catch (error) {
     return undefined;
   }
@@ -68,6 +87,5 @@ function sortDocsDesc() {
 
 export function getLatestDocs(limit: number = 3) {
   const files = sortDocsDesc();
-  console.log({ files });
   return files.sort((fA, fB) => fB.date - fA.date).slice(0, limit);
 }

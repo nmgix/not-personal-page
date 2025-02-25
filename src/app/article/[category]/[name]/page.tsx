@@ -1,5 +1,5 @@
-import { getDocBySlug } from "@/app/api/getDoc";
-import { getDocImages, getDocLinks } from "@/app/api/getDocLinks";
+import { getDocBySlug } from "@/app/serverfunctions/getDoc";
+import { getDocImages, getDocLinks } from "@/app/serverfunctions/getDocLinks";
 import { calculateAllTagsPopularity } from "@/app/serverfunctions/tags";
 import { ImageElement } from "@/components/Specialized/ImageList";
 import { GlobalRoutes, tagPopularityBaseDecrementLevel } from "@/types/articles";
