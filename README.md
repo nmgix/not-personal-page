@@ -41,13 +41,14 @@
    2. [ ] Articles
       1. [ ] '/' (/articles aka домашняя)
          1. [ ] Поиск через ctrl+f (уже есть в компоненте articles-search)
-      2. [ ] Tech articles
+   3. [ ] Article
+      1. [ ] Note(s)
          1. [ ] Selected article page
          2. [ ] Same page article render (nextjs feature) (article widget)
-      3. [ ] Blog
+      2. [ ] Blog(s)
          1. [ ] Selected blog article page
          2. [ ] Same blog article render (nextjs feature) (article widget)
-      4. [ ] Projects
+      3. [ ] Project(s)
          1. [ ] Same page project article render (nextjs feature) (article widget)
 2. [ ] Components
    1. [x] Generic

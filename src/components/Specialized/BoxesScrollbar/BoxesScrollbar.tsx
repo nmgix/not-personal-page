@@ -21,6 +21,7 @@ export const BoxesScrollbar = ({ list, externalClassnames, noWrapper }: BoxesScr
   // useScrollable(boxRef as React.RefObject<HTMLElement>);
 
   // пока убираю все связанные хуки ибо nextjs не даёт рендерить в ssr режиме
+  if (!list || list.length == 0) return null;
 
   return (
     <div

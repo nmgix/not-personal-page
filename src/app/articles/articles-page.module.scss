@@ -64,6 +64,10 @@
         div {
           height: 100%;
           width: 100%;
+
+          input {
+            width: calc(100% - 15px); // sideways input's paddings (3right and 12left)
+          }
         }
         flex: 0.7;
       }

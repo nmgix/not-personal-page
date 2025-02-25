@@ -3,13 +3,13 @@ import styles from "./articles-list-element.module.scss";
 import classnames from "classnames";
 import { BoxesScrollbar } from "../BoxesScrollbar";
 import { ImageList } from "@/components/Specialized/ImageList";
-import { ArticleListElementProps } from "@/types/articles";
+import { ArticleListElementProps, GlobalRoutes } from "@/types/articles";
 
-export const ArticleListElement = ({ TTRmins, id, imagesSrc, previewImages, href, tags, textPreview, title }: ArticleListElementProps) => {
+export const ArticleListElement = ({ TTRmins, imagesSrc, previewImages, tags, textPreview, title, categoryImg, slug }: ArticleListElementProps) => {
   const formatedTTR = Math.floor(TTRmins > 60 ? TTRmins / 60 : TTRmins); // хз будет recalculate, наверное, но хуки ни-ни
 
   return (
-    <Link href={href}>
+    <Link href={`${GlobalRoutes.article}${slug}`}>
       <article className={classnames("box", styles.articlesListElement)}>
         <h3 className={styles.title}>{title}</h3>
         <div className={styles.info}>

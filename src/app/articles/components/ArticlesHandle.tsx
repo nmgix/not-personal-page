@@ -9,16 +9,21 @@ import { RadioButtonsGroup, RadioButtonsGroupProps } from "@/components/Speciali
 import { Icon } from "@/components/Generic/Icon";
 import { ArticleList } from "@/widgets/ArticleList";
 import { ArticleFields, inputPlacholderWords } from "@/types/consts";
-import { mockArticlesFound, mockTags } from "@/types/mocks";
+// import { mockArticlesFound, mockTags } from "@/types/mocks";
 import { ExternalClassnames } from "@/types/components";
 
-type ArticlesSearchProps = Pick<ReturnType<typeof useArticlesSearch>, "setArticlesData" | "setFormData" | "fetchArticles">;
-const ArticlesSearch = ({ setArticlesData, setFormData, fetchArticles }: ArticlesSearchProps) => {
-  const categoriesRef = useRef<RadioButtonsGroupProps["options"]>(
-    mockTags.map(c => ({
+// type Tag = {
+//   title: string;
+//   type: string;
+// };
+
+type ArticlesSearchProps = { tags: ArticleTag[] } & Pick<ReturnType<typeof useArticlesSearch>, "setArticlesData" | "setFormData" | "fetchArticles">;
+const ArticlesSearch = ({ tags, setArticlesData, setFormData, fetchArticles }: ArticlesSearchProps) => {
+  const categoriesTagsRef = useRef<RadioButtonsGroupProps["options"]>(
+    (tags ?? []).map(c => ({
       // react component в obj сомнительно но окэй
-      component: <span>{c.title}</span>,
-      value: c.type
+      component: <span>{c.tag}</span>,
+      value: c.tag
     }))
   );
 
@@ -35,8 +40,8 @@ const ArticlesSearch = ({ setArticlesData, setFormData, fetchArticles }: Article
       <RadioButtonsGroup
         onSelect={() => setArticlesData({ articles: null, totalPages: 0 })}
         name={ArticleFields.type}
-        options={categoriesRef.current}
-        //   externalClassnames={styles.categories}
+        options={categoriesTagsRef.current}
+        externalClassnames={styles.controlsTags}
       />
       <Input externalClassnames={styles.controlsInput} name={ArticleFields.text} ref={null} placeholder={placeholders.current} />
       <DefaultButton externalClassnames={styles.controlsFilter} title='filter by tags' onClick={undefined}>
@@ -47,9 +52,10 @@ const ArticlesSearch = ({ setArticlesData, setFormData, fetchArticles }: Article
 };
 
 import classnames from "classnames";
+import { ArticleTag } from "@/types/articles";
 
-type ArticlesHandleProps = {} & ExternalClassnames;
-export const ArticlesHandle = ({ externalClassnames }: ArticlesHandleProps) => {
+type ArticlesHandleProps = { tags: ArticleTag[] } & ExternalClassnames;
+export const ArticlesHandle = ({ tags, externalClassnames }: ArticlesHandleProps) => {
   const articlesSearchHook = useArticlesSearch();
   useEffect(() => {
     articlesSearchHook.fetchArticles();
@@ -57,8 +63,8 @@ export const ArticlesHandle = ({ externalClassnames }: ArticlesHandleProps) => {
 
   return (
     <div className={classnames(styles.handle, externalClassnames)}>
-      <ArticlesSearch {...articlesSearchHook} />
-      <ArticleList list={mockArticlesFound} externalClassnames={styles.articlesFound} />
+      <ArticlesSearch {...articlesSearchHook} tags={tags} />
+      <ArticleList list={articlesSearchHook.articlesData.articles} externalClassnames={styles.articlesFound} />
     </div>
   );
 };

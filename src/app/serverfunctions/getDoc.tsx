@@ -4,7 +4,7 @@ import matter from "gray-matter";
 import { ArticleData, articleFileName } from "@/types/articles";
 import { articleTypes } from "@/types/consts";
 
-const doscDirectory = join(process.cwd(), "articles");
+export const doscDirectory = join(process.cwd(), "articles");
 
 // https://github.com/nmgix/portfolio/blob/main/helpers/getDocBySlug.ts
 export function getDocBySlug(category: (typeof articleTypes)[number], slug: string /*, locale: string*/): ArticleData | undefined {
@@ -20,10 +20,7 @@ export function getDocBySlug(category: (typeof articleTypes)[number], slug: stri
     return undefined;
   }
 }
-export function getDocBySlugShorten(
-  category: (typeof articleTypes)[number],
-  slug: string /*, locale: string*/
-): Omit<ArticleData, "text"> | undefined {
+export function getDocBySlugShorten(category: string, slug: string /*, locale: string*/): Omit<ArticleData, "text"> | undefined {
   try {
     if (!articleTypes.some(t => t === category)) throw Error("category not found");
     const regex = new RegExp(`^\/?(${articleTypes.join("|")})(\/|$)`, "i");

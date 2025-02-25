@@ -1,12 +1,13 @@
 import { ArticleListElementProps } from "@/types/articles";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 interface SearchParams {
   [key: string]: string;
 }
 
 export const useArticlesSearch = (onResults?: (data: any[]) => void) => {
-  const [searchParams, setSearchParams] = useState<SearchParams>({});
+  // const [searchParams, setSearchParams] = useState<SearchParams>({});
+  const searchParams = useRef<SearchParams>({});
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
 
@@ -16,22 +17,27 @@ export const useArticlesSearch = (onResults?: (data: any[]) => void) => {
   });
 
   const setSearchParam = (name: string, value: string) => {
-    setSearchParams(prev => ({ ...prev, [name]: value }));
+    searchParams.current = { ...searchParams.current, [name]: value };
   };
   const setFormData = (fd: FormData) => {
-    setSearchParams(prev => ({ ...prev, ...(Object.fromEntries(fd) as SearchParams) }));
+    searchParams.current = { ...searchParams.current, ...(Object.fromEntries(fd) as SearchParams) };
   };
 
   const fetchArticles = useCallback(async () => {
     setLoading(true);
     try {
-      const params = new URLSearchParams({ ...searchParams, page: String(page) });
+      const params = new URLSearchParams({ ...searchParams.current, page: String(page) });
       const response = await fetch(`/api/articles?${params}`);
+      // const response = await searchByTags(params)
       if (response.status === 200) {
-        const data = await response.json();
-        if (data.articles === undefined || data.totalPages === undefined) throw new Error("no fields present");
+        const data = (await response.json()) as { articles: ArticleListElementProps[] };
+        console.log(data);
+        // что за totalPages??? || data.totalPages === undefined
+        if (data.articles === undefined) throw new Error("no fields present");
         else {
-          setArticlesData(prev => ({ ...prev, articles: data.articles, totalPages: data.totalPages }));
+          // тут получить статьи или на беке, хз
+          // data.totalPages ?? 1
+          setArticlesData(prev => ({ ...prev, articles: data.articles, totalPages: 1 }));
           if (onResults) onResults(data.articles);
         }
       } else {
