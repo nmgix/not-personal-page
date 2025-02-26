@@ -1,6 +1,6 @@
 import { getDocBySlug } from "@/app/serverfunctions/getDoc";
 import { getDocImages, getDocLinks } from "@/app/serverfunctions/getDocLinks";
-import { calculateAllTagsPopularity } from "@/app/serverfunctions/tags";
+import { calculateAllTagsPopularity, calculateArticleTags } from "@/app/serverfunctions/tags";
 import { ImageElement } from "@/components/Specialized/ImageList";
 import { GlobalRoutes, tagPopularityBaseDecrementLevel } from "@/types/articles";
 import { articleCategories } from "@/types/consts";
@@ -66,12 +66,8 @@ export default async function ArticlePage(props: ArticleProps) {
   }
 
   const mappedLinks = getDocLinks(article.slug);
+  const mappedTags = calculateArticleTags(article.meta.tags);
   const mappedImages: ImageElement[] = getDocImages(article.slug).map(i => ({ alt: i.text, src: i.href }));
-  const globalTags = calculateAllTagsPopularity();
-  const mappedTags = article.meta.tags.map(articleTag => {
-    const foundTag = globalTags.find(globalTag => globalTag.tag === articleTag);
-    return foundTag ?? { popularity: tagPopularityBaseDecrementLevel, tag: articleTag };
-  });
 
   return (
     <ArticleDefault

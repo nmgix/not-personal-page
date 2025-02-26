@@ -2,7 +2,7 @@ import { doscDirectory, getAllDocsFolders } from "./getDoc";
 
 import path from "path";
 import fs from "fs";
-import { articleFileName, ArticleTag } from "@/types/articles";
+import { articleFileName, ArticleTag, tagPopularityBaseDecrementLevel } from "@/types/articles";
 import matter from "gray-matter";
 
 function getAllTags() {
@@ -54,6 +54,21 @@ export function calculateAllTagsPopularity(): ArticleTag[] {
     return [...mapped];
   } catch (error) {
     console.log("calculateAllTagsPopularity", error);
+    return [];
+  }
+}
+
+export function calculateArticleTags(tags: string[]): ArticleTag[] {
+  try {
+    const globalTags = getAllTags();
+    const matched: ArticleTag[] = tags.map(t => {
+      const foundTagPopularity = globalTags.get(t);
+      return { popularity: foundTagPopularity ?? tagPopularityBaseDecrementLevel, tag: t };
+    });
+
+    return matched;
+  } catch (error) {
+    console.log("calculateArticleTags", error);
     return [];
   }
 }

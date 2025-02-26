@@ -11,7 +11,7 @@ export type RadioButtonsGroupProps = {
     value: string;
   }[];
   name: string;
-  onSelect: (id: string | null) => void;
+  onSelect?: (id: string | null) => void;
 } & { ref?: React.Ref<{ selectedOption: string }> } & ExternalClassnames;
 
 /**
@@ -31,11 +31,11 @@ export const RadioButtonsGroup = ({ options, name, externalClassnames, onSelect,
   const _onSelect = (id: string) => {
     if (id === selectedOption) {
       setSelectedOption("");
-      onSelect(null);
+      if(onSelect) onSelect(null);
       return;
     } else {
       setSelectedOption(id);
-      onSelect(id);
+      if(onSelect) onSelect(id);
     }
   };
 

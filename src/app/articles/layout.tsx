@@ -6,14 +6,17 @@ export const metadata: Metadata = {
   description: "my whole bunch of articles~!!"
 };
 export default function RootLayout({
-  children
+  children,
+  articlemodal
 }: Readonly<{
   children: React.ReactNode | React.ReactNode[];
+  articlemodal: React.ReactNode;
 }>) {
   return (
     <>
       <ArticlesGlobalSearch />
       {children}
+      {articlemodal}
     </>
   );
 }

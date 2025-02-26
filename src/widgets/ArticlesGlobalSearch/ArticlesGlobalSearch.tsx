@@ -105,7 +105,7 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
           </div>
           <RadioButtonsGroup
             onSelect={_onSelectCategory}
-            name={ArticleFields.type}
+            name={ArticleFields.tag}
             options={categoriesRef.current}
             externalClassnames={styles.categories}
           />

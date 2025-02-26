@@ -38,12 +38,12 @@ const ArticlesSearch = ({ tags, setArticlesData, setFormData, fetchArticles }: A
   return (
     <form className={styles.controls} onSubmit={onFormSubmit}>
       <RadioButtonsGroup
-        onSelect={() => setArticlesData({ articles: null, totalPages: 0 })}
+        // onSelect={() => setArticlesData({ articles: null, totalPages: 0 })}
         name={ArticleFields.tag}
         options={categoriesTagsRef.current}
         externalClassnames={styles.controlsTags}
       />
-      <Input externalClassnames={styles.controlsInput} name={ArticleFields.text} ref={null} placeholder={placeholders.current} />
+      <Input externalClassnames={styles.controlsInput} name={ArticleFields.text} ref={null} placeholder={placeholders.current[0]} />
       <DefaultButton externalClassnames={styles.controlsFilter} title='filter by tags' onClick={undefined}>
         <Icon icon='filter' />
       </DefaultButton>

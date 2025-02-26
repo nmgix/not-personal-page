@@ -60,7 +60,7 @@ export const BottomCleverBar = () => {
       {secondBar !== null && <div className={classnames("box", styles.barTwo)}>{secondBar()}</div>}
     </div>
   );
-  if (!BarTypes[type].hideInTop) return render;
+  // if (!BarTypes[type].hideInTop) return render; // будет давать варнинг что порядок хуков изменился
 
   useEffect(() => {
     const checkThreshold = () => {

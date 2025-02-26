@@ -7,8 +7,8 @@ import { ExternalClassnames } from "@/types/components";
 type ModalProps = {
   children: React.ReactNode | React.ReactNode[];
   show: boolean;
-  onClose: () => void;
   ariaLabel: string;
+  onClose?: () => void;
   hideCloseBtn?: true;
   outsideToClose?: true;
 } & ExternalClassnames;

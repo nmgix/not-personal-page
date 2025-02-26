@@ -25,7 +25,11 @@ export const Input = (props: InputProps & { ref?: React.Ref<InputRef> }) => {
   // const _placeholder = useRef(
   //   Array.isArray(props.placeholder) ? props.placeholder[Math.floor(Math.random() * props.placeholder.length)] : props.placeholder
   // );
-  const _placeholder = Array.isArray(props.placeholder) ? props.placeholder[Math.floor(Math.random() * props.placeholder.length)] : props.placeholder;
+
+  // проблема гидрации при передаче массива в props.placeholder
+  const _placeholder = useRef(
+    Array.isArray(props.placeholder) ? props.placeholder[Math.floor(Math.random() * props.placeholder.length)] : props.placeholder
+  );
 
   const [_value, setValue] = useState(props.value ?? "");
   useEffect(() => {
@@ -61,7 +65,7 @@ export const Input = (props: InputProps & { ref?: React.Ref<InputRef> }) => {
           onKeyDown={props.onEnterPress ? listenEnter : undefined}
           name={props.name}
           type='text'
-          placeholder={_placeholder}
+          placeholder={_placeholder.current}
           autoFocus={props.focus}
         />
       </div>
