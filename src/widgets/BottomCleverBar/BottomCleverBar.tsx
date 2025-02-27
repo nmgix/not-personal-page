@@ -2,66 +2,28 @@
 
 import classnames from "classnames";
 import styles from "./bottom-clever-bar.module.scss";
-import { JSX, useEffect, useState } from "react";
-import { BackButton } from "@/components/Generic/Buttons";
+import { JSX, ReactElement, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { mockArticlesAmount } from "@/types/mocks";
 import { bottomCleverBarShowThreshold } from "@/types/consts";
-type TemplateVariant = [(() => JSX.Element | null) | null, (() => JSX.Element | null) | null];
+import { ArticleBar } from "@/app/article/[category]/[name]/components/bar";
+import { ArticlesSearchBar } from "@/app/articles/components/bar";
+import { ArticlesAmountBar } from "@/app/articles/components/bar/secondBar";
+export type TemplateComponent = ReactElement | null;
+export type TemplateVariant = [TemplateComponent, TemplateComponent];
 
-const DefaultBar: TemplateVariant = [null, () => <>{process.env.NEXT_PUBLIC_NAME}</>];
-const ArticleBar: TemplateVariant = [null, BackButton];
-const ArticlesSearchBar: TemplateVariant = [null, () => <>{mockArticlesAmount} articles</>];
-
-const BarTypes: { [key: string]: { bars: TemplateVariant; hideInTop: boolean } } = {
-  home: {
-    bars: DefaultBar,
-    hideInTop: true
-  },
-  article: {
-    bars: ArticleBar,
-    hideInTop: false
-  },
-  blog: {
-    bars: ArticleBar,
-    hideInTop: false
-  },
-  project: {
-    bars: ArticleBar,
-    hideInTop: false
-  },
-  articles: {
-    bars: ArticlesSearchBar,
-    hideInTop: true
-  }
-};
-const articleKeys = Object.keys(BarTypes).map(k => `/${k}`);
-
-export type BarTypeKeys = keyof typeof BarTypes;
 // client компонент, так что без разницы где объвлять функцию
-function getMatchedKey(pathname: string) {
-  const matchedKey = articleKeys.find(key => pathname.startsWith(key) && (pathname.length === key.length || pathname[key.length] === "/"));
-  return matchedKey ? matchedKey.replace(/\//g, "") : null;
-}
+// function getMatchedKey(pathname: string) {
+//   const matchedKey = articleKeys.find(key => pathname.startsWith(key) && (pathname.length === key.length || pathname[key.length] === "/"));
+//   return matchedKey ? matchedKey.replace(/\//g, "") : null;
+// }
 
 // разные bartypes рендерятся потому что весь этот компонент ререндерится (бесполезно useState вызывать, он будет отрабатывать один раз, но ререндер при переходе на старинцу, так что ререндер каждый раз ибо компонент маунтится с нуля)
-export const BottomCleverBar = () => {
-  const str = usePathname();
-  const type: BarTypeKeys | null = getMatchedKey(str) as BarTypeKeys;
-  // console.log(str);
-  if (!type) return null;
+export const BottomCleverBar = ({ currentBars, hideInTop }: { currentBars: TemplateVariant; hideInTop: boolean }) => {
+  // const str = usePathname();
+  // const type: BarTypeKeys | null = getMatchedKey(str) as BarTypeKeys;
 
-  const [firstBar, secondBar] = BarTypes[type].bars;
+  const [firstBar, secondBar] = currentBars;
   const [atTop, setAtTop] = useState(true);
-
-  const render = (
-    <div className={classnames(styles.bottomCleverBar, BarTypes[type].hideInTop && atTop && styles.hideBar)}>
-      {firstBar !== null && <div className={classnames("box", styles.barOne)}>{firstBar()}</div>}
-      {secondBar !== null && <div className={classnames("box", styles.barTwo)}>{secondBar()}</div>}
-    </div>
-  );
-  // if (!BarTypes[type].hideInTop) return render; // будет давать варнинг что порядок хуков изменился
-
   useEffect(() => {
     const checkThreshold = () => {
       const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
@@ -77,6 +39,23 @@ export const BottomCleverBar = () => {
       document.removeEventListener("scroll", checkThreshold);
     };
   }, []);
+  //
 
+  console.log({ secondBar });
+
+  const render = (
+    <div className={classnames(styles.bottomCleverBar, hideInTop && atTop && styles.hideBar)}>
+      {firstBar && (
+        <div className={classnames("box", styles.barOne)}>
+          {firstBar}
+          {/* <FirstBar/> */}
+          {/* firstBar() */}
+        </div>
+      )}
+      {secondBar && <div className={classnames("box", styles.barOne)}>{secondBar}</div>}
+      {/* <ArticlesAmountBar /> */}
+    </div>
+  );
+  // if (!BarTypes[type].hideInTop) return render; // будет давать варнинг что порядок хуков изменился
   return render;
 };

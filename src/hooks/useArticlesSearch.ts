@@ -1,19 +1,25 @@
 import { ArticleListElementProps } from "@/types/articles";
 import { useCallback, useRef, useState } from "react";
 
+type ArticlesState = {
+  articles: ArticleListElementProps[] | null | undefined;
+  totalPages: number;
+};
+
 interface SearchParams {
   [key: string]: string;
 }
 
-export const useArticlesSearch = (onResults?: (data: any[]) => void) => {
+export const useArticlesSearch = (onResults?: (data: any[]) => void, predefinedState?: Partial<ArticlesState>) => {
   // const [searchParams, setSearchParams] = useState<SearchParams>({});
   const searchParams = useRef<SearchParams>({});
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
 
-  const [articlesData, setArticlesData] = useState<{ articles: ArticleListElementProps[] | null; totalPages: number }>({
-    articles: null,
-    totalPages: 0
+  const [articlesData, setArticlesData] = useState<ArticlesState>({
+    articles: undefined,
+    totalPages: 0,
+    ...predefinedState
   });
 
   const setSearchParam = (name: string, value: string) => {

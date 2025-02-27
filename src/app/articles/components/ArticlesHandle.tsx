@@ -4,7 +4,7 @@ import styles from "../articles-page.module.scss";
 import { Input } from "@/components/Generic/Input";
 import { DefaultButton } from "@/components/Generic/Buttons";
 import { useArticlesSearch } from "@/hooks/useArticlesSearch";
-import { useEffect, useRef } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import { RadioButtonsGroup, RadioButtonsGroupProps } from "@/components/Specialized/RadioButtons";
 import { Icon } from "@/components/Generic/Icon";
 import { ArticleList } from "@/widgets/ArticleList";

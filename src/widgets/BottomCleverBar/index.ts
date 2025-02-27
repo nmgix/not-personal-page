@@ -1,1 +1,1 @@
-export { BottomCleverBar, type BarTypeKeys } from "./BottomCleverBar";
+export { BottomCleverBar, type TemplateVariant, type TemplateComponent, type Bars } from "./BottomCleverBar";

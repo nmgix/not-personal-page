@@ -1,8 +1,9 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import "./modal.scss";
 import { ExternalClassnames } from "@/types/components";
+import { useRouter } from "next/navigation";
 
 type ModalProps = {
   children: React.ReactNode | React.ReactNode[];
@@ -11,6 +12,7 @@ type ModalProps = {
   onClose?: () => void;
   hideCloseBtn?: true;
   outsideToClose?: true;
+  routerBackOnClose?: true;
 } & ExternalClassnames;
 
 export const Modal: React.FC<ModalProps> = ({ children, show, onClose, externalClassnames, ariaLabel, hideCloseBtn, outsideToClose }) => {

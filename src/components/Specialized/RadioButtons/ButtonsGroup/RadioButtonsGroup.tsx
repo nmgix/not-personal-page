@@ -1,7 +1,7 @@
 import classnames from "classnames";
 import { BoxesScrollbar } from "@/components/Specialized/BoxesScrollbar";
 import styles from "../radio-buttons.module.scss";
-import { useImperativeHandle, useState } from "react";
+import { useCallback, useImperativeHandle, useState } from "react";
 import { RadioButton } from "../Button/RadioButton";
 import { ExternalClassnames } from "@/types/components";
 
@@ -28,16 +28,20 @@ export type RadioButtonsGroupProps = {
  */
 export const RadioButtonsGroup = ({ options, name, externalClassnames, onSelect, ref }: RadioButtonsGroupProps) => {
   const [selectedOption, setSelectedOption] = useState("");
-  const _onSelect = (id: string) => {
-    if (id === selectedOption) {
-      setSelectedOption("");
-      if(onSelect) onSelect(null);
-      return;
-    } else {
-      setSelectedOption(id);
-      if(onSelect) onSelect(id);
-    }
-  };
+  const _onSelect = useCallback(
+    (id: string) => {
+      console.log({ id, selectedOption, equal: id == selectedOption });
+      if (id == selectedOption) {
+        setSelectedOption("");
+        if (onSelect) onSelect(null);
+        return;
+      } else {
+        setSelectedOption(id);
+        if (onSelect) onSelect(id);
+      }
+    },
+    [selectedOption]
+  );
 
   useImperativeHandle(ref, () => ({
     selectedOption

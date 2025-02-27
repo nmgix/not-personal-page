@@ -18,7 +18,8 @@ export const RadioButton = memo(
     const _onSelect = useCallback(() => onSelect(value), [value, checked]);
 
     return (
-      <label tabIndex={idx} className={classnames("button", styles.buttonLabel, styles.button, externalClassnames)} htmlFor={componentId}>
+      // styles.buttonLabel,
+      <label tabIndex={idx} className={classnames("button", styles.button, externalClassnames)} htmlFor={componentId}>
         <input
           className={classnames("visually-hidden")}
           name={name}

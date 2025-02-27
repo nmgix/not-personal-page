@@ -5,17 +5,17 @@ import { BoxesScrollbar } from "../BoxesScrollbar";
 import { ImageList } from "@/components/Specialized/ImageList";
 import { ArticleListElementProps, GlobalRoutes } from "@/types/articles";
 
-export const ArticleListElement = ({ TTRmins, imagesSrc, previewImages, tags, textPreview, title, categoryImg, slug }: ArticleListElementProps) => {
-  const formatedTTR = Math.floor(TTRmins > 60 ? TTRmins / 60 : TTRmins); // хз будет recalculate, наверное, но хуки ни-ни
+export const ArticleListElement = ({ TTRmins, categoryImg, slug, tags, title, imagesSrc, previewImages, textPreview }: ArticleListElementProps) => {
+  const formatedTTR = !isNaN(Number(TTRmins)) ? Math.floor(TTRmins > 60 ? TTRmins / 60 : TTRmins) : 0; // хз будет recalculate, наверное, но хуки ни-ни
 
   return (
-    <Link href={`${GlobalRoutes.article}${slug}`}>
+    <Link href={`${GlobalRoutes.article}${slug ?? ""}`}>
       <article className={classnames("box", styles.articlesListElement)}>
-        <h3 className={styles.title}>{title}</h3>
+        <h3 className={styles.title}>{title ?? slug ?? "Статья"}</h3>
         <div className={styles.info}>
           {/* хз как сделать propogation чтобы теги вместо всего link  при ховер срабатывали */}
           <BoxesScrollbar
-            list={tags.map(tag => (
+            list={(tags ?? []).map(tag => (
               <div className='articleTag'>#{tag}</div>
             ))}
             externalClassnames={styles.tags}

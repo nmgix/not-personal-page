@@ -88,7 +88,7 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
 
   // render//misc
   const nothingSelected = input.length == 0 && (selectedCategory == null || selectedCategory == "");
-  const articlesFound = articlesData.articles !== null && articlesData.articles.length > 0 && input.length > 0;
+  const articlesFound = !!articlesData.articles && articlesData.articles.length > 0 && input.length > 0;
   const noArticlesFound =
     articlesData.articles !== null &&
     articlesData.articles?.length == 0 &&
