@@ -37,7 +37,7 @@ export const useArticlesSearch = (onResults?: (data: any[]) => void, predefinedS
       // const response = await searchByTags(params)
       if (response.status === 200) {
         const data = (await response.json()) as { articles: ArticleListElementProps[] };
-        console.log(data);
+        // console.log(data);
         // что за totalPages??? || data.totalPages === undefined
         if (data.articles === undefined) throw new Error("no fields present");
         else {

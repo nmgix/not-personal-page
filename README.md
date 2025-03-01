@@ -38,18 +38,22 @@
          - моковые данные, нет подгрузки с api
       4. [~] Projects grid
          - моковые данные, нет подгрузки с api
-   2. [ ] Articles
-      1. [ ] '/' (/articles aka домашняя)
-         1. [ ] Поиск через ctrl+f (уже есть в компоненте articles-search)
-   3. [ ] Article
-      1. [ ] Note(s)
-         1. [ ] Selected article page
-         2. [ ] Same page article render (nextjs feature) (article widget)
-      2. [ ] Blog(s)
-         1. [ ] Selected blog article page
-         2. [ ] Same blog article render (nextjs feature) (article widget)
-      3. [ ] Project(s)
-         1. [ ] Same page project article render (nextjs feature) (article widget)
+   2. [~] Articles
+      1. [~] '/' (/articles aka домашняя)
+         1. [~] Поиск через ctrl+f (уже есть в компоненте articles-search)
+         - сейчас не ищется ничего нормально
+   3. [x] Article
+      1. [x] Note(s)
+         1. [x] Selected article page
+         2. [x] Same page article render (nextjs feature) (article widget)
+      2. [x] Blog(s)
+         1. [x] Selected blog article page
+         2. [x] Same blog article render (nextjs feature) (article widget)
+      3. [x] Project(s)
+         - мб под projects другую страницу сделать?
+         - типо с видео в самом начале, например
+         1. [x] Selected article page
+         2. [x] Same page project article render (nextjs feature) (article widget)
 2. [ ] Components
    1. [x] Generic
       1. [x] Box (class)
@@ -64,7 +68,7 @@
       6. [x] Image
       <!-- 7. [ ] Popup
       - под вопросом -->
-   2. [ ] Specialized
+   2. [x] Specialized
       1. [x] ArticleListElement (list item)
       2. [x] CookiePrompt
          - длина пока 100% width доступного, в модалке (с ref для самоудаления, модалка пока Widgets/CookiePopup не написан) должна быть длина до 500px
@@ -104,19 +108,19 @@
       - проблема в том, что в самом дизайне footer ещё не прототипирован/создан
    5. [~] ArticlesGlobalSearch
       1. [x] переписать на form чтобы не держать инфу в стейте, boxscroll обернуть в компонент со своим стейтом а внутернние его box переделать в инпуты радиогруппы? чтобы форма могла получать данные выбранного элемента
-      2. [ ] чтобы только одна модалка могла быть открыта (группы в useKeybind)
-      3. [ ] Подключить к реальным заметкам .md формата, скорее всего запрос на апи (не забыть rate limit на тот эндпоинт и какой-то варнинг в видео попапа при привышении лимита)
+      2. [-] чтобы только одна модалка могла быть открыта (группы в useKeybind)
+      3. [x] Подключить к реальным заметкам .md формата, скорее всего запрос на апи (не забыть rate limit на тот эндпоинт и какой-то варнинг в видео попапа при привышении лимита)
       4. [x] Components
          1. [x] ResultListRenderer
             1. [x] добавить fade vertical при scroll
       5. [ ] проблема блюра при нелевом scroll (фильтр блюрит весь внутернний контент), при скролле остаётся только маска, блюра всего элемента нет
    6. [~] ArticleList
-      1. [ ] обернуть в Suspense + bonus: добавить skeleton анимацию
-      2. [ ] юзать ArticleListElement из Specialized
-   7. [ ] Article (как same page render поверх предыдущего роута без перехода)
-   8. [ ] ImageGallery (prev ImageView)
-      1. [ ] возможность открыть на определённом индексе/id (при нажатии на изображение в середине статьи должна открыться галлерея на id этого изображения)
-      2. [ ] чтобы только одна модалка могла быть открыта (группы в useKeybind)
+      1. [x] обернуть в Suspense + bonus: добавить skeleton анимацию
+      2. [x] юзать ArticleListElement из Specialized
+   7. [x] Article Modal (как same page render поверх предыдущего роута без перехода)
+   8. [x] ImageGallery (prev ImageView)
+      1. [x] возможность открыть на определённом индексе/id (при нажатии на изображение в середине статьи должна открыться галлерея на id этого изображения)
+      2. [x] чтобы только одна модалка могла быть открыта (группы в useKeybind)
    9. [~] SiteMap modal
       1. [ ] чтобы только одна модалка могла быть открыта (группы в useKeybind)
       2. [x] Components
@@ -126,26 +130,26 @@
    11. [x] RandomHeroWidget
    12. [x] ArticlesPreview
        - Я понял что это был за компонент в specialized
-       1. [ ] Из-за link сейчас стили поломаны
+       - Из-за link сейчас стили поломаны
    13. [~] VideosPreview
        1. [ ] Unload img/video if out of view boundaries
-   14. [ ] ArticlePages
+   14. [x] ArticlePages
        - в Widgets потому что будет в blog/,article/,projects/
-       1. [ ] Default
+       1. [x] Default
 4. [x] Hooks
    1. [~] useFade
       1. [x] сделать и для вертикали, пока хук только для горизонтали
       2. [-] добавить throttle
-      3. [ ] иногда в ResultListRenderer блюрится контент при наложении маски
+      - иногда в ResultListRenderer блюрится контент при наложении маски
    2. [x] useDebounce
    3. [x] useScrollable (чтобы без шифта скроллить при overflow-x:scroll)
       1. [-] добавить не то чтобы throttle, но чтобы он собирал все wheel ивенты и batch'ил их в один smooth scroll, что-то на увовне debounce, но с batch
    4. [x] useMinuteTimer
-5. [ ] Storybook
-   1. [ ] Components
+5. [x] Storybook
+   1. [x] Components
       1. [x] Generic
-      2. [ ] Specialized
-   2. [ ] Widgets
+      2. [x] Specialized
+   2. [-] Widgets
 6. [ ] Testing
    1. [ ] Playwright
       1. [ ] Home page

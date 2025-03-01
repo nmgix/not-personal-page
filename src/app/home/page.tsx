@@ -8,16 +8,14 @@ import { Image } from "@/components/Generic/Image";
 
 import { /*mockArticlesFound,*/ mockProjectsShortened } from "@/types/mocks";
 import { VideosPreview } from "@/widgets/VideosPreview";
-import { getDocBySlugShorten, getLatestDocs } from "../api/getDoc";
 import { ArticleListElementProps } from "@/types/articles";
 import { articleTypes } from "@/types/consts";
+import { getDocBySlugShorten, getLatestDocs } from "../serverfunctions/getDoc";
 
 export default function Home() {
   const latestArticlesShorten = getLatestDocs(2).map(d => {
-    console.log({ d });
     return getDocBySlugShorten(d.file.split("/")[0] as (typeof articleTypes)[number], d.file.split("/")[1]);
   });
-  console.log({ latestArticlesShorten });
 
   // надо проверку zod делать всех полей, надоело ?. юзать
   const articlePreviewList: ArticleListElementProps[] = latestArticlesShorten.map(latestArticle => ({

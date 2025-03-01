@@ -30,7 +30,8 @@ export const RadioButtonsGroup = ({ options, name, externalClassnames, onSelect,
   const [selectedOption, setSelectedOption] = useState("");
   const _onSelect = useCallback(
     (id: string) => {
-      console.log({ id, selectedOption, equal: id == selectedOption });
+      // ещё не пофиксил
+      // console.log({ id, selectedOption, equal: id == selectedOption });
       if (id == selectedOption) {
         setSelectedOption("");
         if (onSelect) onSelect(null);

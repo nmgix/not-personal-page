@@ -2,27 +2,17 @@
 
 import classnames from "classnames";
 import styles from "./bottom-clever-bar.module.scss";
-import { JSX, ReactElement, useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { ReactElement, useEffect, useState } from "react";
 import { bottomCleverBarShowThreshold } from "@/types/consts";
-import { ArticleBar } from "@/app/article/[category]/[name]/components/bar";
-import { ArticlesSearchBar } from "@/app/articles/components/bar";
-import { ArticlesAmountBar } from "@/app/articles/components/bar/secondBar";
 export type TemplateComponent = ReactElement | null;
 export type TemplateVariant = [TemplateComponent, TemplateComponent];
 
-// client компонент, так что без разницы где объвлять функцию
-// function getMatchedKey(pathname: string) {
-//   const matchedKey = articleKeys.find(key => pathname.startsWith(key) && (pathname.length === key.length || pathname[key.length] === "/"));
-//   return matchedKey ? matchedKey.replace(/\//g, "") : null;
-// }
-
 // разные bartypes рендерятся потому что весь этот компонент ререндерится (бесполезно useState вызывать, он будет отрабатывать один раз, но ререндер при переходе на старинцу, так что ререндер каждый раз ибо компонент маунтится с нуля)
-export const BottomCleverBar = ({ currentBars, hideInTop }: { currentBars: TemplateVariant; hideInTop: boolean }) => {
+export const BottomCleverBar = ({ currentBars, hideInTop }: { currentBars: TemplateVariant | [] | null | undefined; hideInTop: boolean }) => {
   // const str = usePathname();
   // const type: BarTypeKeys | null = getMatchedKey(str) as BarTypeKeys;
+  console.log("rerender of bottom clever bar");
 
-  const [firstBar, secondBar] = currentBars;
   const [atTop, setAtTop] = useState(true);
   useEffect(() => {
     const checkThreshold = () => {
@@ -41,18 +31,18 @@ export const BottomCleverBar = ({ currentBars, hideInTop }: { currentBars: Templ
   }, []);
   //
 
-  console.log({ secondBar });
+  console.log({ secondBar: currentBars && currentBars[1] });
 
   const render = (
     <div className={classnames(styles.bottomCleverBar, hideInTop && atTop && styles.hideBar)}>
-      {firstBar && (
+      {!!currentBars && currentBars[0] && (
         <div className={classnames("box", styles.barOne)}>
-          {firstBar}
+          {currentBars[0]}
           {/* <FirstBar/> */}
           {/* firstBar() */}
         </div>
       )}
-      {secondBar && <div className={classnames("box", styles.barOne)}>{secondBar}</div>}
+      {!!currentBars && currentBars[1] && <div className={classnames("box", styles.barOne)}>{currentBars[1]}</div>}
       {/* <ArticlesAmountBar /> */}
     </div>
   );
