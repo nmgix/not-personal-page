@@ -4,7 +4,7 @@ import { ArticlesHandle } from "./components/ArticlesHandle";
 import { mockArticlesAmount } from "@/types/mocks";
 import { getPopularTags } from "../serverfunctions/tags";
 
-export default function Articles() {
+export default async function Articles() {
   const fetchedTags = getPopularTags(8);
   // console.log(fetchedTags);
   return (

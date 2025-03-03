@@ -22,7 +22,7 @@ const ArticlesSearch = ({ tags, setArticlesData, setFormData, fetchArticles }: A
   const categoriesTagsRef = useRef<RadioButtonsGroupProps["options"]>(
     (tags ?? []).map(c => ({
       // react component в obj сомнительно но окэй
-      component: <span>{c.tag}</span>,
+      component: <span key={c.tag}>{c.tag}</span>,
       value: c.tag
     }))
   );
