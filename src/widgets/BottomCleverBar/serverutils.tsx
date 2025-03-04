@@ -10,6 +10,11 @@ export const BarTypes: Bars = {
     bars: DefaultBar,
     hideInTop: true
   },
+  articles: {
+    href: "/articles",
+    bars: ArticlesSearchBar,
+    hideInTop: false //true
+  },
   article: {
     href: "/article/",
     bars: ArticleBar,
@@ -24,11 +29,6 @@ export const BarTypes: Bars = {
     href: "/project/",
     bars: ArticleBar,
     hideInTop: false
-  },
-  articles: {
-    href: "/articles",
-    bars: ArticlesSearchBar,
-    hideInTop: false //true
   }
 };
 

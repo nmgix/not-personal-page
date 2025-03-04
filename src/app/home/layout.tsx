@@ -1,4 +1,6 @@
 import { UnexpectedErrorBoundary } from "@/components/Specialized/TestComponents";
+import { BottomCleverBar } from "@/widgets/BottomCleverBar";
+import { BarTypes } from "@/widgets/BottomCleverBar/serverutils";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -14,6 +16,7 @@ export default function RootLayout({
     <>
       <UnexpectedErrorBoundary />
       {children}
+      <BottomCleverBar currentBars={BarTypes["home"].bars} hideInTop={BarTypes["home"].hideInTop} />
     </>
   );
 }
