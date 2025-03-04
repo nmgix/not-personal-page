@@ -26,11 +26,19 @@ export default async function Template({ children }: { children: React.ReactNode
   // const referer = Object.getOwnPropertyDescriptors(req.headers)["headers"].value;
   // console.log({ headers: referer });
 
-  const symbols = Object.getOwnPropertySymbols(globalThis);
-  const needed = symbols[symbols.length - 1];
   // @ts-ignore
-  const curr = globalThis;
-  console.log(curr);
+
+  // const headers = JSON.parse(JSON.stringify(globalThis.__incrementalCache.requestHeaders));
+  // console.log({ headers });
+  // const nextTree = headers["next-router-state-tree"];
+  // console.log({ nextTree });
+  // const nextTreeUnecnoded = nextTree ? urldecode(nextTree) : "";
+  // console.log({ nextTreeUnecnoded });
+  // const parsedTree = JSON.parse(nextTreeUnecnoded);
+  // console.log({ parsedTree });
+  // // const tree = JSON.parse(urldecode(JSON.parse(JSON.stringify(globalThis.__incrementalCache.requestHeaders))["next-router-state-tree"]));
+  // console.log(parsedTree[1].children[0]);
+
   // const idk = globalThis.__incrementalCache.requestHeaders;
   // console.log(globalThis.__incrementalCache.requestHeaders);
 
@@ -38,6 +46,8 @@ export default async function Template({ children }: { children: React.ReactNode
   // console.log(globalThis);
   // console.log(globalThis);
   // console.log({ currentPathname });
+
+  console.log(__dirname);
 
   const type: BarTypeKeys | null = getMatchedKey("");
   const bars: TemplateVariant = type ? BarTypes[type].bars : [null, null];
