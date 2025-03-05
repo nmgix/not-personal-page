@@ -49,7 +49,7 @@ export const ArticleDefault = ({
           {mappedTags !== undefined && mappedTags?.length > 0 && (
             <div className={styles.tags}>
               {mappedTags.map(t => (
-                <Link href={`/articles?article_type=${t.tag}&article-text=&page=1`} style={{ opacity: (70 - t.popularity) / 100 }}>
+                <Link key={t.tag} href={`/articles?article_type=${t.tag}&article-text=&page=1`} style={{ opacity: (70 - t.popularity) / 100 }}>
                   #{t.tag}
                 </Link>
               ))}

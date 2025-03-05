@@ -10,6 +10,7 @@ export enum GlobalRoutes {
   home = "/home",
   articles = "/articles/",
   article = "/article/"
+  // note = "/note/"
   // blog = "/blog/",
   // project = "/project/"
 }
@@ -25,7 +26,7 @@ export type TArticleDefault = {
   date: string;
   TTRmins: number;
   categoryImg: PickKey<typeof AvailableIcons, "blog" | "tech-article" | "video">;
-  text: string; //хз как частями загружать
+  // text: string; //хз как частями загружать
   textPreview?: string;
   imagesSrc?: ImageElement[];
 };
@@ -34,7 +35,7 @@ export type ArticleListElementProps = Omit<TArticleDefault, "date" | "text"> & {
   previewImages?: boolean;
 };
 export type ArticleData = {
-  meta: Omit<TArticleDefault, "imagesSrc" | "href">;
+  meta: Omit<TArticleDefault, "imagesSrc">;
   text: string;
   slug: string;
   // fullPath: string;
@@ -44,4 +45,24 @@ export type ArticleProps = {
   id: string;
   title: string;
   tags: string[];
+};
+
+// export type VideoPreviewProps = {
+//   id: string;
+//   shortenedVideoSrc: string;
+//   videoLength: number;
+//   title: string;
+//   shortenedDescription: string;
+//   thumbnailSrc: string;
+//   relatedTags?: (keyof typeof AvailableIcons)[];
+// } & ExternalClassnames;
+
+export type ArticleVideoPreview = {
+  meta: Omit<TArticleDefault, "imagesSrc" | "date">;
+  slug: string;
+  videoPreview: Partial<{
+    videoSrc: string;
+    imagePlaceholderSrc: string;
+    relatedTagsIcons: (keyof typeof AvailableIcons)[];
+  }>;
 };

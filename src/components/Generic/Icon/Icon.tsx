@@ -23,6 +23,7 @@ type IconProps = {
 } & ExternalClassnames;
 
 export const Icon: React.FC<IconProps> = ({ icon, color, externalClassnames }) => {
+  if (!Object.keys(AvailableIcons).some(i => i === icon)) return null;
   return (
     <svg id={icon} className={classnames(styles.icon, externalClassnames)} style={{ color }}>
       {/* <title>??? */}

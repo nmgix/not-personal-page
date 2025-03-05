@@ -6,16 +6,16 @@ import { BoxesScrollbar } from "@/components/Specialized/BoxesScrollbar";
 import { ArticlesPreview } from "@/widgets/ArticlesPreview";
 import { Image } from "@/components/Generic/Image";
 
-import { /*mockArticlesFound,*/ mockProjectsShortened } from "@/types/mocks";
+// import { /*mockArticlesFound,*/ mockProjectsShortened } from "@/types/mocks";
 import { VideosPreview } from "@/widgets/VideosPreview";
-import { ArticleListElementProps } from "@/types/articles";
+import { ArticleListElementProps, ArticleVideoPreview } from "@/types/articles";
 import { articleTypes } from "@/types/consts";
-import { getDocBySlugShorten, getLatestDocs } from "../serverfunctions/getDoc";
+import { getCategorySlugs, getDocBySlugShorten, getLatestDocs, getProjectVideoPreview } from "../serverfunctions/getDoc";
 
 export default function Home() {
-  const latestArticlesShorten = getLatestDocs(2).map(d => {
-    return getDocBySlugShorten(d.file.split("/")[0] as (typeof articleTypes)[number], d.file.split("/")[1]);
-  });
+  const latestArticlesShorten = getLatestDocs(2).map(d =>
+    getDocBySlugShorten(d.file.split("/")[0] as (typeof articleTypes)[number], d.file.split("/")[1])
+  );
 
   // надо проверку zod делать всех полей, надоело ?. юзать
   const articlePreviewList: ArticleListElementProps[] = latestArticlesShorten.map(latestArticle => ({
@@ -29,6 +29,12 @@ export default function Home() {
     slug: latestArticle?.slug ?? ""
   }));
   //  categoryImg: lA?.category, href: 'todo', id: '', title:
+
+  // getProjectVideoPreview
+  const projects: ArticleVideoPreview[] = getCategorySlugs("project")
+    .map(slug => getProjectVideoPreview(slug.split("/")[0], slug.split("/")[1]))
+    .filter(p => !!p);
+
   return (
     <div className={classnames("page", styles.home)}>
       {/* @ts-ignore */}
@@ -51,9 +57,9 @@ export default function Home() {
       {/* projects lower */}
       <div className={styles.projects}>
         <h3 className={styles.projectsTitle}>
-          projects<mark>{mockProjectsShortened.length}</mark>
+          projects<mark>{projects.length}</mark>
         </h3>
-        <VideosPreview videos={mockProjectsShortened} />
+        <VideosPreview videos={projects} />
       </div>
     </div>
   );

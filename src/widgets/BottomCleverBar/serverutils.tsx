@@ -15,8 +15,8 @@ export const BarTypes: Bars = {
     bars: ArticlesSearchBar,
     hideInTop: false //true
   },
-  article: {
-    href: "/article/",
+  note: {
+    href: "/note/",
     bars: ArticleBar,
     hideInTop: false
   },

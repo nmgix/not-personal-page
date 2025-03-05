@@ -4,65 +4,49 @@ import { Image } from "@/components/Generic/Image";
 import Link from "next/link";
 import { AvailableIcons, Icon } from "@/components/Generic/Icon";
 import { ExternalClassnames } from "@/types/components";
-import { GlobalRoutes } from "@/types/articles";
-
-export type VideoPreviewProps = {
-  id: string;
-  shortenedVideoSrc: string;
-  videoLength: number;
-  title: string;
-  shortenedDescription: string;
-  thumbnailSrc: string;
-  href: string;
-  relatedTags?: (keyof typeof AvailableIcons)[];
-} & ExternalClassnames;
+import { ArticleVideoPreview, GlobalRoutes } from "@/types/articles";
 
 const descriptionLimit = 51;
 
-function formatTime(seconds: number) {
-  const minutes = Math.floor(seconds / 60);
-  const remainingSeconds = seconds % 60;
+// function formatTime(seconds: number) {
+//   const minutes = Math.floor(seconds / 60);
+//   const remainingSeconds = seconds % 60;
 
-  // Добавляем ведущий ноль, если секунды меньше 10
-  const formattedSeconds = remainingSeconds < 10 ? `0${remainingSeconds}` : remainingSeconds;
+//   // Добавляем ведущий ноль, если секунды меньше 10
+//   const formattedSeconds = remainingSeconds < 10 ? `0${remainingSeconds}` : remainingSeconds;
 
-  return `${minutes}:${formattedSeconds}`;
-}
+//   return `${minutes}:${formattedSeconds}`;
+// }
 
-export const VideoPreview = ({
-  shortenedDescription,
-  shortenedVideoSrc,
-  title,
-  videoLength,
-  relatedTags,
-  thumbnailSrc,
-  href,
-  externalClassnames
-}: VideoPreviewProps) => {
+type VideoPreviewProps = ArticleVideoPreview & ExternalClassnames;
+
+export const VideoPreview = ({ meta, slug, videoPreview, externalClassnames }: VideoPreviewProps) => {
   return (
-    <Link href={`${GlobalRoutes.article}${href}`} className={classnames("box", styles.videoPreview, externalClassnames)}>
-      <Image src={thumbnailSrc} alt={`thumbnail of "${title}"`} fill externalClassnames={styles.thumbnail} />
+    <Link href={`${GlobalRoutes.article}${slug}`} className={classnames("box", styles.videoPreview, externalClassnames)}>
+      {typeof videoPreview.imagePlaceholderSrc === "string" && (
+        <Image src={videoPreview.imagePlaceholderSrc} alt={`thumbnail of "${meta.title}"`} fill externalClassnames={styles.thumbnail} />
+      )}
       <div className={styles.previewDescription}>
-        {typeof shortenedVideoSrc === "string" && shortenedVideoSrc.length > 0 && (
-          <video className={styles.video} src={shortenedVideoSrc} autoPlay loop muted preload='metadata' />
+        {typeof videoPreview.videoSrc === "string" && videoPreview.videoSrc.length > 0 && (
+          // вот тут будет 'use client' компонент который бузет в буфер загружать видео и получать его длину выводя отдельно
+          <video className={styles.video} src={videoPreview.videoSrc} autoPlay loop muted preload='metadata' />
         )}
         <div className={styles.top}>
-          <h4 className={styles.title}>{title}</h4>
+          <h4 className={styles.title}>{meta.title}</h4>
           <p className={styles.shortDescription}>
-            {shortenedDescription.length > descriptionLimit ? `${shortenedDescription.slice(0, descriptionLimit)}...` : shortenedDescription}
+            {meta.textPreview && meta.textPreview.length > descriptionLimit ? `${meta.textPreview.slice(0, descriptionLimit)}...` : meta.textPreview}
           </p>
         </div>
         <div className={styles.bottom}>
-          <span className={styles.videoLength}>{formatTime(videoLength)}</span>
-          {relatedTags !== undefined && (
+          {/* <span className={styles.videoLength}>{formatTime(videoLength)}</span> */}
+          {videoPreview.relatedTagsIcons !== undefined && (
             <div className={styles.tags}>
-              {relatedTags.map(t => (
+              {videoPreview.relatedTagsIcons.map(t => (
                 <Icon icon={t} key={t} />
               ))}
             </div>
           )}
         </div>
-        {/* видео не играет :( */}
       </div>
     </Link>
   );
