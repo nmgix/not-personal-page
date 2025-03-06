@@ -17,3 +17,9 @@ $standard-theme: (
   //для bottom-clever-bar
   fade-gradient: linear-gradient(#000000 20%, #000000 100%)
 );
+
+@mixin generate-css-vars($map, $prefix: "--color") {
+  @each $key, $value in $map {
+    #{$prefix}-#{$key}: #{$value};
+  }
+}

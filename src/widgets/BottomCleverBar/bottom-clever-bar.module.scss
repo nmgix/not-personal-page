@@ -1,6 +1,5 @@
 @use "../../styles/margins";
 @use "../../styles/z-indexes";
-@use "../../styles/themes";
 
 .bottomCleverBar {
   display: flex;
@@ -25,15 +24,15 @@
 
   .barOne {
     flex: 1;
-    background-color: themes.theme-standard(box-hover);
+    background-color: var(--color-box-hover);
   }
 
   .barTwo {
     flex: 0;
-    background-color: rgb(themes.theme-standard(box-hover), 0.5);
+    background-color: rgb(var(--color-box-hover), 0.5);
 
     font-family: var(--font-strretch-sans);
-    color: rgb(themes.theme-standard(font-hero), 0.6);
+    color: rgb(var(--color-font-hero), 0.6);
 
     backdrop-filter: blur(7px);
   }

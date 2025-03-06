@@ -1,6 +1,5 @@
 import type { Preview } from "@storybook/react";
 
-import "../src/styles/themes.scss";
 import "../src/styles/global.styles.scss";
 import "../src/components/Generic/components.scss";
 import "react-loading-skeleton/dist/skeleton.css";

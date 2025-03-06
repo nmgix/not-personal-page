@@ -1,8 +1,7 @@
-@use "../../../styles/themes";
 @use "../../../styles/borders";
 
 .box {
-  background-color: themes.theme-standard(box-default);
-  border: 1px solid themes.theme-standard(box-border);
+  background-color: var(--color-box-default);
+  border: 1px solid var(--color-box-border);
   border-radius: borders.$border-default;
 }

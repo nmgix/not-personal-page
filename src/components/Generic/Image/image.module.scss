@@ -1,9 +1,8 @@
 @use "../../../styles/borders";
-@use "../../../styles/themes";
 
 .image {
   border-radius: borders.$border-default;
-  background-color: themes.theme-standard(font-hero);
+  background-color: var(--color-font-hero);
 
   user-select: none;
   -moz-user-select: none;
@@ -21,7 +20,7 @@
     padding-top: 2px;
     font-weight: 800;
     font-size: 10px;
-    color: themes.theme-standard(font-darken);
+    color: var(--color-font-darken);
     position: inherit;
 
     display: none;

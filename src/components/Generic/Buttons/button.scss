@@ -1,9 +1,8 @@
 @use "../../../styles/borders";
-@use "../../../styles/themes";
 
 .button {
   border-radius: borders.$border-s;
-  background-color: themes.theme-standard(box-default);
+  background-color: var(--color-box-default);
 
   padding: 12px 18px;
   border: none;
@@ -11,12 +10,12 @@
   // transition: all 0.01s ease-in-out;
   cursor: pointer;
 
-  color: themes.theme-standard(font-default);
+  color: var(--color-font-default);
   font-weight: 700;
 
   &:hover {
-    background-color: themes.theme-standard(box-hover);
-    color: themes.theme-standard(font-hover);
+    background-color: var(--color-box-hover);
+    color: var(--color-font-hover);
   }
 
   &:active {

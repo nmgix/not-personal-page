@@ -1,6 +1,5 @@
 @use "../../../styles/margins";
 @use "../../../styles/paddings";
-@use "../../../styles/themes";
 
 .articleDefault {
   display: block;
@@ -19,7 +18,7 @@
     padding: paddings.$padding-xs;
 
     .articleDate {
-      color: themes.theme-standard(icon-default);
+      color: var(--color-icon-default);
     }
 
     .tags {
@@ -55,7 +54,7 @@
     .title {
       font-size: 30px;
       font-weight: 700;
-      color: themes.theme-standard(font-hero);
+      color: var(--color-font-hero);
       margin: 0;
 
       position: relative;
@@ -94,7 +93,7 @@
     h4,
     h5,
     h6 {
-      color: themes.theme-standard(font-hover);
+      color: var(--color-font-hover);
       line-height: 32px;
     }
   }

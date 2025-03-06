@@ -2,7 +2,6 @@
 @use "../../styles/paddings";
 @use "../../styles/margins";
 @use "sass:color";
-@use "../../styles/themes";
 
 .articlesPreview {
   padding: paddings.$padding-s;
@@ -27,12 +26,12 @@
 
   .header {
     font-size: 24px;
-    color: themes.theme-standard(font-hover);
+    color: var(--color-font-hover);
 
     margin-bottom: margins.$margin-s;
 
     mark {
-      color: themes.theme-standard(font-darken);
+      color: var(--color-font-darken);
     }
   }
 
@@ -47,7 +46,7 @@
     .element {
       display: block;
 
-      $white-color: themes.theme-standard(box-border);
+      $white-color: #ffffff;
 
       &:hover {
         .articleHeader {

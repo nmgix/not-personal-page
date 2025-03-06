@@ -1,5 +1,3 @@
-@use "../../../styles/themes";
-
 .button {
   font-size: 14px;
   padding: 0px 18px; // хз почему verical paddings are collapsing
@@ -17,8 +15,8 @@
   }
 
   &:has(input[type="radio"]:checked) {
-    background-color: themes.theme-standard(font-default);
-    color: themes.theme-standard(box-default);
+    background-color: var(--color-font-default);
+    color: var(--color-box-default);
   }
 }
 

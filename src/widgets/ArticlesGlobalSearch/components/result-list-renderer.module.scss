@@ -1,6 +1,5 @@
 @use "../../../styles/margins";
 @use "../../../styles/paddings";
-@use "../../../styles/themes";
 
 .resultListRenderer {
   flex: 1;
@@ -16,7 +15,7 @@
     align-items: center;
 
     .title {
-      color: themes.theme-standard(font-default);
+      color: var(--color-font-default);
     }
 
     .button {
@@ -46,20 +45,20 @@
 
     .element {
       // TODO: нормальные html теги выделить по семантике
-      color: themes.theme-standard(icon-default);
+      color: var(--color-icon-default);
 
       &Wrapper {
         border-radius: 10px;
         // composes: defaultButton from "../../../components/Generic/Buttons/Default/default-button.module.scss";
-        background-color: themes.theme-standard(box-default);
+        background-color: var(--color-box-default);
         padding: paddings.$padding-s;
 
         &:hover {
-          background-color: themes.theme-standard(box-hover);
+          background-color: var(--color-box-hover);
         }
       }
       &:hover {
-        color: themes.theme-standard(font-hover);
+        color: var(--color-font-hover);
       }
 
       .title {
@@ -83,7 +82,7 @@
 
         mark {
           font-weight: 800;
-          color: themes.theme-standard(font-hero);
+          color: var(--color-font-hero);
           background: transparent;
         }
       }

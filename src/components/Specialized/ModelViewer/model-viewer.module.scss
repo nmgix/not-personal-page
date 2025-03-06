@@ -1,5 +1,4 @@
 @use "../../../styles/margins";
-@use "../../../styles/themes";
 
 .modelViewer {
   width: 100%;
@@ -20,12 +19,12 @@
 
     .title {
       font-weight: 100;
-      color: themes.theme-standard(font-darken);
+      color: var(--color-font-darken);
     }
 
     .workName {
       font-weight: 800;
-      color: themes.theme-standard(icon-default);
+      color: var(--color-icon-default);
       text-decoration: underline;
 
       cursor: no-drop; // хз зачем, пока ссылка не планируется, ну или можно прикольнуть если зажмёшь этот текст то чё-то случится
@@ -49,7 +48,7 @@
     bottom: 0;
     right: 0;
 
-    color: themes.theme-standard(font-darken);
+    color: var(--color-font-darken);
     z-index: -1;
   }
 }

@@ -1,5 +1,4 @@
 @use "../../../styles/margins";
-@use "../../../styles/themes";
 
 .imageList {
   display: flex;
@@ -41,7 +40,7 @@
   // &[type="button"] был
   &:hover {
     background-color: transparent !important;
-    color: themes.theme-standard(font-hover);
+    color: var(--color-font-hover);
     font-weight: 700;
     font-size: 16px;
   }

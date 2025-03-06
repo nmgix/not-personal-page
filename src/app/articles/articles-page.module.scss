@@ -1,5 +1,4 @@
 @use "../../styles/margins";
-@use "../../styles/themes";
 @use "../../styles/borders";
 
 .articles {
@@ -12,13 +11,13 @@
   width: 100%;
 
   .header {
-    color: themes.theme-standard("font-hero");
+    color: var(--color-font-hero);
     font-size: 24px;
     font-weight: 400;
     mark {
       font-size: 16px;
       font-weight: 100;
-      color: themes.theme-standard("box-border");
+      color: var(--color-box-border);
     }
   }
 
@@ -55,8 +54,8 @@
         flex: 1;
 
         :global(.box) {
-          background-color: themes.theme-standard("box-hover");
-          color: themes.theme-standard("font-hover");
+          background-color: var(--color-box-hover);
+          color: var(--color-font-hover);
         }
       }
       &Input {

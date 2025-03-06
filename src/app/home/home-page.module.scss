@@ -1,5 +1,4 @@
 @use "../../styles/margins";
-@use "../../styles/themes";
 
 .home {
   margin-top: margins.$margin-default;
@@ -61,7 +60,7 @@
     &Title {
       font-family: var(--font-strretch-sans);
       font-size: 16px;
-      color: themes.theme-standard("font-hero");
+      color: var(--color-font-hero);
       font-weight: 400;
 
       display: inline-block;
@@ -69,7 +68,7 @@
       margin-bottom: 25px;
 
       mark {
-        color: themes.theme-standard("font-sub");
+        color: var(--color-font-sub);
         background-color: transparent;
         font-size: 0.8em;
         font-family: var(--font-pulsewidth);

@@ -1,13 +1,12 @@
 @use "../../../styles/margins";
 @use "../../../styles/paddings";
 @use "sass:color";
-@use "../../../styles/themes";
 
 .articlesListElement {
   display: flex;
   flex-direction: column;
 
-  color: themes.theme-standard(font-default);
+  color: var(--color-font-default);
   padding: 14px 15px;
 
   &:hover {
@@ -15,7 +14,7 @@
     // color: color.change($color: currentColor, $lightness: 20%);
 
     $currColor: color.change(
-      $color: themes.theme-standard(font-default),
+      $color: #5e5e5e,
       $lightness: 70%
     );
 
@@ -28,7 +27,7 @@
     font-size: 24px;
 
     color: inherit;
-    border-bottom: 1px solid themes.theme-standard(font-default);
+    border-bottom: 1px solid var(--color-font-default);
 
     margin-bottom: 4px;
   }
@@ -44,7 +43,7 @@
 
     .TTR {
       font-size: 16px;
-      color: themes.theme-standard(font-sub);
+      color: var(--color-font-sub);
     }
 
     .tags {

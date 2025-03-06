@@ -1,5 +1,4 @@
 @use "../../../styles/margins";
-@use "../../../styles/themes";
 
 // .tree {
 
@@ -7,7 +6,7 @@
 .treeNode {
   .label {
     margin-bottom: margins.$margin-s;
-    color: themes.theme-standard(font-hero);
+    color: var(--color-font-hero);
 
     a {
       text-decoration: underline;
@@ -23,6 +22,6 @@
 
   .children {
     padding-left: 10px;
-    border-left: 1px solid themes.theme-standard(font-hero);
+    border-left: 1px solid var(--color-font-hero);
   }
 }

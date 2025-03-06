@@ -1,15 +1,13 @@
-@use "../../../../styles/themes";
-
 .defaultButton {
-  background-color: themes.theme-standard(box-hover);
-  color: themes.theme-standard(font-hover);
+  background-color: var(--color-box-hover);
+  color: var(--color-font-hover);
 
   display: flex;
   justify-content: center;
   align-items: center;
 
   &:hover {
-    background-color: themes.theme-standard(box-default);
-    color: themes.theme-standard(font-default);
+    background-color: var(--color-box-default);
+    color: var(--color-font-default);
   }
 }

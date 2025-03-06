@@ -1,7 +1,6 @@
 @use "../../styles/margins";
 @use "../../styles/paddings";
 @use "../../styles/borders";
-@use "../../styles/themes";
 
 .modal {
   padding: 0;
@@ -35,11 +34,11 @@
 
   overflow-y: hidden;
 
-  background-color: rgba(themes.theme-standard(box-default), 0.6);
+  background-color: rgba(var(--color-box-default), 0.6);
 
   .title {
     font-family: var(--font-strretch-sans);
     font-size: 16px;
-    color: themes.theme-standard(font-hero);
+    color: var(--color-font-hero);
   }
 }

@@ -1,5 +1,4 @@
 @use "../../../styles/paddings";
-@use "../../../styles/themes";
 
 @use "../../../styles/breakpoints";
 @use "../../../styles/media";
@@ -43,7 +42,7 @@
     display: block;
 
     img {
-      color: themes.theme-standard("font-default");
+      color: var(--color-font-default);
     }
   }
 
@@ -91,13 +90,13 @@
       justify-content: space-between;
 
       .videoLength {
-        color: themes.theme-standard(icon-default);
+        color: var(--color-icon-default);
       }
 
       .tags {
         display: flex;
         column-gap: 0.3em;
-        color: themes.theme-standard(icon-default);
+        color: var(--color-icon-default);
         font-size: 0.7em;
 
         :global(svg) {

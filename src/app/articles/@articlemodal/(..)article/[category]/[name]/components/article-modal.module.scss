@@ -1,6 +1,5 @@
-@use "../../../../../../../styles/themes.scss";
-
 .modal {
-  background-color: themes.theme-standard(background-800);
-  color: themes.theme-standard(font-default);
+  background-color: var(--color-background-800);
+  color: var(--color-font-default);
+  max-height: 80vh;
 }
