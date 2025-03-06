@@ -13,21 +13,29 @@ const pulsewidthFont = localFont({
   weight: "700",
   style: "normal",
   variable: "--font-pulsewidth",
-  preload: true
+  preload: true,
+  fallback: ["Arial", "sans-serif"]
 });
 const pulsewidthDotFont = localFont({
   src: "../../public/fonts/Pulsewidth-Dot-1.0.0.otf",
   weight: "700",
   style: "normal",
-  variable: "--font-pulsewidth-dot"
+  variable: "--font-pulsewidth-dot",
+  fallback: ["Arial", "sans-serif"]
 });
 const strretchSansFont = localFont({
   src: "../../public/fonts/STRRETCH-SANS.ttf",
   weight: "700",
   style: "normal",
-  variable: "--font-strretch-sans"
+  variable: "--font-strretch-sans",
+  fallback: ["Helvetica", "Arial", "sans-serif"]
 });
-const jetBrainsFont = JetBrains_Mono({ preload: true, variable: "--font-jetbrains", subsets: ["cyrillic"] });
+const jetBrainsFont = JetBrains_Mono({
+  preload: true,
+  variable: "--font-jetbrains",
+  subsets: ["cyrillic"],
+  fallback: ["Helvetica", "Arial", "sans-serif"]
+});
 
 export const metadata: Metadata = {
   title: process.env.NEXT_PUBLIC_NAME,

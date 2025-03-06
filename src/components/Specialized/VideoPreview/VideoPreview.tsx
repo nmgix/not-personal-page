@@ -2,7 +2,7 @@ import classnames from "classnames";
 import styles from "./video-preview.module.scss";
 import { Image } from "@/components/Generic/Image";
 import Link from "next/link";
-import { AvailableIcons, Icon } from "@/components/Generic/Icon";
+import { Icon } from "@/components/Generic/Icon";
 import { ExternalClassnames } from "@/types/components";
 import { ArticleVideoPreview, GlobalRoutes } from "@/types/articles";
 
@@ -20,16 +20,16 @@ const descriptionLimit = 51;
 
 type VideoPreviewProps = ArticleVideoPreview & ExternalClassnames;
 
-export const VideoPreview = ({ meta, slug, videoPreview, externalClassnames }: VideoPreviewProps) => {
+export const VideoPreview = ({ meta, slug, externalClassnames }: VideoPreviewProps) => {
   return (
     <Link href={`${GlobalRoutes.article}${slug}`} className={classnames("box", styles.videoPreview, externalClassnames)}>
-      {typeof videoPreview.imagePlaceholderSrc === "string" && (
-        <Image src={videoPreview.imagePlaceholderSrc} alt={`thumbnail of "${meta.title}"`} fill externalClassnames={styles.thumbnail} />
+      {typeof meta.imagePlaceholderSrc === "string" && (
+        <Image src={meta.imagePlaceholderSrc} alt={`thumbnail of "${meta.title}"`} fill externalClassnames={styles.thumbnail} />
       )}
       <div className={styles.previewDescription}>
-        {typeof videoPreview.videoSrc === "string" && videoPreview.videoSrc.length > 0 && (
+        {typeof meta.videoSrc === "string" && meta.videoSrc.length > 0 && (
           // вот тут будет 'use client' компонент который бузет в буфер загружать видео и получать его длину выводя отдельно
-          <video className={styles.video} src={videoPreview.videoSrc} autoPlay loop muted preload='metadata' />
+          <video className={styles.video} src={meta.videoSrc} autoPlay loop muted preload='metadata' />
         )}
         <div className={styles.top}>
           <h4 className={styles.title}>{meta.title}</h4>
@@ -39,9 +39,9 @@ export const VideoPreview = ({ meta, slug, videoPreview, externalClassnames }: V
         </div>
         <div className={styles.bottom}>
           {/* <span className={styles.videoLength}>{formatTime(videoLength)}</span> */}
-          {videoPreview.relatedTagsIcons !== undefined && (
+          {meta.relatedTagsIcons !== undefined && (
             <div className={styles.tags}>
-              {videoPreview.relatedTagsIcons.map(t => (
+              {meta.relatedTagsIcons.map(t => (
                 <Icon icon={t} key={t} />
               ))}
             </div>

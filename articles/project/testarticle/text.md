@@ -1,4 +1,18 @@
 ---
 tags: ["wow", "cool", "gamedev"]
-# date: "2025-01-03"
+date: "2025-01-03"
+videoSrc: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+imagePlaceholderSrc: "https://www.digiseller.ru/preview/1175270/p1_3798188_582bf509.jpg"
+relatedTagsIcons: ["code", "blog", "grid-blocks"]
+title: Test project example
+TTRmins: 3
+textPreview: Тестовый пример кода, посмотрим что из этого выйдет
 ---
+
+Здесь ничего новго не увидите, просто проверка что это всё работает. Нате котёнка: UwU.
+
+# Хз как работает выделение, надеюсь норм
+
+Потому что иначе я задолбаюсь стилизовать текста
+
+P.S. я задолбаюсь

@@ -1,6 +1,6 @@
-import { findInDoc, getDocBySlug, getDocBySlugShorten } from "@/app/serverfunctions/getDoc";
-import { splitQuery } from "@/app/serverfunctions/helpers";
-import { getPopularTags, searchByTags } from "@/app/serverfunctions/tags";
+import { findInDoc, getDocBySlug, getDocBySlugShorten } from "@/serverfunctions/getDoc";
+import { splitQuery } from "@/serverfunctions/helpers";
+import { getPopularTags, searchByTags } from "@/serverfunctions/tags";
 import { urldecode } from "@/helpers/url";
 import { ArticleListElementProps } from "@/types/articles";
 import { ArticleFields } from "@/types/consts";

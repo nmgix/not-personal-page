@@ -30,6 +30,7 @@ export function getDocBySlugShorten(category: string, slug: string /*, locale: s
     const { data } = matter(fileContents);
     return { slug: `${category}/${realSlug}`, meta: data as ArticleData["meta"] };
   } catch (error) {
+    console.log("getDocBySlugShorten", error);
     return undefined;
   }
 }
@@ -110,27 +111,11 @@ export function getLatestDocs(limit: number = 3) {
   }
 }
 
-const mockVideo = "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4";
-const mockImagePreview = "https://placehold.co/600x400";
-const mockRelatedTags: ArticleVideoPreview["videoPreview"]["relatedTagsIcons"] = ["blog", "grid-blocks", "code"];
-export function getProjectVideoPreview(category: string, slug: string): ArticleVideoPreview | undefined {
-  try {
-    const file = getDocBySlugShorten(category, slug);
-    if (!file) return undefined; // неправильно
-    return {
-      meta: file.meta,
-      slug: file.slug,
-      videoPreview: { videoSrc: mockVideo, imagePlaceholderSrc: mockImagePreview, relatedTagsIcons: mockRelatedTags }
-    };
-  } catch (error) {
-    console.log("getProjectVideoPreview", error);
-    return undefined;
-  }
-}
-
 export function getCategorySlugs(category: string) {
   try {
-    return fileListWithoutMD(path.join(doscDirectory, category));
+    return fileListWithoutMD(path.join(doscDirectory, category))
+      .map(fileFolder => path.relative(doscDirectory, fileFolder).replace(/\\/g, "/"))
+      .filter(fileLink => !ignoreFiles.some(ignoreFile => fileLink.endsWith(ignoreFile)));
   } catch (error) {
     console.log("getCategorySlugs", error);
     return [];

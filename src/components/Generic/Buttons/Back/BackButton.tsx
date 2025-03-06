@@ -1,21 +1,17 @@
 "use client";
 
-import { Button } from "@/components/Generic/Buttons/Default/DefaultButton";
-import { useRouter } from "next/navigation";
-
 import styles from "./back-btn.module.scss";
 import { GlobalRoutes } from "@/types/articles";
-import { useCallback } from "react";
+import Link from "next/link";
+import classnames from "classnames";
+import { ExternalClassnames } from "@/types/components";
 
-export const BackButton = () => {
-  const router = useRouter();
-  const _onClick = useCallback(() => {
-    // if (props?.onClick) props?.onClick();
-    router.push(GlobalRoutes.articles);
-  }, []);
+type BackButtonProps = ExternalClassnames;
+
+export const BackButton = (props: BackButtonProps) => {
   return (
-    <Button title='назад' onClick={_onClick} externalClassnames={styles.backBtn}>
+    <Link className={classnames("button", styles.backBtn, props.externalClassnames)} href={GlobalRoutes.articles}>
       &#91;к статьям&#93;
-    </Button>
+    </Link>
   );
 };

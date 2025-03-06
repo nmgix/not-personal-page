@@ -6,11 +6,10 @@ import { BoxesScrollbar } from "@/components/Specialized/BoxesScrollbar";
 import { ArticlesPreview } from "@/widgets/ArticlesPreview";
 import { Image } from "@/components/Generic/Image";
 
-// import { /*mockArticlesFound,*/ mockProjectsShortened } from "@/types/mocks";
 import { VideosPreview } from "@/widgets/VideosPreview";
 import { ArticleListElementProps, ArticleVideoPreview } from "@/types/articles";
 import { articleTypes } from "@/types/consts";
-import { getCategorySlugs, getDocBySlugShorten, getLatestDocs, getProjectVideoPreview } from "../serverfunctions/getDoc";
+import { getCategorySlugs, getDocBySlugShorten, getLatestDocs } from "../../serverfunctions/getDoc";
 
 export default function Home() {
   const latestArticlesShorten = getLatestDocs(2).map(d =>
@@ -28,11 +27,13 @@ export default function Home() {
     TTRmins: latestArticle?.meta.TTRmins ?? -1,
     slug: latestArticle?.slug ?? ""
   }));
-  //  categoryImg: lA?.category, href: 'todo', id: '', title:
 
-  // getProjectVideoPreview
   const projects: ArticleVideoPreview[] = getCategorySlugs("project")
-    .map(slug => getProjectVideoPreview(slug.split("/")[0], slug.split("/")[1]))
+    .map(_slug => {
+      // console.log(_slug);
+      const [category, slug] = _slug.split("/");
+      return getDocBySlugShorten(category, slug) as ArticleVideoPreview;
+    })
     .filter(p => !!p);
 
   return (

@@ -58,11 +58,11 @@ export type ArticleProps = {
 // } & ExternalClassnames;
 
 export type ArticleVideoPreview = {
-  meta: Omit<TArticleDefault, "imagesSrc" | "date">;
+  meta: Omit<TArticleDefault, "imagesSrc" | "date"> &
+    Partial<{
+      videoSrc: string;
+      imagePlaceholderSrc: string;
+      relatedTagsIcons: (keyof typeof AvailableIcons)[];
+    }>;
   slug: string;
-  videoPreview: Partial<{
-    videoSrc: string;
-    imagePlaceholderSrc: string;
-    relatedTagsIcons: (keyof typeof AvailableIcons)[];
-  }>;
 };

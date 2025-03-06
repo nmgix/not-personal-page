@@ -1,4 +1,6 @@
 .backBtn {
+  composes: defaultButton from "../Default/default-button.module.scss";
+
   background-color: transparent !important;
   &:hover {
     background-color: transparent !important;

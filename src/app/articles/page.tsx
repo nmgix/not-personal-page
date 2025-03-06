@@ -2,7 +2,7 @@ import classnames from "classnames";
 import styles from "./articles-page.module.scss";
 import { ArticlesHandle } from "./components/ArticlesHandle";
 import { mockArticlesAmount } from "@/types/mocks";
-import { getPopularTags } from "../serverfunctions/tags";
+import { getPopularTags } from "../../serverfunctions/tags";
 
 export default async function Articles() {
   const fetchedTags = getPopularTags(8);

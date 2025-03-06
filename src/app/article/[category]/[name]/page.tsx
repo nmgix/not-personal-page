@@ -1,6 +1,6 @@
-import { getDocBySlug } from "@/app/serverfunctions/getDoc";
-import { getDocImages, getDocLinks } from "@/app/serverfunctions/getDocLinks";
-import { calculateAllTagsPopularity, calculateArticleTags } from "@/app/serverfunctions/tags";
+import { getDocBySlug } from "@/serverfunctions/getDoc";
+import { getDocImages, getDocLinks } from "@/serverfunctions/getDocLinks";
+import { calculateAllTagsPopularity, calculateArticleTags } from "@/serverfunctions/tags";
 import { ImageElement } from "@/components/Specialized/ImageList";
 import { GlobalRoutes, tagPopularityBaseDecrementLevel } from "@/types/articles";
 import { articleCategories } from "@/types/consts";
