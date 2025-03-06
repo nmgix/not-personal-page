@@ -1,5 +1,4 @@
 @use "../../styles/margins";
-@use "../../styles/fonts";
 @use "../../styles/themes";
 
 .home {
@@ -60,7 +59,7 @@
     display: block;
 
     &Title {
-      font-family: fonts.$font-stretch;
+      font-family: var(--font-strretch-sans);
       font-size: 16px;
       color: themes.theme-standard("font-hero");
       font-weight: 400;
@@ -73,7 +72,7 @@
         color: themes.theme-standard("font-sub");
         background-color: transparent;
         font-size: 0.8em;
-        font-family: fonts.$font-header;
+        font-family: var(--font-pulsewidth);
 
         position: absolute;
         right: 0px;

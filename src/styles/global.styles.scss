@@ -1,16 +1,12 @@
-@use "fonts";
 @use "themes";
 @use "margins";
 @use "media";
 @use "breakpoints";
-
 @use "../components/Generic/components.scss";
 // @use "../styles/themes.mixin.scss"
 
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
-
 * {
-  font-family: fonts.$font-primary;
+  font-family: var(--font-jetbrains);
 }
 
 html,

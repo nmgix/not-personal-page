@@ -2,7 +2,7 @@ import path, { join } from "path";
 import fs from "fs";
 import matter from "gray-matter";
 import { ArticleData, articleFileName, ArticleVideoPreview } from "@/types/articles";
-import { ArticleTypes, articleTypes } from "@/types/consts";
+import { articleTypes } from "@/types/consts";
 
 export const doscDirectory = join(process.cwd(), "articles");
 

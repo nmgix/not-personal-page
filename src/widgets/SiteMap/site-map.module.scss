@@ -1,7 +1,6 @@
 @use "../../styles/margins";
 @use "../../styles/paddings";
 @use "../../styles/borders";
-@use "../../styles/fonts";
 @use "../../styles/themes";
 
 .modal {
@@ -39,7 +38,7 @@
   background-color: rgba(themes.theme-standard(box-default), 0.6);
 
   .title {
-    font-family: fonts.$font-stretch;
+    font-family: var(--font-strretch-sans);
     font-size: 16px;
     color: themes.theme-standard(font-hero);
   }

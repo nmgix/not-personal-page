@@ -1,7 +1,6 @@
 @use "../../styles/margins";
 @use "../../styles/paddings";
 @use "../../styles/borders";
-@use "../../styles/fonts";
 @use "../../styles/themes";
 
 .modal {
@@ -46,7 +45,7 @@
     row-gap: margins.$margin-s;
 
     .title {
-      font-family: fonts.$font-stretch;
+      font-family: var(--font-strretch-sans);
       font-size: 16px;
       color: themes.theme-standard(font-hero);
       font-weight: 400;
@@ -151,7 +150,7 @@
       opacity: 0.6;
 
       .title {
-        font-family: fonts.$font-stretch;
+        font-family: var(--font-strretch-sans);
         font-size: 18px;
         font-weight: 400;
       }

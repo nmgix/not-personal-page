@@ -1,4 +1,3 @@
-@use "../../styles/fonts";
 @use "../../styles/themes";
 
 .header {
@@ -8,7 +7,7 @@
   flex-wrap: nowrap;
 
   .devTitle {
-    font-family: fonts.$font-header;
+    font-family: var(--font-pulsewidth);
     font-size: 16px;
     color: themes.theme-standard(font-hero);
     opacity: 0.6;

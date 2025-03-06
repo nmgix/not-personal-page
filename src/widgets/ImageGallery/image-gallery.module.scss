@@ -1,7 +1,6 @@
 @use "../../styles/margins";
 @use "../../styles/paddings";
 @use "../../styles/borders";
-@use "../../styles/fonts";
 @use "../../styles/themes";
 
 .modal {
@@ -26,7 +25,7 @@
     color: themes.theme-standard(font-hero);
 
     cursor: pointer;
-    font-family: fonts.$font-stretch;
+    font-family: var(--font-strretch-sans);
   }
 
   &::before {
