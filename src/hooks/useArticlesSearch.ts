@@ -6,15 +6,20 @@ type ArticlesState = {
   totalPages: number;
 };
 
-interface SearchParams {
+export interface SearchParams {
   [key: string]: string;
 }
 
-export const useArticlesSearch = (onResults?: (data: any[]) => void, predefinedState?: Partial<ArticlesState>) => {
+export const useArticlesSearch = (
+  onResults?: (data: any[]) => void,
+  predefinedState?: Partial<ArticlesState>,
+  prefedinedControlsState?: { searchParams?: SearchParams; page?: number }
+) => {
+  console.log({ prefedinedControlsState });
   // const [searchParams, setSearchParams] = useState<SearchParams>({});
-  const searchParams = useRef<SearchParams>({});
+  const searchParams = useRef<SearchParams>(prefedinedControlsState?.searchParams ?? {});
   const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(prefedinedControlsState?.page ?? 1);
 
   const [articlesData, setArticlesData] = useState<ArticlesState>({
     articles: undefined,

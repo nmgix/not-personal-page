@@ -8,9 +8,10 @@ import { ExternalClassnames } from "@/types/components";
 type BoxesScrollbarProps = {
   list: React.ReactElement[];
   noWrapper?: true;
+  disabled?: boolean;
 } & ExternalClassnames;
 
-export const BoxesScrollbar = ({ list, externalClassnames, noWrapper }: BoxesScrollbarProps) => {
+export const BoxesScrollbar = ({ list, externalClassnames, noWrapper, disabled }: BoxesScrollbarProps) => {
   // const boxRef = useRef<HTMLDivElement>(null);
   // const { updateScrollFn } = useFade(boxRef as React.RefObject<HTMLElement>, true, {
   //   sideOne: "fadeLeft",
@@ -25,6 +26,7 @@ export const BoxesScrollbar = ({ list, externalClassnames, noWrapper }: BoxesScr
 
   return (
     <div
+      tabIndex={disabled ? -1 : undefined}
       // ref={boxRef}
       // onScroll={updateScrollFn}
       className={classnames(

@@ -7,6 +7,7 @@ import Link from "next/link";
 import { ImageList } from "@/components/Specialized/ImageList";
 import { BackButton } from "@/components/Generic/Buttons";
 import Markdown from "markdown-to-jsx";
+import { ArticleFields } from "@/types/consts";
 
 export type ArticleDefaultProps = {
   mappedTextLinks?: { href: string; title?: string }[];
@@ -51,7 +52,10 @@ export const ArticleDefault = ({
           {mappedTags !== undefined && mappedTags?.length > 0 && (
             <div className={styles.tags}>
               {mappedTags.map(t => (
-                <Link key={t.tag} href={`/articles?article_type=${t.tag}&article-text=&page=1`} style={{ opacity: (70 - t.popularity) / 100 }}>
+                <Link
+                  key={t.tag}
+                  href={`/articles?${ArticleFields["tag"]}=${t.tag}&${ArticleFields["text"]}=&${ArticleFields["page"]}=1`}
+                  style={{ opacity: (70 - t.popularity) / 100 }}>
                   #{t.tag}
                 </Link>
               ))}

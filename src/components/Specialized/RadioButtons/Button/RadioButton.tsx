@@ -10,16 +10,17 @@ type RadioButtonProps = {
   value: string;
   checked: boolean;
   idx: number;
+  disabled?: boolean;
 } & ExternalClassnames;
 
 export const RadioButton = memo(
-  ({ children, name, checked, externalClassnames, value, onSelect, idx }: RadioButtonProps) => {
+  ({ children, name, checked, externalClassnames, value, onSelect, idx, disabled }: RadioButtonProps) => {
     const componentId = useId();
     const _onSelect = useCallback(() => onSelect(value), [value, checked]);
 
     return (
       // styles.buttonLabel,
-      <label tabIndex={idx} className={classnames("button", styles.button, externalClassnames)} htmlFor={componentId}>
+      <label tabIndex={disabled ? -1 : idx} className={classnames("button", styles.button, externalClassnames)} htmlFor={componentId}>
         <input
           className={classnames("visually-hidden")}
           name={name}
@@ -29,11 +30,12 @@ export const RadioButton = memo(
           onClick={_onSelect}
           readOnly
           checked={checked}
+          disabled={disabled}
         />
         {children}
       </label>
     );
   },
-  (prev, next) => prev.checked === next.checked
+  (prev, next) => prev.checked === next.checked && prev.disabled === next.disabled
 );
 RadioButton.displayName = "RadioButton";

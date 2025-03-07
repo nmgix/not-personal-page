@@ -8,7 +8,8 @@ export const articleCategories: { type: string; title: string; icon: keyof typeo
 export const inputPlacholderWords = ["мультисемплинг", "геймдев", "разработка"];
 export enum ArticleFields {
   tag = "article_tag",
-  text = "article-text"
+  text = "article-text",
+  page = "page"
 }
 export const bottomCleverBarShowThreshold = 70; //px
 

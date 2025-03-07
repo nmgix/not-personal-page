@@ -16,7 +16,7 @@ export const ArticleList = ({ list, externalClassnames, skeletonItems = 3 }: Art
       {list === undefined
         ? Array(skeletonItems)
             .fill(null)
-            .map((_, idx) => <Skeleton style={{ minHeight: 80 }} key={idx} />)
+            .map((_, idx) => <Skeleton style={{ minHeight: 80, borderRadius: 15, backgroundColor: "#bfbfbf" }} key={idx} />)
         : list !== null &&
           list.map((article, idx) =>
             article === undefined || Object.keys(article).length == 0 ? (

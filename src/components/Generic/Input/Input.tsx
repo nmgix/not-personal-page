@@ -15,6 +15,7 @@ type InputProps = {
   onEnterPress?: (entered: string) => void;
   onTextInputDebounce?: (entered: string) => void;
   focus?: true;
+  disabled?: boolean;
 } & ExternalClassnames;
 
 export type InputRef = {
@@ -31,28 +32,29 @@ export const Input = (props: InputProps & { ref?: React.Ref<InputRef> }) => {
     Array.isArray(props.placeholder) ? props.placeholder[Math.floor(Math.random() * props.placeholder.length)] : props.placeholder
   );
 
-  const [_value, setValue] = useState(props.value ?? "");
+  // const [_value, setValue] = useState(props.value ?? "");
+  const _value = useRef(props.value ?? "");
   useEffect(() => {
-    setValue(props.value ?? "");
+    _value.current = props.value ?? "";
   }, [props.value]);
   const debouncedValue = useDebounced(props.onTextInputDebounce, 300, true);
 
   const onValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    setValue(e.target.value);
+    _value.current = e.target.value;
     if (props.onLetterEntered !== undefined) props.onLetterEntered(e.target.value);
     debouncedValue(e.target.value);
   };
 
   const listenEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key == "Enter") {
-      props.onEnterPress!(_value);
+      props.onEnterPress!(_value.current);
     }
     return e;
   };
 
   useImperativeHandle(props.ref, () => ({
-    value: _value
+    value: _value.current
   }));
 
   return (
@@ -61,12 +63,14 @@ export const Input = (props: InputProps & { ref?: React.Ref<InputRef> }) => {
         <input
           className={styles.input}
           onChange={onValueChange}
-          value={props.value}
+          defaultValue={props.value}
+          // value={_value}
           onKeyDown={props.onEnterPress ? listenEnter : undefined}
           name={props.name}
           type='text'
           placeholder={_placeholder.current}
           autoFocus={props.focus}
+          disabled={props.disabled}
         />
       </div>
       {props.label !== undefined && (

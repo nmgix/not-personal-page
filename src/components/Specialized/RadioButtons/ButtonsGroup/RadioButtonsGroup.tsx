@@ -12,6 +12,8 @@ export type RadioButtonsGroupProps = {
   }[];
   name: string;
   onSelect?: (id: string | null) => void;
+  predefinedSelectedId?: string;
+  disabled?: boolean;
 } & { ref?: React.Ref<{ selectedOption: string }> } & ExternalClassnames;
 
 /**
@@ -26,8 +28,8 @@ export type RadioButtonsGroupProps = {
  *
  * @returns {React.JSX} React element
  */
-export const RadioButtonsGroup = ({ options, name, externalClassnames, onSelect, ref }: RadioButtonsGroupProps) => {
-  const [selectedOption, setSelectedOption] = useState("");
+export const RadioButtonsGroup = ({ options, name, externalClassnames, onSelect, ref, predefinedSelectedId, disabled }: RadioButtonsGroupProps) => {
+  const [selectedOption, setSelectedOption] = useState(predefinedSelectedId ?? "");
   const _onSelect = useCallback(
     (id: string) => {
       // ещё не пофиксил
@@ -52,8 +54,9 @@ export const RadioButtonsGroup = ({ options, name, externalClassnames, onSelect,
   return (
     <BoxesScrollbar
       noWrapper
+      disabled={disabled}
       list={options.map((option, i) => (
-        <RadioButton idx={i} checked={option.value === selectedOption} value={option.value} name={name} onSelect={_onSelect}>
+        <RadioButton disabled={disabled} idx={i} checked={option.value === selectedOption} value={option.value} name={name} onSelect={_onSelect}>
           {option.component}
         </RadioButton>
       ))}
