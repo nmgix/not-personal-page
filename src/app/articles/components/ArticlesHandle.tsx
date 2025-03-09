@@ -4,18 +4,18 @@ import styles from "../articles-page.module.scss";
 import { Input } from "@/components/Generic/Input";
 import { DefaultButton } from "@/components/Generic/Buttons";
 import { SearchParams, useArticlesSearch } from "@/hooks/useArticlesSearch";
-import { Suspense, useEffect, useRef, useTransition } from "react";
+import { Ref, Suspense, useEffect, useRef, useTransition } from "react";
 import { RadioButtonsGroup, RadioButtonsGroupProps } from "@/components/Specialized/RadioButtons";
 import { Icon } from "@/components/Generic/Icon";
 import { ArticleList } from "@/widgets/ArticleList";
 import { ArticleFields, inputPlacholderWords } from "@/types/consts";
 import { ExternalClassnames } from "@/types/components";
 
-type ArticlesSearchProps = { tags: ArticleTag[]; prefedinedControlsState?: { searchParams?: SearchParams; page?: number } } & Pick<
+type ArticlesSearchProps = { formRef: Ref<any>; tags: ArticleTag[]; prefedinedControlsState?: { searchParams?: SearchParams; page?: number } } & Pick<
   ReturnType<typeof useArticlesSearch>,
-  "setArticlesData" | "setFormData" | "fetchArticles" | "articlesData"
+  "fetchArticles" | "articlesData" | "loading" | "page"
 >;
-const ArticlesSearch = ({ tags, setArticlesData, prefedinedControlsState, setFormData, fetchArticles, articlesData }: ArticlesSearchProps) => {
+const ArticlesSearch = ({ page, loading, formRef, tags, prefedinedControlsState, fetchArticles, articlesData }: ArticlesSearchProps) => {
   const categoriesTagsRef = useRef<RadioButtonsGroupProps["options"]>(
     (tags ?? []).map(c => ({
       // react component в obj сомнительно но окэй
@@ -24,27 +24,31 @@ const ArticlesSearch = ({ tags, setArticlesData, prefedinedControlsState, setFor
     }))
   );
 
-  const [isPending, startTransition] = useTransition();
-
   const placeholders = useRef(inputPlacholderWords.map(w => `например, ${w}`));
 
   const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    startTransition(async () => {
-      e.preventDefault();
-      const fd = new FormData(e.currentTarget);
-      setFormData(fd);
-      const newUrl = `${GlobalRoutes.articles}?${new URLSearchParams({ ...(Object.fromEntries(fd) as SearchParams), page: 1 } as {})}`;
-      window.history.replaceState({ ...window.history.state, as: newUrl, new: newUrl }, "", newUrl);
-      await fetchArticles();
+    e.preventDefault();
+    const urlParams = new URLSearchParams({
+      ...Object.fromEntries(
+        Array.from(new FormData(e.currentTarget)).filter(function ([k, v]) {
+          return v;
+        })
+      ),
+      page: String(page)
     });
+    const newUrl = `${GlobalRoutes.articles}?${urlParams}`; // frontend route
+    console.log(newUrl);
+    window.history.replaceState({ ...window.history.state, as: newUrl, new: newUrl }, "", newUrl);
+    fetchArticles(urlParams);
   };
 
   const predefinedExists = prefedinedControlsState !== undefined && prefedinedControlsState["searchParams"] !== undefined;
 
-  const searchUnavailable = isPending === true || articlesData?.articles === undefined;
+  const searchUnavailable = loading === true || articlesData?.articles === undefined;
 
   return (
     <form
+      ref={formRef}
       className={styles.controls}
       onSubmit={onFormSubmit}
       style={{
@@ -96,13 +100,14 @@ export const ArticlesHandle = ({ tags, externalClassnames, presetState }: Articl
         : undefined
   };
   const articlesSearchHook = useArticlesSearch(undefined, undefined, _presetState);
+  const formRef = useRef<HTMLFormElement>(null);
   useEffect(() => {
-    articlesSearchHook.fetchArticles();
+    articlesSearchHook.fetchArticles(new FormData(formRef.current ?? undefined));
   }, []);
 
   return (
     <div className={classnames(styles.handle, externalClassnames)}>
-      <ArticlesSearch {...articlesSearchHook} tags={tags} prefedinedControlsState={_presetState} />
+      <ArticlesSearch formRef={formRef} {...articlesSearchHook} tags={tags} prefedinedControlsState={_presetState} />
       <ArticleList list={articlesSearchHook.articlesData.articles} externalClassnames={styles.articlesFound} />
     </div>
   );
