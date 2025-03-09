@@ -1,6 +1,6 @@
 "use client";
 
-import { useImperativeHandle, useRef, useState } from "react";
+import { useImperativeHandle, useRef, useState, useTransition } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import classnames from "classnames";
 import styles from "./articles-global-search.module.scss";
@@ -75,14 +75,20 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
 
   // CATEGORIES CONTROLS & STATE END
 
+  const [isPending, setTransition] = useTransition();
+
   // MAKING SEARCH START
 
   const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    console.log("form submit?");
-    e.preventDefault();
-    setFormData(new FormData(e.currentTarget));
-    fetchArticles();
+    setTransition(async () => {
+      console.log("form submit?");
+      e.preventDefault();
+      setFormData(new FormData(e.currentTarget));
+      await fetchArticles();
+    });
   };
+
+  console.log("global rerender");
 
   // MAKING SEARCH END
 
@@ -98,11 +104,18 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
   return (
     <Modal ariaLabel='articles global search' onClose={onClose} show={modalOpen} externalClassnames={styles.modal} hideCloseBtn>
       <div className={classnames("box", styles.articlesGlobalSearch)}>
-        <form className={styles.top} onSubmit={onFormSubmit}>
-          <div className={styles.titleWrapper}>
-            <h4 className={styles.title}>articles search</h4>
-            <span className={styles.subtitle}>{mockArticlesAmount} articles currently</span>
-          </div>
+        <div className={styles.titleWrapper}>
+          <h4 className={styles.title}>articles search</h4>
+          <span className={styles.subtitle}>{mockArticlesAmount} articles currently</span>
+        </div>
+        <form
+          className={styles.top}
+          onSubmit={onFormSubmit}
+          style={{
+            opacity: isPending ? "0.2" : 1,
+            pointerEvents: isPending ? "none" : "auto",
+            userSelect: isPending ? "none" : "auto"
+          }}>
           <RadioButtonsGroup
             onSelect={_onSelectCategory}
             name={ArticleFields.tag}

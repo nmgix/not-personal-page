@@ -15,7 +15,7 @@ export const useArticlesSearch = (
   predefinedState?: Partial<ArticlesState>,
   prefedinedControlsState?: { searchParams?: SearchParams; page?: number }
 ) => {
-  console.log({ prefedinedControlsState });
+  // console.log({ prefedinedControlsState });
   // const [searchParams, setSearchParams] = useState<SearchParams>({});
   const searchParams = useRef<SearchParams>(prefedinedControlsState?.searchParams ?? {});
   const [loading, setLoading] = useState(false);

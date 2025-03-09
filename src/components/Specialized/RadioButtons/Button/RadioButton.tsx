@@ -17,7 +17,6 @@ export const RadioButton = memo(
   ({ children, name, checked, externalClassnames, value, onSelect, idx, disabled }: RadioButtonProps) => {
     const componentId = useId();
     const _onSelect = useCallback(() => onSelect(value), [value, checked]);
-
     return (
       // styles.buttonLabel,
       <label tabIndex={disabled ? -1 : idx} className={classnames("button", styles.button, externalClassnames)} htmlFor={componentId}>
@@ -36,6 +35,6 @@ export const RadioButton = memo(
       </label>
     );
   },
-  (prev, next) => prev.checked === next.checked && prev.disabled === next.disabled
+  (prev, next) => prev.checked === next.checked && Boolean(prev.disabled) === Boolean(next.disabled)
 );
 RadioButton.displayName = "RadioButton";

@@ -4,6 +4,41 @@
 @use "../../../styles/media";
 @use "../../../styles/breakpoints";
 
+// $fadeWidth: 50px;
+
+// .fadeLeft {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   mask: linear-gradient(to right, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 1) $fadeWidth);
+//   -webkit-mask: linear-gradient(to right, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 1) $fadeWidth);
+//   pointer-events: none;
+// }
+
+// .fadeRight {
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+//   width: 100%;
+//   height: 100%;
+//   mask: linear-gradient(to right, rgba(0, 0, 0, 1) calc(100% - $fadeWidth), rgba(0, 0, 0, 0));
+//   -webkit-mask: linear-gradient(to right, rgba(0, 0, 0, 1) calc(100% - $fadeWidth), rgba(0, 0, 0, 0));
+//   pointer-events: none;
+// }
+
+// .dynamicFade {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   mask: linear-gradient(to right, rgba(0, 0, 0, 1) var(--dynamicFadeStart, 0px), rgba(0, 0, 0, 0) var(--dynamicFadeEnd, $fadeWidth));
+//   -webkit-mask: linear-gradient(to right, rgba(0, 0, 0, 1) var(--dynamicFadeStart, 0px), rgba(0, 0, 0, 0) var(--dynamicFadeEnd, $fadeWidth));
+//   pointer-events: none;
+// }
+
 .boxesScrollbar {
   display: flex;
   flex-direction: row;
@@ -26,27 +61,25 @@
     }
   }
 
-  // scroll-behavior: smooth;
-
-  // $fade-border-persentage: 10%;
-  // mask: linear-gradient(to right, black calc(100% - 30px), transparent);
-  // -webkit-mask: linear-gradient(to right, transparent 30px, black calc(100% - 60px), transparent);
-
-  // не transparent, а rgba потому что: https://codepen.io/kidd1118/pen/qxQwvE
-  // -webkit-mask:
-  // linear-gradient(
+  // $fadeWidth: 50px;
+  // .fadeRight {
+  //   mask: linear-gradient(to right, rgba(0, 0, 0, 1) calc(100% - $fadeWidth), rgba(0, 0, 0, 0));
+  //   -webkit-mask: linear-gradient(to right, rgba(0, 0, 0, 1) calc(100% - $fadeWidth), rgba(0, 0, 0, 0));
+  // }
+  // .fadeLeft {
+  //   mask: linear-gradient(to right, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 1) $fadeWidth);
+  //   -webkit-mask: linear-gradient(to right, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 1) $fadeWidth);
+  // }
+  // .fadeBoth {
+  //   mask: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) $fadeWidth, rgba(0, 0, 0, 1) calc(100% - $fadeWidth), rgba(0, 0, 0, 0));
+  //   -webkit-mask: linear-gradient(
   //     to right,
   //     rgba(0, 0, 0, 0) 0%,
-  //     rgba(0, 0, 0, 1) $fade-border-persentage,
-  //     rgba(0, 0, 0, 1) calc(100% - $fade-border-persentage),
-  //     rgba(0, 0, 0, 0) 100%
-  //   ),
-  //   linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) $fade-border-persentage),
-  //   linear-gradient(to right, rgba(0, 0, 0, 1) calc(100% - $fade-border-persentage), rgba(0, 0, 0, 0) 100%);
-  // // -webkit-mask: linear-gradient(to left, black calc(100% - 30px), transparent);
-  // // -webkit-mask: linear-gradient(to right, transparent, #fff) top / 10% 90%;
-  // // -webkit-mask: linear-gradient(to top, transparent 10%, #fff 15% 90%, transparent 95%);
-  // -webkit-mask-repeat: no-repeat;
+  //     rgba(0, 0, 0, 1) $fadeWidth,
+  //     rgba(0, 0, 0, 1) calc(100% - $fadeWidth),
+  //     rgba(0, 0, 0, 0)
+  //   );
+  // }
 
   :global(.box) {
     padding: paddings.$padding-xs paddings.$padding-s;

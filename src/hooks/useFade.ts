@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 // подумал что не смогу переписать всю функцию на leftSide/rightSide или topSide/bottomSide, так что ограничусь jsDoc
 
@@ -47,7 +47,7 @@ export const useFade = (
     if (appendedSyles !== null) element.classList.add(...appendedSyles);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (nodeRef?.current !== null) {
       _updateScroll(nodeRef.current); // called only once on init
     }

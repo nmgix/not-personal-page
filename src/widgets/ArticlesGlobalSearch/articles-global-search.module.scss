@@ -36,29 +36,28 @@
 
   background-color: rgba(var(--color-box-default), 0.6);
 
+  .title {
+    font-family: var(--font-strretch-sans);
+    font-size: 16px;
+    color: var(--color-font-hero);
+    font-weight: 400;
+
+    &Wrapper {
+      display: block;
+    }
+  }
+  .subtitle {
+    font-size: 12px;
+    color: var(--color-font-sub);
+    font-weight: 100;
+  }
+
   .top {
     display: flex;
     flex-direction: column;
     flex: 0;
 
     row-gap: margins.$margin-s;
-
-    .title {
-      font-family: var(--font-strretch-sans);
-      font-size: 16px;
-      color: var(--color-font-hero);
-      font-weight: 400;
-
-      &Wrapper {
-        display: block;
-      }
-    }
-
-    .subtitle {
-      font-size: 12px;
-      color: var(--color-font-sub);
-      font-weight: 100;
-    }
 
     .categories {
       border: none;
