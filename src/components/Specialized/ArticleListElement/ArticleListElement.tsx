@@ -20,7 +20,7 @@ export const ArticleListElement = ({ TTRmins, categoryImg, slug, tags, title, im
             ))}
             externalClassnames={styles.tags}
           />
-          <span className='TTR'>{formatedTTR}min</span>
+          <span className={styles.ttr}>{formatedTTR}min</span>
         </div>
         <div className={styles.textWrapper}>
           {previewImages && (

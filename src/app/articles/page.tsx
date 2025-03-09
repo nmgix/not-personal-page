@@ -4,13 +4,24 @@ import { ArticlesHandle } from "./components/ArticlesHandle";
 import { mockArticlesAmount } from "@/types/mocks";
 import { getPopularTags } from "../../serverfunctions/tags";
 import { ArticleFields } from "@/types/consts";
+import { getArticle } from "@/serverfunctions/getArticles";
+import { urldecode } from "@/helpers/url";
 
-export type QueryParams = { [key in keyof typeof ArticleFields]: string };
+export type QueryParams = { [key in ArticleFields]: string };
 
 export default async function Articles(props: { params: Promise<void>; searchParams?: Promise<QueryParams> }) {
   const query = await props.searchParams;
   const fetchedTags = getPopularTags(8);
-  // console.log(fetchedTags);
+  const fetchedArticles = !query
+    ? []
+    : getArticle(
+        query[ArticleFields.tag],
+        query[ArticleFields.text]
+          ?.split("+")
+          .filter(w => w.length > 0)
+          .map(w => urldecode(w))
+      );
+
   return (
     <div className={classnames("page", styles.articles)}>
       <h3 className={styles.header}>
@@ -20,7 +31,7 @@ export default async function Articles(props: { params: Promise<void>; searchPar
         <div className={classnames("box", styles.box1)} />
         <div className={classnames("box", styles.box2)} />
       </div>
-      <ArticlesHandle tags={fetchedTags} presetState={query} />
+      <ArticlesHandle tags={fetchedTags} presetQuery={query} presetArticles={fetchedArticles} />
     </div>
   );
 }

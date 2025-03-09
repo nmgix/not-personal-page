@@ -10,6 +10,16 @@ export interface SearchParams {
   [key: string]: string;
 }
 
+export const getUrlSearchParams = (fd: FormData, extraProps?: { [key: string]: string | number }): URLSearchParams =>
+  new URLSearchParams({
+    ...Object.fromEntries(
+      Array.from(fd).filter(function ([_, v]) {
+        return v;
+      })
+    ),
+    ...(extraProps as {})
+  });
+
 export const useArticlesSearch = (
   onResults?: (data: any[]) => void,
   predefinedState?: Partial<ArticlesState>,

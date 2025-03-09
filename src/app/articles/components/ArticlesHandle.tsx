@@ -3,19 +3,19 @@
 import styles from "../articles-page.module.scss";
 import { Input } from "@/components/Generic/Input";
 import { DefaultButton } from "@/components/Generic/Buttons";
-import { SearchParams, useArticlesSearch } from "@/hooks/useArticlesSearch";
-import { Ref, Suspense, useEffect, useRef, useTransition } from "react";
+import { getUrlSearchParams, SearchParams, useArticlesSearch } from "@/hooks/useArticlesSearch";
+import { Ref, useEffect, useRef } from "react";
 import { RadioButtonsGroup, RadioButtonsGroupProps } from "@/components/Specialized/RadioButtons";
 import { Icon } from "@/components/Generic/Icon";
 import { ArticleList } from "@/widgets/ArticleList";
 import { ArticleFields, inputPlacholderWords } from "@/types/consts";
 import { ExternalClassnames } from "@/types/components";
 
-type ArticlesSearchProps = { formRef: Ref<any>; tags: ArticleTag[]; prefedinedControlsState?: { searchParams?: SearchParams; page?: number } } & Pick<
+type ArticlesSearchProps = { formRef: Ref<any>; tags: ArticleTag[]; presetQuery?: { searchParams?: SearchParams; page?: number } } & Pick<
   ReturnType<typeof useArticlesSearch>,
   "fetchArticles" | "articlesData" | "loading" | "page"
 >;
-const ArticlesSearch = ({ page, loading, formRef, tags, prefedinedControlsState, fetchArticles, articlesData }: ArticlesSearchProps) => {
+const ArticlesSearch = ({ page, loading, formRef, tags, presetQuery, fetchArticles, articlesData }: ArticlesSearchProps) => {
   const categoriesTagsRef = useRef<RadioButtonsGroupProps["options"]>(
     (tags ?? []).map(c => ({
       // react component в obj сомнительно но окэй
@@ -28,21 +28,13 @@ const ArticlesSearch = ({ page, loading, formRef, tags, prefedinedControlsState,
 
   const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const urlParams = new URLSearchParams({
-      ...Object.fromEntries(
-        Array.from(new FormData(e.currentTarget)).filter(function ([k, v]) {
-          return v;
-        })
-      ),
-      page: String(page)
-    });
+    const urlParams = getUrlSearchParams(new FormData(e.currentTarget), { page: String(page) });
     const newUrl = `${GlobalRoutes.articles}?${urlParams}`; // frontend route
-    console.log(newUrl);
     window.history.replaceState({ ...window.history.state, as: newUrl, new: newUrl }, "", newUrl);
     fetchArticles(urlParams);
   };
 
-  const predefinedExists = prefedinedControlsState !== undefined && prefedinedControlsState["searchParams"] !== undefined;
+  const predefinedExists = presetQuery !== undefined && presetQuery["searchParams"] !== undefined;
 
   const searchUnavailable = loading === true || articlesData?.articles === undefined;
 
@@ -62,10 +54,10 @@ const ArticlesSearch = ({ page, loading, formRef, tags, prefedinedControlsState,
         disabled={searchUnavailable}
         options={categoriesTagsRef.current}
         externalClassnames={styles.controlsTags}
-        predefinedSelectedId={predefinedExists ? prefedinedControlsState["searchParams"]![ArticleFields.tag] : undefined}
+        predefinedSelectedId={predefinedExists ? presetQuery["searchParams"]![ArticleFields.tag] : undefined}
       />
       <Input
-        value={predefinedExists ? prefedinedControlsState["searchParams"]![ArticleFields.text] : undefined}
+        value={predefinedExists ? presetQuery["searchParams"]![ArticleFields.text] : undefined}
         externalClassnames={styles.controlsInput}
         name={ArticleFields.text}
         ref={null}
@@ -80,34 +72,43 @@ const ArticlesSearch = ({ page, loading, formRef, tags, prefedinedControlsState,
 };
 
 import classnames from "classnames";
-import { ArticleTag, GlobalRoutes } from "@/types/articles";
+import { ArticleListElementProps, ArticleTag, GlobalRoutes } from "@/types/articles";
 import { QueryParams } from "../page";
 
-type ArticlesHandleProps = { tags: ArticleTag[]; presetState?: Partial<QueryParams> } & ExternalClassnames;
-export const ArticlesHandle = ({ tags, externalClassnames, presetState }: ArticlesHandleProps) => {
+type ArticlesHandleProps = {
+  tags: ArticleTag[];
+  presetArticles?: ArticleListElementProps[];
+  presetQuery?: Partial<QueryParams>;
+} & ExternalClassnames;
+export const ArticlesHandle = ({ presetArticles, tags, externalClassnames, presetQuery }: ArticlesHandleProps) => {
   // console.log({ presetState });
 
-  const _presetState = {
-    page: presetState?.page !== undefined ? Number(presetState?.page) : undefined,
+  const _presetQuery = {
+    page: presetQuery?.page !== undefined ? Number(presetQuery?.page) : undefined,
     searchParams:
-      presetState !== undefined &&
-      (presetState[ArticleFields.tag as keyof Partial<QueryParams>] !== undefined ||
-        presetState[ArticleFields.text as keyof Partial<QueryParams>]) !== undefined
+      presetQuery !== undefined &&
+      (presetQuery[ArticleFields.tag as keyof Partial<QueryParams>] !== undefined ||
+        presetQuery[ArticleFields.text as keyof Partial<QueryParams>]) !== undefined
         ? {
-            [ArticleFields.tag]: presetState[ArticleFields.tag as keyof Partial<QueryParams>] ?? "",
-            [ArticleFields.text]: presetState[ArticleFields.text as keyof Partial<QueryParams>] ?? ""
+            [ArticleFields.tag]: presetQuery[ArticleFields.tag as keyof Partial<QueryParams>] ?? "",
+            [ArticleFields.text]: presetQuery[ArticleFields.text as keyof Partial<QueryParams>] ?? ""
           }
         : undefined
   };
-  const articlesSearchHook = useArticlesSearch(undefined, undefined, _presetState);
+  const articlesSearchHook = useArticlesSearch(
+    undefined,
+    presetArticles && presetArticles.length > 0 ? { articles: presetArticles, totalPages: 1 } : undefined,
+    _presetQuery
+  );
   const formRef = useRef<HTMLFormElement>(null);
-  useEffect(() => {
-    articlesSearchHook.fetchArticles(new FormData(formRef.current ?? undefined));
-  }, []);
+
+  // useEffect(() => {
+  //   articlesSearchHook.fetchArticles(getUrlSearchParams(new FormData(formRef.current ?? undefined), { page: String(articlesSearchHook.page) }));
+  // }, []); // вот этот реквест заменить на serverside респонзс с найденными статьями
 
   return (
     <div className={classnames(styles.handle, externalClassnames)}>
-      <ArticlesSearch formRef={formRef} {...articlesSearchHook} tags={tags} prefedinedControlsState={_presetState} />
+      <ArticlesSearch formRef={formRef} {...articlesSearchHook} tags={tags} presetQuery={_presetQuery} />
       <ArticleList list={articlesSearchHook.articlesData.articles} externalClassnames={styles.articlesFound} />
     </div>
   );
