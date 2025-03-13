@@ -84,7 +84,7 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
           </div>
         </form>
         <div className={styles.searchResult}>
-          {nothingSelected && (
+          {nothingSelected && !articlesFound && (
             <div className={styles.girlBored}>
               <Image
                 src='/assets/girl.png'

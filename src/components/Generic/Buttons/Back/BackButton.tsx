@@ -10,7 +10,7 @@ type BackButtonProps = ExternalClassnames;
 
 export const BackButton = (props: BackButtonProps) => {
   return (
-    <Link className={classnames("button", styles.backBtn, props.externalClassnames)} href={GlobalRoutes.articles}>
+    <Link prefetch={false} className={classnames("button", styles.backBtn, props.externalClassnames)} href={GlobalRoutes.articles}>
       &#91;к статьям&#93;
     </Link>
   );

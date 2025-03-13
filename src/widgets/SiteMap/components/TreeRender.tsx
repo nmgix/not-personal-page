@@ -24,7 +24,15 @@ function TreeNode({
 
   return (
     <div className={classnames(styles.treeNode, nodeProps)}>
-      <div className={styles.label}>{noLink ? <span>{label}</span> : <Link href={fullPath.current}>{label}</Link>}</div>
+      <div className={styles.label}>
+        {noLink ? (
+          <span>{label}</span>
+        ) : (
+          <Link prefetch={false} href={fullPath.current}>
+            {label}
+          </Link>
+        )}
+      </div>
 
       <ul className={styles.children}>
         {children !== undefined && children.length > 0 && (

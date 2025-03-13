@@ -7,7 +7,7 @@ const ClientDate = dynamic(() => import("./components/ClientDate").then(c => c.C
 export const Header = ({ homeHref = "/" }: { homeHref: string }) => {
   return (
     <header className={styles.header}>
-      <Link href={homeHref}>
+      <Link prefetch={false} href={homeHref}>
         <h1 className={styles.devTitle}>{process.env.NEXT_PUBLIC_NAME}</h1>
       </Link>
       <ClientDate />

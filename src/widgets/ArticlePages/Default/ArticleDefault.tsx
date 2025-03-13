@@ -53,8 +53,10 @@ export const ArticleDefault = ({
             <div className={styles.tags}>
               {mappedTags.map(t => (
                 <Link
+                  prefetch={false}
                   key={t.tag}
-                  href={`/articles?${ArticleFields["tag"]}=${t.tag}&${ArticleFields["text"]}=&${ArticleFields["page"]}=1`}
+                  shallow={false}
+                  href={`/articles?${ArticleFields["tag"]}=${t.tag}`}
                   style={{ opacity: (70 - t.popularity) / 100 }}>
                   #{t.tag}
                 </Link>

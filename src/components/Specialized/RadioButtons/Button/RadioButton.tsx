@@ -13,28 +13,28 @@ type RadioButtonProps = {
   disabled?: boolean;
 } & ExternalClassnames;
 
-export const RadioButton = memo(
-  ({ children, name, checked, externalClassnames, value, onSelect, idx, disabled }: RadioButtonProps) => {
-    const componentId = useId();
-    const _onSelect = useCallback(() => onSelect(value), [value, checked]);
-    return (
-      // styles.buttonLabel,
-      <label tabIndex={disabled ? -1 : idx} className={classnames("button", styles.button, externalClassnames)} htmlFor={componentId}>
-        <input
-          className={classnames("visually-hidden")}
-          name={name}
-          type='radio'
-          id={componentId}
-          value={value}
-          onClick={_onSelect}
-          readOnly
-          checked={checked}
-          disabled={disabled}
-        />
-        {children}
-      </label>
-    );
-  },
-  (prev, next) => prev.checked === next.checked && Boolean(prev.disabled) === Boolean(next.disabled)
-);
+export const RadioButton = ({ children, name, checked, externalClassnames, value, onSelect, idx, disabled }: RadioButtonProps) => {
+  // memo(
+  const componentId = useId();
+  const _onSelect = useCallback(() => onSelect(value), [value, checked]);
+  return (
+    // styles.buttonLabel,
+    <label tabIndex={disabled ? -1 : idx} className={classnames("button", styles.button, externalClassnames)} htmlFor={componentId}>
+      <input
+        className={classnames("visually-hidden")}
+        name={name}
+        type='radio'
+        id={componentId}
+        value={value}
+        onClick={_onSelect}
+        readOnly
+        checked={checked}
+        disabled={disabled}
+      />
+      {children}
+    </label>
+  );
+};
+//   (prev, next) => prev.checked === next.checked && Boolean(prev.disabled) === Boolean(next.disabled)
+// );
 RadioButton.displayName = "RadioButton";

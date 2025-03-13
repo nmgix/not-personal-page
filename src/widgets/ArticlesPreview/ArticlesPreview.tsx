@@ -13,7 +13,7 @@ export const ArticlesPreview = ({ list, externalClassnames, articlesRenderLimit 
   return (
     <div className={classnames("box", styles.articlesPreview, externalClassnames)}>
       <div className={classnames("fadeBottom", styles.articlesPreviewInsideWrapper)}>
-        <Link href={GlobalRoutes.articles} className={styles.articlesPreviewLink} />
+        <Link prefetch={false} href={GlobalRoutes.articles} className={styles.articlesPreviewLink} />
         <h3 className={styles.header}>
           статьи<mark>&#40;{list.length}&#41;</mark>
         </h3>
@@ -21,6 +21,7 @@ export const ArticlesPreview = ({ list, externalClassnames, articlesRenderLimit 
           {list &&
             list.slice(0, articlesRenderLimit ?? 3).map((article, i) => (
               <Link
+                prefetch={false}
                 key={article.slug}
                 href={`${GlobalRoutes.article}${article.slug}`}
                 className={classnames("fadeBottom", styles.element)}

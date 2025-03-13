@@ -13,6 +13,7 @@ export default function RootLayout({
   children: React.ReactNode | React.ReactNode[];
   articlemodal: React.ReactNode;
 }>) {
+  console.log("another page??");
   return (
     <>
       {children}

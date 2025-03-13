@@ -22,7 +22,7 @@ type VideoPreviewProps = ArticleVideoPreview & ExternalClassnames;
 
 export const VideoPreview = ({ meta, slug, externalClassnames }: VideoPreviewProps) => {
   return (
-    <Link href={`${GlobalRoutes.article}${slug}`} className={classnames("box", styles.videoPreview, externalClassnames)}>
+    <Link prefetch={false} href={`${GlobalRoutes.article}${slug}`} className={classnames("box", styles.videoPreview, externalClassnames)}>
       {typeof meta.imagePlaceholderSrc === "string" && (
         <Image src={meta.imagePlaceholderSrc} alt={`thumbnail of "${meta.title}"`} fill externalClassnames={styles.thumbnail} />
       )}

@@ -1,7 +1,7 @@
 import classnames from "classnames";
 import { BoxesScrollbar } from "@/components/Specialized/BoxesScrollbar";
 import styles from "../radio-buttons.module.scss";
-import { memo, useCallback, useImperativeHandle, useState } from "react";
+import { memo, useCallback, useEffect, useImperativeHandle, useState } from "react";
 import { RadioButton } from "../Button/RadioButton";
 import { ExternalClassnames } from "@/types/components";
 
@@ -28,37 +28,38 @@ export type RadioButtonsGroupProps = {
  *
  * @returns {React.JSX} React element
  */
-export const RadioButtonsGroup = memo(
-  ({ options, name, externalClassnames, onSelect, ref, predefinedSelectedId, disabled }: RadioButtonsGroupProps) => {
-    const [selectedOption, setSelectedOption] = useState(predefinedSelectedId ?? "");
-    const _onSelect = useCallback(
-      (id: string) => {
-        // ещё не пофиксил
-        // console.log({ id, selectedOption, equal: id == selectedOption });
-        setSelectedOption(id == selectedOption ? "" : id);
-        if (onSelect) onSelect(id == selectedOption ? null : id);
-      },
-      [selectedOption]
-    );
+export const RadioButtonsGroup = ({ options, name, externalClassnames, onSelect, ref, predefinedSelectedId, disabled }: RadioButtonsGroupProps) => {
+  const [selectedOption, setSelectedOption] = useState(predefinedSelectedId ?? "");
+  useEffect(() => {
+    setSelectedOption(predefinedSelectedId ?? "");
+  }, [predefinedSelectedId]);
 
-    useImperativeHandle(ref, () => ({
-      selectedOption
-    }));
+  const _onSelect = useCallback(
+    (id: string) => {
+      // ещё не пофиксил
+      // console.log({ id, selectedOption, equal: id == selectedOption });
+      setSelectedOption(id == selectedOption ? "" : id);
+      if (onSelect) onSelect(id == selectedOption ? null : id);
+    },
+    [selectedOption]
+  );
 
-    // TODO на сегодня: уйти от boxes scrollbar, выделить fade как кормпонент или scrollable, ибо обёртка детей в .box мешает
-    return (
-      <BoxesScrollbar
-        noWrapper
-        disabled={disabled}
-        list={options.map((option, i) => (
-          <RadioButton disabled={disabled} idx={i} checked={option.value === selectedOption} value={option.value} name={name} onSelect={_onSelect}>
-            {option.component}
-          </RadioButton>
-        ))}
-        externalClassnames={classnames(styles.group, externalClassnames)}
-      />
-    );
-  },
-  (prev, next) => prev.options.length === next.options.length && Boolean(prev.disabled) === Boolean(next.disabled)
-); // TODO поправить на что-то умное
+  useImperativeHandle(ref, () => ({
+    selectedOption
+  }));
+
+  // TODO на сегодня: уйти от boxes scrollbar, выделить fade как кормпонент или scrollable, ибо обёртка детей в .box мешает
+  return (
+    <BoxesScrollbar
+      noWrapper
+      disabled={disabled}
+      list={options.map((option, i) => (
+        <RadioButton disabled={disabled} idx={i} checked={option.value === selectedOption} value={option.value} name={name} onSelect={_onSelect}>
+          {option.component}
+        </RadioButton>
+      ))}
+      externalClassnames={classnames(styles.group, externalClassnames)}
+    />
+  );
+};
 RadioButtonsGroup.displayName = "RadioButtonsGroup";

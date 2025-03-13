@@ -38,7 +38,7 @@ export default async function Articles(props: { params: Promise<void>; searchPar
         {latestPosts[0] ? <LatestBox {...latestPosts[0]} externalClassnames={styles.box1} /> : <div className={classnames("box", styles.box1)} />}
         {latestPosts[1] ? <LatestBox {...latestPosts[1]} externalClassnames={styles.box2} /> : <div className={classnames("box", styles.box2)} />}
       </div>
-      <ArticlesHandle tags={fetchedTags} presetQuery={query} presetArticles={fetchedArticles} />
+      <ArticlesHandle tags={fetchedTags} query={query} presetArticles={fetchedArticles} />
     </div>
   );
 }
