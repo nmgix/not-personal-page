@@ -1,6 +1,6 @@
 import classnames from "classnames";
 import styles from "../radio-buttons.module.scss";
-import { memo, useCallback, useId } from "react";
+import { memo, RefObject, useCallback, useId } from "react";
 import { ExternalClassnames } from "@/types/components";
 
 type RadioButtonProps = {

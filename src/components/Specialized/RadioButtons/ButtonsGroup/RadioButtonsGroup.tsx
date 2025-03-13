@@ -1,7 +1,7 @@
 import classnames from "classnames";
 import { BoxesScrollbar } from "@/components/Specialized/BoxesScrollbar";
 import styles from "../radio-buttons.module.scss";
-import { memo, useCallback, useEffect, useImperativeHandle, useState } from "react";
+import { memo, useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { RadioButton } from "../Button/RadioButton";
 import { ExternalClassnames } from "@/types/components";
 
@@ -29,15 +29,30 @@ export type RadioButtonsGroupProps = {
  * @returns {React.JSX} React element
  */
 export const RadioButtonsGroup = ({ options, name, externalClassnames, onSelect, ref, predefinedSelectedId, disabled }: RadioButtonsGroupProps) => {
+  const boxRef = useRef<HTMLDivElement>(null);
+
   const [selectedOption, setSelectedOption] = useState(predefinedSelectedId ?? "");
   useEffect(() => {
     setSelectedOption(predefinedSelectedId ?? "");
+
+    if (!!boxRef.current) {
+      const idx = options.findIndex(o => o.value === predefinedSelectedId);
+      const child = boxRef.current.children[idx] as HTMLLabelElement;
+      if (!child) return;
+      child.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        inline: "center" // Это важно для горизонтальной прокрутки! // gpt комм
+      });
+      // let timeout = setTimeout(() => {
+      //   child.focus();
+      //   clearTimeout(timeout);
+      // }, 0.5);
+    }
   }, [predefinedSelectedId]);
 
   const _onSelect = useCallback(
     (id: string) => {
-      // ещё не пофиксил
-      // console.log({ id, selectedOption, equal: id == selectedOption });
       setSelectedOption(id == selectedOption ? "" : id);
       if (onSelect) onSelect(id == selectedOption ? null : id);
     },
@@ -53,6 +68,7 @@ export const RadioButtonsGroup = ({ options, name, externalClassnames, onSelect,
     <BoxesScrollbar
       noWrapper
       disabled={disabled}
+      ref={boxRef}
       list={options.map((option, i) => (
         <RadioButton disabled={disabled} idx={i} checked={option.value === selectedOption} value={option.value} name={name} onSelect={_onSelect}>
           {option.component}

@@ -17,6 +17,7 @@ type ArticlesSearchProps = {
   query?: { searchParams?: SearchParams; page?: number };
 } & Pick<ReturnType<typeof useArticlesSearch>, "fetchArticles" | "articlesData" | "loading" | "page">;
 const ArticlesSearch = ({ page, loading, formRef, tags, query, fetchArticles, articlesData }: ArticlesSearchProps) => {
+  const placeholders = useRef(inputPlacholderWords.map(w => `например, ${w}`));
   const categoriesTagsRef = useRef<RadioButtonsGroupProps["options"]>(
     (tags ?? []).map(c => ({
       // react component в obj сомнительно но окэй
@@ -24,8 +25,6 @@ const ArticlesSearch = ({ page, loading, formRef, tags, query, fetchArticles, ar
       value: c.tag
     }))
   );
-
-  const placeholders = useRef(inputPlacholderWords.map(w => `например, ${w}`));
 
   const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -37,14 +36,9 @@ const ArticlesSearch = ({ page, loading, formRef, tags, query, fetchArticles, ar
 
   const [firstRender, setFirstRender] = useState(true);
   useEffect(() => {
-    // @ts-ignore
-    console.log("render, query: " + query?.searchParams[ArticleFields.tag]);
     if (firstRender === true) {
       return setFirstRender(false);
     } else {
-      // @ts-ignore
-      console.log(`query change ${query?.searchParams[ArticleFields.tag]}`);
-      // formRef.current!.requestSubmit();
       if (query !== undefined && query["searchParams"] !== undefined) {
         fetchArticles(new URLSearchParams({ ...query["searchParams"], page: String(page) }));
       }

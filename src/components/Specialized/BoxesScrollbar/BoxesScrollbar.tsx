@@ -11,10 +11,9 @@ type BoxesScrollbarProps = {
   list: React.ReactElement[];
   noWrapper?: true;
   disabled?: boolean;
-} & ExternalClassnames;
+} & { ref?: React.Ref<HTMLDivElement> } & ExternalClassnames;
 
-export const BoxesScrollbar = ({ list, externalClassnames, noWrapper, disabled }: BoxesScrollbarProps) => {
-  const boxRef = useRef<HTMLDivElement>(null);
+export const BoxesScrollbar = ({ list, externalClassnames, noWrapper, disabled, ref }: BoxesScrollbarProps) => {
   // const { updateScrollFn, fadeBoth, fadeState } = useFade(boxRef as React.RefObject<HTMLElement>, true, {
   //   sideOne: "fadeLeft",
   //   sideTwo: "fadeRight",
@@ -62,7 +61,7 @@ export const BoxesScrollbar = ({ list, externalClassnames, noWrapper, disabled }
 
   return (
     <div
-      ref={boxRef}
+      ref={ref}
       // onScroll={updateScrollFn}
       // onScroll={e => {
       //   let scroll = e.currentTarget.scrollLeft;
