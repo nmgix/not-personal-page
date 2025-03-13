@@ -3,13 +3,10 @@ import type { Metadata } from "next";
 import "../styles/global.styles.scss";
 import "react-loading-skeleton/dist/skeleton.css";
 import { GlobalRoutes } from "@/types/articles";
-import { JetBrains_Mono } from "next/font/google";
 
-import localFont from "next/font/local";
 import classnames from "classnames";
 import { usedFonts } from "@/types/consts";
-import { AppHotkeysWrapper, ArticlesGlobalSearch } from "@/widgets/ArticlesGlobalSearch";
-import { HotkeysProvider } from "react-hotkeys-hook";
+import { ArticlesGlobalSearch } from "@/widgets/ArticlesGlobalSearch";
 
 export const metadata: Metadata = {
   title: process.env.NEXT_PUBLIC_NAME,
@@ -21,11 +18,9 @@ export default async function RootLayout(props: { params: Promise<any>; children
   return (
     <html lang='ru' className={classnames(...usedFonts.map(f => f.variable))}>
       <body>
-        <AppHotkeysWrapper>
-          <Header homeHref={GlobalRoutes.home} />
-          {props.children}
-          <ArticlesGlobalSearch />
-        </AppHotkeysWrapper>
+        <Header homeHref={GlobalRoutes.home} />
+        {props.children}
+        <ArticlesGlobalSearch />
       </body>
     </html>
   );

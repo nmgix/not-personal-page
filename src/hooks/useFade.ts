@@ -48,10 +48,7 @@ export const useFade = (
   };
 
   useLayoutEffect(() => {
-    if (nodeRef?.current !== null) {
-      _updateScroll(nodeRef.current); // called only once on init
-    }
-    console.log("lel not once");
+    if (nodeRef?.current !== null) _updateScroll(nodeRef.current);
   }, [nodeRef]);
 
   // whole hook is called multiple times

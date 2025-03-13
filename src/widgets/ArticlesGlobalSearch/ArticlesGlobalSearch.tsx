@@ -15,6 +15,8 @@ import { ArticleFields, inputPlacholderWords } from "@/types/consts";
 import { useModal } from "./hooks/useModal";
 import { useInput } from "./hooks/useInput";
 import { useCategory } from "./hooks/useCategory";
+import useClickOutside from "./hooks/useClickOutside";
+import { useRef } from "react";
 
 const Modal = dynamic(() => import("../../components/Generic/Modal").then(m => m.Modal), { ssr: false });
 
@@ -23,10 +25,12 @@ export type ArticlesGlobalSearchRef = {
 };
 
 export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSearchRef> }) => {
-  const { onClose, modalOpen } = useModal(ref);
+  const { onClose, modalOpen, setModalOpen } = useModal(ref);
   const { articlesData, setArticlesData, loading, page, fetchArticles } = useArticlesSearch();
   const { input, onInput, placeholders } = useInput(inputPlacholderWords, setArticlesData);
   const { categoriesRef, selectedCategory, onSelectCategory } = useCategory(setArticlesData);
+  const searchRef = useRef<HTMLDivElement>(null);
+  useClickOutside<HTMLDivElement>(searchRef, () => setModalOpen(false));
 
   const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -36,7 +40,7 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
 
   // render//misc
   const nothingSelected = input.length == 0 && (selectedCategory == null || selectedCategory == "");
-  const articlesFound = !!articlesData.articles && articlesData.articles.length > 0 && input.length > 0;
+  const articlesFound = !!articlesData.articles && articlesData.articles.length > 0;
   const noArticlesFound =
     articlesData.articles !== null &&
     articlesData.articles?.length == 0 &&
@@ -45,7 +49,7 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
 
   return (
     <Modal ariaLabel='articles global search' onClose={onClose} show={modalOpen} externalClassnames={styles.modal} hideCloseBtn>
-      <div className={classnames("box", styles.articlesGlobalSearch)}>
+      <div ref={searchRef} className={classnames("box", styles.articlesGlobalSearch)}>
         <div className={styles.titleWrapper}>
           <h4 className={styles.title}>articles search</h4>
           <span className={styles.subtitle}>{mockArticlesAmount} articles currently</span>

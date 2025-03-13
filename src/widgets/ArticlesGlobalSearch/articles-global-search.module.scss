@@ -34,7 +34,8 @@
 
   overflow-y: hidden;
 
-  background-color: rgba(var(--color-box-default), 0.6);
+  // https://stackoverflow.com/a/71098929/14889638
+  background-color: color-mix(in srgb, var(--color-box-default) 30%, transparent);
 
   .title {
     font-family: var(--font-strretch-sans);
