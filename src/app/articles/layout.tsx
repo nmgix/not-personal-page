@@ -1,4 +1,3 @@
-import { ArticlesGlobalSearch } from "@/widgets/ArticlesGlobalSearch";
 import { BottomCleverBar } from "@/widgets/BottomCleverBar";
 import { BarTypes } from "@/widgets/BottomCleverBar/serverutils";
 import type { Metadata } from "next";
@@ -16,7 +15,6 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <ArticlesGlobalSearch />
       {children}
       {articlemodal}
       <BottomCleverBar currentBars={BarTypes["articles"].bars} hideInTop={BarTypes["articles"].hideInTop} />

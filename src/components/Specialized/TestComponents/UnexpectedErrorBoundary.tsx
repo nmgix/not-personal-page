@@ -4,6 +4,8 @@ import { createPortal } from "react-dom";
 import { useEffect, useRef, useState } from "react";
 import { BoundaryRender } from "./Boundary";
 import { useNetworkState } from "react-use";
+import { useHotkeysContext } from "react-hotkeys-hook";
+import { KeybindsScopes } from "@/types/consts";
 
 const boundaryActivatePercent = 70;
 
@@ -12,6 +14,7 @@ export const UnexpectedErrorBoundary = () => {
   const [foundOut, setFoundOut] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
   const htmlRef = useRef<HTMLHtmlElement>(null);
+  const { disableScope, enableScope } = useHotkeysContext();
   const windowHeight = useRef<number | null>(null); //ну кто захочет баловаться высотой, тогои проблемы,  всякие landscape и portrait ориентации я поддерживать не собираюсь
   useEffect(() => {
     htmlRef.current = document.querySelector("html");
@@ -34,12 +37,15 @@ export const UnexpectedErrorBoundary = () => {
     // и так даже лучше
     if (foundOut === false) {
       document.body.classList.remove("hideFromTop");
+      enableScope(KeybindsScopes.globalSearch);
     } else {
       if (activeBoundary) {
         document.body.classList.add("hideFromTop");
         document.body.style.top = `0px`; // на всякий ибо если зажать кнопку при триггере, то top остается тот что был при drag
+        disableScope(KeybindsScopes.globalSearch);
       } else {
         document.body.classList.remove("hideFromTop");
+        enableScope(KeybindsScopes.globalSearch);
       }
     }
   }, [activeBoundary, foundOut]);

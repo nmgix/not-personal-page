@@ -48,3 +48,7 @@ const jetBrainsFont = JetBrains_Mono({
 });
 
 export const usedFonts = [pulsewidthFont, pulsewidthDotFont, strretchSansFont, jetBrainsFont];
+
+export enum KeybindsScopes {
+  globalSearch = "global-search"
+}

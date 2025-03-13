@@ -1,1 +1,2 @@
-export { ArticlesGlobalSearch, type SearchRef } from "./ArticlesGlobalSearch";
+export { ArticlesGlobalSearch } from "./ArticlesGlobalSearch";
+export { AppHotkeysWrapper } from "./AppHotkeysWrapper";

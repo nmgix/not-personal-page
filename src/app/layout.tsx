@@ -8,6 +8,8 @@ import { JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import classnames from "classnames";
 import { usedFonts } from "@/types/consts";
+import { AppHotkeysWrapper, ArticlesGlobalSearch } from "@/widgets/ArticlesGlobalSearch";
+import { HotkeysProvider } from "react-hotkeys-hook";
 
 export const metadata: Metadata = {
   title: process.env.NEXT_PUBLIC_NAME,
@@ -19,8 +21,11 @@ export default async function RootLayout(props: { params: Promise<any>; children
   return (
     <html lang='ru' className={classnames(...usedFonts.map(f => f.variable))}>
       <body>
-        <Header homeHref={GlobalRoutes.home} />
-        {props.children}
+        <AppHotkeysWrapper>
+          <Header homeHref={GlobalRoutes.home} />
+          {props.children}
+          <ArticlesGlobalSearch />
+        </AppHotkeysWrapper>
       </body>
     </html>
   );
