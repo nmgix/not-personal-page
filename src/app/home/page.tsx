@@ -21,6 +21,7 @@ export default function Home() {
     title: latestArticle?.meta.title ?? latestArticle?.slug ?? "somehow title didnt load UwU",
     categoryImg: latestArticle?.meta.categoryImg ?? "tech-article",
     tags: [],
+    date: latestArticle?.meta.date ?? new Date(0).toISOString(),
     imagesSrc: [],
     previewImages: false,
     textPreview: latestArticle?.meta.textPreview,

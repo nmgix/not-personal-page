@@ -13,3 +13,4 @@ export declare const variant3BottomTitle: string;
 export declare const variant3Top: string;
 export declare const variant3TopTags: string;
 export declare const variant4Top: string;
+export declare const wrapper: string;

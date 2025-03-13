@@ -3,7 +3,7 @@
 
 .shared {
   min-height: 150px;
-  max-width: 300px;
+  // max-width: 300px;
 
   display: flex;
 
@@ -12,6 +12,23 @@
 
   padding: paddings.$padding-s;
   color: var(--color-font-default);
+
+  overflow: hidden;
+}
+
+.wrapper {
+  :global(.box) {
+    width: 100%;
+    height: 100%;
+
+    box-sizing: border-box;
+  }
+}
+
+@mixin textline-overflow {
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  word-break: keep-all;
 }
 
 .variant1 {
@@ -36,12 +53,15 @@
   }
   &Bottom {
     flex: 1;
-    align-content: end;
+    align-content: flex-end;
 
     display: flex;
     flex-direction: row;
-    gap: margins.$margin-s;
+    column-gap: margins.$margin-s;
+    row-gap: margins.$margin-xs;
     flex-wrap: wrap;
+
+    overflow: hidden;
   }
 }
 
@@ -55,6 +75,8 @@
       font-weight: 800;
       color: var(--color-font-hero);
       font-size: 24px;
+
+      @include textline-overflow;
     }
   }
 
@@ -76,7 +98,7 @@
 }
 
 .variant3 {
-  justify-content: end;
+  justify-content: flex-end;
   flex-direction: column;
 
   &Top {
@@ -85,9 +107,7 @@
     justify-content: space-between;
 
     &Tags {
-      overflow-x: hidden;
-      text-overflow: ellipsis;
-      word-break: keep-all;
+      @include textline-overflow;
     }
   }
 
@@ -97,11 +117,7 @@
       color: var(--color-font-hero);
       font-size: 24px;
 
-      text-align: center;
-      white-space: nowrap;
-      overflow-x: hidden;
-      text-overflow: ellipsis;
-      word-break: keep-all;
+      @include textline-overflow;
     }
   }
 }

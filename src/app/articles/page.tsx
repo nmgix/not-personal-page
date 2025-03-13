@@ -7,6 +7,7 @@ import { ArticleFields } from "@/types/consts";
 import { getArticles } from "@/serverfunctions/getArticles";
 import { urldecode } from "@/helpers/url";
 import { getDocBySlugShorten, getLatestDocs } from "@/serverfunctions/getDoc";
+import { LatestBox } from "./components/latest-box/LatestBox";
 
 export type QueryParams = { [key in ArticleFields]: string };
 
@@ -27,7 +28,6 @@ export default async function Articles(props: { params: Promise<void>; searchPar
     const [category, slug] = d.file.split("/");
     return getDocBySlugShorten(category, slug);
   });
-  console.log(latestPosts);
 
   return (
     <div className={classnames("page", styles.articles)}>
@@ -35,8 +35,8 @@ export default async function Articles(props: { params: Promise<void>; searchPar
         &#91;статьи&#93;<mark>{mockArticlesAmount}</mark>
       </h3>
       <div className={styles.latestPosts}>
-        {/* <div className={classnames("box", styles.box1)} /> */}
-        {/* <div className={classnames("box", styles.box2)} /> */}
+        {latestPosts[0] ? <LatestBox {...latestPosts[0]} externalClassnames={styles.box1} /> : <div className={classnames("box", styles.box1)} />}
+        {latestPosts[1] ? <LatestBox {...latestPosts[1]} externalClassnames={styles.box2} /> : <div className={classnames("box", styles.box2)} />}
       </div>
       <ArticlesHandle tags={fetchedTags} presetQuery={query} presetArticles={fetchedArticles} />
     </div>

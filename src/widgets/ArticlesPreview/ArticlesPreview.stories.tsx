@@ -14,14 +14,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    list: mockArticlesFound,
-    articlesHref: "/articles/"
+    list: mockArticlesFound
   }
 };
 
 export const Empty: Story = {
   args: {
-    list: [],
-    articlesHref: "/articles/"
+    list: []
   }
 };

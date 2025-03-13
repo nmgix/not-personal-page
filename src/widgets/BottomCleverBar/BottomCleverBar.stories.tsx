@@ -1,6 +1,7 @@
-import type { Args, Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import { BottomCleverBar } from "@/widgets/BottomCleverBar";
+import { BarTypes } from "./serverutils";
 
 const meta = {
   title: "Widgets/BottomCleverBar",
@@ -8,7 +9,7 @@ const meta = {
   args: {}
 } satisfies Meta<typeof BottomCleverBar>;
 
-const CleverBarInterscetionExamle = (args: Args) => (
+const CleverBarIntersectionExample = (args: Story["args"]) => (
   <>
     <div style={{ backgroundColor: "red", width: 200, height: 40, position: "absolute", left: "40vw", top: 5 }} />
     <BottomCleverBar {...args} />
@@ -19,5 +20,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: () => <CleverBarInterscetionExamle />
+  args: {
+    currentBars: BarTypes["articles"].bars,
+    hideInTop: BarTypes["articles"].hideInTop
+  },
+  render: args => <CleverBarIntersectionExample {...args} />
 };
