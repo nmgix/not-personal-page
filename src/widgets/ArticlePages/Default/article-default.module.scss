@@ -1,5 +1,7 @@
 @use "../../../styles/margins";
 @use "../../../styles/paddings";
+@use "../../../styles/media";
+@use "../../../styles/breakpoints";
 
 .articleDefault {
   display: block;
@@ -11,11 +13,22 @@
   .rightPanel {
     float: right;
     width: 25%;
-
     display: flex;
     flex-direction: column;
     gap: margins.$margin-default;
     padding: paddings.$padding-xs;
+    @include media.media-maxw(breakpoints.$xs) {
+      float: none;
+      display: grid;
+      width: 100%;
+
+      .links {
+        align-items: flex-start !important;
+        & > * {
+          text-align: start !important;
+        }
+      }
+    }
 
     .articleDate {
       color: var(--color-icon-default);
@@ -50,6 +63,7 @@
     // display: flex; // нельзя ибо тогда рушится идея обтекаемого текста
     // flex-direction: column;
     // gap: margins.$margin-default;
+    padding-bottom: 35px; //ибо в body при overflow по height не применяется паддинг в конце
 
     .title {
       font-size: 30px;
@@ -95,6 +109,7 @@
     h6 {
       color: var(--color-font-hover);
       line-height: 32px;
+      padding: 5px 0;
     }
   }
 }

@@ -1,0 +1,113 @@
+@use "../../../../styles/paddings";
+@use "../../../../styles/margins";
+
+.shared {
+  min-height: 150px;
+  max-width: 300px;
+
+  display: flex;
+
+  flex: 0;
+  float: left;
+
+  padding: paddings.$padding-s;
+  color: var(--color-font-default);
+}
+
+.variant1 {
+  flex-direction: column;
+
+  &Top {
+    flex: 0;
+
+    &Title {
+      font-weight: 800;
+      color: var(--color-font-hero);
+      font-size: 20px;
+    }
+    &Subtitle {
+      display: flex;
+      flex-direction: row;
+      gap: margins.$margin-default;
+      flex-wrap: wrap;
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+  &Bottom {
+    flex: 1;
+    align-content: end;
+
+    display: flex;
+    flex-direction: row;
+    gap: margins.$margin-s;
+    flex-wrap: wrap;
+  }
+}
+
+.variant2 {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+
+  &Left {
+    &Title {
+      font-weight: 800;
+      color: var(--color-font-hero);
+      font-size: 24px;
+    }
+  }
+
+  &Right {
+    display: flex;
+    flex-direction: column;
+    gap: margins.$margin-xs;
+
+    font-size: 18px;
+
+    &Tags {
+      display: flex;
+      flex-direction: column;
+      gap: margins.$margin-xs;
+
+      color: var(--color-font-hero);
+    }
+  }
+}
+
+.variant3 {
+  justify-content: end;
+  flex-direction: column;
+
+  &Top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &Tags {
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      word-break: keep-all;
+    }
+  }
+
+  &Bottom {
+    &Title {
+      font-weight: 800;
+      color: var(--color-font-hero);
+      font-size: 24px;
+
+      text-align: center;
+      white-space: nowrap;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      word-break: keep-all;
+    }
+  }
+}
+
+.variant4 {
+  &Top {
+    flex: 1;
+  }
+}

@@ -12,7 +12,7 @@ import { RadioButtonsGroup, RadioButtonsGroupProps } from "@/components/Speciali
 import { ResultListRenderer } from "./components/ResultListRenderer";
 import { ArticleListElementProps } from "@/types/articles";
 import { mockArticlesAmount, mockArticlesFound } from "@/types/mocks";
-import { useArticlesSearch } from "@/hooks/useArticlesSearch";
+import { getUrlSearchParams, useArticlesSearch } from "@/hooks/useArticlesSearch";
 import dynamic from "next/dynamic";
 import { articleCategories, ArticleFields, inputPlacholderWords } from "@/types/consts";
 
@@ -34,7 +34,7 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
   // MODAL CONTROLS & STATE END
 
   // ARTICLES LIST START START
-  const { articlesData, setArticlesData, setFormData, fetchArticles } = useArticlesSearch();
+  const { articlesData, setArticlesData, loading, page, fetchArticles } = useArticlesSearch();
   // ARTICLES LIST START END
 
   // SEARCH INPUT CONTROL START
@@ -75,20 +75,16 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
 
   // CATEGORIES CONTROLS & STATE END
 
-  const [isPending, setTransition] = useTransition();
-
   // MAKING SEARCH START
 
-  const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    setTransition(async () => {
-      console.log("form submit?");
-      e.preventDefault();
-      setFormData(new FormData(e.currentTarget));
-      await fetchArticles();
-    });
+  const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    console.log("form submit?");
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    // fetchArticles(getUrlSearchParams(fd, { page: String(page) }));
+    const response = await fetch(`/api/articles/${fd.get(ArticleFields.category)}?${getUrlSearchParams(fd, { page: String(page) })}`);
+    console.log(response);
   };
-
-  console.log("global rerender");
 
   // MAKING SEARCH END
 
@@ -112,13 +108,13 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
           className={styles.top}
           onSubmit={onFormSubmit}
           style={{
-            opacity: isPending ? "0.2" : 1,
-            pointerEvents: isPending ? "none" : "auto",
-            userSelect: isPending ? "none" : "auto"
+            opacity: loading ? "0.2" : 1,
+            pointerEvents: loading ? "none" : "auto",
+            userSelect: loading ? "none" : "auto"
           }}>
           <RadioButtonsGroup
             onSelect={_onSelectCategory}
-            name={ArticleFields.tag}
+            name={ArticleFields.category}
             options={categoriesRef.current}
             externalClassnames={styles.categories}
           />

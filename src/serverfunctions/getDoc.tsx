@@ -20,7 +20,10 @@ export function getDocBySlug(category: string, slug: string /*, locale: string*/
     return undefined;
   }
 }
-export function getDocBySlugShorten(category: string, slug: string /*, locale: string*/): Omit<ArticleData, "text"> | undefined {
+export function getDocBySlugShorten(
+  category: string,
+  slug: string /*, locale: string*/
+): Omit<ArticleData, "text"> | ArticleVideoPreview | undefined {
   try {
     if (!articleTypes.some(t => t === category)) throw Error("category not found");
     const regex = new RegExp(`^\/?(${articleTypes.join("|")})(\/|$)`, "i");

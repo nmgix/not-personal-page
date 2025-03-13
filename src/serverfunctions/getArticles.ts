@@ -2,16 +2,16 @@ import { ArticleListElementProps } from "@/types/articles";
 import { getPopularTags, searchByTags } from "./tags";
 import { findInDoc, getDocBySlugShorten } from "./getDoc";
 
-export const getArticle = (articleTag?: string, articleText?: string[]) => {
+export const getArticles = (articleTag?: string, articleText?: string[], articleCategory?: string) => {
   let searchTags: string[] = [];
   if (articleTag) searchTags.push(articleTag);
+  else searchTags = getPopularTags(3).map(t => t.tag);
 
-  // console.log({ searchTags });
-  if (!articleTag) {
-    // return new Response("no tags", { status: 400, statusText: "not WW" });
-    searchTags = getPopularTags(3).map(t => t.tag);
-  }
+  // articleCategory либо тут
+
   const foundArticlesSlugs = searchByTags(searchTags ?? []);
+  // либо вот тут            ^ articleCategory втиснуть типо искать по тегам внутри категории
+
   // console.log({ foundArticlesSlugs });
   const articles: ArticleListElementProps[] = [];
   if (foundArticlesSlugs.length > 0) {

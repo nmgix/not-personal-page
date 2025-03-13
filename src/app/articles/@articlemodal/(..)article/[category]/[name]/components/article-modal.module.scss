@@ -1,5 +1,42 @@
+@use "../../../../../../../styles/margins";
+
+.toFullPage {
+  composes: defaultButton from "../../../../../../../components/Generic/Buttons/Default/default-button.module.scss";
+  float: right;
+
+  border: none;
+  border-radius: 3px;
+  padding: 3px 6px;
+  z-index: 3;
+
+  cursor: pointer;
+}
+
 .modal {
   background-color: var(--color-background-800);
   color: var(--color-font-default);
   max-height: 80vh;
+  padding-bottom: 0;
+
+  & > div {
+    z-index: 1;
+    max-width: 75vw;
+    width: 75vw;
+  }
+
+  // width вместе с media query
+}
+
+.loader {
+  width: 50vw;
+  min-height: 30vh;
+
+  display: flex;
+  flex-direction: column;
+  gap: margins.$margin-default;
+
+  & > div {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
 }

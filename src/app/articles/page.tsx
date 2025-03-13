@@ -4,8 +4,9 @@ import { ArticlesHandle } from "./components/ArticlesHandle";
 import { mockArticlesAmount } from "@/types/mocks";
 import { getPopularTags } from "../../serverfunctions/tags";
 import { ArticleFields } from "@/types/consts";
-import { getArticle } from "@/serverfunctions/getArticles";
+import { getArticles } from "@/serverfunctions/getArticles";
 import { urldecode } from "@/helpers/url";
+import { getDocBySlugShorten, getLatestDocs } from "@/serverfunctions/getDoc";
 
 export type QueryParams = { [key in ArticleFields]: string };
 
@@ -14,7 +15,7 @@ export default async function Articles(props: { params: Promise<void>; searchPar
   const fetchedTags = getPopularTags(8);
   const fetchedArticles = !query
     ? []
-    : getArticle(
+    : getArticles(
         query[ArticleFields.tag],
         query[ArticleFields.text]
           ?.split("+")
@@ -22,14 +23,20 @@ export default async function Articles(props: { params: Promise<void>; searchPar
           .map(w => urldecode(w))
       );
 
+  const latestPosts = getLatestDocs(2).map(d => {
+    const [category, slug] = d.file.split("/");
+    return getDocBySlugShorten(category, slug);
+  });
+  console.log(latestPosts);
+
   return (
     <div className={classnames("page", styles.articles)}>
       <h3 className={styles.header}>
         &#91;статьи&#93;<mark>{mockArticlesAmount}</mark>
       </h3>
       <div className={styles.latestPosts}>
-        <div className={classnames("box", styles.box1)} />
-        <div className={classnames("box", styles.box2)} />
+        {/* <div className={classnames("box", styles.box1)} /> */}
+        {/* <div className={classnames("box", styles.box2)} /> */}
       </div>
       <ArticlesHandle tags={fetchedTags} presetQuery={query} presetArticles={fetchedArticles} />
     </div>

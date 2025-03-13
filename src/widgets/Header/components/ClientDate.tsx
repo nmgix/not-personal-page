@@ -18,7 +18,7 @@ export const ClientDate = () => {
   useEffect(() => {}, [date]);
 
   return (
-    <span className={styles.timeInfo}>
+    <span className={styles.timeInfo} suppressHydrationWarning>
       {localDate} local. {codingSinceDate}y in dev
     </span>
   );

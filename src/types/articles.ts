@@ -30,7 +30,7 @@ export type TArticleDefault = {
   textPreview?: string;
   imagesSrc?: ImageElement[];
 };
-export type ArticleListElementProps = Omit<TArticleDefault, "date" | "text"> & {
+export type ArticleListElementProps = Omit<TArticleDefault, "text"> & {
   slug: string;
   previewImages?: boolean;
 };
@@ -58,7 +58,7 @@ export type ArticleProps = {
 // } & ExternalClassnames;
 
 export type ArticleVideoPreview = {
-  meta: Omit<TArticleDefault, "imagesSrc" | "date"> &
+  meta: Omit<TArticleDefault, "imagesSrc"> &
     Partial<{
       videoSrc: string;
       imagePlaceholderSrc: string;

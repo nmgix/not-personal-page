@@ -17,6 +17,9 @@ export const ArticleModal = ({ children }: { children: React.ReactElement }) => 
       hideCloseBtn
       outsideToClose
       routerBackOnClose>
+      <button className={styles.toFullPage} onClick={() => window.location.reload()}>
+        на полную страницу
+      </button>
       {children}
     </Modal>
   );
