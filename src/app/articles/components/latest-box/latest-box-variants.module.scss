@@ -1,5 +1,7 @@
 @use "../../../../styles/paddings";
 @use "../../../../styles/margins";
+@use "../../../../styles/media";
+@use "../../../../styles/breakpoints";
 
 .shared {
   min-height: 150px;
@@ -14,6 +16,15 @@
   color: var(--color-font-default);
 
   overflow: hidden;
+
+  &:hover {
+    border-color: var(--color-font-default);
+  }
+
+  &:active {
+    border-color: var(--color-font-hover);
+    background-color: color-mix(in srgb, var(--color-font-default) 30%, transparent);
+  }
 }
 
 .wrapper {
@@ -69,6 +80,10 @@
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
+
+  @include media.media-maxw(breakpoints.$xs) {
+    flex-direction: column;
+  }
 
   &Left {
     &Title {

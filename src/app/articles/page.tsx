@@ -6,12 +6,14 @@ import { getPopularTags } from "../../serverfunctions/tags";
 import { ArticleFields } from "@/types/consts";
 import { getArticles } from "@/serverfunctions/getArticles";
 import { urldecode } from "@/helpers/url";
-import { getDocBySlugShorten, getLatestDocs } from "@/serverfunctions/getDoc";
+import { getAllDocsFolders, getDocBySlugShorten, getLatestDocs } from "@/serverfunctions/getDoc";
 import { LatestBox } from "./components/latest-box/LatestBox";
 
 export type QueryParams = { [key in ArticleFields]: string };
 
 export default async function Articles(props: { params: Promise<void>; searchParams?: Promise<QueryParams> }) {
+  const articlesAmount = getAllDocsFolders().length;
+
   const query = await props.searchParams;
   const fetchedTags = getPopularTags(8);
   const fetchedArticles = !query
@@ -32,7 +34,7 @@ export default async function Articles(props: { params: Promise<void>; searchPar
   return (
     <div className={classnames("page", styles.articles)}>
       <h3 className={styles.header}>
-        &#91;статьи&#93;<mark>{mockArticlesAmount}</mark>
+        &#91;статьи&#93;<mark>{articlesAmount}</mark>
       </h3>
       <div className={styles.latestPosts}>
         {latestPosts[0] ? <LatestBox {...latestPosts[0]} externalClassnames={styles.box1} /> : <div className={classnames("box", styles.box1)} />}

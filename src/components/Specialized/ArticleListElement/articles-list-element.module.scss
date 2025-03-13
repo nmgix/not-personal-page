@@ -6,20 +6,26 @@
   display: flex;
   flex-direction: column;
 
-  color: var(--color-font-default);
+  color: color-mix(in srgb, var(--color-font-default) 70%, transparent);
   padding: 14px 15px;
 
   &:hover {
     // https://stackoverflow.com/a/70990728/14889638
     // color: color.change($color: currentColor, $lightness: 20%);
 
-    $currColor: color.change(
-      $color: #5e5e5e,
-      $lightness: 70%
-    );
+    // $currColor: color.change(
+    //   $color: #5e5e5e,
+    //   $lightness: 70%
+    // );
 
-    color: $currColor;
-    border-color: $currColor;
+    color: var(--color-font-default);
+    border-color: color-mix(in srgb, var(--color-font-default) 70%, transparent);
+  }
+
+  &:active {
+    color: var(--color-font-hover);
+    border-color: var(--color-font-hover);
+    background-color: color-mix(in srgb, var(--color-font-default) 30%, transparent);
   }
 
   .title {
@@ -30,6 +36,9 @@
     border-bottom: 1px solid var(--color-font-default);
 
     margin-bottom: 4px;
+
+    text-overflow: ellipsis;
+    overflow-x: hidden;
   }
 
   .info {
@@ -56,7 +65,7 @@
         top: -3px;
         padding: 3px;
         z-index: -1;
-        background-color: var(--color-box-default);
+        background-color: inherit;
 
         // -webkit-box-shadow: 0px 0px 10px 0px var(--color-box-default);
         // -moz-box-shadow: 0px 0px 10px 0px var(--color-box-default);
@@ -66,6 +75,7 @@
 
     .tags {
       :global(.box) {
+        background-color: inherit;
         padding: paddings.$padding-xs 0;
       }
     }
