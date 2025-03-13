@@ -4,7 +4,6 @@ import { createPortal } from "react-dom";
 import { useEffect, useRef, useState } from "react";
 import { BoundaryRender } from "./Boundary";
 import { useNetworkState } from "react-use";
-import { useHotkeysContext } from "react-hotkeys-hook";
 
 const boundaryActivatePercent = 70;
 
@@ -33,14 +32,26 @@ export const UnexpectedErrorBoundary = () => {
     // но и-за того что я делаю проверку if (foundOut === false) и activeBoundary может быть активный
     // после того как кикнули Boundary, то activeBoundary == true, но foundOut == false, поэтому кнопки нет
     // и так даже лучше
+
+    // onMouseEnter={() => (htmlRef.current!.style.overflow = "hidden")}
+    // onMouseLeave={() => (htmlRef.current!.style.overflow = "auto")}
+
     if (foundOut === false) {
       document.body.classList.remove("hideFromTop");
+      htmlRef.current!.style.overflow = "auto";
     } else {
       if (activeBoundary) {
         document.body.classList.add("hideFromTop");
+        document.getElementsByTagName("html")[0].classList.remove("tryingToHide");
+
+        let timeout = setTimeout(() => {
+          htmlRef.current!.style.overflow = "hidden";
+          clearTimeout(timeout);
+        }, 800);
         document.body.style.top = `0px`; // на всякий ибо если зажать кнопку при триггере, то top остается тот что был при drag
       } else {
         document.body.classList.remove("hideFromTop");
+        htmlRef.current!.style.overflow = "auto";
       }
     }
   }, [activeBoundary, foundOut]);
@@ -69,7 +80,7 @@ export const UnexpectedErrorBoundary = () => {
       btnRef.current.style.top = `${clientY}px`;
     }
     document.body.style.top = `${clientY}px`;
-    htmlRef.current!.style.overflowY = "hidden";
+    // htmlRef.current!.style.overflowY = "hidden";
   };
   const onButtonDrag = (e: MouseEvent) => buttonDragHandler(e.clientY);
   const onButtonTouchMove = (e: React.TouchEvent<HTMLButtonElement>) => buttonDragHandler(e.touches[0].clientY);
@@ -105,14 +116,18 @@ export const UnexpectedErrorBoundary = () => {
       return;
     }
 
+    const html = document.getElementsByTagName("html")[0];
+
     if (mouseDown === true) {
       window.addEventListener("mousemove", onButtonDrag);
       btnRef.current?.addEventListener("mouseenter", mouseIn);
       btnRef.current?.addEventListener("mouseleave", mouseOut);
+      html.classList.add("tryingToHide");
     } else {
       window.removeEventListener("mousemove", onButtonDrag);
       btnRef.current?.removeEventListener("mouseenter", mouseIn);
       btnRef.current?.removeEventListener("mouseleave", mouseOut);
+      html.classList.remove("tryingToHide");
       timeoutBound.current = null;
     }
 
@@ -129,12 +144,9 @@ export const UnexpectedErrorBoundary = () => {
         createPortal(<BoundaryRender since={state.since} setFoundOut={setFoundOut} active={activeBoundary} />, document.querySelector("html")!)}
       {!activeBoundary && (
         <button
-          // onMouseEnter={() => (htmlRef.current!.style.overflow = "hidden")}
-          onMouseLeave={() => (htmlRef.current!.style.overflow = "auto")}
           onMouseDown={e => {
             onButtonDragStart(e as unknown as MouseEvent);
-            htmlRef.current!.style.overflow = "hidden";
-          }} // в react типе нет clientY, а в mouseEvent есть (отрабатывает mouseEvent)
+          }}
           onMouseUp={onButtonDragEnd}
           onTouchStart={onButtonTouchStart}
           onTouchMove={onButtonTouchMove}

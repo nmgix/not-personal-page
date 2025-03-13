@@ -6,3 +6,9 @@
   top: 100vh !important;
   transition: top 0.8s ease-out !important;
 }
+
+.tryingToHide {
+  position: fixed;
+  overflow-y: scroll !important;
+  width: 100%;
+}
