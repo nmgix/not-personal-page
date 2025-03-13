@@ -1,20 +1,20 @@
 "use client";
 
-import { useImperativeHandle, useRef, useState, useTransition } from "react";
-import { useHotkeys } from "react-hotkeys-hook";
 import classnames from "classnames";
-import styles from "./articles-global-search.module.scss";
-import { AvailableIcons, Icon } from "@/components/Generic/Icon";
-import { Button } from "@/components/Generic/Buttons/Default/DefaultButton";
-import { Input, InputRef } from "@/components/Generic/Input";
-import { Image } from "@/components/Generic/Image";
-import { RadioButtonsGroup, RadioButtonsGroupProps } from "@/components/Specialized/RadioButtons";
-import { ResultListRenderer } from "./components/ResultListRenderer";
-import { ArticleListElementProps } from "@/types/articles";
-import { mockArticlesAmount, mockArticlesFound } from "@/types/mocks";
-import { getUrlSearchParams, useArticlesSearch } from "@/hooks/useArticlesSearch";
 import dynamic from "next/dynamic";
-import { articleCategories, ArticleFields, inputPlacholderWords } from "@/types/consts";
+import styles from "./articles-global-search.module.scss";
+import { Icon } from "@/components/Generic/Icon";
+import { Button } from "@/components/Generic/Buttons/Default/DefaultButton";
+import { Input } from "@/components/Generic/Input";
+import { Image } from "@/components/Generic/Image";
+import { RadioButtonsGroup } from "@/components/Specialized/RadioButtons";
+import { ResultListRenderer } from "./components/ResultListRenderer";
+import { mockArticlesAmount } from "@/types/mocks";
+import { getUrlSearchParams, useArticlesSearch } from "@/hooks/useArticlesSearch";
+import { ArticleFields, inputPlacholderWords } from "@/types/consts";
+import { useModal } from "./hooks/useModal";
+import { useInput } from "./hooks/useInput";
+import { useCategory } from "./hooks/useCategory";
 
 const Modal = dynamic(() => import("../../components/Generic/Modal").then(m => m.Modal), { ssr: false });
 
@@ -23,70 +23,16 @@ export type ArticlesGlobalSearchRef = {
 };
 
 export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSearchRef> }) => {
-  // MODAL CONTROLS & STATE START
-  const [modalOpen, setModalOpen] = useState(false);
-  const onClose = () => setModalOpen(false);
-  useHotkeys("ctrl+k", () => setModalOpen(true), { enabled: true, preventDefault: true }, []);
-  // на случай неободимости открыть окно, например, в туториале
-  useImperativeHandle(ref, () => ({
-    setModalState: setModalOpen
-  }));
-  // MODAL CONTROLS & STATE END
-
-  // ARTICLES LIST START START
+  const { onClose, modalOpen } = useModal(ref);
   const { articlesData, setArticlesData, loading, page, fetchArticles } = useArticlesSearch();
-  // ARTICLES LIST START END
-
-  // SEARCH INPUT CONTROL START
-
-  const placeholders = useRef(inputPlacholderWords.map(w => `например, ${w}`));
-  const [input, setInput] = useState("");
-  const onInput = (searchWord: string) => {
-    setArticlesData({ articles: null, totalPages: 0 });
-    setInput(searchWord);
-  };
-  // const onInputEnd = (searchWord: string) => {
-  //   console.log(searchWord);
-  // };
-
-  // SEARCH INPUT CONTROL END
-
-  // CATEGORIES CONTROLS & STATE START
-
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const _onSelectCategory = (val: string | null) => {
-    setArticlesData({ articles: null, totalPages: 0 });
-    setSelectedCategory(val);
-  };
-  // не useRef мне нужен, что-то типо memo, если хочу ререндер при select категории (аппенд класса .active .box'у)
-  // а мб useRef достаточно, я же не буду в memo оборачивать вот эти компоненты, и так пойдёт, наверное
-  const categoriesRef = useRef<RadioButtonsGroupProps["options"]>(
-    articleCategories.map(c => ({
-      // react component в obj сомнительно но окэй
-      component: (
-        <div className={styles.category}>
-          <Icon icon={c.icon} />
-          <span>{c.title}</span>
-        </div>
-      ),
-      value: c.type
-    }))
-  );
-
-  // CATEGORIES CONTROLS & STATE END
-
-  // MAKING SEARCH START
+  const { input, onInput, placeholders } = useInput(inputPlacholderWords, setArticlesData);
+  const { categoriesRef, selectedCategory, onSelectCategory } = useCategory(setArticlesData);
 
   const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    console.log("form submit?");
     e.preventDefault();
-    const fd = new FormData(e.currentTarget);
-    // fetchArticles(getUrlSearchParams(fd, { page: String(page) }));
-    const response = await fetch(`/api/articles/${fd.get(ArticleFields.category)}?${getUrlSearchParams(fd, { page: String(page) })}`);
-    console.log(response);
+    const urlParams = getUrlSearchParams(new FormData(e.currentTarget), { page: String(page) });
+    fetchArticles(urlParams);
   };
-
-  // MAKING SEARCH END
 
   // render//misc
   const nothingSelected = input.length == 0 && (selectedCategory == null || selectedCategory == "");
@@ -113,7 +59,7 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
             userSelect: loading ? "none" : "auto"
           }}>
           <RadioButtonsGroup
-            onSelect={_onSelectCategory}
+            onSelect={onSelectCategory}
             name={ArticleFields.category}
             options={categoriesRef.current}
             externalClassnames={styles.categories}

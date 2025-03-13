@@ -3,7 +3,7 @@
 @use "../../styles/borders";
 
 .modal {
-  padding: 0;
+  padding: 0 !important;
   background: transparent;
 
   width: 50vw;

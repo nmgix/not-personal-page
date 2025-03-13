@@ -2,7 +2,7 @@
 @use "../../styles/borders";
 
 .articles {
-  margin-top: calc(margins.$margin-default * 2);
+  margin-top: 37px;
   display: flex;
   flex-direction: column;
   row-gap: margins.$margin-default;

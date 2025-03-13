@@ -102,10 +102,6 @@ export const ArticlesHandle = ({ presetArticles, tags, externalClassnames, prese
   );
   const formRef = useRef<HTMLFormElement>(null);
 
-  // useEffect(() => {
-  //   articlesSearchHook.fetchArticles(getUrlSearchParams(new FormData(formRef.current ?? undefined), { page: String(articlesSearchHook.page) }));
-  // }, []); // вот этот реквест заменить на serverside респонзс с найденными статьями
-
   return (
     <div className={classnames(styles.handle, externalClassnames)}>
       <ArticlesSearch formRef={formRef} {...articlesSearchHook} tags={tags} presetQuery={_presetQuery} />
