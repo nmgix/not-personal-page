@@ -32,6 +32,7 @@
   }
 
   .viewRenderer {
+    height: 100%;
     flex: 1;
 
     & > div > div > canvas {

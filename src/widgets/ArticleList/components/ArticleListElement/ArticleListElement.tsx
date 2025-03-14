@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from "./articles-list-element.module.scss";
 import classnames from "classnames";
-import { BoxesScrollbar } from "../BoxesScrollbar";
+import { BoxesScrollbar } from "../../../../components/Specialized/BoxesScrollbar";
 import { ImageList } from "@/components/Specialized/ImageList";
 import { ArticleListElementProps, GlobalRoutes } from "@/types/articles";
 

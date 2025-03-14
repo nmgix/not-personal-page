@@ -1,1 +1,1 @@
-export { ModelViewer, AvailableModels } from "./ModelViewer";
+export { ModelViewer } from "./ModelViewer";

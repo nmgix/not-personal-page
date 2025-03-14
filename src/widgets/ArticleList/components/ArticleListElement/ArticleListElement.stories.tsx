@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ArticleListElement } from "@/components/Specialized/ArticleListElement";
+import { ArticleListElement } from "@/widgets/ArticleList/components/ArticleListElement";
 
 const meta = {
-  title: "Specialized/ArticleListElement",
+  title: "Widgets/ArticleList/ArticleListElement",
   component: ArticleListElement,
   args: {}
 } satisfies Meta<typeof ArticleListElement>;
@@ -49,7 +49,8 @@ export const MemesNoPreview: Story = {
       "Duis eget condimentum neque. In at mi faucibus, interdum ipsum sit amet, cursus quam. Cras purus lacus, vulputate ac tempor sed, imperdiet quis risus. Maecenas posuere dapibus egestas. In vel tincidunt libero. Etiam non scelerisque est, et tempor purus. Vivamus porttitor, ex eget luctus posuere, elit neque placerat ante, eu sagittis arcu velit ut neque",
     title: "Daily memes 121",
     TTRmins: 3,
-    categoryImg: "blog"
+    categoryImg: "blog",
+    date: "2023-01-01"
   }
 };
 export const MemesPreview: Story = {
@@ -90,7 +91,8 @@ export const MemesPreview: Story = {
       "Duis eget condimentum neque. In at mi faucibus, interdum ipsum sit amet, cursus quam. Cras purus lacus, vulputate ac tempor sed, imperdiet quis risus. Maecenas posuere dapibus egestas. In vel tincidunt libero. Etiam non scelerisque est, et tempor purus. Vivamus porttitor, ex eget luctus posuere, elit neque placerat ante, eu sagittis arcu velit ut neque",
     title: "Daily memes 122",
     TTRmins: 0.5,
-    categoryImg: "blog"
+    categoryImg: "blog",
+    date: "2023-01-01"
   }
 };
 export const MemesNoDescription: Story = {
@@ -129,7 +131,8 @@ export const MemesNoDescription: Story = {
     tags: ["memes", "daily"],
     title: "Daily memes 123",
     TTRmins: 1,
-    categoryImg: "blog"
+    categoryImg: "blog",
+    date: "2023-01-02"
   }
 };
 export const MemesNoImages: Story = {
@@ -142,7 +145,8 @@ export const MemesNoImages: Story = {
       "Duis eget condimentum neque. In at mi faucibus, interdum ipsum sit amet, cursus quam. Cras purus lacus, vulputate ac tempor sed, imperdiet quis risus. Maecenas posuere dapibus egestas. In vel tincidunt libero. Etiam non scelerisque est, et tempor purus. Vivamus porttitor, ex eget luctus posuere, elit neque placerat ante, eu sagittis arcu velit ut neque",
     title: "Daily memes 124",
     TTRmins: 14,
-    categoryImg: "blog"
+    categoryImg: "blog",
+    date: "2023-03-02"
   }
 };
 export const TechArticleNoInfo: Story = {
@@ -153,6 +157,7 @@ export const TechArticleNoInfo: Story = {
     tags: [],
     title: "C++ example",
     TTRmins: 60,
-    categoryImg: "tech-article"
+    categoryImg: "tech-article",
+    date: "2024-05-17"
   }
 };

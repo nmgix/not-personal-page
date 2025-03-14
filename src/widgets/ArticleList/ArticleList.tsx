@@ -1,5 +1,5 @@
 import classnames from "classnames";
-import { ArticleListElement } from "@/components/Specialized/ArticleListElement";
+import { ArticleListElement } from "./components/ArticleListElement";
 import { ArticleListElementProps } from "@/types/articles";
 import styles from "./article-list.module.scss";
 import { ExternalClassnames } from "@/types/components";

@@ -3,6 +3,7 @@ import fs from "fs";
 import matter from "gray-matter";
 import { ArticleData, articleFileName, ArticleVideoPreview } from "@/types/articles";
 import { articleTypes } from "@/types/consts";
+import { shuffle } from "./helpers";
 
 export const doscDirectory = join(process.cwd(), "articles");
 
@@ -71,9 +72,12 @@ function fileListWithoutMD(dir: string) {
 
 const ignoreFiles = [".gitkeep"] as const;
 
-export function getAllDocsFolders() {
+export function getAllDocsFolders(limit?: number) {
   try {
-    return articleTypes
+    const categories = [...articleTypes];
+    shuffle(categories);
+    return categories
+      .slice(0, limit)
       .map(t => fileListWithoutMD(path.join(doscDirectory, t)))
       .flat()
       .filter(fileLink => !ignoreFiles.some(ignoreFile => fileLink.endsWith(ignoreFile)));
@@ -83,20 +87,21 @@ export function getAllDocsFolders() {
   }
 }
 
-function sortDocsDesc() {
+function sortDocsDesc(limit?: number) {
   try {
+    let found = 0;
     const filesFolders = getAllDocsFolders();
-
     const files: { file: string; date: number }[] = [];
 
-    filesFolders.forEach(fileFolder => {
+    filesFolders.some(fileFolder => {
+      if (!!limit && found >= limit) return true;
       const fileContents = fs.readFileSync(path.join(fileFolder, articleFileName), "utf8");
       if (!fileContents) return;
       const { data } = matter(fileContents);
       if (!data.date) return;
+      ++found;
       files.push({ file: path.relative(doscDirectory, fileFolder).replace(/\\/g, "/"), date: Number(new Date(data.date)) });
     });
-
     return files;
   } catch (error) {
     console.log("sortDocsDesc", error);
@@ -104,9 +109,9 @@ function sortDocsDesc() {
   }
 }
 
-export function getLatestDocs(limit: number = 3) {
+export function getLatestDocs(limit = 3) {
   try {
-    const files = sortDocsDesc();
+    const files = sortDocsDesc(limit);
     return files.sort((fA, fB) => fB.date - fA.date).slice(0, limit);
   } catch (error) {
     console.log("getLatestDocs", error);

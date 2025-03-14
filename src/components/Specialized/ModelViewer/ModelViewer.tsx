@@ -12,11 +12,7 @@ import { ErrorBoundary } from "@/components/Specialized/ErrorBoundary";
 import { useHold } from "@technarts/react-use-hold";
 import useDebounced from "@/hooks/useDebounce";
 import { ExternalClassnames } from "@/types/components";
-
-export const AvailableModels = {
-  dragons_liberation: "gltf/dragons_liberation.glb",
-  corkboard: "gltf/corkboard.glb"
-} as const;
+import { AvailableModels } from "@/types/consts";
 
 type ModelViewerProps = {
   renderModelTitle: keyof typeof AvailableModels;
@@ -61,7 +57,7 @@ export const ModelViewer = ({ renderModelTitle, externalClassnames }: ModelViewe
       </div>
       <div className={styles.viewRenderer}>
         <ErrorBoundary fallbackComponent={<span>error rendering model viewer UwU</span>}>
-          <Canvas {...longPressEvent}>
+          <Canvas {...longPressEvent} style={{ background: "transparent", backgroundColor: "transparent" }}>
             <ambientLight intensity={0.25} />
             <Suspense fallback={null}>
               <Stage>

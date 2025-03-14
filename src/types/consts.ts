@@ -48,3 +48,8 @@ const jetBrainsFont = JetBrains_Mono({
 });
 
 export const usedFonts = [pulsewidthFont, pulsewidthDotFont, strretchSansFont, jetBrainsFont];
+
+export const AvailableModels = {
+  // dragons_liberation: "gltf/dragons_liberation.glb",
+  corkboard: "gltf/corkboard.glb"
+} as const;
