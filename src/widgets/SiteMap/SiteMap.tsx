@@ -8,7 +8,7 @@ import styles from "./site-map.module.scss";
 import { PageTree } from "./types";
 import { Tree } from "./components/TreeRender";
 import dynamic from "next/dynamic";
-import { GlobalRoutes } from "@/types/articles";
+import { GlobalRoutes } from "@/types/consts";
 const Modal = dynamic(() => import("../../components/Generic/Modal").then(m => m.Modal), { ssr: false });
 
 const pages: PageTree[] = [

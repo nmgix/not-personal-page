@@ -21,3 +21,19 @@ export function dateTimeAgo(date: Date, english?: boolean) {
 
   return english ? "just now" : "только что";
 }
+
+export const formatDate = (date: string | Date) => {
+  date = date instanceof Date ? date : new Date(date);
+  const fd = date
+    .toLocaleDateString("ru-RU", {
+      // hour: "2-digit",
+      // minute: "2-digit",
+      day: "2-digit",
+      month: "2-digit",
+      year: "2-digit",
+
+      timeZone: process.env.NEXT_PUBLIC_TIMEZONE
+    })
+    .replace(/[-.]/g, "/");
+  return fd;
+};

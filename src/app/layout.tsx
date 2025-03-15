@@ -2,10 +2,9 @@ import { Header } from "@/widgets/Header";
 import type { Metadata } from "next";
 import "../styles/global.styles.scss";
 import "react-loading-skeleton/dist/skeleton.css";
-import { GlobalRoutes } from "@/types/articles";
 
 import classnames from "classnames";
-import { usedFonts } from "@/types/consts";
+import { GlobalRoutes, usedFonts } from "@/types/consts";
 import { ArticlesGlobalSearch } from "@/widgets/ArticlesGlobalSearch";
 
 export const metadata: Metadata = {

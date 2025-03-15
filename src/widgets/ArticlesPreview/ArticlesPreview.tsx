@@ -1,8 +1,9 @@
-import { ArticleListElementProps, GlobalRoutes } from "@/types/articles";
+import { ArticleListElementProps } from "@/types/articles";
 import classnames from "classnames";
 import styles from "./articles-preview.module.scss";
 import Link from "next/link";
 import { ExternalClassnames } from "@/types/components";
+import { GlobalRoutes } from "@/types/consts";
 
 type ArticlesPreviewProps = {
   list: ArticleListElementProps[];

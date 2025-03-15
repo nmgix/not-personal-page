@@ -12,12 +12,12 @@ const LatestNewsTabs = dynamic(() => import("../LatestNewsTabs").then(mod => mod
 });
 
 export const variants = {
-  tabs: <LatestNewsTabs />,
-  viewer: (
-    <ModelViewerWidget
-      renderModelTitle={Object.keys(AvailableModels)[Math.floor(Math.random() * Object.keys(AvailableModels).length)] as keyof typeof AvailableModels}
-    />
-  )
+  tabs: <LatestNewsTabs />
+  // viewer: (
+  //   <ModelViewerWidget
+  //     renderModelTitle={Object.keys(AvailableModels)[Math.floor(Math.random() * Object.keys(AvailableModels).length)] as keyof typeof AvailableModels}
+  //   />
+  // )
 };
 
 type RandomHeroWidgetProps = {

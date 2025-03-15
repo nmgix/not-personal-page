@@ -1,5 +1,5 @@
 import { ArticleListElementProps } from "@/types/articles";
-import { useCallback, useRef, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 
 type ArticlesState = {
   articles: ArticleListElementProps[] | null | undefined;

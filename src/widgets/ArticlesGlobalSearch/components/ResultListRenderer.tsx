@@ -1,5 +1,5 @@
 import classnames from "classnames";
-import { ArticleListElementProps, GlobalRoutes } from "@/types/articles";
+import { ArticleListElementProps } from "@/types/articles";
 import styles from "./result-list-renderer.module.scss";
 import classNames from "classnames";
 import { useMemo, useRef, useState } from "react";
@@ -9,6 +9,7 @@ import Link from "next/link";
 import { selectTextExample } from "./helpers";
 import { useFade } from "@/hooks/useFade";
 import { ExternalClassnames } from "@/types/components";
+import { GlobalRoutes } from "@/types/consts";
 
 const ListElement = ({ article, searchedPhrase }: { article: ArticleListElementProps; searchedPhrase: string }) => {
   const text = useMemo(() => selectTextExample(100, article.textPreview, searchedPhrase), [article.textPreview, searchedPhrase]);

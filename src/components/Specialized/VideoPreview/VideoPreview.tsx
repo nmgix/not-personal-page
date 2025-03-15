@@ -4,7 +4,8 @@ import { Image } from "@/components/Generic/Image";
 import Link from "next/link";
 import { Icon } from "@/components/Generic/Icon";
 import { ExternalClassnames } from "@/types/components";
-import { ArticleVideoPreview, GlobalRoutes } from "@/types/articles";
+import { ArticleVideoPreview } from "@/types/articles";
+import { GlobalRoutes } from "@/types/consts";
 
 const descriptionLimit = 51;
 

@@ -2,7 +2,7 @@ import classnames from "classnames";
 import { ArticleTag, TArticleDefault } from "@/types/articles";
 import { ExternalClassnames } from "@/types/components";
 import styles from "./article-default.module.scss";
-import { dateTimeAgo } from "@/helpers/dateTimeAgo";
+import { dateTimeAgo, formatDate } from "@/helpers/date";
 import Link from "next/link";
 import { ImageList } from "@/components/Specialized/ImageList";
 import { BackButton } from "@/components/Generic/Buttons";
@@ -33,17 +33,7 @@ export const ArticleDefault = ({
 }: ArticleDefaultProps) => {
   const d = new Date(date);
   const timeAgo = dateTimeAgo(d);
-  const localDate = d
-    .toLocaleTimeString("ru-RU", {
-      // hour: "2-digit",
-      // minute: "2-digit",
-      day: "2-digit",
-      month: "2-digit",
-      year: "2-digit",
-
-      timeZone: process.env.NEXT_PUBLIC_TIMEZONE
-    })
-    .replace("-", "/");
+  const localDate = formatDate(date);
 
   const minPopularity = Math.min(...(mappedTags ?? []).map(t => t.popularity));
   const maxPopularity = Math.max(...(mappedTags ?? []).map(t => t.popularity));

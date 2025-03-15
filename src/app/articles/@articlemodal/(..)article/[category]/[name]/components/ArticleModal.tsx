@@ -1,7 +1,7 @@
 "use client";
 
 import { Modal } from "@/components/Generic/Modal";
-import { GlobalRoutes } from "@/types/articles";
+import { GlobalRoutes } from "@/types/consts";
 import { useRouter } from "next/navigation";
 
 import styles from "./article-modal.module.scss";

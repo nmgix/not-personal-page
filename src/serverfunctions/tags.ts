@@ -1,10 +1,11 @@
-import { doscDirectory, getAllDocsFolders } from "./getDoc";
+import { getAllDocsFolders } from "./getDoc";
 
 import path from "path";
 import fs from "fs";
-import { articleFileName, ArticleTag, tagPopularityBaseDecrementLevel } from "@/types/articles";
+import { ArticleTag } from "@/types/articles";
 import matter from "gray-matter";
-import { memoize } from "./helpers";
+import { docsDirectory, memoize, memoizeDefaultValues, removeFullPath } from "./helpers";
+import { articleFileName, tagPopularityBaseDecrementLevel } from "@/types/consts";
 
 function _getArticleTags(filePath: string): Map<string, number> {
   try {
@@ -24,7 +25,7 @@ function _getArticleTags(filePath: string): Map<string, number> {
     return new Map();
   }
 }
-const getArticleTags = memoize(_getArticleTags);
+const getArticleTags = memoize(_getArticleTags, memoizeDefaultValues.maxCacheSize, memoizeDefaultValues.ttl, removeFullPath);
 
 function getAllTagsAppearance() {
   let tags = new Map<string, number>();
@@ -111,7 +112,7 @@ function _searchByTags(searchTags: string[]): string[] {
       if (foundTags.length === searchTags.length) foundPages.push(article);
     });
 
-    return foundPages.map(f => path.relative(doscDirectory, f).replace(/\\/g, "/"));
+    return foundPages.map(removeFullPath);
   } catch (error) {
     console.log("searchByTags", error);
     return foundPages;
@@ -120,7 +121,7 @@ function _searchByTags(searchTags: string[]): string[] {
 export const searchByTags = memoize(_searchByTags, 12);
 
 function _getDocTopTag(category: string, slug: string) {
-  const articleTags = getArticleTags(path.join(doscDirectory, `${category}/${slug}`));
+  const articleTags = getArticleTags(path.join(docsDirectory, `${category}/${slug}`));
   return (([tag, popularity]) => ({ tag, popularity }))(
     Array.from(articleTags.entries()).reduce((max, curr) => (curr[1] > max[1] ? curr : max), ["", tagPopularityBaseDecrementLevel])
   );

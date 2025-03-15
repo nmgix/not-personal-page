@@ -1,4 +1,4 @@
-import { GlobalRoutes } from "@/types/articles";
+import { GlobalRoutes } from "@/types/consts";
 import { redirect } from "next/navigation";
 
 export default function Index() {

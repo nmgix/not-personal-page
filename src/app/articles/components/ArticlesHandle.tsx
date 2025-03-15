@@ -8,8 +8,9 @@ import { RefObject, useEffect, useRef, useState } from "react";
 import { RadioButtonsGroup, RadioButtonsGroupProps } from "@/components/Specialized/RadioButtons";
 import { Icon } from "@/components/Generic/Icon";
 import { ArticleList } from "@/widgets/ArticleList";
-import { ArticleFields, inputPlacholderWords } from "@/types/consts";
+import { ArticleFields, GlobalRoutes, inputPlacholderWords } from "@/types/consts";
 import { ExternalClassnames } from "@/types/components";
+import { ArticleListElementProps, ArticleTag } from "@/types/articles";
 
 type ArticlesSearchProps = {
   formRef: RefObject<HTMLFormElement | null>;
@@ -83,7 +84,6 @@ const ArticlesSearch = ({ page, loading, formRef, tags, query, fetchArticles, ar
 };
 
 import classnames from "classnames";
-import { ArticleListElementProps, ArticleTag, GlobalRoutes } from "@/types/articles";
 import { QueryParams } from "../page";
 
 const transformQuery = (query: Partial<QueryParams> | undefined) => {

@@ -1,6 +1,6 @@
 ---
 tags: ["idx", "wow", "cool", "news", "ideas", "new", "gamedev"]
-date: "2023-01-05"
+date: 2023-01-05
 title: Новая статья в блоге!!
 TTRmins: 5
 ---

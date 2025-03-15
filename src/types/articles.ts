@@ -2,19 +2,6 @@ import { AvailableIcons } from "@/components/Generic/Icon";
 import { ImageElement } from "@/components/Specialized/ImageList";
 import { type PickKey } from "@/helpers/typescript";
 
-export const tagPopularityBaseDecrementLevel = 50;
-export const articleFileName = "text.md";
-
-export enum GlobalRoutes {
-  root = "/",
-  home = "/home",
-  articles = "/articles/",
-  article = "/article/"
-  // note = "/note/"
-  // blog = "/blog/",
-  // project = "/project/"
-}
-
 export type ArticleTag = {
   popularity: number;
   tag: string;

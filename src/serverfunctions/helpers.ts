@@ -1,3 +1,6 @@
+import { articleFolder } from "@/types/consts";
+import path, { join } from "path";
+
 export function splitQuery(url: string) {
   const query: { [queryParam: string]: string } = {};
   url
@@ -86,12 +89,22 @@ class LRUCacheWithTTL<K, V> {
   }
 }
 
-export function memoize<T extends (...args: any[]) => any>(fn: T, maxCacheSize: number = 10, ttl: number = 7 * 24 * 3600 * 1000): T {
+export const memoizeDefaultValues = {
+  maxCacheSize: 10,
+  ttl: 7 * 24 * 3600 * 1000
+};
+
+export function memoize<T extends (...args: any[]) => any>(
+  fn: T,
+  maxCacheSize: number = memoizeDefaultValues.maxCacheSize,
+  ttl: number = memoizeDefaultValues.ttl,
+  keyFormatter?: (key: string) => string
+): T {
   const functionName = fn.name.replace(/^_/, "");
   const cache = new LRUCacheWithTTL<string, ReturnType<T>>(maxCacheSize, ttl, functionName);
 
   return ((...args: Parameters<T>): ReturnType<T> => {
-    const key = args.length > 0 ? JSON.stringify(args) : "no-args";
+    const key = args.length > 0 ? (keyFormatter ? keyFormatter(JSON.stringify(args)) : JSON.stringify(args)) : "no-args";
 
     if (cache.has(key)) {
       return cache.get(key)!;
@@ -104,3 +117,10 @@ export function memoize<T extends (...args: any[]) => any>(fn: T, maxCacheSize: 
     return result;
   }) as T;
 }
+
+export const docsDirectory = join(process.cwd(), articleFolder);
+
+export function removeFullPath(fileFolder: string) {
+  return path.relative(docsDirectory, fileFolder).replace(/\\/g, "/");
+}
+// export const removeFullPath = memoize(_removeFullPath);

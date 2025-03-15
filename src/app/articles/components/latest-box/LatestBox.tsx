@@ -3,19 +3,21 @@ import classnames from "classnames";
 import { JSX, memo } from "react";
 import styles from "./latest-box-variants.module.scss";
 import Link from "next/link";
-import { GlobalRoutes } from "@/types/articles";
+import { GlobalRoutes } from "@/types/consts";
 import { ExternalClassnames } from "@/types/components";
+import { formatDate } from "@/helpers/date";
 
 type BoxProps = Exclude<ReturnType<typeof getDocBySlugShorten>, undefined>;
 
 const BoxVar1 = (props: BoxProps) => {
+  console.log(props.meta.date);
   return (
     <div className={classnames("box", styles.shared, styles.variant1)}>
       <div className={styles.variant1Top}>
         <h4 className={styles.variant1TopTitle}>{props.meta.title ?? props.slug.split("/").join(" / ")}</h4>
         <div className={styles.variant1TopSubtitle}>
-          {props.meta.date !== undefined && <span>{props.meta.date.split(" ")[0]}</span>}
-          {props.meta.TTRmins !== undefined && <span>{props.meta.TTRmins}min</span>}
+          {props.meta.date !== undefined && <span>{formatDate(props.meta.date)}</span>}
+          {props.meta.TTRmins !== undefined && <span>{props.meta.TTRmins ?? 5}min</span>}
         </div>
       </div>
       <div className={styles.variant1Bottom}>

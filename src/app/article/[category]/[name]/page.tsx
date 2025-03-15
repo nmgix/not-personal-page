@@ -1,8 +1,7 @@
 import { getDocBySlug, getDocImages, getDocLinks } from "@/serverfunctions/getDoc";
 import { calculateAllTagsPopularity, calculateArticleTags } from "@/serverfunctions/tags";
 import { ImageElement } from "@/components/Specialized/ImageList";
-import { GlobalRoutes, tagPopularityBaseDecrementLevel } from "@/types/articles";
-import { articleCategories } from "@/types/consts";
+import { articleCategories, GlobalRoutes } from "@/types/consts";
 import { mockServerArticleFetch } from "@/types/mocks";
 import { ArticleDefault } from "@/widgets/ArticlePages";
 import { Metadata, ResolvingMetadata } from "next";

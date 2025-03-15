@@ -3,9 +3,10 @@ import styles from "./articles-list-element.module.scss";
 import classnames from "classnames";
 import { BoxesScrollbar } from "../../../../components/Specialized/BoxesScrollbar";
 import { ImageList } from "@/components/Specialized/ImageList";
-import { ArticleListElementProps, GlobalRoutes } from "@/types/articles";
+import { ArticleListElementProps } from "@/types/articles";
+import { GlobalRoutes } from "@/types/consts";
 
-export const ArticleListElement = ({ TTRmins, categoryImg, slug, tags, title, imagesSrc, previewImages, textPreview }: ArticleListElementProps) => {
+export const ArticleListElement = ({ TTRmins, slug, tags, title, imagesSrc, previewImages, textPreview }: ArticleListElementProps) => {
   const formatedTTR = !isNaN(Number(TTRmins)) ? Math.floor(TTRmins > 60 ? TTRmins / 60 : TTRmins) : 0; // хз будет recalculate, наверное, но хуки ни-ни
 
   return (

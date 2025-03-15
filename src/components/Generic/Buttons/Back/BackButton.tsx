@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./back-btn.module.scss";
-import { GlobalRoutes } from "@/types/articles";
+import { GlobalRoutes } from "@/types/consts";
 import Link from "next/link";
 import classnames from "classnames";
 import { ExternalClassnames } from "@/types/components";

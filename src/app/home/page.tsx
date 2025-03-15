@@ -6,8 +6,8 @@ import { ArticlesPreview } from "@/widgets/ArticlesPreview";
 import { Image } from "@/components/Generic/Image";
 
 import { VideosPreview } from "@/widgets/VideosPreview";
-import { ArticleListElementProps, ArticleVideoPreview, GlobalRoutes } from "@/types/articles";
-import { articleTypes } from "@/types/consts";
+import { ArticleListElementProps, ArticleVideoPreview } from "@/types/articles";
+import { articleTypes, GlobalRoutes } from "@/types/consts";
 import { getArticleMetaField, getCategorySlugs, getDocBySlugShorten, getLatestDocs, getRandomArticles } from "../../serverfunctions/getDoc";
 import { getDocTopTag } from "@/serverfunctions/tags";
 import { AvailableIcons, Icon } from "@/components/Generic/Icon";

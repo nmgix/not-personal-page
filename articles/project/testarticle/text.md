@@ -1,6 +1,6 @@
 ---
 tags: ["wow", "cool", "gamedev"]
-date: "2025-01-03"
+date: 2025-01-03
 videoSrc: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
 imagePlaceholderSrc: "https://www.digiseller.ru/preview/1175270/p1_3798188_582bf509.jpg"
 relatedTagsIcons: ["code", "blog", "grid-blocks"]

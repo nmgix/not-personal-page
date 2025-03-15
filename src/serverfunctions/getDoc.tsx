@@ -1,12 +1,10 @@
 import path, { join } from "path";
 import fs from "fs";
 import matter from "gray-matter";
-import { ArticleData, articleFileName, ArticleListElementProps, ArticleVideoPreview } from "@/types/articles";
-import { articleTypes } from "@/types/consts";
-import { memoize, shuffle } from "./helpers";
+import { ArticleData, ArticleListElementProps, ArticleVideoPreview } from "@/types/articles";
+import { articleFileName, articleTypes } from "@/types/consts";
+import { docsDirectory, memoize, removeFullPath, shuffle } from "./helpers";
 import { getPopularTags, searchByTags } from "./tags";
-
-export const doscDirectory = join(process.cwd(), "articles");
 
 // https://github.com/nmgix/portfolio/blob/main/helpers/getDocBySlug.ts
 export function getDocBySlug(category: string, slug: string /*, locale: string*/): ArticleData | undefined {
@@ -14,9 +12,10 @@ export function getDocBySlug(category: string, slug: string /*, locale: string*/
     if (!articleTypes.some(t => t === category)) throw Error("category not found");
     const regex = new RegExp(`^\/?(${articleTypes.join("|")})(\/|$)`, "i");
     const realSlug = slug.replace(regex, "");
-    const fullPath = join(doscDirectory, category, realSlug, articleFileName);
+    const fullPath = join(docsDirectory, category, realSlug, articleFileName);
     const fileContents = fs.readFileSync(fullPath, "utf8");
     const { data, content } = matter(fileContents);
+    // вот здесь надо data.datE форматнуть, надо бы zod подключить
     return { slug: `${category}/${realSlug}`, meta: data as ArticleData["meta"], text: content };
   } catch (error) {
     return undefined;
@@ -31,9 +30,12 @@ export function getDocBySlugShorten(
     if (!articleTypes.some(t => t === category)) throw Error("category not found");
     const regex = new RegExp(`^\/?(${articleTypes.join("|")})(\/|$)`, "i");
     const realSlug = slug.replace(regex, "");
-    const fullPath = join(doscDirectory, category, realSlug, articleFileName);
+    const fullPath = join(docsDirectory, category, realSlug, articleFileName);
     const fileContents = fs.readFileSync(fullPath, "utf8");
     const { data } = matter(fileContents);
+
+    // вот здесь надо data.datE форматнуть, надо бы zod подключить
+
     return { slug: `${category}/${realSlug}`, meta: data as ArticleData["meta"] };
   } catch (error) {
     console.log("getDocBySlugShorten", error);
@@ -45,7 +47,7 @@ export function findInDoc(category: string, slug: string, words: string[], inclu
     if (!articleTypes.some(t => t === category)) throw Error("category not found");
     const regex = new RegExp(`^\/?(${articleTypes.join("|")})(\/|$)`, "i");
     const realSlug = slug.replace(regex, "");
-    const fullPath = join(doscDirectory, category, realSlug, articleFileName);
+    const fullPath = join(docsDirectory, category, realSlug, articleFileName);
     const fileContents = fs.readFileSync(fullPath, "utf8");
     const { data, content } = matter(fileContents);
     const wordsMatch = new RegExp(words.join("|"), "gi").test(content);
@@ -74,17 +76,14 @@ function fileListWithoutMD(dir: string) {
   }
 }
 
-// const ignoreFiles = [".gitkeep"] as const;
-
 function _getAllDocsFolders(limit?: number) {
   try {
     const categories = [...articleTypes];
     shuffle(categories);
     return categories
       .slice(0, limit)
-      .map(t => fileListWithoutMD(path.join(doscDirectory, t)))
+      .map(t => fileListWithoutMD(path.join(docsDirectory, t)))
       .flat();
-    // .filter(fileLink => !ignoreFiles.some(ignoreFile => fileLink.endsWith(ignoreFile)));
   } catch (error) {
     console.log("getAllDocsFolders", error);
     return [];
@@ -105,7 +104,7 @@ function sortDocsDesc(limit?: number) {
       const { data } = matter(fileContents);
       if (!data.date) return;
       ++found;
-      files.push({ file: path.relative(doscDirectory, fileFolder).replace(/\\/g, "/"), date: Number(new Date(data.date)) });
+      files.push({ file: removeFullPath(fileFolder), date: Number(new Date(data.date)) });
     });
     return files;
   } catch (error) {
@@ -127,8 +126,7 @@ export const getLatestDocs = memoize(_getLatestDocs);
 
 export function getCategorySlugs(category: string) {
   try {
-    return fileListWithoutMD(path.join(doscDirectory, category)).map(fileFolder => path.relative(doscDirectory, fileFolder).replace(/\\/g, "/"));
-    // .filter(fileLink => !ignoreFiles.some(ignoreFile => fileLink.endsWith(ignoreFile)));
+    return fileListWithoutMD(path.join(docsDirectory, category)).map(fileFolder => removeFullPath(fileFolder));
   } catch (error) {
     console.log("getCategorySlugs", error);
     return [];
@@ -139,7 +137,7 @@ const imgRegexp = new RegExp(/!\[([^\[.]+?)\]\((.+?)\)/gm); // [title](link)
 const linksRegexp = new RegExp(/!?\[([^\[.]+?)\]\((.+?)\)/gm); // ![imgtitle](link)
 export function getDocLinks(path: string) {
   try {
-    const md = fs.readFileSync(join(doscDirectory, path, articleFileName), "utf8");
+    const md = fs.readFileSync(join(docsDirectory, path, articleFileName), "utf8");
     let mdWithoutImg = String(md).replace(imgRegexp, "");
     let hrefAndTextMd = [];
     let result: any = "";
@@ -158,7 +156,7 @@ export function getDocLinks(path: string) {
 
 export function getDocImages(path: string) {
   try {
-    const md = fs.readFileSync(join(doscDirectory, path, articleFileName), "utf8");
+    const md = fs.readFileSync(join(docsDirectory, path, articleFileName), "utf8");
     let hrefAndTextMd = [];
     let result: any = "";
     while ((result = imgRegexp.exec(md))) {
@@ -225,7 +223,7 @@ function _getRandomArticlesWithSeed(paths: string[], start: number = 0, limit: n
     currentIndex++;
   }
 
-  return { articles: articles.map(a => path.relative(doscDirectory, a).replace(/\\/g, "/")), newSeed: seed, newIndex: currentIndex };
+  return { articles: articles.map(removeFullPath), newSeed: seed, newIndex: currentIndex };
 }
 
 export const getRandomArticlesWithSeed = memoize(_getRandomArticlesWithSeed);
