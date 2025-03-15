@@ -47,6 +47,7 @@ export const ArticleDefault = ({
 
   const minPopularity = Math.min(...(mappedTags ?? []).map(t => t.popularity));
   const maxPopularity = Math.max(...(mappedTags ?? []).map(t => t.popularity));
+  const dateInvalid = localDate === "Invalid Date";
 
   return (
     <div className={classnames("page", styles.articleDefault, externalClassnames)}>
@@ -54,7 +55,7 @@ export const ArticleDefault = ({
       <div>
         <div className={styles.rightPanel}>
           <span className={styles.articleDate}>
-            {localDate} &#40;{timeAgo}&#41;
+            {!dateInvalid ? localDate : ""} &#40;{!dateInvalid ? timeAgo : "Нет даты T_T"}&#41;
           </span>
           {mappedTags !== undefined && mappedTags?.length > 0 && (
             <div className={styles.tags}>
@@ -62,7 +63,6 @@ export const ArticleDefault = ({
                 <Link
                   prefetch={false}
                   key={t.tag}
-                  shallow={false}
                   href={`/articles?${ArticleFields["tag"]}=${t.tag}`}
                   style={{ opacity: normalize(t.popularity, minPopularity, maxPopularity) / 100 }}>
                   #{t.tag}
@@ -86,7 +86,7 @@ export const ArticleDefault = ({
         <div className={styles.articleContent}>
           {/* <a href='/' title={id} */}
           <h2 className={styles.title} data-id={slug}>
-            {title}
+            {title ?? slug}
           </h2>
           {/* overrides поле не помешает чтобы рендерить code блоки кастомным компонентом */}
           <Markdown>{text}</Markdown>

@@ -12,6 +12,79 @@
   <img align="top" src="./.git.content/figma_preview3.png" width="20%" />
 </p>
 
+# Структура заметок
+
+```
+root/
+│
+├── articles/
+│   ├── blog/
+│   │   └── article_name/
+│   │       └── text.md
+│   ├── note/
+│   │   └── another_article/
+│   │       └── text.md
+│   └── project/
+│       └── cool_project/
+│           ├── text.md
+│           └── image.png
+│
+```
+
+1. blog|note|project (идут по default, можно свои добавлять)
+2. обязателен text.md иначе папка будет скипаться внутри serverfunctions, остальные файлы опциональны (обычно это изображения)
+
+# Файл статьи, что писать в шапке
+
+Никаких знаков препинания после значения ключа, никаких запятых и им подобных
+
+Для обычного text.md
+
+```.md
+---
+   tags: ["idx", "wow", "cool", "news", "ideas", "new", "gamedev"]
+   date: 2025-01-03
+   title: Новая статья в блоге, опять!!
+   TTRmins: 10
+---
+```
+
+или
+
+```.md
+---
+   title: Заголовок статьи
+   tags: ["news", "cool"]
+   date: "2025-01-03"
+   TTRmins: 15
+   categoryImg: blog
+   //(доступны "blog" | "tech-article" | "video"), это тоже убрать, а ещё кавычки должны быть одинарные внутри двойных или наоборот, иначе наткнёшься на https://stackoverflow.com/a/73838504/14889638
+
+   // опционально, эту строчку надо удалить иначе будет ошибка и редирект на /home без объяснений
+   textPreview: Какой-то текст, не больше 100? ,кажется, знаков
+   imagesSrc: [{ src: "https://cdn.memes.com/up/71558571535638926/i/1736290969647.jpg", alt: "meme 1" }]
+---
+```
+
+~~хотя почти все ключи опциональны кроме date, кажется~~
+в принципе, можно просто text.md бросить и суммарное кол-во articles изменится, но файлы на страничке показываться не будут, по ним можно перейти, но они будут пустые
+
+Для project/ text.md
+
+```.md
+---
+   tags: ["wow", "cool", "gamedev"]
+   date: "2025-01-03"
+   title: Test project example
+   TTRmins: 3
+   textPreview: Тестовый пример кода, посмотрим что из этого выйдет
+
+   videoSrc: https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4
+   imagePlaceholderSrc: https://www.digiseller.ru/preview/1175270/p1_3798188_582bf509.jpg
+   relatedTagsIcons: ["code", "blog", "grid-blocks"]
+---
+```
+
 ## Сетап
 
 > [!IMPORTANT]

@@ -47,16 +47,6 @@ export type ArticleProps = {
   tags: string[];
 };
 
-// export type VideoPreviewProps = {
-//   id: string;
-//   shortenedVideoSrc: string;
-//   videoLength: number;
-//   title: string;
-//   shortenedDescription: string;
-//   thumbnailSrc: string;
-//   relatedTags?: (keyof typeof AvailableIcons)[];
-// } & ExternalClassnames;
-
 export type ArticleVideoPreview = {
   meta: Omit<TArticleDefault, "imagesSrc"> &
     Partial<{

@@ -7,21 +7,26 @@ import matter from "gray-matter";
 import { memoize } from "./helpers";
 
 function _getArticleTags(filePath: string): Map<string, number> {
-  const tags = new Map<string, number>();
+  try {
+    const tags = new Map<string, number>();
 
-  const fileContents = fs.readFileSync(path.join(filePath, articleFileName), "utf8");
-  if (!fileContents) return tags;
-  const { data } = matter(fileContents);
-  if (!data.tags || !Array.isArray(data.tags) || data.tags.length === 0) return tags;
-  data.tags.forEach((t: string) => {
-    let existingTag = tags.get(t);
-    if (!isNaN(Number(existingTag)) || existingTag == undefined) tags.set(t, !isNaN(Number(existingTag)) ? ++(existingTag as number) : 1);
-  });
-  return tags;
+    const fileContents = fs.readFileSync(path.join(filePath, articleFileName), "utf8");
+    if (!fileContents) return tags;
+    const { data } = matter(fileContents);
+    if (!data.tags || !Array.isArray(data.tags) || data.tags.length === 0) return tags;
+    data.tags.forEach((t: string) => {
+      let existingTag = tags.get(t);
+      if (!isNaN(Number(existingTag)) || existingTag == undefined) tags.set(t, !isNaN(Number(existingTag)) ? ++(existingTag as number) : 1);
+    });
+    return tags;
+  } catch (error) {
+    console.log("getArticleTags", error);
+    return new Map();
+  }
 }
 const getArticleTags = memoize(_getArticleTags);
 
-function getAllTagsOccurance() {
+function getAllTagsAppearance() {
   let tags = new Map<string, number>();
   try {
     const filesFolders = getAllDocsFolders();
@@ -35,7 +40,7 @@ function getAllTagsOccurance() {
     });
     return tags;
   } catch (error) {
-    console.log("getAllTags", error);
+    console.log("getAllTagsAppearance", error);
     return tags;
   }
 }
@@ -60,7 +65,7 @@ const articlesTags = memoize(_articlesTags, 1, 8 * 3600 * 1000);
 
 export function calculateAllTagsPopularity(): ArticleTag[] {
   try {
-    const tags = getAllTagsOccurance();
+    const tags = getAllTagsAppearance();
     const mapped = tags.entries().map(([tag, popularity]) => ({ tag, popularity } as ArticleTag));
     return [...mapped];
   } catch (error) {
@@ -71,8 +76,8 @@ export function calculateAllTagsPopularity(): ArticleTag[] {
 
 export function calculateArticleTags(tags: string[]): ArticleTag[] {
   try {
-    const globalTags = getAllTagsOccurance();
-    const matched: ArticleTag[] = tags.map(t => {
+    const globalTags = getAllTagsAppearance();
+    const matched: ArticleTag[] = (tags ?? []).map(t => {
       const foundTagPopularity = globalTags.get(t);
       return { popularity: foundTagPopularity ? tagPopularityBaseDecrementLevel - foundTagPopularity : tagPopularityBaseDecrementLevel, tag: t };
     });

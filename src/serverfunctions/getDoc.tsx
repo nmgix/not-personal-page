@@ -63,8 +63,10 @@ export function findInDoc(category: string, slug: string, words: string[], inclu
 function fileListWithoutMD(dir: string) {
   try {
     return fs.readdirSync(dir).reduce((acc, curr) => {
-      // return acc.concat(curr.replace(".md", ""));
-      return acc.concat(`${dir}/${curr}`);
+      const currPath = path.join(dir, curr);
+      const isFolder = fs.lstatSync(currPath).isDirectory();
+      const containsMainMd = isFolder === true ? fs.readdirSync(currPath).includes(articleFileName) : false;
+      return isFolder && containsMainMd ? acc.concat(`${dir}/${curr}`) : acc;
     }, [] as string[]);
   } catch (error) {
     console.log("fileListWithoutMD", error);
@@ -72,7 +74,7 @@ function fileListWithoutMD(dir: string) {
   }
 }
 
-const ignoreFiles = [".gitkeep"] as const;
+// const ignoreFiles = [".gitkeep"] as const;
 
 function _getAllDocsFolders(limit?: number) {
   try {
@@ -81,8 +83,8 @@ function _getAllDocsFolders(limit?: number) {
     return categories
       .slice(0, limit)
       .map(t => fileListWithoutMD(path.join(doscDirectory, t)))
-      .flat()
-      .filter(fileLink => !ignoreFiles.some(ignoreFile => fileLink.endsWith(ignoreFile)));
+      .flat();
+    // .filter(fileLink => !ignoreFiles.some(ignoreFile => fileLink.endsWith(ignoreFile)));
   } catch (error) {
     console.log("getAllDocsFolders", error);
     return [];
@@ -125,9 +127,8 @@ export const getLatestDocs = memoize(_getLatestDocs);
 
 export function getCategorySlugs(category: string) {
   try {
-    return fileListWithoutMD(path.join(doscDirectory, category))
-      .map(fileFolder => path.relative(doscDirectory, fileFolder).replace(/\\/g, "/"))
-      .filter(fileLink => !ignoreFiles.some(ignoreFile => fileLink.endsWith(ignoreFile)));
+    return fileListWithoutMD(path.join(doscDirectory, category)).map(fileFolder => path.relative(doscDirectory, fileFolder).replace(/\\/g, "/"));
+    // .filter(fileLink => !ignoreFiles.some(ignoreFile => fileLink.endsWith(ignoreFile)));
   } catch (error) {
     console.log("getCategorySlugs", error);
     return [];

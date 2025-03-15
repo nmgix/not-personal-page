@@ -60,7 +60,7 @@ export default async function ArticlePage(props: ArticleProps) {
   }
   const article = getDocBySlug(params.category as (typeof getDocBySlug)["arguments"][0], params.name);
   if (!article) {
-    console.log("this page does not exist");
+    console.log(`${Object.values(params).join("/")}: ❌ Страница не найдена`);
     return redirect(GlobalRoutes.home);
   }
 
