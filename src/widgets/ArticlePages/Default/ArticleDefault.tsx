@@ -9,6 +9,10 @@ import { BackButton } from "@/components/Generic/Buttons";
 import Markdown from "markdown-to-jsx";
 import { ArticleFields } from "@/types/consts";
 
+const normalize = (value: number, min: number, max: number, newMin = 10, newMax = 70) => {
+  return ((value - min) / (max - min)) * (newMax - newMin) + newMin;
+};
+
 export type ArticleDefaultProps = {
   mappedTextLinks?: { href: string; title?: string }[];
   mappedTags?: ArticleTag[];
@@ -41,6 +45,9 @@ export const ArticleDefault = ({
     })
     .replace("-", "/");
 
+  const minPopularity = Math.min(...(mappedTags ?? []).map(t => t.popularity));
+  const maxPopularity = Math.max(...(mappedTags ?? []).map(t => t.popularity));
+
   return (
     <div className={classnames("page", styles.articleDefault, externalClassnames)}>
       <BackButton externalClassnames={styles.backBtn} />
@@ -57,7 +64,7 @@ export const ArticleDefault = ({
                   key={t.tag}
                   shallow={false}
                   href={`/articles?${ArticleFields["tag"]}=${t.tag}`}
-                  style={{ opacity: (70 - t.popularity) / 100 }}>
+                  style={{ opacity: normalize(t.popularity, minPopularity, maxPopularity) / 100 }}>
                   #{t.tag}
                 </Link>
               ))}

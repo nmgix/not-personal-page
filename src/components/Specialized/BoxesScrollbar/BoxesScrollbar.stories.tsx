@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { BoxesScrollbar } from "@/components/Specialized/BoxesScrollbar";
-import { mockList } from "./types";
+import { mockList } from "@/types/mocks";
 
 const meta = {
   title: "Specialized/BoxesScrollbar",

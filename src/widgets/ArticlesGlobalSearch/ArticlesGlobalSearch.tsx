@@ -9,7 +9,6 @@ import { Input } from "@/components/Generic/Input";
 import { Image } from "@/components/Generic/Image";
 import { RadioButtonsGroup } from "@/components/Specialized/RadioButtons";
 import { ResultListRenderer } from "./components/ResultListRenderer";
-import { mockArticlesAmount } from "@/types/mocks";
 import { getUrlSearchParams, useArticlesSearch } from "@/hooks/useArticlesSearch";
 import { ArticleFields, inputPlacholderWords } from "@/types/consts";
 import { useModal } from "./hooks/useModal";
@@ -52,7 +51,7 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
       <div ref={searchRef} className={classnames("box", styles.articlesGlobalSearch)}>
         <div className={styles.titleWrapper}>
           <h4 className={styles.title}>articles search</h4>
-          <span className={styles.subtitle}>{mockArticlesAmount} articles currently</span>
+          <span className={styles.subtitle}>{articlesData.articles?.length ?? 0} articles currently</span>
         </div>
         <form
           className={styles.top}

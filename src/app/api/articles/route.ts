@@ -1,7 +1,7 @@
 import { splitQuery } from "@/serverfunctions/helpers";
 import { urldecode } from "@/helpers/url";
 import { ArticleFields } from "@/types/consts";
-import { getArticles } from "@/serverfunctions/getArticles";
+import { getArticles } from "@/serverfunctions/getDoc";
 
 type QueryParams = Partial<Record<ArticleFields, string>>;
 

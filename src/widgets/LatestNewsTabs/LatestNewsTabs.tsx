@@ -17,7 +17,7 @@ export const LatestNewsTabs = ({ externalClassnames }: LastetNewsTabsProps) => {
   return (
     <div className={classnames(styles.latestNewsTabs, externalClassnames)}>
       {latestPosts.map((p, idx) => (
-        <LatestBox {...p} externalClassnames={idx < 2 ? styles.firstRowItem : styles.secondRowItem} />
+        <LatestBox key={p.slug} {...p} externalClassnames={idx < 2 ? styles.firstRowItem : styles.secondRowItem} />
       ))}
     </div>
   );

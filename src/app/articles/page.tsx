@@ -4,9 +4,8 @@ import { ArticlesHandle } from "./components/ArticlesHandle";
 import { mockArticlesAmount } from "@/types/mocks";
 import { getPopularTags } from "../../serverfunctions/tags";
 import { ArticleFields } from "@/types/consts";
-import { getArticles } from "@/serverfunctions/getArticles";
 import { urldecode } from "@/helpers/url";
-import { getAllDocsFolders, getDocBySlugShorten, getLatestDocs } from "@/serverfunctions/getDoc";
+import { getAllDocsFolders, getArticles, getDocBySlugShorten, getLatestDocs } from "@/serverfunctions/getDoc";
 import { LatestBox } from "./components/latest-box/LatestBox";
 
 export type QueryParams = { [key in ArticleFields]: string };

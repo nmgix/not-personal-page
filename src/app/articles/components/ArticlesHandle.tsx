@@ -34,10 +34,11 @@ const ArticlesSearch = ({ page, loading, formRef, tags, query, fetchArticles, ar
     fetchArticles(urlParams);
   };
 
-  const [firstRender, setFirstRender] = useState(true);
+  const firstRender = useRef(true);
   useEffect(() => {
-    if (firstRender === true) {
-      return setFirstRender(false);
+    if (firstRender.current === true) {
+      firstRender.current = false;
+      return;
     } else {
       if (query !== undefined && query["searchParams"] !== undefined) {
         fetchArticles(new URLSearchParams({ ...query["searchParams"], page: String(page) }));
@@ -115,7 +116,12 @@ export const ArticlesHandle = ({ presetArticles, tags, externalClassnames, query
   );
   const formRef = useRef<HTMLFormElement>(null);
 
+  const firstRender = useRef(true);
   useEffect(() => {
+    if (firstRender.current === true) {
+      firstRender.current = false;
+      return;
+    }
     setCurrentQuery(transformQuery(query));
   }, [query]);
 

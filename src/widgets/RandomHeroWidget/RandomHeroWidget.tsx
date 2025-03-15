@@ -26,7 +26,6 @@ type RandomHeroWidgetProps = {
 
 export const RandomHeroWidget = ({ externalClassnames, externalWidgetClassnames }: RandomHeroWidgetProps) => {
   const selectedComponentName = Object.keys(variants)[Math.floor(Math.random() * Object.keys(variants).length)] as keyof typeof variants;
-  console.log({ selectedComponentName });
   const component = variants[selectedComponentName];
 
   if (component === undefined) return null;
