@@ -10,7 +10,6 @@ import { formatDate } from "@/helpers/date";
 type BoxProps = Exclude<ReturnType<typeof getDocBySlugShorten>, undefined>;
 
 const BoxVar1 = (props: BoxProps) => {
-  console.log(props.meta.date);
   return (
     <div className={classnames("box", styles.shared, styles.variant1)}>
       <div className={styles.variant1Top}>

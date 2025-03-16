@@ -42,7 +42,8 @@
     display: block;
 
     img {
-      color: var(--color-font-default);
+      color: var(--color-font-default) !important;
+      border-radius: inherit;
     }
   }
 

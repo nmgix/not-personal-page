@@ -17,6 +17,18 @@
     }
   }
 
+  .boxesScrollbar {
+    &Tag {
+      display: flex;
+      color: var(--color-font-default);
+      column-gap: margins.$margin-xs;
+
+      svg {
+        width: 1.1em;
+      }
+    }
+  }
+
   .mainTabs {
     flex: 0;
 

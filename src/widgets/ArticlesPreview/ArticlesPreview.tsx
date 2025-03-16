@@ -3,14 +3,14 @@ import classnames from "classnames";
 import styles from "./articles-preview.module.scss";
 import Link from "next/link";
 import { ExternalClassnames } from "@/types/components";
-import { GlobalRoutes } from "@/types/consts";
+import { articlesPreviewRenderLimit, GlobalRoutes } from "@/types/consts";
 
 type ArticlesPreviewProps = {
   list: ArticleListElementProps[];
   articlesRenderLimit?: number;
 } & ExternalClassnames;
 
-export const ArticlesPreview = ({ list, externalClassnames, articlesRenderLimit }: ArticlesPreviewProps) => {
+export const ArticlesPreview = ({ list, externalClassnames, articlesRenderLimit = articlesPreviewRenderLimit }: ArticlesPreviewProps) => {
   return (
     <div className={classnames("box", styles.articlesPreview, externalClassnames)}>
       <div className={classnames("fadeBottom", styles.articlesPreviewInsideWrapper)}>
@@ -20,7 +20,7 @@ export const ArticlesPreview = ({ list, externalClassnames, articlesRenderLimit 
         </h3>
         <div className={classnames(styles.list)}>
           {list &&
-            list.slice(0, articlesRenderLimit ?? 3).map((article, i) => (
+            list.slice(0, articlesRenderLimit).map((article, i) => (
               <Link
                 prefetch={false}
                 key={article.slug}

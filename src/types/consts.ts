@@ -12,7 +12,9 @@ export const articleCategories: { type: string; title: string; icon: keyof typeo
 export const articleTypes = ["note", "blog", "project"] as const;
 export const AvailableModels = {
   dragons_liberation: "gltf/dragons_liberation.glb",
-  corkboard: "gltf/corkboard.glb"
+  corkboard: "gltf/corkboard.glb",
+  fish: "gltf/fish.glb",
+  tuna_fish: "gltf/tuna_fish.glb"
 } as const;
 export enum GlobalRoutes {
   root = "/",
@@ -20,6 +22,7 @@ export enum GlobalRoutes {
   articles = "/articles/",
   article = "/article/"
 }
+export const articlesPreviewRenderLimit = 3;
 
 // остальное не важно
 export const tagPopularityBaseDecrementLevel = 50;

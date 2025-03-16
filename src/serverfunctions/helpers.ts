@@ -1,5 +1,6 @@
 import { articleFolder } from "@/types/consts";
 import path, { join } from "path";
+import { memoryUsage } from "node:process";
 
 export function splitQuery(url: string) {
   const query: { [queryParam: string]: string } = {};

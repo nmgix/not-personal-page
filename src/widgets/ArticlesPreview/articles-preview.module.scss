@@ -1,6 +1,7 @@
 @use "../../styles/borders";
 @use "../../styles/paddings";
 @use "../../styles/margins";
+@use "../../styles/mixins";
 @use "sass:color";
 
 .articlesPreview {
@@ -72,6 +73,8 @@
         background-color: color.change($color: $white-color, $lightness: 20%);
         .title {
           font-weight: 400;
+          @include mixins.textlines-overflow;
+          white-space: pre;
         }
         .ttr {
           font-weight: 400;

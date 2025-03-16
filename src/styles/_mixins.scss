@@ -1,0 +1,5 @@
+@mixin textlines-overflow {
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  word-break: keep-all;
+}

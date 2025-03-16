@@ -15,7 +15,7 @@ import Link from "next/link";
 
 export default function Home() {
   // надо проверку zod делать всех полей, надоело ?. юзать
-  const articlePreviewList: ArticleListElementProps[] = getLatestDocs(2)
+  const articlePreviewList: ArticleListElementProps[] = getLatestDocs(3)
     .map(d => getDocBySlugShorten(d.file.split("/")[0] as (typeof articleTypes)[number], d.file.split("/")[1]))
     .map(latestArticle => ({
       title: latestArticle?.meta.title ?? latestArticle?.slug ?? "somehow title didnt load UwU",
@@ -54,14 +54,14 @@ export default function Home() {
       <RandomHeroWidget externalClassnames={styles.randomWidget} externalWidgetClassnames={{ viewer: styles.viewer }} />
       <BoxesScrollbar
         list={scrollbarItems.map(a => (
-          <Link href={a.href} style={{ display: "flex", color: "var(--color-font-default)" }} prefetch={false}>
+          <Link href={a.href} prefetch={false} className={classnames(styles.boxesScrollbarTag)}>
             <Icon icon={a.icon} />
             <span>{a.title}</span>
           </Link>
         ))}
       />
       <div className={styles.mainTabs}>
-        <ArticlesPreview list={articlePreviewList} externalClassnames={styles.articlesPreview} articlesRenderLimit={2} />
+        <ArticlesPreview list={articlePreviewList} externalClassnames={styles.articlesPreview} />
         <Image
           src='/assets/person.png'
           alt='guy standing'

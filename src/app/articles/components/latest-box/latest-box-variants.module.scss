@@ -2,6 +2,7 @@
 @use "../../../../styles/margins";
 @use "../../../../styles/media";
 @use "../../../../styles/breakpoints";
+@use "../../../../styles/mixins";
 
 .shared {
   min-height: 150px;
@@ -34,12 +35,6 @@
 
     box-sizing: border-box;
   }
-}
-
-@mixin textline-overflow {
-  overflow-x: hidden;
-  text-overflow: ellipsis;
-  word-break: keep-all;
 }
 
 .variant1 {
@@ -91,7 +86,7 @@
       color: var(--color-font-hero);
       font-size: 24px;
 
-      @include textline-overflow;
+      @include mixins.textlines-overflow;
     }
   }
 
@@ -122,7 +117,7 @@
     justify-content: space-between;
 
     &Tags {
-      @include textline-overflow;
+      @include mixins.textlines-overflow;
     }
   }
 
@@ -132,7 +127,7 @@
       color: var(--color-font-hero);
       font-size: 24px;
 
-      @include textline-overflow;
+      @include mixins.textlines-overflow;
     }
   }
 }
