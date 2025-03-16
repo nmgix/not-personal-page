@@ -125,3 +125,10 @@ export function removeFullPath(fileFolder: string) {
   return path.relative(docsDirectory, fileFolder).replace(/\\/g, "/");
 }
 // export const removeFullPath = memoize(_removeFullPath);
+
+import fs from "fs";
+export function setDocMtime(doc: any, fullPath: string) {
+  const stats = fs.statSync(fullPath);
+  if (!stats.mtime && !stats.mtimeMs && !stats.birthtimeMs) throw new Error("No file stats, impossible");
+  doc["date"] = stats.mtime !== undefined ? stats.mtime : new Date(stats.mtimeMs ?? stats.birthtimeMs ?? null);
+}

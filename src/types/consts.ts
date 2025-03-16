@@ -2,6 +2,8 @@ import { AvailableIcons } from "@/components/Generic/Icon";
 import { JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
 
+export const articlesPreviewAmount = 2;
+export const articlesPreviewRenderLimit = 3;
 export const articleFileName = "text.md";
 export const articleFolder = "articles"; // умнее я ничего не придумал
 export const articleCategories: { type: string; title: string; icon: keyof typeof AvailableIcons }[] = [
@@ -22,7 +24,6 @@ export enum GlobalRoutes {
   articles = "/articles/",
   article = "/article/"
 }
-export const articlesPreviewRenderLimit = 3;
 
 // остальное не важно
 export const tagPopularityBaseDecrementLevel = 50;

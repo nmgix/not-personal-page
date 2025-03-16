@@ -3,7 +3,7 @@ import fs from "fs";
 import matter from "gray-matter";
 import { ArticleData, ArticleListElementProps, ArticleVideoPreview } from "@/types/articles";
 import { articleFileName, articleTypes } from "@/types/consts";
-import { docsDirectory, memoize, removeFullPath, shuffle } from "./helpers";
+import { docsDirectory, memoize, removeFullPath, setDocMtime, shuffle } from "./helpers";
 import { getPopularTags, searchByTags } from "./tags";
 
 // https://github.com/nmgix/portfolio/blob/main/helpers/getDocBySlug.ts
@@ -15,6 +15,7 @@ export function getDocBySlug(category: string, slug: string /*, locale: string*/
     const fullPath = join(docsDirectory, category, realSlug, articleFileName);
     const fileContents = fs.readFileSync(fullPath, "utf8");
     const { data, content } = matter(fileContents);
+    if (!data["date"]) setDocMtime(data, fullPath);
     // вот здесь надо data.datE форматнуть, надо бы zod подключить
     return { slug: `${category}/${realSlug}`, meta: data as ArticleData["meta"], text: content };
   } catch (error) {
@@ -33,6 +34,7 @@ export function getDocBySlugShorten(
     const fullPath = join(docsDirectory, category, realSlug, articleFileName);
     const fileContents = fs.readFileSync(fullPath, "utf8");
     const { data } = matter(fileContents);
+    if (!data["date"]) setDocMtime(data, fullPath);
 
     // вот здесь надо data.datE форматнуть, надо бы zod подключить
 
@@ -99,12 +101,13 @@ function sortDocsDesc(limit?: number) {
 
     filesFolders.some(fileFolder => {
       if (!!limit && found >= limit) return true;
-      const fileContents = fs.readFileSync(path.join(fileFolder, articleFileName), "utf8");
+      const fullPath = path.join(fileFolder, articleFileName);
+      const fileContents = fs.readFileSync(fullPath, "utf8");
       if (!fileContents) return;
       const { data } = matter(fileContents);
-      if (!data.date) return;
-      ++found;
+      if (!data["date"]) setDocMtime(data, fullPath);
       files.push({ file: removeFullPath(fileFolder), date: Number(new Date(data.date)) });
+      ++found;
     });
     return files;
   } catch (error) {
