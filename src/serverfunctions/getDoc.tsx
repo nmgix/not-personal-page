@@ -2,7 +2,7 @@ import path, { join } from "path";
 import fs from "fs";
 import matter from "gray-matter";
 import { ArticleData, ArticleListElementProps, ArticleVideoPreview } from "@/types/articles";
-import { articleFileName, articleTypes } from "@/types/consts";
+import { apiConsts, articleTypes } from "@/types/consts";
 import { docsDirectory, memoize, removeFullPath, setDocMtime, shuffle } from "./helpers";
 import { getPopularTags, searchByTags } from "./tags";
 
@@ -12,7 +12,7 @@ export function getDocBySlug(category: string, slug: string /*, locale: string*/
     if (!articleTypes.some(t => t === category)) throw Error("category not found");
     const regex = new RegExp(`^\/?(${articleTypes.join("|")})(\/|$)`, "i");
     const realSlug = slug.replace(regex, "");
-    const fullPath = join(docsDirectory, category, realSlug, articleFileName);
+    const fullPath = join(docsDirectory, category, realSlug, apiConsts.articleFilename);
     const fileContents = fs.readFileSync(fullPath, "utf8");
     const { data, content } = matter(fileContents);
     if (!data["date"]) setDocMtime(data, fullPath);
@@ -31,7 +31,7 @@ export function getDocBySlugShorten(
     if (!articleTypes.some(t => t === category)) throw Error("category not found");
     const regex = new RegExp(`^\/?(${articleTypes.join("|")})(\/|$)`, "i");
     const realSlug = slug.replace(regex, "");
-    const fullPath = join(docsDirectory, category, realSlug, articleFileName);
+    const fullPath = join(docsDirectory, category, realSlug, apiConsts.articleFilename);
     const fileContents = fs.readFileSync(fullPath, "utf8");
     const { data } = matter(fileContents);
     if (!data["date"]) setDocMtime(data, fullPath);
@@ -49,7 +49,7 @@ export function findInDoc(category: string, slug: string, words: string[], inclu
     if (!articleTypes.some(t => t === category)) throw Error("category not found");
     const regex = new RegExp(`^\/?(${articleTypes.join("|")})(\/|$)`, "i");
     const realSlug = slug.replace(regex, "");
-    const fullPath = join(docsDirectory, category, realSlug, articleFileName);
+    const fullPath = join(docsDirectory, category, realSlug, apiConsts.articleFilename);
     const fileContents = fs.readFileSync(fullPath, "utf8");
     const { data, content } = matter(fileContents);
     const wordsMatch = new RegExp(words.join("|"), "gi").test(content);
@@ -69,7 +69,7 @@ function fileListWithoutMD(dir: string) {
     return fs.readdirSync(dir).reduce((acc, curr) => {
       const currPath = path.join(dir, curr);
       const isFolder = fs.lstatSync(currPath).isDirectory();
-      const containsMainMd = isFolder === true ? fs.readdirSync(currPath).includes(articleFileName) : false;
+      const containsMainMd = isFolder === true ? fs.readdirSync(currPath).includes(apiConsts.articleFilename) : false;
       return isFolder && containsMainMd ? acc.concat(`${dir}/${curr}`) : acc;
     }, [] as string[]);
   } catch (error) {
@@ -101,7 +101,7 @@ function sortDocsDesc(limit?: number) {
 
     filesFolders.some(fileFolder => {
       if (!!limit && found >= limit) return true;
-      const fullPath = path.join(fileFolder, articleFileName);
+      const fullPath = path.join(fileFolder, apiConsts.articleFilename);
       const fileContents = fs.readFileSync(fullPath, "utf8");
       if (!fileContents) return;
       const { data } = matter(fileContents);
@@ -140,7 +140,7 @@ const imgRegexp = new RegExp(/!\[([^\[.]+?)\]\((.+?)\)/gm); // [title](link)
 const linksRegexp = new RegExp(/!?\[([^\[.]+?)\]\((.+?)\)/gm); // ![imgtitle](link)
 export function getDocLinks(path: string) {
   try {
-    const md = fs.readFileSync(join(docsDirectory, path, articleFileName), "utf8");
+    const md = fs.readFileSync(join(docsDirectory, path, apiConsts.articleFilename), "utf8");
     let mdWithoutImg = String(md).replace(imgRegexp, "");
     let hrefAndTextMd = [];
     let result: any = "";
@@ -159,7 +159,7 @@ export function getDocLinks(path: string) {
 
 export function getDocImages(path: string) {
   try {
-    const md = fs.readFileSync(join(docsDirectory, path, articleFileName), "utf8");
+    const md = fs.readFileSync(join(docsDirectory, path, apiConsts.articleFilename), "utf8");
     let hrefAndTextMd = [];
     let result: any = "";
     while ((result = imgRegexp.exec(md))) {

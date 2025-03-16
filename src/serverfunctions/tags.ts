@@ -5,13 +5,13 @@ import fs from "fs";
 import { ArticleTag } from "@/types/articles";
 import matter from "gray-matter";
 import { docsDirectory, memoize, memoizeDefaultValues, removeFullPath } from "./helpers";
-import { articleFileName, tagPopularityBaseDecrementLevel } from "@/types/consts";
+import { apiConsts, tagPopularityBaseDecrementLevel } from "@/types/consts";
 
 function _getArticleTags(filePath: string): Map<string, number> {
   try {
     const tags = new Map<string, number>();
 
-    const fileContents = fs.readFileSync(path.join(filePath, articleFileName), "utf8");
+    const fileContents = fs.readFileSync(path.join(filePath, apiConsts.articleFilename), "utf8");
     if (!fileContents) return tags;
     const { data } = matter(fileContents);
     if (!data.tags || !Array.isArray(data.tags) || data.tags.length === 0) return tags;

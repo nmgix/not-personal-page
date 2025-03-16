@@ -84,7 +84,7 @@
       .textPreview {
         overflow-y: hidden;
         text-overflow: ellipsis;
-        height: 50px;
+        min-height: 30px;
         margin-bottom: -10px;
         font-weight: 700;
         color: color.change($color: $white-color, $lightness: 30%);

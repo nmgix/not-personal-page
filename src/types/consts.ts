@@ -2,10 +2,18 @@ import { AvailableIcons } from "@/components/Generic/Icon";
 import { JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
 
-export const articlesPreviewAmount = 2;
-export const articlesPreviewRenderLimit = 3;
-export const articleFileName = "text.md";
-export const articleFolder = "articles"; // умнее я ничего не придумал
+export const homeArticlePreviewConsts = {
+  amount: 2,
+  max: 3
+};
+export const articlesSearchConsts = {
+  articlesPerPage: 5
+};
+export const apiConsts = {
+  articleFilename: "text.md",
+  articleFolder: "articles"
+};
+
 export const articleCategories: { type: string; title: string; icon: keyof typeof AvailableIcons }[] = [
   { type: "note", title: "статьи", icon: "tech-article" },
   { type: "project", title: "проекты", icon: "video" },

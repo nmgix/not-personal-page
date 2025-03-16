@@ -1,4 +1,4 @@
-import { articleFolder } from "@/types/consts";
+import { apiConsts } from "@/types/consts";
 import path, { join } from "path";
 import { memoryUsage } from "node:process";
 
@@ -119,7 +119,7 @@ export function memoize<T extends (...args: any[]) => any>(
   }) as T;
 }
 
-export const docsDirectory = join(process.cwd(), articleFolder);
+export const docsDirectory = join(process.cwd(), apiConsts.articleFolder);
 
 export function removeFullPath(fileFolder: string) {
   return path.relative(docsDirectory, fileFolder).replace(/\\/g, "/");

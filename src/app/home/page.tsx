@@ -7,7 +7,7 @@ import { Image } from "@/components/Generic/Image";
 
 import { VideosPreview } from "@/widgets/VideosPreview";
 import { ArticleListElementProps, ArticleVideoPreview } from "@/types/articles";
-import { articlesPreviewAmount, articleTypes, GlobalRoutes } from "@/types/consts";
+import { articleTypes, GlobalRoutes, homeArticlePreviewConsts } from "@/types/consts";
 import { getArticleMetaField, getCategorySlugs, getDocBySlugShorten, getLatestDocs, getRandomArticles } from "../../serverfunctions/getDoc";
 import { getDocTopTag } from "@/serverfunctions/tags";
 import { AvailableIcons, Icon } from "@/components/Generic/Icon";
@@ -15,7 +15,7 @@ import Link from "next/link";
 
 export default function Home() {
   // надо проверку zod делать всех полей, надоело ?. юзать
-  const articlePreviewList: ArticleListElementProps[] = getLatestDocs(articlesPreviewAmount)
+  const articlePreviewList: ArticleListElementProps[] = getLatestDocs(homeArticlePreviewConsts.amount)
     .map(d => getDocBySlugShorten(d.file.split("/")[0] as (typeof articleTypes)[number], d.file.split("/")[1]))
     .map(latestArticle => ({
       title: latestArticle?.meta.title ?? latestArticle?.slug ?? "somehow title didnt load UwU",
