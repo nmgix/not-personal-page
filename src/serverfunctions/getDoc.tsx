@@ -2,7 +2,7 @@ import path, { join } from "path";
 import fs from "fs";
 import matter from "gray-matter";
 import { ArticleData, ArticleListElementProps, ArticleVideoPreview } from "@/types/articles";
-import { apiConsts, articleTypes } from "@/types/consts";
+import { apiConsts, articlesSearchConsts, articleTypes } from "@/types/consts";
 import { docsDirectory, memoize, removeFullPath, setDocMtime, shuffle } from "./helpers";
 import { getPopularTags, searchByTags } from "./tags";
 
@@ -49,9 +49,11 @@ export function findInDoc(category: string, slug: string, words: string[], inclu
     if (!articleTypes.some(t => t === category)) throw Error("category not found");
     const regex = new RegExp(`^\/?(${articleTypes.join("|")})(\/|$)`, "i");
     const realSlug = slug.replace(regex, "");
+
     const fullPath = join(docsDirectory, category, realSlug, apiConsts.articleFilename);
     const fileContents = fs.readFileSync(fullPath, "utf8");
     const { data, content } = matter(fileContents);
+
     const wordsMatch = new RegExp(words.join("|"), "gi").test(content);
     if (wordsMatch) {
       if (includeText) return { slug: `${category}/${realSlug}`, meta: data as ArticleData["meta"], text: content } as ArticleData;
@@ -64,7 +66,7 @@ export function findInDoc(category: string, slug: string, words: string[], inclu
   }
 }
 
-function fileListWithoutMD(dir: string) {
+function _fileListWithoutMD(dir: string) {
   try {
     return fs.readdirSync(dir).reduce((acc, curr) => {
       const currPath = path.join(dir, curr);
@@ -77,8 +79,9 @@ function fileListWithoutMD(dir: string) {
     return [];
   }
 }
+const fileListWithoutMD = memoize(_fileListWithoutMD);
 
-function _getAllDocsFolders(limit?: number) {
+export function getAllDocsFolders(limit?: number) {
   try {
     const categories = [...articleTypes];
     shuffle(categories);
@@ -91,7 +94,6 @@ function _getAllDocsFolders(limit?: number) {
     return [];
   }
 }
-export const getAllDocsFolders = memoize(_getAllDocsFolders);
 
 function sortDocsDesc(limit?: number) {
   try {
@@ -176,34 +178,46 @@ export function getDocImages(path: string) {
   }
 }
 
-export const getArticles = (articleTag?: string, articleText?: string[], articleCategory?: string) => {
-  let searchTags: string[] = [];
-  if (articleTag) searchTags.push(articleTag);
-  else searchTags = getPopularTags(3).map(t => t.tag);
+export const getArticles = (
+  article: { tag?: string | string[]; category?: string; text?: string[] },
+  pagination?: Partial<{ start: number; limit: number }>
+): { articles: ArticleListElementProps[]; total: number } => {
+  try {
+    pagination = {
+      start: pagination?.start ?? 0,
+      limit: (pagination?.start ?? 0) + (!isNaN(pagination?.limit!) ? Number(pagination!.limit) : articlesSearchConsts.articlesPerPage)
+    };
+    let searchTags: string[] = [];
+    if (article.tag) searchTags = searchTags.concat(article.tag);
+    else searchTags.concat(getPopularTags().map(t => t.tag));
+    const foundArticlesSlugs = searchByTags(searchTags ?? [], article.category ? [article.category] : [], {
+      start: pagination.start!,
+      end: pagination.limit!
+    });
+    const articles: ArticleListElementProps[] = [];
 
-  // articleCategory либо тут
-
-  const foundArticlesSlugs = searchByTags(searchTags ?? []);
-  // либо вот тут            ^ articleCategory втиснуть типо искать по тегам внутри категории
-
-  // console.log({ foundArticlesSlugs });
-  const articles: ArticleListElementProps[] = [];
-  if (foundArticlesSlugs.length > 0) {
-    if (articleText && articleText.length > 0) {
-      foundArticlesSlugs.forEach(slug => {
-        const [category, fileRoute] = slug.split("/");
-        const article = findInDoc(category, fileRoute, articleText, false);
-        if (article) articles.push({ ...article.meta, slug });
-      });
-    } else {
-      foundArticlesSlugs.forEach(slug => {
-        const [category, fileRoute] = slug.split("/");
-        const article = getDocBySlugShorten(category, fileRoute);
-        if (article !== undefined) articles.push({ ...article.meta, slug });
-      });
+    if (foundArticlesSlugs.slugs.length > 0) {
+      if (article.text && article.text.length > 0) article.text = article.text!.map(a => a.trim()).filter(a => a.length > 0);
+      if (article.text && article.text.length > 0) {
+        // если после строчки выше будет пустой массив то скип, да, хреновая проверка
+        foundArticlesSlugs.slugs.forEach(slug => {
+          const [category, fileRoute] = slug.split("/");
+          const currArticle = findInDoc(category, fileRoute, article.text!, false);
+          if (!!currArticle) articles.push({ ...currArticle.meta, slug });
+        });
+      } else {
+        foundArticlesSlugs.slugs.forEach(slug => {
+          const [category, fileRoute] = slug.split("/");
+          const article = getDocBySlugShorten(category, fileRoute);
+          if (!!article) articles.push({ ...article.meta, slug });
+        });
+      }
     }
+    return { articles, total: foundArticlesSlugs.total };
+  } catch (error) {
+    console.log("getArticles", error);
+    return { articles: [], total: 0 };
   }
-  return articles;
 };
 
 function seededRandom(seed: number): () => number {

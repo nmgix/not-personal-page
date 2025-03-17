@@ -10,6 +10,7 @@ import { selectTextExample } from "./helpers";
 import { useFade } from "@/hooks/useFade";
 import { ExternalClassnames } from "@/types/components";
 import { GlobalRoutes } from "@/types/consts";
+import { useInView } from "react-intersection-observer";
 
 const ListElement = ({ article, searchedPhrase }: { article: ArticleListElementProps; searchedPhrase: string }) => {
   const text = useMemo(() => selectTextExample(100, article.textPreview, searchedPhrase), [article.textPreview, searchedPhrase]);
@@ -30,11 +31,12 @@ const ListElement = ({ article, searchedPhrase }: { article: ArticleListElementP
 type ResultListRenderProps = {
   list: ArticleListElementProps[];
   searchedPhrase: string;
+  onBottomReach?: () => void;
 } & ExternalClassnames;
 
 const _renderListVariant = ["blocks", "rows"] as const;
 
-export const ResultListRenderer = ({ list, searchedPhrase, externalClassnames }: ResultListRenderProps) => {
+export const ResultListRenderer = ({ list, searchedPhrase, externalClassnames, onBottomReach }: ResultListRenderProps) => {
   const [renderListVariant, setRenderVariant] = useState<number>(0);
   const cycleVariant = () => {
     setRenderVariant(currIdx => (currIdx + 1) % _renderListVariant.length);
@@ -44,6 +46,15 @@ export const ResultListRenderer = ({ list, searchedPhrase, externalClassnames }:
     sideOne: "fadeTop",
     sideTwo: "fadeBottom",
     bothSides: "fadeTopBottom"
+  });
+
+  const { ref } = useInView({
+    threshold: 0,
+    trackVisibility: !!list,
+    delay: 100,
+    onChange: inView => {
+      if (inView && !!onBottomReach) onBottomReach();
+    }
   });
 
   return (
@@ -58,6 +69,7 @@ export const ResultListRenderer = ({ list, searchedPhrase, externalClassnames }:
         {list.map(article => (
           <ListElement key={article.slug} article={article} searchedPhrase={searchedPhrase} />
         ))}
+        <div className={"intersectionObserverTriggerItem"} ref={ref} />
       </ul>
     </div>
   );

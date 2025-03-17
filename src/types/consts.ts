@@ -38,10 +38,11 @@ export const tagPopularityBaseDecrementLevel = 50;
 export const bottomCleverBarShowThreshold = 70; //px
 export const inputPlacholderWords = ["мультисемплинг", "геймдев", "разработка"];
 export enum ArticleFields {
+  category = "article-category",
   tag = "article_tag",
   text = "article-text",
   page = "page",
-  category = "article-category"
+  limit = "limit"
 }
 const pulsewidthFont = localFont({
   src: "../../public/fonts/Pulsewidth-1.0.0.otf",

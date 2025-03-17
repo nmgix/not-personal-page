@@ -122,3 +122,11 @@ mark {
 dialog {
   margin: 0;
 }
+
+.intersectionObserverTriggerItem {
+  width: 100%;
+  height: 1px;
+  background-color: transparent;
+
+  margin-top: calc(margins.$margin-default * -1);
+}

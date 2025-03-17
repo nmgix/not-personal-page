@@ -3,21 +3,20 @@
 import styles from "../articles-page.module.scss";
 import { Input } from "@/components/Generic/Input";
 import { DefaultButton } from "@/components/Generic/Buttons";
-import { getUrlSearchParams, SearchParams, useArticlesSearch } from "@/hooks/useArticlesSearch";
+import { ArticleQuery, getUrlSearchParams, SearchParams, useArticlesSearch } from "@/hooks/useArticlesSearch";
 import { RefObject, useEffect, useRef, useState } from "react";
 import { RadioButtonsGroup, RadioButtonsGroupProps } from "@/components/Specialized/RadioButtons";
 import { Icon } from "@/components/Generic/Icon";
 import { ArticleList } from "@/widgets/ArticleList";
-import { ArticleFields, GlobalRoutes, inputPlacholderWords } from "@/types/consts";
+import { ArticleFields, articlesSearchConsts, GlobalRoutes, inputPlacholderWords } from "@/types/consts";
 import { ExternalClassnames } from "@/types/components";
 import { ArticleListElementProps, ArticleTag } from "@/types/articles";
 
 type ArticlesSearchProps = {
   formRef: RefObject<HTMLFormElement | null>;
   tags: ArticleTag[];
-  query?: { searchParams?: SearchParams; page?: number };
-} & Pick<ReturnType<typeof useArticlesSearch>, "fetchArticles" | "articlesData" | "loading" | "page">;
-const ArticlesSearch = ({ page, loading, formRef, tags, query, fetchArticles, articlesData }: ArticlesSearchProps) => {
+} & Pick<ReturnType<typeof useArticlesSearch>, "fetchArticles" | "articlesData" | "loading" | "articleQuery" | "setArticleQuery">;
+const ArticlesSearch = ({ loading, formRef, tags, fetchArticles, articleQuery, articlesData, setArticleQuery }: ArticlesSearchProps) => {
   const placeholders = useRef(inputPlacholderWords.map(w => `например, ${w}`));
   const categoriesTagsRef = useRef<RadioButtonsGroupProps["options"]>(
     (tags ?? []).map(c => ({
@@ -29,25 +28,17 @@ const ArticlesSearch = ({ page, loading, formRef, tags, query, fetchArticles, ar
 
   const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const urlParams = getUrlSearchParams(new FormData(e.currentTarget), { page: String(page) });
-    const newUrl = `${GlobalRoutes.articles}?${urlParams}`; // frontend route
+    const newUrl = `${GlobalRoutes.articles}?${getUrlSearchParams(undefined, {
+      ...articleQuery,
+      page: 0 + 1 /* +1 убирается при сохранении в стейт, это для юзера +1 в url */
+    })}`; // frontend route
     window.history.replaceState({ ...window.history.state, as: newUrl, new: newUrl }, "", newUrl);
-    fetchArticles(urlParams);
+    // const fd = new FormData(e.currentTarget);
+    // const fdFields = fd.entries().map(([key, fdVal]) => ({ [key]: fdVal }));
+    setArticleQuery(prev => ({ ...prev, page: 0 }));
+    fetchArticles(undefined, { ...articleQuery, page: 0 });
   };
 
-  const firstRender = useRef(true);
-  useEffect(() => {
-    if (firstRender.current === true) {
-      firstRender.current = false;
-      return;
-    } else {
-      if (query !== undefined && query["searchParams"] !== undefined) {
-        fetchArticles(new URLSearchParams({ ...query["searchParams"], page: String(page) }));
-      }
-    }
-  }, [query]);
-
-  const predefinedExists = query !== undefined && query["searchParams"] !== undefined;
   const searchUnavailable = loading === true || articlesData?.articles === undefined;
 
   return (
@@ -61,17 +52,18 @@ const ArticlesSearch = ({ page, loading, formRef, tags, query, fetchArticles, ar
         userSelect: searchUnavailable ? "none" : "auto"
       }}>
       <RadioButtonsGroup
-        // onSelect={() => setArticlesData({ articles: null, totalPages: 0 })}
         name={ArticleFields.tag}
         disabled={searchUnavailable}
+        onSelect={id => setArticleQuery(prev => ({ ...prev, article_tag: id ?? "" }))}
         options={categoriesTagsRef.current}
         externalClassnames={styles.controlsTags}
-        predefinedSelectedId={predefinedExists ? query["searchParams"]![ArticleFields.tag] : undefined}
+        predefinedSelectedId={articleQuery[ArticleFields.tag] ? String(articleQuery[ArticleFields.tag]) : undefined}
       />
       <Input
-        value={predefinedExists ? query["searchParams"]![ArticleFields.text] : undefined}
+        value={articleQuery[ArticleFields.text] ? String(articleQuery[ArticleFields.text]) : undefined}
         externalClassnames={styles.controlsInput}
         name={ArticleFields.text}
+        onTextInputDebounce={text => setArticleQuery(prev => ({ ...prev, "article-text": text }))}
         ref={null}
         placeholder={placeholders.current[0]}
         disabled={searchUnavailable}
@@ -88,7 +80,7 @@ import { QueryParams } from "../page";
 
 const transformQuery = (query: Partial<QueryParams> | undefined) => {
   return {
-    page: query?.page !== undefined ? Number(query?.page) : undefined,
+    page: !isNaN(Number(query?.page)) ? Number(query?.page) - 1 : undefined,
     searchParams:
       query !== undefined &&
       (query[ArticleFields.tag as keyof Partial<QueryParams>] !== undefined || query[ArticleFields.text as keyof Partial<QueryParams>]) !== undefined
@@ -102,19 +94,16 @@ const transformQuery = (query: Partial<QueryParams> | undefined) => {
 
 type ArticlesHandleProps = {
   tags: ArticleTag[];
-  presetArticles?: ArticleListElementProps[];
+  preset?: {
+    articles?: ArticleListElementProps[];
+    total?: number;
+  };
   query?: Partial<QueryParams>;
 } & ExternalClassnames;
-export const ArticlesHandle = ({ presetArticles, tags, externalClassnames, query }: ArticlesHandleProps) => {
-  // console.log({ presetState });
-
-  const [currentQuery, setCurrentQuery] = useState(transformQuery(query));
-  const articlesSearchHook = useArticlesSearch(
-    undefined,
-    presetArticles && presetArticles.length > 0 ? { articles: presetArticles, totalPages: 1 } : undefined,
-    currentQuery
-  );
+export const ArticlesHandle = ({ preset, tags, externalClassnames, query }: ArticlesHandleProps) => {
+  const articlesSearchHook = useArticlesSearch(undefined, preset, transformQuery(query));
   const formRef = useRef<HTMLFormElement>(null);
+  const initialQuery = useRef(query);
 
   const firstRender = useRef(true);
   useEffect(() => {
@@ -122,13 +111,30 @@ export const ArticlesHandle = ({ presetArticles, tags, externalClassnames, query
       firstRender.current = false;
       return;
     }
-    setCurrentQuery(transformQuery(query));
+    if (query !== initialQuery.current) {
+      let currentQuery = transformQuery(query);
+      articlesSearchHook.setArticleQuery(prev => ({ ...prev, ...currentQuery.searchParams, page: currentQuery.page ?? prev.page }));
+      initialQuery.current = query;
+    }
   }, [query]);
 
   return (
     <div className={classnames(styles.handle, externalClassnames)}>
-      <ArticlesSearch formRef={formRef} {...articlesSearchHook} tags={tags} query={currentQuery} />
-      <ArticleList list={articlesSearchHook.articlesData.articles} externalClassnames={styles.articlesFound} />
+      <ArticlesSearch formRef={formRef} {...articlesSearchHook} tags={tags} />
+      <ArticleList
+        onBottomReach={() =>
+          ((!firstRender.current && articlesSearchHook.articlesData.lastRequestResult === null) ||
+            articlesSearchHook.articlesData.lastRequestResult! > 0) &&
+          articlesSearchHook.articlesData.articles &&
+          articlesSearchHook.articlesData.total - articlesSearchHook.articlesData.articles.length > 0 &&
+          articlesSearchHook.fetchArticles(undefined, {
+            ...articlesSearchHook.articleQuery,
+            page: (articlesSearchHook.articleQuery.page ?? 0) + 1
+          })
+        }
+        list={articlesSearchHook.articlesData.articles}
+        externalClassnames={styles.articlesFound}
+      />
     </div>
   );
 };

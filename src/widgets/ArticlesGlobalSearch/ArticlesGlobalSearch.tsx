@@ -25,7 +25,7 @@ export type ArticlesGlobalSearchRef = {
 
 export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSearchRef> }) => {
   const { onClose, modalOpen, setModalOpen } = useModal(ref);
-  const { articlesData, setArticlesData, loading, page, fetchArticles } = useArticlesSearch();
+  const { articlesData, setArticlesData, loading, fetchArticles, articleQuery } = useArticlesSearch();
   const { input, onInput, placeholders } = useInput(inputPlacholderWords, setArticlesData);
   const { categoriesRef, selectedCategory, onSelectCategory } = useCategory(setArticlesData);
   const searchRef = useRef<HTMLDivElement>(null);
@@ -33,8 +33,7 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
 
   const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const urlParams = getUrlSearchParams(new FormData(e.currentTarget), { page: String(page) });
-    fetchArticles(urlParams);
+    fetchArticles(new FormData(e.currentTarget), { page: articleQuery.page + 1 });
   };
 
   // render//misc
@@ -100,7 +99,9 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
               <span className={styles.subtitle}>u dont know where to search c;</span>
             </div>
           )}
-          {articlesFound && <ResultListRenderer list={articlesData.articles ?? []} searchedPhrase={input} />}
+          {articlesFound && (
+            <ResultListRenderer list={articlesData.articles ?? []} searchedPhrase={input} onBottomReach={() => console.log("request next batch")} />
+          )}
         </div>
       </div>
     </Modal>

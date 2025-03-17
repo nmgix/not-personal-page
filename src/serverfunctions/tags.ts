@@ -1,11 +1,10 @@
-import { getAllDocsFolders } from "./getDoc";
-
 import path from "path";
 import fs from "fs";
 import { ArticleTag } from "@/types/articles";
 import matter from "gray-matter";
-import { docsDirectory, memoize, memoizeDefaultValues, removeFullPath } from "./helpers";
-import { apiConsts, tagPopularityBaseDecrementLevel } from "@/types/consts";
+import { docsDirectory, memoize, memoizeDefaultValues, paginationOptions, removeFullPath } from "./helpers";
+import { apiConsts, articlesSearchConsts, tagPopularityBaseDecrementLevel } from "@/types/consts";
+import { getAllDocsFolders } from "./getDoc";
 
 function _getArticleTags(filePath: string): Map<string, number> {
   try {
@@ -25,7 +24,7 @@ function _getArticleTags(filePath: string): Map<string, number> {
     return new Map();
   }
 }
-const getArticleTags = memoize(_getArticleTags, memoizeDefaultValues.maxCacheSize, memoizeDefaultValues.ttl, removeFullPath);
+const getArticleTags = memoize(_getArticleTags, 50, memoizeDefaultValues.ttl, removeFullPath);
 
 function getAllTagsAppearance() {
   let tags = new Map<string, number>();
@@ -46,25 +45,29 @@ function getAllTagsAppearance() {
   }
 }
 
-function _articlesTags() {
+function _articlesTags(categories?: string[]) {
+  // , pagination?: { start: number; limit: number }
   const articles = new Map<string, string[]>();
-  try {
-    const filesFolders = getAllDocsFolders();
 
-    // const tags: { [x: string]: ArticleTag } = {};
+  // const pOpts = paginationOptions()
+
+  try {
+    let filesFolders = getAllDocsFolders();
+    if (!!categories && categories.length > 0) filesFolders = filesFolders.filter(f => categories.some(c => c === f.split("/")[0]));
+
     filesFolders.forEach(fileFolder => {
       const articleTags = getArticleTags(fileFolder);
       if (articleTags) articles.set(fileFolder, [...articleTags.keys()]);
     });
-    return articles;
   } catch (error) {
     console.log("articlesTags", error);
-    return articles;
+  } finally {
+    return { articles, total: articles.size };
   }
 }
-const articlesTags = memoize(_articlesTags, 1, 8 * 3600 * 1000);
+const articlesTags = memoize(_articlesTags, undefined, 8 * 3600 * 1000);
 
-export function calculateAllTagsPopularity(): ArticleTag[] {
+function _calculateAllTagsPopularity(): ArticleTag[] {
   try {
     const tags = getAllTagsAppearance();
     const mapped = tags.entries().map(([tag, popularity]) => ({ tag, popularity } as ArticleTag));
@@ -74,6 +77,7 @@ export function calculateAllTagsPopularity(): ArticleTag[] {
     return [];
   }
 }
+export const calculateAllTagsPopularity = memoize(_calculateAllTagsPopularity);
 
 export function calculateArticleTags(tags: string[]): ArticleTag[] {
   try {
@@ -100,22 +104,22 @@ export function getPopularTags(limit: number = 5): ArticleTag[] {
   }
 }
 
-function _searchByTags(searchTags: string[]): string[] {
-  const foundPages: string[] = [];
+function _searchByTags(searchTags: string[], categories?: string[], pagination?: { start: number; end: number }) {
+  let foundPages: string[] = [];
+  let total = 0;
   try {
-    const articleTags = articlesTags();
-
-    articleTags.forEach((tags, article) => {
-      let foundTags = tags.filter(function (n) {
-        return searchTags.indexOf(n) !== -1;
-      });
-      if (foundTags.length === searchTags.length) foundPages.push(article);
-    });
-
-    return foundPages.map(removeFullPath);
+    const aTags = articlesTags(categories);
+    const pOpts = {
+      start: pagination?.start ?? 0,
+      end: pagination?.end ?? articlesSearchConsts.articlesPerPage
+    };
+    const totalFoundArticles = [...aTags.articles].filter(([_, tags]) => searchTags.every(searchTag => tags.includes(searchTag)));
+    total = totalFoundArticles.length;
+    foundPages = totalFoundArticles.slice(pOpts.start, pOpts.end).map(([article]) => article);
   } catch (error) {
     console.log("searchByTags", error);
-    return foundPages;
+  } finally {
+    return { slugs: foundPages.map(removeFullPath), total };
   }
 }
 export const searchByTags = memoize(_searchByTags, 12);

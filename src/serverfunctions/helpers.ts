@@ -1,6 +1,5 @@
-import { apiConsts } from "@/types/consts";
+import { apiConsts, articlesSearchConsts } from "@/types/consts";
 import path, { join } from "path";
-import { memoryUsage } from "node:process";
 
 export function splitQuery(url: string) {
   const query: { [queryParam: string]: string } = {};
@@ -49,13 +48,14 @@ class LRUCacheWithTTL<K, V> {
 
     if (this.cache.size >= this.maxSize) {
       const oldestKey = this.cache.keys().next().value;
-      console.log(`${this.funcName}: 🔄 LRU вытеснил ключ "${oldestKey}"`);
+      // console.log(`${this.funcName}: 🔄 LRU вытеснил ключ "${oldestKey}"`);
       if (oldestKey) this.cache.delete(oldestKey);
     }
 
     const timeoutId = setTimeout(() => {
-      console.log(`${this.funcName}: ⌛ Ключ "${key}" истёк и удалён.`);
+      // console.log(`${this.funcName}: ⌛ Ключ "${key}" истёк и удалён.`);
       this.cache.delete(key);
+      clearTimeout(timeoutId); //на всякий
     }, this.ttl);
 
     this.cache.set(key, { value, timeoutId });
@@ -63,7 +63,7 @@ class LRUCacheWithTTL<K, V> {
 
   get(key: K): V | undefined {
     if (!this.cache.has(key)) {
-      console.log(`${this.funcName}: ❌ Ключ "${key}" не найден.`);
+      // console.log(`${this.funcName}: ❌ Ключ "${key}" не найден.`);
       return undefined;
     }
 
@@ -71,7 +71,7 @@ class LRUCacheWithTTL<K, V> {
     this.cache.delete(key);
     this.cache.set(key, entry);
 
-    console.log(`${this.funcName}: 🔁 Ключ "${key}" взят из кэша.`);
+    // console.log(`${this.funcName}: 🔁 Ключ "${key}" взят из кэша.`);
     return entry.value;
   }
 
@@ -111,7 +111,7 @@ export function memoize<T extends (...args: any[]) => any>(
       return cache.get(key)!;
     }
 
-    console.log(`${functionName}: ✅ Рассчитывание значение для кеша`);
+    // console.log(`${functionName}: ✅ Рассчитывание значение для кеша`);
     const result = fn(...args);
     cache.set(key, result);
 
