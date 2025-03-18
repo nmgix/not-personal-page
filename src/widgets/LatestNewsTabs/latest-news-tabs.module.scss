@@ -1,5 +1,7 @@
 @use "../../styles/paddings";
 @use "../../styles/margins";
+@use "../../styles/media";
+@use "../../styles/breakpoints";
 
 .latestNewsTabs {
   height: 100%;
@@ -17,5 +19,18 @@
 
   .secondRowItem {
     grid-column: span 2;
+  }
+
+  @include media.media-maxw(breakpoints.$md) {
+    grid-template-columns: 1fr;
+
+    .firstRowItem,
+    .secondRowItem {
+      grid-column: 1;
+    }
+
+    & > *:not(:nth-child(-n + 3)) {
+      display: none;
+    }
   }
 }

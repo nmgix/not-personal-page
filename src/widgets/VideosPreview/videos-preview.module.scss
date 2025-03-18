@@ -8,17 +8,17 @@
 
   .grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: 1fr;
     gap: margins.$margin-s;
 
     font-size: 14px;
 
-    @include media.media-maxw(breakpoints.$lg) {
-      font-size: 12px;
-    }
-    @include media.media-maxw(breakpoints.$md) {
-      font-size: 10px;
+    // @include media.media-maxw(breakpoints.$lg) {
+    //   font-size: 12px;
+    // }
+    @include media.media-maxw(breakpoints.$sm) {
+      grid-template-columns: 1fr;
     }
   }
 }

@@ -2,13 +2,19 @@
 
 import classnames from "classnames";
 import styles from "./bottom-clever-bar.module.scss";
-import { ReactElement, useEffect, useRef, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { bottomCleverBarShowThreshold } from "@/types/consts";
+import { ExternalClassnames } from "@/types/components";
 export type TemplateComponent = ReactElement | null;
 export type TemplateVariant = [TemplateComponent, TemplateComponent];
 
 // разные bartypes рендерятся потому что весь этот компонент ререндерится (бесполезно useState вызывать, он будет отрабатывать один раз, но ререндер при переходе на старинцу, так что ререндер каждый раз ибо компонент маунтится с нуля)
-export const BottomCleverBar = ({ currentBars, hideInTop }: { currentBars: TemplateVariant | [] | null | undefined; hideInTop: boolean }) => {
+export const BottomCleverBar = ({
+  currentBars,
+  hideInTop,
+  externalClassnames,
+  style
+}: { currentBars: TemplateVariant | [] | null | undefined; hideInTop: boolean; style?: React.CSSProperties } & ExternalClassnames) => {
   const [atTop, setAtTop] = useState(true);
   useEffect(() => {
     const checkThreshold = () => {
@@ -27,7 +33,7 @@ export const BottomCleverBar = ({ currentBars, hideInTop }: { currentBars: Templ
   }, [atTop]);
 
   const render = (
-    <div className={classnames(styles.bottomCleverBar, hideInTop && atTop && styles.hideBar)}>
+    <div style={style} className={classnames(styles.bottomCleverBar, hideInTop && atTop && styles.hideBar, externalClassnames)}>
       {!!currentBars && currentBars[0] && <div className={classnames("box", styles.barOne)}>{currentBars[0]}</div>}
       {!!currentBars && currentBars[1] && <div className={classnames("box", styles.barOne)}>{currentBars[1]}</div>}
     </div>

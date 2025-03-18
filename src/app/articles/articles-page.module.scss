@@ -1,5 +1,7 @@
 @use "../../styles/margins";
 @use "../../styles/borders";
+@use "../../styles/media";
+@use "../../styles/breakpoints";
 
 .articles {
   margin-top: 37px;
@@ -36,6 +38,14 @@
     .box2 {
       grid-column: span 1;
     }
+
+    @include media.media-maxw(breakpoints.$md) {
+      grid-template-columns: 1fr;
+
+      & > *:not(:first-child) {
+        display: none;
+      }
+    }
   }
 
   .handle {
@@ -71,6 +81,25 @@
       }
       &Filter {
         flex: 0;
+      }
+
+      @include media.media-maxw(breakpoints.$md) {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+
+        &Tags {
+          grid-column: span 3;
+
+          & > * {
+            padding: 12px 18px;
+          }
+        }
+        &Input {
+          grid-column: span 2;
+        }
+        &Filter {
+          grid-column: span 1;
+        }
       }
     }
 

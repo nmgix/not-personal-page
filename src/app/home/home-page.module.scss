@@ -1,4 +1,6 @@
 @use "../../styles/margins";
+@use "../../styles/media";
+@use "../../styles/breakpoints";
 
 .home {
   margin-top: margins.$margin-default;
@@ -59,6 +61,17 @@
 
     .box3 {
       grid-column: span 3;
+    }
+
+    @include media.media-maxw(breakpoints.$xs) {
+      grid-template-columns: repeat(2, 1fr);
+
+      .articlesPreview {
+        grid-column: span 2;
+      }
+      .box3 {
+        grid-column: span 2;
+      }
     }
   }
 

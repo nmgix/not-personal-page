@@ -139,15 +139,14 @@ export const ArticlesHandle = ({ preset, tags, externalClassnames, query }: Arti
         externalClassnames={styles.articlesFound}
       />
       <BottomCleverBar
+        style={{ bottom: -2 }}
         currentBars={[
           null,
           articlesSearchHook.articlesData.total ? (
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-              <ClientArticlesAmountBar articlesAmount={articlesSearchHook.articlesData.total} />
-              {!!articlesSearchHook.articlesData.articles && (
-                <span style={{ fontSize: 10 }}>&#40;{articlesSearchHook.articlesData.articles?.length} loaded&#41;</span>
-              )}
-            </div>
+            <ClientArticlesAmountBar
+              articlesAmount={articlesSearchHook.articlesData.total}
+              articlesLoaded={articlesSearchHook.articlesData.articles?.length}
+            />
           ) : null
         ]}
         hideInTop={false}
