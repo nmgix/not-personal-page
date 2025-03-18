@@ -1,5 +1,3 @@
-import { BottomCleverBar } from "@/widgets/BottomCleverBar";
-import { BarTypes } from "@/widgets/BottomCleverBar/serverutils";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -17,7 +15,6 @@ export default function RootLayout({
     <>
       {children}
       {articlemodal}
-      {/* <BottomCleverBar currentBars={BarTypes["articles"].bars} hideInTop={BarTypes["articles"].hideInTop} /> */}
     </>
   );
 }

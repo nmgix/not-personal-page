@@ -77,6 +77,9 @@ const ArticlesSearch = ({ loading, formRef, tags, fetchArticles, articleQuery, a
 
 import classnames from "classnames";
 import { QueryParams } from "../page";
+import { BottomCleverBar } from "@/widgets/BottomCleverBar";
+import { BarTypes } from "@/widgets/BottomCleverBar/serverutils";
+import { ClientArticlesAmountBar } from "./bar/clientSecondBar";
 
 const transformQuery = (query: Partial<QueryParams> | undefined) => {
   return {
@@ -134,6 +137,20 @@ export const ArticlesHandle = ({ preset, tags, externalClassnames, query }: Arti
         }
         list={articlesSearchHook.articlesData.articles}
         externalClassnames={styles.articlesFound}
+      />
+      <BottomCleverBar
+        currentBars={[
+          null,
+          articlesSearchHook.articlesData.total ? (
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+              <ClientArticlesAmountBar articlesAmount={articlesSearchHook.articlesData.total} />
+              {!!articlesSearchHook.articlesData.articles && (
+                <span style={{ fontSize: 10 }}>&#40;{articlesSearchHook.articlesData.articles?.length} loaded&#41;</span>
+              )}
+            </div>
+          ) : null
+        ]}
+        hideInTop={false}
       />
     </div>
   );
