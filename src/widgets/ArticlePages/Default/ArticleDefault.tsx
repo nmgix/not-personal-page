@@ -10,6 +10,7 @@ import Markdown from "markdown-to-jsx";
 import { ArticleFields } from "@/types/consts";
 
 const normalize = (value: number, min: number, max: number, newMin = 10, newMax = 70) => {
+  if (value == min && value == max) return value;
   return ((value - min) / (max - min)) * (newMax - newMin) + newMin;
 };
 

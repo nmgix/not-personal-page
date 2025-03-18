@@ -25,23 +25,24 @@ export type ArticlesGlobalSearchRef = {
 
 export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSearchRef> }) => {
   const { onClose, modalOpen, setModalOpen } = useModal(ref);
-  const { articlesData, setArticlesData, loading, fetchArticles, articleQuery } = useArticlesSearch();
-  const { input, onInput, placeholders } = useInput(inputPlacholderWords, setArticlesData);
-  const { categoriesRef, selectedCategory, onSelectCategory } = useCategory(setArticlesData);
+  const articleSearchHook = useArticlesSearch();
+  const { input, onInput, placeholders } = useInput(inputPlacholderWords, articleSearchHook.setArticlesData);
+  const { categoriesRef, selectedCategory, onSelectCategory } = useCategory(articleSearchHook);
   const searchRef = useRef<HTMLDivElement>(null);
   useClickOutside<HTMLDivElement>(searchRef, () => setModalOpen(false));
 
   const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    fetchArticles(new FormData(e.currentTarget), { page: articleQuery.page + 1 });
+    articleSearchHook.fetchArticles(undefined, { "article-category": selectedCategory ?? undefined, "article-text": input, page: 0 });
+    // fetchArticles(new FormData(e.currentTarget), { page: articleQuery.page + 1 });
   };
 
   // render//misc
   const nothingSelected = input.length == 0 && (selectedCategory == null || selectedCategory == "");
-  const articlesFound = !!articlesData.articles && articlesData.articles.length > 0;
+  const articlesFound = !!articleSearchHook.articlesData.articles && articleSearchHook.articlesData.articles.length > 0;
   const noArticlesFound =
-    articlesData.articles !== null &&
-    articlesData.articles?.length == 0 &&
+    articleSearchHook.articlesData.articles !== null &&
+    articleSearchHook.articlesData.articles?.length == 0 &&
     (input.length > 0 || (selectedCategory != null && (selectedCategory as string).length > 0));
   // render//misc
 
@@ -50,15 +51,15 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
       <div ref={searchRef} className={classnames("box", styles.articlesGlobalSearch)}>
         <div className={styles.titleWrapper}>
           <h4 className={styles.title}>articles search</h4>
-          <span className={styles.subtitle}>{articlesData.articles?.length ?? 0} articles currently</span>
+          <span className={styles.subtitle}>{articleSearchHook.articlesData.articles?.length ?? 0} articles currently</span>
         </div>
         <form
           className={styles.top}
           onSubmit={onFormSubmit}
           style={{
-            opacity: loading ? "0.2" : 1,
-            pointerEvents: loading ? "none" : "auto",
-            userSelect: loading ? "none" : "auto"
+            opacity: articleSearchHook.loading ? "0.2" : 1,
+            pointerEvents: articleSearchHook.loading ? "none" : "auto",
+            userSelect: articleSearchHook.loading ? "none" : "auto"
           }}>
           <RadioButtonsGroup
             onSelect={onSelectCategory}
@@ -100,7 +101,18 @@ export const ArticlesGlobalSearch = ({ ref }: { ref?: React.Ref<ArticlesGlobalSe
             </div>
           )}
           {articlesFound && (
-            <ResultListRenderer list={articlesData.articles ?? []} searchedPhrase={input} onBottomReach={() => console.log("request next batch")} />
+            <ResultListRenderer
+              list={articleSearchHook.articlesData.articles ?? []}
+              searchedPhrase={input}
+              total={articleSearchHook.articlesData.total}
+              onBottomReach={() =>
+                articleSearchHook.fetchArticles(undefined, {
+                  "article-category": selectedCategory ?? undefined,
+                  "article-text": input,
+                  page: articleSearchHook.articleQuery.page + 1
+                })
+              }
+            />
           )}
         </div>
       </div>

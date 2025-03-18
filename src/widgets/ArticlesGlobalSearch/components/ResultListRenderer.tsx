@@ -31,12 +31,13 @@ const ListElement = ({ article, searchedPhrase }: { article: ArticleListElementP
 type ResultListRenderProps = {
   list: ArticleListElementProps[];
   searchedPhrase: string;
+  total?: number;
   onBottomReach?: () => void;
 } & ExternalClassnames;
 
 const _renderListVariant = ["blocks", "rows"] as const;
 
-export const ResultListRenderer = ({ list, searchedPhrase, externalClassnames, onBottomReach }: ResultListRenderProps) => {
+export const ResultListRenderer = ({ list, searchedPhrase, externalClassnames, total, onBottomReach }: ResultListRenderProps) => {
   const [renderListVariant, setRenderVariant] = useState<number>(0);
   const cycleVariant = () => {
     setRenderVariant(currIdx => (currIdx + 1) % _renderListVariant.length);
@@ -60,7 +61,7 @@ export const ResultListRenderer = ({ list, searchedPhrase, externalClassnames, o
   return (
     <div className={classnames(styles.resultListRenderer, externalClassnames)}>
       <div className={classnames(styles.top)}>
-        <span className={styles.title}>&#91;results&#93;&nbsp;{list.length}&nbsp;found</span>
+        <span className={styles.title}>&#91;results&#93;&nbsp;{total ?? list.length}&nbsp;found</span>
         <Button title={`grid: mode: ${_renderListVariant[renderListVariant]}`} onClick={cycleVariant} externalClassnames={styles.button}>
           <Icon icon={`grid-${_renderListVariant[renderListVariant]}`} />
         </Button>

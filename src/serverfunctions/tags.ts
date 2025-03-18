@@ -2,7 +2,7 @@ import path from "path";
 import fs from "fs";
 import { ArticleTag } from "@/types/articles";
 import matter from "gray-matter";
-import { docsDirectory, memoize, memoizeDefaultValues, paginationOptions, removeFullPath } from "./helpers";
+import { docsDirectory, memoize, memoizeDefaultValues, removeFullPath } from "./helpers";
 import { apiConsts, articlesSearchConsts, tagPopularityBaseDecrementLevel } from "@/types/consts";
 import { getAllDocsFolders } from "./getDoc";
 
@@ -53,8 +53,13 @@ function _articlesTags(categories?: string[]) {
 
   try {
     let filesFolders = getAllDocsFolders();
-    if (!!categories && categories.length > 0) filesFolders = filesFolders.filter(f => categories.some(c => c === f.split("/")[0]));
-
+    // console.log({ before: filesFolders.length });
+    if (!!categories && categories.length > 0)
+      filesFolders = filesFolders.filter(f => {
+        const filePath = removeFullPath(f);
+        return categories.some(c => c === filePath.split("/")[0]);
+      });
+    // console.log({ after: filesFolders.length });
     filesFolders.forEach(fileFolder => {
       const articleTags = getArticleTags(fileFolder);
       if (articleTags) articles.set(fileFolder, [...articleTags.keys()]);
@@ -94,7 +99,7 @@ export function calculateArticleTags(tags: string[]): ArticleTag[] {
   }
 }
 
-export function getPopularTags(limit: number = 5): ArticleTag[] {
+function _getPopularTags(limit: number = 5): ArticleTag[] {
   try {
     const tags = calculateAllTagsPopularity();
     return tags.sort((tA, tB) => tB.popularity - tA.popularity).slice(0, limit);
@@ -103,10 +108,12 @@ export function getPopularTags(limit: number = 5): ArticleTag[] {
     return [];
   }
 }
+export const getPopularTags = memoize(_getPopularTags, 50);
 
 function _searchByTags(searchTags: string[], categories?: string[], pagination?: { start: number; end: number }) {
   let foundPages: string[] = [];
   let total = 0;
+
   try {
     const aTags = articlesTags(categories);
     const pOpts = {

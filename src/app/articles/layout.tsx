@@ -17,7 +17,7 @@ export default function RootLayout({
     <>
       {children}
       {articlemodal}
-      <BottomCleverBar currentBars={BarTypes["articles"].bars} hideInTop={BarTypes["articles"].hideInTop} />
+      {/* <BottomCleverBar currentBars={BarTypes["articles"].bars} hideInTop={BarTypes["articles"].hideInTop} /> */}
     </>
   );
 }

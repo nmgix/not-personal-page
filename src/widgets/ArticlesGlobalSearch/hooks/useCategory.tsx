@@ -5,11 +5,11 @@ import { useRef, useState } from "react";
 import styles from "../articles-global-search.module.scss";
 import { Icon } from "@/components/Generic/Icon";
 
-export const useCategory = (setArticlesData: ReturnType<typeof useArticlesSearch>["setArticlesData"]) => {
+export const useCategory = (articleSearchHook: ReturnType<typeof useArticlesSearch>) => {
   // CATEGORIES CONTROLS & STATE START
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const onSelectCategory = (val: string | null) => {
-    setArticlesData({ articles: null, totalPages: 0 });
+    articleSearchHook.setArticlesData({ articles: null, total: 0, lastRequestResult: null });
     setSelectedCategory(val);
   };
   // не useRef мне нужен, что-то типо memo, если хочу ререндер при select категории (аппенд класса .active .box'у)

@@ -7,7 +7,7 @@
       "label": "Development group",
       "type": "shell",
       "problemMatcher": [],
-      "dependsOn": ["Storybook", "Styles", "Git"],
+      "dependsOn": ["next dev", "Styles", "Git"],
       "runOptions": {
         "runOn": "folderOpen"
       },
