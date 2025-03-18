@@ -8,6 +8,9 @@ import { ImageList } from "@/components/Specialized/ImageList";
 import { BackButton } from "@/components/Generic/Buttons";
 import Markdown from "markdown-to-jsx";
 import { ArticleFields } from "@/types/consts";
+import { Image } from "@/components/Generic/Image";
+import { createElement } from "react";
+import { getBaseURL, getRelativeImgUrl } from "@/helpers/url";
 
 const normalize = (value: number, min: number, max: number, newMin = 10, newMax = 70) => {
   if (value == min && value == max) return value;
@@ -21,7 +24,7 @@ export type ArticleDefaultProps = {
   text: string;
 } & Omit<TArticleDefault, "tags"> &
   ExternalClassnames;
-export const ArticleDefault = ({
+export const ArticleDefault = async ({
   title,
   mappedTags,
   text,
@@ -39,6 +42,8 @@ export const ArticleDefault = ({
   const minPopularity = Math.min(...(mappedTags ?? []).map(t => t.popularity));
   const maxPopularity = Math.max(...(mappedTags ?? []).map(t => t.popularity));
   const dateInvalid = localDate === "Invalid Date";
+
+  const host = await getBaseURL();
 
   return (
     <div className={classnames("page", styles.articleDefault, externalClassnames)}>
@@ -64,7 +69,7 @@ export const ArticleDefault = ({
           {mappedTextLinks !== undefined && mappedTextLinks?.length > 0 && (
             <div className={styles.links}>
               {mappedTextLinks.map(l => (
-                <a href={l.href} rel='noreferrer'>
+                <a key={l.href} href={l.href} rel='noreferrer'>
                   {l.title ? l.title : l.href}
                 </a>
               ))}
@@ -80,7 +85,34 @@ export const ArticleDefault = ({
             {title ?? slug}
           </h2>
           {/* overrides поле не помешает чтобы рендерить code блоки кастомным компонентом */}
-          <Markdown>{text}</Markdown>
+          <Markdown
+            options={{
+              createElement(type, props, children) {
+                if (type === "img")
+                  // return createElement("img", {
+                  //   ...props,
+                  //   draggable: false,
+                  //   style: { width: "100%" },
+                  //   src: getRelativeImgUrl((props as { src: string })["src"], host.origin, {
+                  //     category: slug.split("/")[0],
+                  //     name: slug.split("/")[1]
+                  //   })
+                  // });
+                  return (
+                    <Image
+                      fill
+                      alt={(props as { alt: string })["alt"]}
+                      src={getRelativeImgUrl((props as { src: string })["src"], host.origin, {
+                        category: slug.split("/")[0],
+                        name: slug.split("/")[1]
+                      })}
+                    />
+                  );
+                else return createElement(type, props, children);
+              }
+            }}>
+            {text}
+          </Markdown>
           {/* {Array.isArray(text) ? (text as string[]).map(t => <span>{t}</span>) : text} */}
         </div>
       </div>

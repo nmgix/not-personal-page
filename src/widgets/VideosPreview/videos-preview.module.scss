@@ -14,9 +14,9 @@
 
     font-size: 14px;
 
-    // @include media.media-maxw(breakpoints.$lg) {
-    //   font-size: 12px;
-    // }
+    @include media.media-maxw(breakpoints.$lg) {
+      grid-template-columns: repeat(2, 1fr);
+    }
     @include media.media-maxw(breakpoints.$sm) {
       grid-template-columns: 1fr;
     }

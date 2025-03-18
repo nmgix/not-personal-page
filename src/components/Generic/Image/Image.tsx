@@ -1,13 +1,13 @@
-import ImageNext, { StaticImageData } from "next/image";
+// import ImageNext, { StaticImageData } from "next/image";
 import classnames from "classnames";
 import styles from "./image.module.scss";
 import { ExternalClassnames } from "@/types/components";
 
 type ImageProps = {
-  src: string | StaticImageData;
+  src: string;
   alt: string;
   size: { width: number; height: number };
-  priority?: boolean;
+  // priority?: boolean;
   showAlt?: boolean;
   omImgLoadCB?: () => void;
   onImgErrorLoadCB?: () => {};
@@ -16,11 +16,11 @@ type ImageProps = {
 type UnionImageProps = (Omit<ImageProps, "size"> & { fill: true }) | ImageProps;
 
 export const Image = ({ externalClassnames, showAlt, omImgLoadCB, onImgErrorLoadCB, ...props }: UnionImageProps) => {
-  // memo(
-  // const [error, setError] = useState(false);
+  console.log(props.src);
   return (
     <div className={classnames(styles.imageWrapper, externalClassnames)}>
-      <ImageNext
+      {/* <ImageNext
+        
         className={styles.image}
         draggable={false}
         {...props}
@@ -28,12 +28,10 @@ export const Image = ({ externalClassnames, showAlt, omImgLoadCB, onImgErrorLoad
         height={(props as ImageProps)?.size?.height ?? undefined}
         onError={onImgErrorLoadCB}
         onLoad={omImgLoadCB}
-      />
-      {/* {(showAlt || error) === true && <span className={styles.imageAlt}>{props.alt}</span>} */}
+      /> */}
+      <img src={props.src} alt={props.alt} className={styles.image} draggable={false} onError={onImgErrorLoadCB} onLoad={omImgLoadCB} />
       <span className={classnames(styles.imageAlt, showAlt && "img-show")}>{props.alt}</span>
     </div>
   );
 };
-//   (prev, next) => prev.src === next.src
-// );
 Image.displayName = "Image";

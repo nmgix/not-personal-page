@@ -1,6 +1,6 @@
-import { AvailableIcons } from "@/components/Generic/Icon";
 import { ImageElement } from "@/components/Specialized/ImageList";
 import { type PickKey } from "@/helpers/typescript";
+import { AvailableIcons } from "./consts";
 
 export type ArticleTag = {
   popularity: number;

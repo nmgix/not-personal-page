@@ -5,6 +5,7 @@ import { ArticleData, ArticleListElementProps, ArticleVideoPreview } from "@/typ
 import { apiConsts, articlesSearchConsts, articleTypes } from "@/types/consts";
 import { docsDirectory, memoize, removeFullPath, setDocMtime, shuffle } from "./helpers";
 import { getPopularTags, searchByTags } from "./tags";
+import { getRelativeImgUrl } from "@/helpers/url";
 
 // https://github.com/nmgix/portfolio/blob/main/helpers/getDocBySlug.ts
 export function getDocBySlug(category: string, slug: string /*, locale: string*/): ArticleData | undefined {
@@ -159,14 +160,15 @@ export function getDocLinks(path: string) {
   }
 }
 
-export function getDocImages(path: string) {
+export function getDocImages(path: string, host: string) {
   try {
     const md = fs.readFileSync(join(docsDirectory, path, apiConsts.articleFilename), "utf8");
     let hrefAndTextMd = [];
     let result: any = "";
     while ((result = imgRegexp.exec(md))) {
+      const [category, name] = path.split("/");
       hrefAndTextMd.push({
-        href: result[2],
+        href: getRelativeImgUrl(result[2], host, { category, name }), // внутри .md файла ссылка не меняется ведь,  getDocImages для сайдбара изображения
         text: result[1]
       });
     }

@@ -4,18 +4,7 @@ import { memo } from "react";
 import classnames from "classnames";
 import styles from "./icon.module.scss";
 import { ExternalClassnames } from "@/types/components";
-
-export enum AvailableIcons {
-  "arrow-link",
-  "tech-article",
-  "drag-left",
-  "filter",
-  "blog",
-  "video",
-  "grid-blocks",
-  "grid-rows",
-  "code"
-}
+import { AvailableIcons } from "@/types/consts";
 
 type IconProps = {
   icon: keyof typeof AvailableIcons;

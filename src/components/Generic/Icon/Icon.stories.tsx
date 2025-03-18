@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { Icon } from "@/components/Generic/Icon";
-import { AvailableIcons } from "./Icon";
 import { getEnumKeys } from "@/helpers/getEnumKeys";
+import { AvailableIcons } from "@/types/consts";
 // import icons from "../../public/icons.svg";
 
 const meta = {

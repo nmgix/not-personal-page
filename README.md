@@ -36,6 +36,8 @@ root/
 
 # Файл статьи, что писать в шапке
 
+Будет интересен [этот файл с типами](./src/types/consts.ts)
+
 Никаких знаков препинания после значения ключа, никаких запятых и им подобных
 
 Для обычного text.md
@@ -81,7 +83,7 @@ root/
 
    videoSrc: https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4
    imagePlaceholderSrc: https://www.digiseller.ru/preview/1175270/p1_3798188_582bf509.jpg
-   relatedTagsIcons: ["code", "blog", "grid-blocks"]
+   relatedTagsIcons: ["code", "blog", "grid-blocks"] // смотреть AvailableIcons, удалить этот комментарий
 ---
 ```
 

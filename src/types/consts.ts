@@ -1,4 +1,3 @@
-import { AvailableIcons } from "@/components/Generic/Icon";
 import { JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
 
@@ -31,6 +30,17 @@ export enum GlobalRoutes {
   home = "/home",
   articles = "/articles/",
   article = "/article/"
+}
+export enum AvailableIcons {
+  "arrow-link",
+  "tech-article",
+  "drag-left",
+  "filter",
+  "blog",
+  "video",
+  "grid-blocks",
+  "grid-rows",
+  "code"
 }
 
 // остальное не важно

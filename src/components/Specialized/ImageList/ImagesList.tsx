@@ -28,10 +28,10 @@ export const ImageList = ({ images, size, galleryButton = false, imageThreshold 
               onClick={() => console.log("open gallery, somehow, img idx: " + idx)}
               tab={-1}
               externalClassnames={styles.imageButton}>
-              <Image src={img.src} size={size} showAlt={false} alt={img.alt} />
+              <Image externalClassnames={styles.innerImage} src={img.src} size={size} showAlt={false} alt={img.alt} />
             </Button>
           ) : (
-            <Image key={idx} src={img.src} size={size} showAlt={false} alt={img.alt} />
+            <Image externalClassnames={styles.innerImage} key={idx} src={img.src} size={size} showAlt={false} alt={img.alt} />
           )
         )
       : []

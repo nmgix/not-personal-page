@@ -1,6 +1,8 @@
 @use "../../../styles/borders";
 
 .image {
+  width: 100%;
+
   border-radius: borders.$border-default;
   background-color: var(--color-font-hero);
 

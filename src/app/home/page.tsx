@@ -7,11 +7,11 @@ import { Image } from "@/components/Generic/Image";
 
 import { VideosPreview } from "@/widgets/VideosPreview";
 import { ArticleListElementProps, ArticleVideoPreview } from "@/types/articles";
-import { articleTypes, GlobalRoutes, homeArticlePreviewConsts } from "@/types/consts";
+import { articleTypes, AvailableIcons, GlobalRoutes, homeArticlePreviewConsts } from "@/types/consts";
 import { getArticleMetaField, getCategorySlugs, getDocBySlugShorten, getLatestDocs, getRandomArticles } from "../../serverfunctions/getDoc";
 import { getDocTopTag } from "@/serverfunctions/tags";
-import { AvailableIcons, Icon } from "@/components/Generic/Icon";
 import Link from "next/link";
+import { Icon } from "@/components/Generic/Icon";
 
 export default function Home() {
   // надо проверку zod делать всех полей, надоело ?. юзать

@@ -7,6 +7,7 @@ import { ArticleDefault } from "@/widgets/ArticlePages";
 import { Metadata, ResolvingMetadata } from "next";
 import { redirect } from "next/navigation";
 import { NextRequest } from "next/server";
+import { getBaseURL } from "@/helpers/url";
 
 type ArticleProps = {
   params: Promise<{ category: string; name: string }>;
@@ -63,9 +64,11 @@ export default async function ArticlePage(props: ArticleProps) {
     return redirect(GlobalRoutes.home);
   }
 
+  const host = await getBaseURL();
+
   const mappedLinks = getDocLinks(article.slug);
   const mappedTags = calculateArticleTags(article.meta.tags);
-  const mappedImages: ImageElement[] = getDocImages(article.slug).map(i => ({ alt: i.text, src: i.href }));
+  const mappedImages: ImageElement[] = getDocImages(article.slug, host.origin).map(i => ({ alt: i.text, src: i.href }));
 
   return (
     <ArticleDefault

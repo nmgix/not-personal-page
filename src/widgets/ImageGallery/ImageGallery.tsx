@@ -34,7 +34,7 @@ export const ImageGallery = ({ images, ref, size }: ImageGalleryProps) => {
   const [currentImageIdx, setCurrentImageIdx] = useState(0);
   const imagesIndexes = useMemo(() => {
     const mappedIds: { [id: string]: number } = {};
-    images.map((img, idx) => (mappedIds[img.id] = idx));
+    images.forEach((img, idx) => (mappedIds[`${img.src}${idx}`] = idx));
     return mappedIds;
   }, []);
   const openId = (id: string) => {
@@ -84,8 +84,8 @@ export const ImageGallery = ({ images, ref, size }: ImageGalleryProps) => {
   return (
     <Modal ariaLabel={`image gallery (${images.length} images)`} onClose={onClose} show={modalOpen} externalClassnames={classnames(styles.modal)}>
       <div onWheel={onScroll} ref={imagesListRef} className={classnames("box", styles.imageGallery)}>
-        {images.map(img => (
-          <Image key={img.id} src={img.src} alt={img.alt} showAlt size={temporarySizes} externalClassnames={styles.imageInstance} />
+        {images.map((img, idx) => (
+          <Image key={`${img.src}${idx}`} src={img.src} alt={img.alt} showAlt size={temporarySizes} externalClassnames={styles.imageInstance} />
         ))}
       </div>
     </Modal>
