@@ -3,7 +3,7 @@ import { calculateAllTagsPopularity, calculateArticleTags } from "@/serverfuncti
 import { ImageElement } from "@/components/Specialized/ImageList";
 import { articleCategories, GlobalRoutes } from "@/types/consts";
 import { mockServerArticleFetch } from "@/types/mocks";
-import { ArticleDefault } from "@/widgets/ArticlePages";
+import { ArticleDefault } from "@/app/article/[category]/[name]/components/ArticlePages";
 import { Metadata, ResolvingMetadata } from "next";
 import { redirect } from "next/navigation";
 import { NextRequest } from "next/server";

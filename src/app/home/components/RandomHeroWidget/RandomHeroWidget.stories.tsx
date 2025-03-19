@@ -1,12 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
-
-import { LatestNewsTabs } from "@/widgets/LatestNewsTabs";
+import { RandomHeroWidget } from "./RandomHeroWidget";
 
 const meta = {
-  title: "Widgets/LatestNewsTabs",
-  component: LatestNewsTabs,
+  title: "Pages/Home/RandomHeroWidget",
+  component: RandomHeroWidget,
   args: {}
-} satisfies Meta<typeof LatestNewsTabs>;
+} satisfies Meta<typeof RandomHeroWidget>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

@@ -7,7 +7,7 @@ import { ArticleQuery, getUrlSearchParams, SearchParams, useArticlesSearch } fro
 import { RefObject, useEffect, useRef, useState } from "react";
 import { RadioButtonsGroup, RadioButtonsGroupProps } from "@/components/Specialized/RadioButtons";
 import { Icon } from "@/components/Generic/Icon";
-import { ArticleList } from "@/widgets/ArticleList";
+import { ArticleList } from "@/app/articles/components/ArticleList";
 import { ArticleFields, articlesSearchConsts, GlobalRoutes, inputPlacholderWords } from "@/types/consts";
 import { ExternalClassnames } from "@/types/components";
 import { ArticleListElementProps, ArticleTag } from "@/types/articles";

@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { VideosPreview } from "@/widgets/VideosPreview";
 import { mockProjectsShortened } from "@/types/mocks";
+import { VideosPreview } from "./VideosPreview";
 
 const meta = {
-  title: "Widgets/VideosPreview",
+  title: "Pages/Home/VideosPreview",
   component: VideosPreview,
   args: {}
 } satisfies Meta<typeof VideosPreview>;

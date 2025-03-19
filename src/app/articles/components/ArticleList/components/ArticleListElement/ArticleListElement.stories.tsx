@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ArticleListElement } from "@/widgets/ArticleList/components/ArticleListElement";
+import { ArticleListElement } from "@/app/articles/components/ArticleList/components/ArticleListElement";
 
 const meta = {
   title: "Widgets/ArticleList/ArticleListElement",
